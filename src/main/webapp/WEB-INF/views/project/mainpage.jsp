@@ -4,14 +4,14 @@
 	<link rel="stylesheet" href="/resources/include/assets/css/main.css">
 	</head>
 	<body>
-		<header id="header" class="alt"><div class="logo"><a href="index.html">SaveTheAnimal <span>by team3</span></a></div>
+		<header id="header" class="alt"><div class="logo"><a href="/">SaveTheAnimal <span>by team3</span></a></div>
 				<a href="#menu">Menu</a>
 		</header>
 		<!-- Nav -->
 		<nav id="menu">
 			<ul class="links">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="generic.html">봉사모집</a></li>
+				<li><a href="/">Home</a></li>
+				<li><a href="/project/volunteer">봉사모집</a></li>
 				<li><a href="elements.html">입양</a></li>
 				<li><a href="donate.html">후원</a>
 				<li><a href="#">자유게시판</a>
