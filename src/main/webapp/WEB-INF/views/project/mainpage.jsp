@@ -14,7 +14,7 @@
 				<li><a href="/project/volunteer">봉사모집</a></li>
 				<li><a href="elements.html">입양</a></li>
 				<li><a href="donate.html">후원</a>
-				<li><a href="#">자유게시판</a>
+				<li><a href="/project/freeboard">자유게시판</a>
 				<li><a href="#">봉사후기게시판</a>
 				<li><a href="#">입양후기게시판</a>
 				<li><a href="#">공지사항</a>
