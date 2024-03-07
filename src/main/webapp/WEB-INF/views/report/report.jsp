@@ -13,6 +13,6 @@
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">	</head>
 	<body>
-		
+		test body
 	</body>
 </html>
