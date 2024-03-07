@@ -15,6 +15,5 @@ git<%@ page language="java" contentType="text/html; charset=UTF-8"
 	<body>
 		<h1>안녕</h1>
 		<div id='calendar'></div>
-		<h1>잘가</h1>
 	</body>
 </html>
