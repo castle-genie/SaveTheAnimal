@@ -13,7 +13,7 @@
 		<meta name="robots" content="noindex">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Final Project</title>
+		<title>My Project</title>
 		
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/images/common/icon.png" />
