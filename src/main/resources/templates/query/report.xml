@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.report.dao.ReportDao">
+	<resultMap type="report" id="reportMap">
+		<id column="report_id" property="reportId"/>
+		<result column="report_sort" property="reportSort"/>
+		<result column="report_date" property="reportDate"/>
+		<result column="report_detail" property="reportDetail"/>
+		<result column="report_status" property="reportStatus"/>
+	</resultMap>
+
+	<select id="reportList" parameterType="report" resultMap="reportMap">
+		select report_id, report_sort, to_char(report_date, 'YYYY-MM-DD') as report_date
+			, report_detail, report_status
+		from report
+		order by report_id desc
+	</select>
+	
+
+
+
+
+
+
+</mapper>
