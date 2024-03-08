@@ -12,9 +12,15 @@
 	</header><!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="index.html">Home</a></li>
-			<li><a href="generic.html">Generic</a></li>
-			<li><a href="elements.html">Elements</a></li>
+			<li><a href="/">Home</a></li>
+			<li><a href="/project/volunteer">봉사모집</a></li>
+			<li><a href="/project/adoption">입양</a></li>
+			<li><a href="donate.html">후원</a>
+			<li><a href="/project/freeboard">자유게시판</a>
+			<li><a href="#">봉사후기게시판</a>
+			<li><a href="#">입양후기게시판</a>
+			<li><a href="#">공지사항</a>
+			<li><a href="/user/login">로그인</a>
 		</ul>
 	</nav><!-- One -->
 	<section id="One" class="wrapper style3">
@@ -47,6 +53,8 @@
 					</form>
 					<button type="button" id="loginBtn" name="loginBtn" class="button special fit">로그인</button>
 					<a href="#">회원가입</a>
+					<a href="#">ID 찾기</a>
+					<a href="#">비밀번호 찾기</a>
 				</div>
 			</div>
 		</div>
