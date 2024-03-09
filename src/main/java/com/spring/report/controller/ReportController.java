@@ -26,10 +26,13 @@ public class ReportController {
 		List<ReportVO> reportList = reportService.reportList(rvo);
 		model.addAttribute("reportList", reportList);
 		
-		return "client/board/boardList";		
-		
+		return "admin/report/reportList";		
 	}
 	
+	@GetMapping("admintest")
+	public String test() {
+		return"admin/adminMain";
+	}
 	
 	
 	
