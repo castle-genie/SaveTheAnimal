@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp" %>    
 <link rel="stylesheet" href="/resources/include/assets/css/main.css">
+<style>
+	.form-container {
+	    width: 55%; 
+	    margin: 0 auto;
+	}
+</style>
 </head>
 <body class="subpage">
 
@@ -39,24 +45,26 @@
 						<header class="align-center">
 							<p>Save The Animal</p>
 							<h2>회원 로그인</h2>
-						</header>
-						<form id="loginForm">
+						</header>						
+							<div class="form-container">
+								<form id="loginForm">
 							<div class="row uniform">
-								<div class="6u$ 12u$(small)">
+								<div class="6u$ 12u$(large)">
 									<label for="userId">아이디</label>
+								</div>								
+								<div class="6u$ 12u$(large)">
+									<input type="text" name="userId" id="userId"  placeholder="ID" />									
 								</div>
-								<div class="6u$ 12u$(small)">
-									<input type="text" name="userId" id="userId"  placeholder="ID" />
-								</div>
-								<div class="6u$ 12u$(small)">
+								<div class="6u$ 12u$(large)">
 									<label for="userPasswd">비밀번호</label>
-								</div>
-								<div class="6u$ 12u$(small)">
+								</div>	
+								<div class="6u$ 12u$(large)">	
 									<input type="password" name="userPasswd" id="userPasswd"  placeholder="Password" />
 								</div>
 							</div>
-						</form>
+							</form>
 						<button type="button" id="loginBtn" name="loginBtn" class="button special fit big">로그인</button>
+						</div>
 						<div class="align-center">
 							<a href="/join" class="button alt small">회원가입</a>              
 							<a href="/findId" class="button alt small">ID 찾기</a>
