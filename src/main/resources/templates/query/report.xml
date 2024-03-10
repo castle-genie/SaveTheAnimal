@@ -7,17 +7,121 @@
 		<result column="report_date" property="reportDate"/>
 		<result column="report_detail" property="reportDetail"/>
 		<result column="report_status" property="reportStatus"/>
+		
+		<result column="user_id" property="userId"/>
+		<result column="fboard_id" property="fboardId"/>
+		<result column="vfboard_id" property="vfboardId"/>
+		<result column="afboard_id" property="afboardId"/>
+		<result column="fcomment_id" property="fcommentId"/>
+		<result column="vfcomment_id" property="vfcommentId"/>
+		<result column="afcomment_id" property="afcommentId"/>
+		
+<!-- 		<result column="fboard_title" property="ftitle"/>
+		<result column="vfboard_title" property="vftitle"/>
+		<result column="afboard_title" property="aftitle"/>
+		
+		<result column="fboard_date" property="fdate"/>
+		<result column="vfboard_date" property="vfdate"/>
+		<result column="afboard_date" property="afdate"/>
+		<result column="fcomment_date" property="fcodate"/>
+		<result column="vfcomment_date" property="vfcodate"/>
+		<result column="afcomment_date" property="afcodate"/>
+		
+		<result column="fboard_content" property="fcontent"/>
+		<result column="vfboard_content" property="vfcontent"/>
+		<result column="afboard_content" property="afcontent"/>
+		<result column="fcomment_content" property="fcocontent"/>
+		<result column="vfcomment_content" property="vfcocontent"/>
+		<result column="afcomment_content" property="afcocontent"/> -->
+		
+
+
+
 	</resultMap>
 
 	<select id="reportList" parameterType="report" resultMap="reportMap">
-		select report_id, report_sort, to_char(report_date, 'YYYY-MM-DD') as report_date
-			, report_detail, report_status
-		from report
-		order by report_id desc
+		select distinct r.report_id, r.report_sort, to_char(r.report_date, 'YYYY-MM-DD') as report_date, r.report_status,
+		    r.user_id, r.fboard_id, r.vfboard_id, r.afboard_id, r.fcomment_id, r.vfcomment_id, r.afcomment_id ,
+		    case
+		        when r.fboard_id is not null then f.fboard_title
+		        when r.vfboard_id is not null then v.vfboard_title
+		        when r.afboard_id is not null then a.afboard_title
+		        when r.fcomment_id is not null then fc.fcomment_content
+		        when r.vfcomment_id is not null then vc.vfcomment_content
+		        when r.afcomment_id is not null then ac.afcomment_content
+		    end as boardTitle,
+		    case
+		        when r.fboard_id is not null then to_char(f.fboard_date, 'YYYY-MM-DD')
+		        when r.vfboard_id is not null then to_char(v.vfboard_date, 'YYYY-MM-DD')
+		        when r.afboard_id is not null then to_char(a.afboard_date, 'YYYY-MM-DD')
+		        when r.fcomment_id is not null then to_char(fc.fcomment_date, 'YYYY-MM-DD')
+		        when r.vfcomment_id is not null then to_char(vc.vfcomment_date, 'YYYY-MM-DD')
+		        when r.afcomment_id is not null then to_char(ac.afcomment_date, 'YYYY-MM-DD')
+		    end as boardDate,
+		    case
+		        when r.fboard_id is not null then f.user_id
+		        when r.vfboard_id is not null then v.user_id
+		        when r.afboard_id is not null then a.user_id
+		        when r.fcomment_id is not null then fc.user_id
+		        when r.vfcomment_id is not null then vc.user_id
+		        when r.afcomment_id is not null then ac.user_id
+		    end as boardUser
+		from report r, freeBoard f, volunteerFeedbackBoard v, adoptionFeedbackBoard a, fcomment fc, vfcomment vc, afcomment ac
+		where (r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id)
 	</select>
 	
+	<select id="reportDetail" parameterType="report" resultMap="reportMap">
+		select distinct r.report_id, r.report_sort, to_char(r.report_date, 'YYYY-MM-DD') as report_date, r.report_status, r.report_detail,
+		    r.user_id, r.fboard_id, r.vfboard_id, r.afboard_id, r.fcomment_id, r.vfcomment_id, r.afcomment_id ,
+		    case
+		        when r.fboard_id is not null then f.fboard_id
+		        when r.vfboard_id is not null then v.vfboard_id
+		        when r.afboard_id is not null then a.afboard_id
+		        when r.fcomment_id is not null then fc.fcomment_id
+		        when r.vfcomment_id is not null then vc.vfcomment_id
+		        when r.afcomment_id is not null then ac.afcomment_id
+		    end as boardId,
+		    case
+		        when r.fboard_id is not null then f.fboard_title
+		        when r.vfboard_id is not null then v.vfboard_title
+		        when r.afboard_id is not null then a.afboard_title
+		        when r.fcomment_id is not null then fc.fcomment_content
+		        when r.vfcomment_id is not null then vc.vfcomment_content
+		        when r.afcomment_id is not null then ac.afcomment_content
+		    end as boardTitle,
+		    case
+		        when r.fboard_id is not null then to_char(f.fboard_date, 'YYYY-MM-DD')
+		        when r.vfboard_id is not null then to_char(v.vfboard_date, 'YYYY-MM-DD')
+		        when r.afboard_id is not null then to_char(a.afboard_date, 'YYYY-MM-DD')
+		        when r.fcomment_id is not null then to_char(fc.fcomment_date, 'YYYY-MM-DD')
+		        when r.vfcomment_id is not null then to_char(vc.vfcomment_date, 'YYYY-MM-DD')
+		        when r.afcomment_id is not null then to_char(ac.afcomment_date, 'YYYY-MM-DD')
+		    end as boardDate,
+		    case
+		        when r.fboard_id is not null then f.user_id
+		        when r.vfboard_id is not null then v.user_id
+		        when r.afboard_id is not null then a.user_id
+		        when r.fcomment_id is not null then fc.user_id
+		        when r.vfcomment_id is not null then vc.user_id
+		        when r.afcomment_id is not null then ac.user_id
+		    end as boardUser,
+		    case
+		        when r.fboard_id is not null then f.fboard_content
+		        when r.vfboard_id is not null then v.vfboard_content
+		        when r.afboard_id is not null then a.afboard_content
+		        when r.fcomment_id is not null then fc.fcomment_content
+		        when r.vfcomment_id is not null then vc.vfcomment_content
+		        when r.afcomment_id is not null then ac.afcomment_content
+		    end as boardContent
+		from report r, freeBoard f, volunteerFeedbackBoard v, adoptionFeedbackBoard a, fcomment fc, vfcomment vc, afcomment ac
+		where r.report_id = ${reportId} and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
+	
+	</select>
 
-
+	<delete id="reportDelete" parameterType="report">
+		delete from report
+		where report_id = #{reportId}
+	</delete>
 
 
 

@@ -22,4 +22,26 @@ public class ReportServiceImpl implements ReportService {
 		return list;
 	}
 
+
+	@Override
+	public ReportVO reportDetail(ReportVO rvo) {
+		ReportVO detail = rDao.reportDetail(rvo);
+		if(detail != null) {
+			detail.setReportDetail(detail.getReportDetail().replaceAll("\n", "<br />"));
+		}
+		
+		return detail;
+	}
+
+
+	@Override
+	public int reportDelete(ReportVO rvo) {
+		int result = rDao.reportDelete(rvo);
+		return result;
+	}
+
+
+
+
+
 }

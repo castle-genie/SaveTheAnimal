@@ -9,6 +9,8 @@ import com.spring.report.vo.ReportVO;
 @Mapper
 public interface ReportDao {
 	public List<ReportVO> reportList(ReportVO rvo);
+	public ReportVO reportDetail(ReportVO rvo);
+	public int reportDelete(ReportVO rvo);
 		
 	
 }

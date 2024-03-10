@@ -6,6 +6,8 @@ import com.spring.report.vo.ReportVO;
 
 public interface ReportService {
 
-	List<ReportVO> reportList(ReportVO rvo);
-
+	public List<ReportVO> reportList(ReportVO rvo);
+	public ReportVO reportDetail(ReportVO rvo);
+	public int reportDelete(ReportVO rvo);
+	
 }
