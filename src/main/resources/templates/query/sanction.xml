@@ -7,7 +7,7 @@
 		<result column="sanction_result" property="sanctionStatus"/>
 		<result column="sanction_date" property="sanctionStatus"/>
 
-		<association pro
+		
 		<result column="report_id" property="reportId"/>	
 	</resultMap>
 	

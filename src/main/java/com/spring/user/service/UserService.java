@@ -9,6 +9,9 @@ public interface UserService {
 	
 	public int userJoin(UserVO uvo); 			// 회원 가입
 	public int idCheck(UserVO uvo);				// 회원 아이디 중복 체크
+	public int phoneCheck(UserVO uvo);			// 핸드폰번호 중복 체크
+	public int emailCheck(UserVO uvo);			// 이메일 중복 체크
+	//public int checkDuplicate(UserVO uvo); // 중복 체크 : 아이디, 핸드폰번호, 이메일
 	
 	
 	public UserVO userInfo(UserVO uvo);			// 회원 정보 조회	

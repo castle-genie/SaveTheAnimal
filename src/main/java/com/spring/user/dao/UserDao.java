@@ -18,8 +18,10 @@ public interface UserDao {
 	//public int updatePasswd(UserVO uvo);		// 비밀번호 재설정
 	
 	public int userJoin(UserVO uvo); 			// 회원 가입	
-	//public int idCheck(UserVO uvo);				// 아이디 중복 체크
-	public int checkDuplicate(UserVO uvo); // 중복 체크 : 아이디, 핸드폰번호, 이메일
+	public int idCheck(UserVO uvo);				// 아이디 중복 체크
+	public int phoneCheck(UserVO uvo);			// 핸드폰번호 중복 체크
+	public int emailCheck(UserVO uvo);			// 이메일 중복 체크
+	//public int checkDuplicate(UserVO uvo); // 중복 체크 : 아이디, 핸드폰번호, 이메일
 	
 	public UserVO userInfo(UserVO uvo); 		// 내정보 확인 - 상세 조회	
 	public int userUpdate(UserVO uvo); 			// 회원정보 수정
