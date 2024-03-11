@@ -5,6 +5,7 @@ $(function(){
 		if (!chkData("#userId", "아이디를")) return;
 		if (!chkData("#userPasswd", "비밀번호를")) return;
 		if (!chkData("#userPasswdCheck", "비밀번호 확인을")) return;
+
 		if (!chkData("#userName", "이름을")) return;
 		if (!chkData("#userPhone", "핸드폰번호를")) return;
 		if (!chkData("#userEmail", "이메일을")) return;
