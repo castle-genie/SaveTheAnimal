@@ -76,13 +76,22 @@ public class UserDaoTests {
 		uvo.setUserEmail("memmh@naver.com");
 		int result = userDao.findIdCheck(uvo);
 		log.info((result==1) ? "회원 이메일" : "비회원 이메일");
-	}*/
+	}
 	@Test
 	public void testIdCheck() {
 		UserVO uvo = new UserVO();
 		uvo.setUserId("member88");
 		int result = userDao.idCheck(uvo);
 		log.info((result==1) ? "존재하는 아이디" : "사용가능 아이디");
+	}*/
+	@Test
+	public void testCheckDuplicate() {
+		UserVO uvo = new UserVO();
+		uvo.setUserId("member99");
+		//uvo.setUserPhone("010-1111-1111");
+		//uvo.setUserEmail("member01@naver.com");
+		int result = userDao.checkDuplicate(uvo);
+		log.info((result==1) ? "존재함" : "사용가능");
 	}
 	
 }

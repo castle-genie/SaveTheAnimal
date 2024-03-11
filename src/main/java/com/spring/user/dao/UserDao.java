@@ -12,16 +12,16 @@ public interface UserDao {
 	public UserVO userLoginProcess(UserVO uvo); // 유저 로그인		
 	
 	public UserVO findId(UserVO uvo); 			// 아이디 찾기
-	public int findIdCheck(UserVO uvo); 		// 회원 아이디 확인
-	
-	//public UserVO findPasswd(UserVO uvo); 	// 비밀번호 찾기	
+	public int findIdCheck(UserVO uvo); 		// 회원아이디 여부 체크
+		
+	public int pwdConfirm(UserVO uvo);			// 비밀번호 확인
 	//public int updatePasswd(UserVO uvo);		// 비밀번호 재설정
 	
 	public int userJoin(UserVO uvo); 			// 회원 가입	
-	public int idCheck(UserVO uvo);			// 아이디 중복 체크
+	//public int idCheck(UserVO uvo);				// 아이디 중복 체크
+	public int checkDuplicate(UserVO uvo); // 중복 체크 : 아이디, 핸드폰번호, 이메일
 	
 	public UserVO userInfo(UserVO uvo); 		// 내정보 확인 - 상세 조회	
-	public int pwdConfirm(UserVO uvo);			// 비밀번호 확인
 	public int userUpdate(UserVO uvo); 			// 회원정보 수정
 
 	

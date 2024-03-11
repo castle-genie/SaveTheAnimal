@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int idCheck(UserVO uvo) {
 		int result = 0;
-		result = userDao.idCheck(uvo);
+		//result = userDao.idCheck(uvo);
 		return result;
 	}
 	

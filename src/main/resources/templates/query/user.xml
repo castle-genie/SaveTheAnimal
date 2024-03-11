@@ -43,12 +43,29 @@
 	</insert>
 	
 	<!-- 회원아이디 중복 체크 -->
-	<select id="idCheck" parameterType="user" resultType="int">
+	<!-- <select id="idCheck" parameterType="user" resultType="int">
 		select count(*) 
 		from users
 		where user_id = #{userId}
-	</select>
+	</select> -->
 	
+	<!-- 중복 체크 : 아이디, 핸드폰번호, 이메일 -->
+	<select id="checkDuplicate" parameterType="user" resultType="int">
+	    select count(*) 
+		from users
+	    where
+	    <choose>
+	        <when test="checkType == 'user_id'">
+	            user_id = #{userId}
+	        </when>
+	        <when test="checkType == 'user_email'">
+	            user_email = #{userEmail}
+	        </when>
+	        <when test="checkType == 'user_phone'">
+	            user_phone = #{userPhone}
+	        </when>
+	    </choose>
+	</select>	
 
 	<update id="userUpdate" parameterType="user">
 		update users
