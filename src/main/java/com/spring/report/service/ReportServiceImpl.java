@@ -1,4 +1,4 @@
-package com.spring.reort.service;
+package com.spring.report.service;
 
 import java.util.List;
 
@@ -35,8 +35,8 @@ public class ReportServiceImpl implements ReportService {
 
 
 	@Override
-	public int reportDelete(ReportVO rvo) {
-		int result = rDao.reportDelete(rvo);
+	public int reportUpdate(ReportVO rvo) {
+		int result = rDao.reportUpdate(rvo);
 		return result;
 	}
 

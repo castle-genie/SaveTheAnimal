@@ -11,6 +11,7 @@ public class SanctionVO {
 	private int sanctionResult;
 	private int sanctionDate;
 	
+	private String boardUser;
 	private ReportVO rvo;
 	
 }

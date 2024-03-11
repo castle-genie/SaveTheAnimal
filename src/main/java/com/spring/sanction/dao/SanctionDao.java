@@ -7,5 +7,4 @@ import com.spring.sanction.vo.SanctionVO;
 @Mapper
 public interface SanctionDao {
 	public int sanctionInsert(SanctionVO svo);
-	public int sanctionDelete(SanctionVO svo);
 }

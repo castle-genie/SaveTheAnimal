@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.spring.reort.service.ReportService;
+import com.spring.report.service.ReportService;
 import com.spring.report.vo.ReportVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,14 +39,13 @@ public class ReportController {
 		return "admin/report/reportDetail";
 	}
 	
-	@PostMapping("reportDelete")
+	@PostMapping("reportUpdate")
 	public String reportDelete(ReportVO rvo) {
-		log.info("reportDelete 호출");
-		reportService.reportDelete(rvo);
+		log.info("reportUpdate 호출");
+		reportService.reportUpdate(rvo);
 		log.info("rvo : " + rvo);
 		return "redirect:/admin/report/reportList";
 	}
-	
 	
 
 	

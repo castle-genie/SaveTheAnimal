@@ -1,4 +1,4 @@
-package com.spring.reort.service;
+package com.spring.report.service;
 
 import java.util.List;
 
@@ -8,6 +8,6 @@ public interface ReportService {
 
 	public List<ReportVO> reportList(ReportVO rvo);
 	public ReportVO reportDetail(ReportVO rvo);
-	public int reportDelete(ReportVO rvo);
+	public int reportUpdate(ReportVO rvo);
 	
 }

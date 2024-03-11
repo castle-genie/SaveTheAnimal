@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.spring.sanction.service.SanctionService;
 import com.spring.sanction.vo.SanctionVO;
 
-@RequestMapping("/sanction/*")
+@RequestMapping("/admin/sanction/*")
 @Controller
 public class SanctionController {
 	
