@@ -38,6 +38,13 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	public int idCheck(UserVO uvo) {
+		int result = 0;
+		result = userDao.idCheck(uvo);
+		return result;
+	}
+	
+	@Override
 	public int pwdConfirm(UserVO uvo) {
 		int result = 0;
 		result = userDao.pwdConfirm(uvo);
@@ -57,6 +64,7 @@ public class UserServiceImpl implements UserService {
 		int result = userDao.userUpdate(uvo);
 		return result;
 	}
+
 
 
 	

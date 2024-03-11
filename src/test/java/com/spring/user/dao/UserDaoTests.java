@@ -15,14 +15,14 @@ public class UserDaoTests {
 	@Setter(onMethod_ = @Autowired)
 	private UserDao userDao;
 	
-	@Test
+	/*@Test
 	public void testUserLoginProcess() {
 		UserVO uvo = new UserVO();
 		uvo.setUserId("member01");
 		uvo.setUserPasswd("password");
 		UserVO result = userDao.userLoginProcess(uvo);
 		log.info(result.toString());
-	}
+	}*/
 	/*@Test
 	public void testUserJoin() {
 		UserVO uvo = new UserVO();
@@ -77,5 +77,12 @@ public class UserDaoTests {
 		int result = userDao.findIdCheck(uvo);
 		log.info((result==1) ? "회원 이메일" : "비회원 이메일");
 	}*/
+	@Test
+	public void testIdCheck() {
+		UserVO uvo = new UserVO();
+		uvo.setUserId("member88");
+		int result = userDao.idCheck(uvo);
+		log.info((result==1) ? "존재하는 아이디" : "사용가능 아이디");
+	}
 	
 }

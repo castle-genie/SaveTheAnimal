@@ -18,9 +18,12 @@ public interface UserDao {
 	//public int updatePasswd(UserVO uvo);		// 비밀번호 재설정
 	
 	public int userJoin(UserVO uvo); 			// 회원 가입	
+	public int idCheck(UserVO uvo);			// 아이디 중복 체크
+	
 	public UserVO userInfo(UserVO uvo); 		// 내정보 확인 - 상세 조회	
 	public int pwdConfirm(UserVO uvo);			// 비밀번호 확인
 	public int userUpdate(UserVO uvo); 			// 회원정보 수정
+
 	
 	
 	//public int userDelete(UserVO uvo);// 회원 삭제..ㄷㄷ

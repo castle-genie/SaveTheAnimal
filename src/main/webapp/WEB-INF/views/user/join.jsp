@@ -7,6 +7,12 @@
 	    width: 800px; 
 	    margin: 0 auto;
 	}
+	.error {
+		color: red;
+	}
+	.success {
+		color: blue;
+	}
 </style>
 </head>
 <body class="subpage">
@@ -60,7 +66,7 @@
 													<input type="text" name="userId" id="userId" maxlength="15" placeholder="영문/숫자 6~15자리" />
 												</td>	
 												<td>
-													<button type="button" class="button alt small">중복 확인</button>
+													<button type="button" class="button alt small" id="idCheckBtn">중복 확인</button>
 												</td>
 											</tr>
 											<tr>
@@ -85,13 +91,13 @@
 											</tr>
 											<tr>
 												<td>
-													<label for="userPhone" class="align-center">핸드폰번호</label>
+													<label for="userPhone" class="align-center" >핸드폰번호</label>
 												</td>
 												<td>
 													<input type="text" name="userPhone" id="userPhone" maxlength="11" placeholder="'-' 제외 입력" />
 												</td>
 												<td>
-													<button type="button" class="button alt small">중복 확인</button>
+													<button type="button" class="button alt small" id="phoneCheckBtn">중복 확인</button>
 												</td>
 											</tr>
 											<tr>
@@ -102,7 +108,7 @@
 													<input type="email" name="userEmail" id="userEmail"  placeholder="이메일 입력" />
 												</td>
 												<td>
-													<button type="button" class="button alt small">중복 확인</button>
+													<button type="button" class="button alt small" id="emailCheckBtn">중복 확인</button>
 												</td>
 											</tr>
 										</tbody>

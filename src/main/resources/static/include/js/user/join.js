@@ -1,139 +1,200 @@
-$(function(){
-	/* 회원가입 버튼 클릭 시 처리 이벤트 */
-	$("#joinBtn").on("click", function() {
-		// 입력값 체크
-		if (!chkData("#userId", "아이디를")) return;
-		if (!chkData("#userPasswd", "비밀번호를")) return;
-		if (!chkData("#userPasswdCheck", "비밀번호 확인을")) return;
-
-		if (!chkData("#userName", "이름을")) return;
-		if (!chkData("#userPhone", "핸드폰번호를")) return;
-		if (!chkData("#userEmail", "이메일을")) return;
-		
-		/**
-		
-		
-		let userName = $("#userName").val();
-		let userPhone = $("#userPhone").val();
-		let userEmail = $("#userEmail").val();*/
-		
-		// 회원가입 폼 유효성 검사//
-		
-		/* 아이디 유효성 검사 (첫글자 영문자로, 두번째부터 영문자와 숫자로 6글자 이상 15글자 이하.) */
-		let userId = $("#userId").val();
-		
-		
-		
-        const idPattern = /(^[a-zA-Z][a-zA-Z0-9]{5,14}$)/g;  // 정규표현식 주기
-        if(!idPattern.test(userId)){  // 패턴에 맞지 않았을 때 - 부정연산자 사용
-            alert("아이디는 첫글자 영문자로, 두번째부터 영문자와 숫자로 \n6글자 이상 15글자 이하로 작성해 주셔야 합니다.");
-            $("#userId").val("");
-            $("#userId").focus();       
-            return;
-        }
-        
-        /* 비밀번호 유효성 검사 */
-        let userPasswd = $("#userPasswd").val();
-        let userPasswdCheck = $("#userPasswdCheck").val();
-
-        // 비밀번호 8자~20자 유효성 검사
-        const pwdPattern = /(^[a-zA-Z0-9]{8,20}$)/g;
-        if (!pwdPattern.test(userPasswd)) {
-            alert("유효하지 않은 비밀번호 입니다.");
-            $("#userPasswd").val("");
-            $("#userPasswd").focus();
-            return;
-        }
-        // 비밀번호 일치여부 확인
-        if (userPasswd != userPasswdCheck) {
-            $("input[name='error']").attr("placeholder", "비밀번호와 비밀번호 확인은 일치해야 합니다.");
-            //alert("비밀번호와 비밀번호 확인은 일치해야 합니다.\n다시 입력해 주세요.");
-            $("#userPasswdCheck").val("");
-            $("#userPasswdCheck").focus();
-            return;
-        }
-
-        /** 이름 입력 검사 */
-        let name = $("#user_name").val();
-
-        if(name.replace(/\s/g, "") == "") {
-            alert("이름을 입력해주세요.");
-            $("#user_name").val("");
-            $("#user_name").focus();
-            return;
-        }
-
-        /** 생년월일 입력 검사 */
-        if($("#birth").val().replace(/\s/g, "") == "") {
-            alert("생년월일을 입력해주세요.");
-            $("#birth").val("");
-            $("#birth").focus();
-            return;
-        }
-
-        /** 라디오버튼 선택여부 검사 */
-        //$("라디오버튼CSS셀렉터").is(":checked")
-        // -> 체크일 경우 : true
-        if(!$("input[name='gender']").is(":checked")) {
-            alert("성별을 선택해 주세요.");
-            return;
-        }
-
-        /** 이메일 주소 입력여부 검사 */
-        // console.log($("#email").val());
-        if($("#email").val().replace(/\s/g,"")=="") {
-            alert("이메일 주소를 입력하세요.");
-            $("#email").val("");
-            $("#email").focus();
-            return;
-        }
-        if($("#emailDomain").val().replace(/\s/g,"")=="") {
-            alert("이메일 주소를 입력하세요.");
-            $("#emailDomain").val("");
-            $("#emailDomain").focus();
-            return;
-        }
-
-        /** 핸드폰 번호 입력 여부 검사 */
-        if($("#hpno").val().replace(/\s/g,"")=="") {
-            alert("핸드폰 번호를 입력하세요.");
-            $("#hpno").val("");
-            $("#hpno").focus();
-            return;
-        }
-
-        /** 취미 체크박스 선택여부 검사 */
-        if(!$("input[name='hobby']").is(":checked")) {
-            alert("취미를 선택해 주세요.");
-            return;
-        }
-        
-        /* selectbox 선택여부 검사
-            - $("select의 셀렉터 > option:selected").index() : 선택된 항목의 index 번호.
-            - $("select의 셀렉터 > option:selected").val() : 선택된 항목의 값
-            - $("select의 셀렉터").val() : 선택된 항목의 값을 반환
-         */
-        if ($("select[name='job'] > option:selected").index() < 1 ) {
-            alert("직업을 선택해 주세요.");
-            return;
-        }
-
-
- 
-		
-		/*$("#joinForm").attr({
-			"method":"post",
-			"action":"/join"				
-		});
-		$("#joinForm").submit();*/
-
-	});
-});
-
-
-
+/* 전역 변수 설정 */
+let idCheck = 0; 
+let phoneCheck = 0;
+let emailCheck = 0;
 
 // 전체동의 체크박스
 function selectAll(selectAll) {
     $('input[type="checkbox"]').prop('checked', selectAll.checked);
 }
+
+$(function(){
+	
+	/* 아이디 유효성 체크, 중복 체크 */
+	$("#idCheckBtn").on("click", function(){
+		/* 아이디 유효성 검사 (첫글자 영문자로, 두번째부터 영문자와 숫자로 6글자 이상 15글자 이하.) */
+		let userId = $("#userId").val();
+        const idPattern = /(^[a-zA-Z][a-zA-Z0-9]{5,14}$)/g;  // 정규표현식 주기
+		if (!chkData("#userId", "아이디를")) {
+			return;
+		} else if (!idPattern.test(userId)) {  // 패턴에 맞지 않았을 때 - 부정연산자 사용
+            alert("아이디는 첫글자 영문자로, 두번째부터 영문자와 숫자로 \n6 ~ 15 글자수를 입력해주세요.");
+            $("#userId").val("");
+            $("#userId").focus();       
+            return;
+        }
+        /* ajax 중복 체크 */
+		$.ajax({ 
+			url : "/idCheck",  
+			type : "post",
+			data : {
+				"userId":userId
+			},
+			success: function(result) {
+				if (result === 1) {                    
+                    alert("존재하는 아이디입니다. 다른 아이디를 입력해주세요.");
+                    $("#userId").val(""); 
+                    $("#userId").focus();              
+                } else {
+                    alert("사용가능한 아이디입니다.");
+                    $("#userPasswd").focus();
+                    //아이디가 중복하지 않으면 idCheck = 1 
+                    idCheck = 1;                 
+                }
+			},
+			error: (xhr, textStatus, errorThrown) => {
+				alert("AJAX 요청 실패:\n"+ textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
+			}
+		});				
+	});	
+	
+	/* 아이디 중복 체크 후 다른 아이디로 다시 변경할 경우 이벤트 */
+	$("#userId").on("change", function(){
+		//console.log("아이디 입력값 변경 이벤트");
+		idCheck = 0; // 중복체크 진행하도록 유도
+	});
+	
+	/* 핸드폰 번호 유효성 체크, 중복 체크 */	
+	$("#phoneCheckBtn").on("click", function(){
+        let userPhone = $("#userPhone").val();
+        const phonePattern = /(^01(?:0|1|[6-9])\d{7,8}$)/g; // 하이픈을 포함하지 않는 핸드폰번호
+        //const phonePattern = /(^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$)/g;
+        if (!chkData("#userPhone", "핸드폰번호를")) {
+			return;
+        } else if(!phonePattern.test(userPhone)) {
+            alert("핸드폰번호 11자리를 입력하세요.");
+            $("#userPhone").val("");
+            $("#userPhone").focus();
+            return;
+        }
+        /* ajax 중복 체크 */
+        
+        
+        
+        
+        
+	});
+	
+	/* 중복 체크 후 다른 번호로 다시 변경할 경우 이벤트 */
+	$("#userPhone").on("change", function(){	
+		phoneCheck = 0; 
+	});
+	
+	/* 이메일 유효성 체크, 중복 체크 */
+	
+	$("#emailCheckBtn").on("click", function(){
+        let userEmail = $("#userEmail").val();
+        //const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/;
+        const emailPattern = /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        if (!chkData("#userEmail", "이메일을")) { return;	
+        }else if(!emailPattern.test(userEmail)) {
+            alert("유효하지 않은 이메일 주소입니다. 다시 입력하세요.");
+            $("#userEmail").val("");
+            $("#userEmail").focus();
+            return;
+        }
+        /* ajax 중복 체크 */
+        
+        
+        
+        
+        
+        
+	});	
+	
+	/* 중복 체크 후 다른 이메일로 다시 변경할 경우 이벤트 */
+	$("#userEmail").on("change", function(){		
+		emailCheck = 0; 
+	});
+	
+	/* 개인정보 동의 및 회원약관 동의 체크 시 전체 동의 체크 */
+	$('#agreePrivInfo, #agreeTerms').click(function() {
+	    if ($('#agreePrivInfo').is(':checked') && $('#agreeTerms').is(':checked')) {
+	        $('#check-all').prop('checked', true);
+	    } else {
+	        $('#check-all').prop('checked', false);
+	    }
+	});
+	
+	
+	/* 회원 가입 버튼 클릭 시 처리 이벤트 */
+	$("#joinBtn").on("click", function() {					
+		// 회원가입 폼 입력값 체크, 유효성 검사
+		
+		/* 아이디 중복 검사 확인 */
+		if (idCheck == 0) {
+			alert("아이디 중복검사를 진행해주세요");
+			$("#userId").focus();
+			return;
+		}		
+		/* 핸드폰번호 중복 검사 확인 */
+		if (idCheck == 0) {
+			alert("핸드폰번호 중복검사를 진행해주세요");
+			$("#userPhone").focus();
+			return;
+		}
+		/* 이메일 중복 검사 확인 */
+        if (idCheck == 0) {
+			alert("이메일 중복검사를 진행해주세요");
+			$("#userEmail").focus();
+			return;
+		}
+		
+        /* 비밀번호 유효성 검사 */
+        let userPasswd = $("#userPasswd").val();
+        const pwdPattern = /(^[a-zA-Z0-9]{8,20}$)/g;
+		if (!chkData("#userPasswd", "비밀번호를")) {
+			return;		
+        // 비밀번호 8자~20자 유효성 검사
+        }else if (!pwdPattern.test(userPasswd)) {
+            alert("비밀번호는 영문/숫자 8 ~ 20자리로 입력해주세요.");
+            $("#userPasswd").val("");
+            $("#userPasswd").focus();
+            return;
+        }
+             
+        let userPasswdCheck = $("#userPasswdCheck").val();
+        if (!chkData("#userPasswdCheck", "비밀번호 확인을")) {
+			return;	
+        // 비밀번호 일치여부 확인
+        } else if (userPasswd != userPasswdCheck) {
+            //$("input[name='error']").attr("placeholder", "비밀번호와 비밀번호 확인은 일치해야 합니다.");
+            alert("비밀번호와 비밀번호 확인은 일치해야 합니다.\n다시 입력해 주세요.");
+            $("#userPasswdCheck").val("");
+            $("#userPasswdCheck").focus();
+            return;
+        }
+
+        /* 이름 입력 검사 (한글 2~6자) */
+        let userName = $("#userName").val();
+		const namePattern = /^[가-힣]{2,6}$/g; 
+		if (!chkData("#userName", "이름을")) {
+			return;
+		// 한글 2~6자 유효성 검사
+        } else if(!namePattern.test(userName)) {
+            alert("이름은 한글 2~6자로 입력해주세요");
+            $("#userName").val("");
+            $("#userName").focus();
+            return;
+        }      		
+        /* 동의 체크박스 선택여부 검사 */
+        if(!$("input[name='agree']").is(":checked")) {
+            alert("동의 항목 모두 체크 하셔야 가입 가능합니다.");
+            return;
+        }
+		
+		/* 회원가입 최종 확인 */		
+		if (confirm("회원가입을 진행하시겠습니까?")){			
+			$("#joinForm").attr({
+				"method":"post",
+				"action":"/join"				
+			});
+			$("#joinForm").submit();
+			alert("회원가입 성공");
+		} else {
+			alert("회원가입 취소");
+		}
+		
+	});
+		
+});
