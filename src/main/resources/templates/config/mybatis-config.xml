@@ -3,5 +3,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.spring.report.vo.ReportVO" alias="report"/>
+		<typeAlias type="com.spring.volunteer.vo.VolunteerVO" alias="volunteer" />
 	</typeAliases>
 </configuration>
