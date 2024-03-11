@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp" %>    
-
+<link rel="stylesheet" href="/resources/include/assets/css/main.css">
+<style>
+	.form-container {
+	    width: 800px; 
+	    margin: 0 auto;
+	}
+</style>
+</head>
 <body class="subpage">
 
 	<!-- Header -->
@@ -19,7 +26,7 @@
 			<li><a href="#">봉사후기게시판</a>
 			<li><a href="#">입양후기게시판</a>
 			<li><a href="#">공지사항</a>
-			<li><a href="/user/login">로그인</a>
+			<li><a href="/login">로그인</a>
 		</ul>
 	</nav><!-- One -->
 	<section id="One" class="wrapper style3">
@@ -38,116 +45,93 @@
 						<p>Save The Animal</p>
 						<h2>회원 가입</h2>
 					</header>
-					<form id="joinForm">
-						<div class="row uniform">
-							<div class="table-wrapper">
-								<table>
-								<thead><tr></tr></thead>
-									<tbody>
-										<tr>
-											<td>
-												<label for="id" class="align-center">아이디</label>
-											</td>
-											<td>
-												<input type="text" name="id" id="id"  placeholder="영문/숫자 6~15자리" />
-											</td>	
-											<td>
-												<button type="button" class="button alt small">중복 확인</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<label for="pwd" class="align-center">비밀번호</label>
-											</td>	
-											<td>
-												<input type="password" name="pwd" id="pwd" placeholder="영문/숫자 8~20자리" />
-												<br>
-												<input type="password" name="pwdCheck" id="pwdCheck" placeholder="위와 동일하게 입력" />
-											</td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>
-												<label for="name" class="align-center">이름</label>
-											</td>	
-											<td>
-												<input type="text" name="name" id="name" placeholder="한글 2~6자" />
-											</td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>
-												<label for="email" class="align-center">이메일</label>
-											</td>
-											<td>
-												<input type="email" name="email" id="email"  placeholder="이메일 입력" />
-											</td>
-											<td>
-												<button type="button" class="button alt small">중복 확인</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<label for="phone" class="align-center">핸드폰번호</label>
-											</td>
-											<td>
-												<input type="text" name="phone" id="phone"  placeholder="이메일 입력" />
-											</td>
-											<td>
-												<button type="button" class="button alt small">중복 확인</button>
-											</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="3">
-											</td>
-										</tr>
-										<tr>
-											<td colspan="3">
-												<input type="checkbox" name="agreeAll" id="agreeAll" />
-												<label for="agreeAll">전체 동의</label>
-											</td>
-										</tr>
-										<tr>
-											<td colspan="3"> 
-												<input type="checkbox" name="agreePrivInfo" id="agreePrivInfo" />
-												<label for="agreePrivInfo">개인정보 수집 및 이용 동의</label>
-												<input type="checkbox" name="agreeTerms" id="agreeTerms" />
-												<label for="agreeTerms">회원 약관 동의</label>
-											</td>
-										</tr>										
-									</tfoot>
-								</table>
+					<div class="form-container">
+						<form id="joinForm" name="joinForm">
+							<div class="row uniform">
+								<div class="table-wrapper">
+									<table>
+										<thead><tr></tr></thead>
+										<tbody>
+											<tr>
+												<td>
+													<label for="userId" class="align-center">아이디</label>
+												</td>
+												<td>
+													<input type="text" name="userId" id="userId" maxlength="15" placeholder="영문/숫자 6~15자리" />
+												</td>	
+												<td>
+													<button type="button" class="button alt small">중복 확인</button>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="userPasswd" class="align-center">비밀번호</label>
+												</td>	
+												<td>
+													<input type="password" maxlength="20" name="userPasswd" id="userPasswd" placeholder="영문/숫자 8~20자리" />
+													<br>
+													<input type="password" maxlength="20" name="userPasswdCheck" id="userPasswdCheck" placeholder="위와 동일하게 입력" />
+												</td>
+												<td><span id="password-error" class="error"></span></td>
+											</tr>
+											<tr>
+												<td>
+													<label for="userName" class="align-center">이름</label>
+												</td>	
+												<td>
+													<input type="text" maxlength="6" name="userName" id="userName" placeholder="한글 2~6자" />
+												</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>
+													<label for="userPhone" class="align-center">핸드폰번호</label>
+												</td>
+												<td>
+													<input type="text" name="userPhone" id="userPhone" maxlength="11" placeholder="'-' 제외 입력" />
+												</td>
+												<td>
+													<button type="button" class="button alt small">중복 확인</button>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="userEmail" class="align-center">이메일</label>
+												</td>
+												<td>
+													<input type="email" name="userEmail" id="userEmail"  placeholder="이메일 입력" />
+												</td>
+												<td>
+													<button type="button" class="button alt small">중복 확인</button>
+												</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="3">
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													<input type="checkbox" value='selectall' onclick='selectAll(this)' name="agree" id="check-all" />
+													<label for="check-all">전체 동의</label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3"> 
+													<input type="checkbox" class="single-checkbox" name="agree" id="agreePrivInfo" />
+													<label for="agreePrivInfo">개인정보 수집 및 이용 동의</label>
+													<input type="checkbox" class="single-checkbox" name="agree" id="agreeTerms" />
+													<label for="agreeTerms">회원 약관 동의</label>
+												</td>
+											</tr>										
+										</tfoot>
+									</table>
+								</div>
 							</div>
-		
-							<!-- <div class="6u$ 12u$(small)">
-								<label>이름</label>	
-								<input type="text" name="name" id="name" placeholder="한글 2~6자" />
-							</div>
-							<div class="6u$ 12u$(small)">
-								<label>이메일</label>	
-								<input type="email" name="email" id="email"  placeholder="이메일 입력" />
-							</div>
-							<div class="6u$ 12u$(small)">
-								<label>핸드폰번호</label>	
-								<input type="text" name="phone" id="phone"  placeholder="'-' 기호 제외 입력" />
-							</div>
-							<div class="6u$ 12u$(small)">
-								<input type="checkbox" name="agreeAll" id="agreeAll" />
-								<label for="agreeAll">전체 동의</label>	
-							</div>
-							<div class="6u$ 12u$(xsmall)">								
-								<input type="checkbox" name="agreePrivInfo" id="agreePrivInfo" />
-								<label for="agreePrivInfo">개인정보 수집 및 이용 동의</label>
-							</div>
-							<div class="6u$ 12u$(xsmall)">								
-								<input type="checkbox" name="agreeTerms" id="agreeTerms" />
-								<label for="agreeTerms">회원 약관 동의</label>
-							</div> -->
-						</div>
-					</form>
-					<button type="button" id="joinBtnBtn" name="joinBtn" class="button special fit">회원 가입</button>
+						</form>
+						<button type="button" id="joinBtn" name="joinBtn" class="button special fit">회원 가입</button>
+					</div>
 				</div>
 			</div>
 		<div>join.jsp 화면</div>
@@ -169,8 +153,16 @@
 	<div class="copyright">
 		Made with <a href="https://templated.co/">Templated</a>.
 	</div>
-
 	<!-- Scripts -->
+	<script src="/resources/include/js/user/join.js"></script>
+	<script>
+	$(function(){		
+		let errorMsg = "${errorMsg}"; 
+		if (errorMsg != "") {
+			alert(errorMsg);
+		}
+	});
+	</script>
 </body>
 
 </html>
