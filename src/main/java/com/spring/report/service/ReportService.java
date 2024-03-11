@@ -1,4 +1,4 @@
-package com.spring.reort.service;
+package com.spring.report.service;
 
 import java.util.List;
 

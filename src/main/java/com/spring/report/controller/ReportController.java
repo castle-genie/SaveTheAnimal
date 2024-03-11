@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.spring.reort.service.ReportService;
+import com.spring.report.service.ReportService;
 import com.spring.report.vo.ReportVO;
 
 import lombok.extern.slf4j.Slf4j;
