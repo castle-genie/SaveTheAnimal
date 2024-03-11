@@ -18,7 +18,7 @@ public class ModifyController {
 	
 	@GetMapping("/volunteer")
 	public String showCalendar() {
-        return "/project/volunteer";
+        return "/volunteer/volunteer";
     }
 }
 	
