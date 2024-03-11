@@ -35,7 +35,7 @@ public class CalendarController {
      model.addAttribute("currentYear", currentYear);
      model.addAttribute("currentMonth", currentMonth);
      model.addAttribute("monthSchedule", monthSchedule);
-     return "calendar";
+     return "/project/calendar";
  }
 }
 
