@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.freeBoard.dao.FreeBoardDAO">
+	<resultMap type="freeBoard" id="freeBoardMap">
+		<id column="fboard_id" property="fboardId"/>
+		<result column="fboard_title" property="fboardTitle"/>
+		<result column="fboard_content" property="fboardContent"/>
+		<result column="fboard_like" property="fboardCnt"/>
+		<result column="fboard_date" property="fboardDate"/>
+	</resultMap>
+	<select id="freeBoardList" parameterType="freeBoard" resultMap="freeBoardMap">
+		SELECT 	fboard_id, fboard_title, fboard_like, fboard_date
+		FROM 	freeBoard
+		ORDER BY fboard_id DESC
+	</select>
+	<select id="freeBoardDetail" parameterType="freeBoard" resultMap="freeBoardMap">
+		SELECT 	fboard_id, fboard_title, fboard_content, fboard_like
+				fboard_date, user_id
+		FROM 	freeBoard
+		WHERE	fboard_id = #{fboardId}
+	</select>
+	 
+</mapper>
