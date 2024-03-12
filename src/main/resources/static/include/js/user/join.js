@@ -96,8 +96,7 @@ $(function(){
 		phoneCheck = 0; 
 	});
 	
-	/* 이메일 유효성 체크, 중복 체크 */
-	
+	/* 이메일 유효성 체크, 중복 체크 */	
 	$("#emailCheckBtn").on("click", function(){
         let userEmail = $("#userEmail").val();
         //const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/;

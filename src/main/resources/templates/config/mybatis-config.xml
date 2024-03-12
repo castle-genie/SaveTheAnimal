@@ -4,10 +4,7 @@
 	<typeAliases>
 		<typeAlias type="com.spring.report.vo.ReportVO" alias="report"/>
 		<typeAlias type="com.spring.user.vo.UserVO" alias="user" />
-<<<<<<< HEAD
-=======
 		<typeAlias type="com.spring.volunteer.vo.VolunteerVO" alias="volunteer" />
->>>>>>> 3e53ee3be1f357d175417d4ca0b7de9528ec6102
 		<typeAlias type="com.spring.sanction.vo.SanctionVO" alias="sanction"/>
 	</typeAliases>
 </configuration>
