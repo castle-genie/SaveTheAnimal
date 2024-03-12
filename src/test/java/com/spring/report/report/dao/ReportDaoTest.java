@@ -26,7 +26,14 @@
 ////		}
 ////	}
 //
-//
+////	@Test
+////	public void testReportDelete() {
+////		ReportVO rvo = new ReportVO();
+////		rvo.setReportId(47);
+////		
+////		int count =rDao.reportDelete(rvo);
+////		log.info("수정된 행의 수: " + count);
+////	}
 //
 //
 //
