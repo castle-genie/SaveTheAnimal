@@ -15,31 +15,6 @@ $(function(){
 				$("#f_data").submit();
 			}
 		});
-/*		$.ajax({
-			type:"post",
-			url:"/admin/report/reportUpdate",
-			data:$("#f_data").serialize(),
-			success:function(){
-				console.log("성공");
-			},
-			error:function(){
-				console.log("실패");
-				$("#f_data").submit();
-			}
-		});
-*/		
-		
-
-
-
-
-
-/*		$("#f_data").attr({
-			"method":"post",
-			"action":"/admin/sanction/sanctionInsert"
-		});
-		$("#f_data").submit();
-*/
 
 		$("#f_data").attr({
 			"method":"post",
