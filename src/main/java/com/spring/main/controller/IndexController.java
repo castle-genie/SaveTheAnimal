@@ -10,7 +10,6 @@ public class IndexController {
 	@GetMapping("/")
 	public String mainpage() {
 		return "project/mainpage";
-
 	}
 	
 	@GetMapping("admin")
