@@ -8,8 +8,8 @@ import com.spring.freeBoard.vo.FreeBoardVO;
 
 @Mapper
 public interface FreeBoardDAO {
-	public List<FreeBoardVO> freeBoardList(FreeBoardVO freeBoardVO);
+	public List<FreeBoardVO> freeBoardList(FreeBoardVO fbvo);
 	
-	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
+	//public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
 
 }

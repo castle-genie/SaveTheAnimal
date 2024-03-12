@@ -7,7 +7,7 @@ import com.spring.freeBoard.vo.FreeBoardVO;
 public interface FreeBoardService {
 	
 	//게시물 목록 조회
-	public List<FreeBoardVO> freeBoardList(FreeBoardVO freeBoardVO);
+	public List<FreeBoardVO> freeBoardList(FreeBoardVO fbvo);
 	
 	//public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
 
