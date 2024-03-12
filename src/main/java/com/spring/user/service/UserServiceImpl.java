@@ -23,13 +23,6 @@ public class UserServiceImpl implements UserService {
 		UserVO result = userDao.findId(uvo);
 		return result;
 	}
-	
-	@Override
-	public int findIdCheck(UserVO uvo) {
-		int result = 0;
-		result = userDao.findIdCheck(uvo);
-		return result;
-	}
 
 	@Override
 	public int userJoin(UserVO uvo) {

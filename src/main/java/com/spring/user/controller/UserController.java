@@ -104,17 +104,29 @@ public class UserController {
 	}*/
 	
 	@GetMapping("/findId")
-	public String findIdForm() {
+	public String findId() {
 		log.info("아이디 찾기 화면");
-		return "user/findIdForm";
-	}
-
-	@PostMapping("/findId")
-	public String findId(UserVO uvo, Model model) {
-		log.info("아이디 찾기 호출");
-		UserVO result = userService.findId(uvo); 
-		model.addAttribute("result", result);
 		return "user/findId";
+	}
+	
+	@PostMapping("/findId")
+	public String findId(UserVO uvo, Model model, RedirectAttributes ras) {
+		log.info("아이디 찾기 호출");		
+		UserVO result = userService.findId(uvo); 
+		
+		if (result != null) {
+			model.addAttribute("result", result);
+			return "user/findId";
+		} else { 
+			ras.addFlashAttribute("msg", "가입 이메일이 아닙니다.");
+			return "redirect:/findId";
+		}
+	}
+	
+	@GetMapping("/resetPwd")
+	public String resetPwd() {
+		log.info("아이디 찾기 화면");
+		return "user/resetPwd";
 	}
 	
 }

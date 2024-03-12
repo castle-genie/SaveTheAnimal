@@ -108,5 +108,14 @@ public class UserDaoTests {
 		int result = userDao.checkDuplicate(uvo);
 		log.info((result==1) ? "존재함" : "사용가능");
 	}*/
+	@Test
+	public void testResetPasswd() {
+		UserVO uvo = new UserVO();
+		uvo.setUserId("member00");
+		uvo.setUserEmail("member01@naver.com");
+		uvo.setUserPasswd("12341234");
+		int result = userDao.resetPasswd(uvo);
+		log.info((result==1) ? "성공" : "실패");
+	}
 	
 }

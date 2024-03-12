@@ -29,12 +29,12 @@
 		where user_email = #{userEmail}
 	</select>
 	
-	<!-- 회원아이디 여부 체크 -->
-	<select id="findIdCheck" parameterType="user" resultType="int">
-		select count(*) 
-		from users
-		where user_email = #{userEmail}
-	</select>
+	<!-- 비밀번호 재설정 -->
+	<update id="resetPasswd" parameterType="user">
+		update users
+		set user_pwd = #{userPasswd} 
+		where user_id = #{userId} and user_email = #{userEmail}
+	</update>
 	
 	<!-- 회원 가입 -->
 	<insert id="userJoin" parameterType="user">
@@ -79,6 +79,14 @@
 	    </choose>
 	</select>-->
 
+	<select id="userInfo" parameterType="user" resultMap="userMap">
+		select 
+		    user_id, user_pwd, user_name, user_phone, user_email, user_volcnt, user_level,
+		    to_char(user_date, 'YYYY-MM-DD') as user_date, user_act, user_repcnt
+		from users
+		where user_id = #{userId}
+	</select>
+	
 	<update id="userUpdate" parameterType="user">
 		update users
 		set user_name = #{userName}, user_phone = #{userPhone}, user_email = #{userEmail}
@@ -88,14 +96,7 @@
 		where user_id = #{userId}
 	</update>
 	
-	<select id="userInfo" parameterType="user" resultMap="userMap">
-		select 
-		    user_id, user_pwd, user_name, user_phone, user_email, user_volcnt, user_level,
-		    to_char(user_date, 'YYYY-MM-DD') as user_date, user_act, user_repcnt
-		from users
-		where user_id = #{userId}
-	</select>
-	
+	<!-- 비밀번호 일치 확인 -->
 	<select id="pwdConfirm" parameterType="user" resultType="int">
 		select nvl((
 		            select 1 from users

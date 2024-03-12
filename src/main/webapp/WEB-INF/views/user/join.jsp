@@ -19,7 +19,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<div class="logo"><a href="index.html">Hielo <span>by TEMPLATED</span></a></div>
+		<div class="logo"><a href="/">SaveTheAnimal <span>by team3</span></a></div>
 		<a href="#menu">Menu</a>
 	</header><!-- Nav -->
 	<nav id="menu">

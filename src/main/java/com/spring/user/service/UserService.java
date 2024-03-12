@@ -5,7 +5,7 @@ import com.spring.user.vo.UserVO;
 public interface UserService {
 	public UserVO userLoginProcess(UserVO uvo); // 회원 로그인
 	public UserVO findId(UserVO uvo); 			// 아이디 찾기
-	public int findIdCheck(UserVO uvo); 		// 회원 아이디 확인	
+	//public int findIdCheck(UserVO uvo); 		// 회원 아이디 확인	
 	
 	public int userJoin(UserVO uvo); 			// 회원 가입
 	public int idCheck(UserVO uvo);				// 회원 아이디 중복 체크
