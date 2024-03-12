@@ -14,7 +14,8 @@
 		
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="/resources/js/jquery-3.7.1.min.js"></script>
+		<script src="/resources/include/js/jquery-3.7.1.min.js"></script>
+		<script src="/resources/include/js/common.js"></script>
 	</head>
 	<body>
 		<div>findId.jsp : 아이디 찾기 성공 페이지 - 아이디 보여주기</div>
