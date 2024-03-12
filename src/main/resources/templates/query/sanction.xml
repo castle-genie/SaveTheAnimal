@@ -6,15 +6,14 @@
 		<result column="sanction_status" property="sanctionStatus"/>
 		<result column="sanction_result" property="sanctionStatus"/>
 		<result column="sanction_date" property="sanctionStatus"/>
-
 		<result column="report_id" property="reportId"/>	
 	</resultMap>
 	
 	<insert id="sanctionInsert" parameterType="sanction">
 		insert into sanction(sanction_id, sanction_status, sanction_result, sanction_date, report_id)
 		values(sanction_seq.nextval, 1, 
-		    (select (user_repcnt + 1) from users where user_id = ${boardUser})
-		    , sysdate, #{reportId})
+		    (select (user_repcnt + 1) from users where user_id = #{boardUser})
+		    , sysdate, #{reportId})		
 	</insert>
 	
 </mapper>
