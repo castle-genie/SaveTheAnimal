@@ -10,14 +10,12 @@ public class IndexController {
 	@GetMapping("/")
 	public String mainpage() {
 		return "project/mainpage";
-<<<<<<< HEAD
+
 	}	
-=======
-	}
 	
 	@GetMapping("admin")
 	public String adminPage() {
 		return"admin/adminMain";
 	}
->>>>>>> 1a258f1d5fb851adda884777da4b72107f2a53b9
+
 }
