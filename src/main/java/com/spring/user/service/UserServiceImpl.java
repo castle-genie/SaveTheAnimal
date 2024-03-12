@@ -43,6 +43,18 @@ public class UserServiceImpl implements UserService {
 		result = userDao.idCheck(uvo);
 		return result;
 	}
+	@Override
+	public int phoneCheck(UserVO uvo) {
+		int result = 0;
+		result = userDao.phoneCheck(uvo);
+		return result;
+	}
+	@Override
+	public int emailCheck(UserVO uvo) {
+		int result = 0;
+		result = userDao.emailCheck(uvo);
+		return result;
+	}
 	
 	@Override
 	public int pwdConfirm(UserVO uvo) {
@@ -64,6 +76,8 @@ public class UserServiceImpl implements UserService {
 		int result = userDao.userUpdate(uvo);
 		return result;
 	}
+
+	
 
 
 

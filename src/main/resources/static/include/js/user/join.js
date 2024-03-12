@@ -68,11 +68,27 @@ $(function(){
             return;
         }
         /* ajax 중복 체크 */
-        
-        
-        
-        
-        
+        $.ajax({ 
+			url : "/phoneCheck",  
+			type : "post",
+			data : {
+				"userPhone":userPhone
+			},
+			success: function(result) {
+				if (result === 1) {                    
+                    alert("존재하는 번호입니다.");
+                    $("#userPhone").val(""); 
+                    $("#userPhone").focus();              
+                } else {
+                    alert("사용가능한 번호입니다.");
+                    $("#userEmail").focus();
+                    phoneCheck = 1;                 
+                }
+			},
+			error: (xhr, textStatus, errorThrown) => {
+				alert("AJAX 요청 실패:\n"+ textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
+			}
+		});	            
 	});
 	
 	/* 중복 체크 후 다른 번호로 다시 변경할 경우 이벤트 */
@@ -94,12 +110,26 @@ $(function(){
             return;
         }
         /* ajax 중복 체크 */
-        
-        
-        
-        
-        
-        
+        $.ajax({ 
+			url : "/emailCheck",  
+			type : "post",
+			data : {
+				"userEmail":userEmail
+			},
+			success: function(result) {
+				if (result === 1) {                    
+                    alert("존재하는 이메일입니다.");
+                    $("#userEmail").val(""); 
+                    $("#userEmail").focus();              
+                } else {
+                    alert("사용가능한 이메일입니다.");
+                    emailCheck = 1;                 
+                }
+			},
+			error: (xhr, textStatus, errorThrown) => {
+				alert("AJAX 요청 실패:\n"+ textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
+			}
+		});		       
 	});	
 	
 	/* 중복 체크 후 다른 이메일로 다시 변경할 경우 이벤트 */

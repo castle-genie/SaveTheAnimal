@@ -80,5 +80,41 @@ public class UserController {
 		result = userService.idCheck(uvo);
 		return result;
 	}
+	@ResponseBody
+	@PostMapping("/phoneCheck")
+	public int phoneCheck(UserVO uvo) {
+		int result = 0;
+		result = userService.phoneCheck(uvo);
+		return result;
+	}
+	@ResponseBody
+	@PostMapping("/emailCheck")
+	public int emailCheck(UserVO uvo) {
+		int result = 0;
+		result = userService.emailCheck(uvo);
+		return result;
+	}
+	
+	/*@ResponseBody
+	@PostMapping("/checkDuplicate")
+	public int checkDuplicate(UserVO uvo) {
+		int result = 0;
+		result = userService.checkDuplicate(uvo);
+		return result;
+	}*/
+	
+	@GetMapping("/findId")
+	public String findIdForm() {
+		log.info("아이디 찾기 화면");
+		return "user/findIdForm";
+	}
+
+	@PostMapping("/findId")
+	public String findId(UserVO uvo, Model model) {
+		log.info("아이디 찾기 호출");
+		UserVO result = userService.findId(uvo); 
+		model.addAttribute("result", result);
+		return "user/findId";
+	}
 	
 }
