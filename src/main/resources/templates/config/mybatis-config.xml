@@ -4,5 +4,8 @@
 	<typeAliases>
 		<typeAlias type="com.spring.report.vo.ReportVO" alias="report"/>
 		<typeAlias type="com.spring.donate.vo.DonateVO" alias="donate"/>
+		<typeAlias type="com.spring.volunteer.vo.VolunteerVO" alias="volunteer" />
+		<typeAlias type="com.spring.sanction.vo.SanctionVO" alias="sanction"/>
+		<typeAilas type="com.spring.donate.vo.DonateVO" alias="donate"/>
 	</typeAliases>
 </configuration>

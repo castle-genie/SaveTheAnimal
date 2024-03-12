@@ -1,16 +1,13 @@
-package com.spring.report.dao;
+package com.spring.report.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.spring.report.vo.ReportVO;
 
-@Mapper
-public interface ReportDao {
+public interface ReportService {
+
 	public List<ReportVO> reportList(ReportVO rvo);
 	public ReportVO reportDetail(ReportVO rvo);
 	public int reportUpdate(ReportVO rvo);
-		
 	
 }
