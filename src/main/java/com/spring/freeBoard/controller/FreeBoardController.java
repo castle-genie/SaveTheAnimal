@@ -41,9 +41,6 @@ public class FreeBoardController {
 		return "freeBoardList";
 	}
 	*/
-	
-	
-	
 	/*
 	@GetMapping("freeBoardList")
 	public String freeBoardList(Model model) throws Exception{
@@ -53,5 +50,4 @@ public class FreeBoardController {
 		
 	}
 	*/
-	
 }
