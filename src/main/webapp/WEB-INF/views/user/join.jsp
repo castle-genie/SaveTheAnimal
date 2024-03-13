@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/common.jsp" %>    
-<link rel="stylesheet" href="/resources/include/assets/css/main.css">
+<%@ include file="/WEB-INF/views/common/common.jsp" %>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
 <style>
 	.form-container {
 	    width: 800px; 
@@ -17,24 +18,9 @@
 </head>
 <body class="subpage">
 
-	<!-- Header -->
-	<header id="header">
-		<div class="logo"><a href="/">SaveTheAnimal <span>by team3</span></a></div>
-		<a href="#menu">Menu</a>
-	</header><!-- Nav -->
-	<nav id="menu">
-		<ul class="links">
-			<li><a href="/">Home</a></li>
-			<li><a href="/project/volunteer">봉사모집</a></li>
-			<li><a href="/project/adoption">입양</a></li>
-			<li><a href="donate.html">후원</a>
-			<li><a href="/project/freeboard">자유게시판</a>
-			<li><a href="#">봉사후기게시판</a>
-			<li><a href="#">입양후기게시판</a>
-			<li><a href="#">공지사항</a>
-			<li><a href="/login">로그인</a>
-		</ul>
-	</nav><!-- One -->
+	<!-- Header, Nav -->
+	<%@ include file="/WEB-INF/views/project/generic.jspf" %>   
+	<!-- One -->
 	<section id="One" class="wrapper style3">
 		<div class="inner">
 			<header class="align-center">
@@ -160,6 +146,11 @@
 		Made with <a href="https://templated.co/">Templated</a>.
 	</div>
 	<!-- Scripts -->
+	<script src="/resources/include/assets2/js/jquery.min.js"></script>
+	<script src="/resources/include/assets2/js/jquery.scrollex.min.js"></script>
+	<script src="/resources/include/assets2/js/skel.min.js"></script>
+	<script src="/resources/include/assets2/js/util.js"></script>
+	<script src="/resources/include/assets2/js/main.js"></script>
 	<script src="/resources/include/js/user/join.js"></script>
 	<script>
 	$(function(){		

@@ -135,6 +135,19 @@ public class UserController {
 	
 
 	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		log.info("마이페이지 화면");
+		return "user/myPage";
+	}
+	
 	@GetMapping("/admin/userList")
 	public String userList(@ModelAttribute UserVO uvo, Model model) {
 		List<UserVO> userList = userService.userList(uvo);
