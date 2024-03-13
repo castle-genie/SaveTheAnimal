@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/common.jsp" %>
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
+	
+</head>
+<body class="subpage">
+
 <%@ include file="/WEB-INF/views/project/generic.jspf" %>   
 
 	<!-- One -->
@@ -25,7 +32,14 @@
 				</div>
 			</div>
 		</div>
-	</section><!-- Footer -->
+	</section>
+	
+	
+	
+	
+	
+	
+	<!-- Footer -->
 	<footer id="footer">
 		<div class="container">
 			<ul class="icons">

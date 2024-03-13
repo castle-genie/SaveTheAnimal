@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/common.jsp" %>
-	<meta charset="utf-8">
-	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
-</head>
 
-<body class="subpage">
+
 
 	<!-- Header -->
 	<header id="header">
