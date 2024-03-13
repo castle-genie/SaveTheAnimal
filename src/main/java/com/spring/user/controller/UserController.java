@@ -133,13 +133,6 @@ public class UserController {
 		return "user/resetPwd";
 	}
 	
-
-	
-	
-	
-	
-	
-	
 	
 	
 	@GetMapping("/mypage")
@@ -147,6 +140,28 @@ public class UserController {
 		log.info("마이페이지 화면");
 		return "user/myPage";
 	}
+	
+	@GetMapping("/updateProfile")
+	public String updateProfile() {
+		log.info("회원정보수정 화면");
+		return "user/updateProfile";
+	}
+	
+	/*@PostMapping("/updateProfile")
+	public String userUpdate(UserVO uvo, Model model, RedirectAttributes ras) {
+		log.info("회원정보 수정");
+		int result = 0;
+		String url = "";
+		
+		//result = userService.userUpdate(uvo);
+		if (result ==1) {
+			url="user/myPage";
+		} else {
+			ras.addFlashAttribute("errorMsg", "업데이트에 문제가 있어 다시 진행해 주세요.");
+			url="/updateProfile";
+		}
+		return "redirect:"+url;
+	}*/
 	
 	@GetMapping("/admin/userList")
 	public String userList(@ModelAttribute UserVO uvo, Model model) {

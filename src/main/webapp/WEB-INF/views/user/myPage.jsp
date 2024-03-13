@@ -31,7 +31,7 @@
 					<div class="grid">
 						<!-- 회원 프로필 -->
 						<div class="image fit">   	
-							<div class="my-3 p-3 bg-body rounded shadow-sm">
+							<div class="my-3 p-4 bg-body rounded shadow-sm">
 							    <h4 class="border-bottom pb-2 mb-0"><strong>My Profile</strong></h4>
 							    <div class="d-flex text-body-secondary pt-3">
 							      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -67,15 +67,14 @@
 							      	</div>
 							    </div>
 							    <small class="d-block text-end mt-3">
-							      <a href="/update">회원정보 수정</a>
-							      <button type="button" id="goUpdateBtn">회원정보 수정</button>
+							      <button type="button" id="goUpdateBtn" class="btn btn-small">회원정보 수정</button>
 							    </small>
 							  </div>					
 						</div>
 
 						<!-- 활동 내역 -->						
 		 				<div class="image fit">
-							<div class="my-3 p-3 bg-body rounded shadow-sm">
+							<div class="my-3 p-4 bg-body rounded shadow-sm">
 							    <h4 class="border-bottom pb-2 mb-0"><strong>My Activities</strong></h4>										    
 							    <br/>
 							    <p class="align-right">봉사 레벨 <br> 봉사 횟수</p>
@@ -123,7 +122,7 @@
 
 						<!-- 기부 후원 내역 -->
 					 	<div class="image fit">			
-							<div class="my-3 p-3 bg-body rounded shadow-sm">
+							<div class="my-3 p-4 bg-body rounded shadow-sm">
 							    <h4 class="border-bottom pb-2 mb-0"><strong>My Donations</strong></h4>
 							    <div class="d-flex text-body-secondary pt-3">
 							      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -169,12 +168,10 @@
 
 					<hr>
 					<div>myPage.jsp 화면</div>
-					<div>하위 메뉴 배치 해서 ajax로 불러오기</div>
-					<div>내 정보 수정 : userUpdateForm.jsp</div>
-					<div>나의 활동 : 각각 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
-					<div>후원 정보 : 후원정보 페이지로 이동</div>
-					<hr>
-					
+					<div>하위 메뉴 배치 해서 회원정보 ajax로 불러오기</div>
+					<div>내 정보 수정 : updateProfile.jsp</div>
+					<div>나의 활동, 후원 정보 : 각각 해당 페이지로 이동하여 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
+					<hr>					
 				</div>
 			</div>
 		</div>
@@ -201,25 +198,13 @@
 	<script src="/resources/include/assets2/js/skel.min.js"></script>
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
-	<script>
-	// 문서가 로드된 후에 실행되는 이벤트 핸들러
-    document.addEventListener("DOMContentLoaded", function() {
-        // 버튼 클릭 이벤트 핸들러 추가
-        let goUpdateBtn = document.getElementById("goUpdateBtn");
-        if (goUpdateBtn) {
-            goUpdateBtn.addEventListener("click", function() {
-                // 회원 정보 수정 페이지로 이동
-                window.location.href = "/update";
-            });
-        }
-    });
-		/* $(function(){
-			$("#goUpdateBtn").on("click", function(){
-				console.log("회원정보 수정 버튼 클릭");
-				location.href="";
-			});
-			
-		}); */
+	<script>	
+		$(function(){
+			// 회원 정보 수정 이동 
+			$("#goUpdateBtn").on("click", function(){				
+				location.href="/updateProfile";
+			});			
+		}); 
 	</script>
 </body>
 
