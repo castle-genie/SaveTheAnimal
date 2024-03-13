@@ -1,5 +1,7 @@
 package com.spring.user.service;
 
+import java.util.List;
+
 import com.spring.user.vo.UserVO;
 
 public interface UserService {
@@ -18,4 +20,6 @@ public interface UserService {
 	public int pwdConfirm(UserVO uvo);			// 비밀번호 확인
 	public int userUpdate(UserVO uvo); 			// 회원 정보 수정
 	//public int userDelete(UserVO uvo); // 회원 탈퇴
+	
+	public List<UserVO> userList(UserVO uvo);   // 회원 목록 조회
 }

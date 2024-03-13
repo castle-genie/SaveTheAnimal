@@ -1,5 +1,7 @@
 package com.spring.user.dao;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +16,16 @@ import lombok.extern.slf4j.Slf4j;
 public class UserDaoTests {	
 	@Setter(onMethod_ = @Autowired)
 	private UserDao userDao;
+	
+	@Test
+	// 리스트 가져와서 로그에 출력하기
+	public void testUserList() {
+		UserVO uvo = null;
+		List<UserVO> list = userDao.userList(uvo);
+		for (UserVO vo : list) {
+			log.info(vo.toString());
+		}
+	}
 	
 	/*@Test
 	public void testUserLoginProcess() {
@@ -108,7 +120,7 @@ public class UserDaoTests {
 		int result = userDao.checkDuplicate(uvo);
 		log.info((result==1) ? "존재함" : "사용가능");
 	}*/
-	@Test
+	/*@Test
 	public void testResetPasswd() {
 		UserVO uvo = new UserVO();
 		uvo.setUserId("member00");
@@ -116,6 +128,6 @@ public class UserDaoTests {
 		uvo.setUserPasswd("12341234");
 		int result = userDao.resetPasswd(uvo);
 		log.info((result==1) ? "성공" : "실패");
-	}
+	}*/
 	
 }

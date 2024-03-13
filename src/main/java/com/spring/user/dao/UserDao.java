@@ -1,6 +1,8 @@
 package com.spring.user.dao;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.spring.user.vo.UserVO;
@@ -23,15 +25,12 @@ public interface UserDao {
 	public UserVO userInfo(UserVO uvo); 		// 내정보 확인 - 상세 조회	
 	public int userUpdate(UserVO uvo); 			// 회원정보 수정
 	public int pwdConfirm(UserVO uvo);			// 비밀번호 일치 확인
-
 	
+	public List<UserVO> userList(UserVO uvo); //회원 목록 조회
 	
 	//public int userDelete(UserVO uvo);// 회원 삭제..ㄷㄷ
 	
-	
 	//public int userListCnt(UserVO uvo); // users 테이블의 전체 레코드 수 : 페이징처리시 필요
-
-	//public List<UserVO> userList(UserVO uvo); //회원 목록 조회
 	
 	
 }
