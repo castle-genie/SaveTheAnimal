@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +10,7 @@
 <link rel="stylesheet" href="/resources/include/assets/css/main.css">
 </head>
 <body>
-<h2>자유게시판</h2>
+<h2 width="50%">자유게시판</h2>
 
 
 	<div class="table-wrapper">
@@ -28,14 +27,11 @@
 			<tbody>
 			<c:forEach items="${freeBoardList }" var="list">
 				<tr>
-					<a href='detail?seq={$list.fboardId}'>
-						<td>${list.fboardTitle}</td>
-					</a>
+					<td>${list.fboardTitle}</td>
 					<td>${list.userId }</td>
 					<td>${list.fboardLike }</td>
 					<td>${list.fboardCnt }</td>
-					<td><fmt:formatDate value="${list.fboardDate }" pattern="yyyy.MM.dd"/></td>
-					<!-- <td>${list.fboardDate }</td> -->
+					<td>${list.fboardDate }</td>
 				</tr>
 			</c:forEach>
 			</tbody>

@@ -8,18 +8,19 @@
 		<result column="fboard_like" property="fboardLike"/>
 		<result column="fboard_cnt" property="fboardCnt"/>
 		<result column="fboard_date" property="fboardDate"/>
+		<result column="user_id" property="userId"/>
 	</resultMap>
-	<select id="freeBoardList" parameterType="freeBoard" resultMap="freeBoardMap">
-		SELECT 	fboard_id, fboard_title, fboard_like, fboard_date
+	<!-- 자유게시판 목록 -->
+	<select id="freeBoardList" parameterType="freeBoardList" resultMap="freeBoardMap">
+		SELECT 	fboard_id, fboard_title, fboard_like, user_id, fboard_cnt, fboard_date
 		FROM 	freeBoard
 		ORDER BY fboard_id DESC
 	</select>
-	<!-- 
-	<select id="freeBoardDetail" parameterType="freeBoard" resultMap="freeBoardMap">
+	<!-- 자유게시판 글 상세조회 -->
+	<select id="freeBoardDetail" parameterType="freeBoardDetail" resultMap="freeBoardMap">
 		SELECT 	fboard_id, fboard_title, fboard_content, fboard_like
 				fboard_date, user_id
 		FROM 	freeBoard
 		WHERE	fboard_id = #{fboardId}
 	</select>
-	 -->
 </mapper>

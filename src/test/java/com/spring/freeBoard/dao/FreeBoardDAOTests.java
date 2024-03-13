@@ -15,18 +15,18 @@ import lombok.extern.slf4j.Slf4j;
 public class FreeBoardDAOTests {
 	
 	@Autowired
-	private FreeBoardDAO fbDAO;
+	private FreeBoardDAO freeBoardDAO;
 	
 	
 	@Test
 	public void testFreeBoardList() {
 		FreeBoardVO freeBoardVO = new FreeBoardVO();
-		List<FreeBoardVO> freeBoardList = fbDAO.freeBoardList(freeBoardVO);
+		List<FreeBoardVO> freeBoardList = freeBoardDAO.freeBoardList(freeBoardVO);
 		for(FreeBoardVO list : freeBoardList) {
 			log.info(list.toString());
 			
 		}
-		log.info("ㅁㄴㅇㄹ" + fbDAO.freeBoardList(freeBoardVO));
+		log.info("ㅁㄴㅇㄹ" + freeBoardDAO.freeBoardList(freeBoardVO));
 		
 	}
 

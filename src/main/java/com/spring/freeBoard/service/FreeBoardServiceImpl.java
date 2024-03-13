@@ -12,16 +12,22 @@ import com.spring.freeBoard.vo.FreeBoardVO;
 public class FreeBoardServiceImpl implements FreeBoardService{
 	
 	@Autowired
-	private FreeBoardDAO fbDAO;
+	private FreeBoardDAO freeBoardDAO;
 	
 	
 	@Override
-	public List<FreeBoardVO> freeBoardList(FreeBoardVO fbvo){
-		List<FreeBoardVO> freeBoardList = fbDAO.freeBoardList(fbvo);
+	public List<FreeBoardVO> freeBoardList(FreeBoardVO freeBoardVO){
+		List<FreeBoardVO> freeBoardList = freeBoardDAO.freeBoardList(freeBoardVO);
 		
 		return freeBoardList;
 	}
 	
+	@Override
+	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO) {
+		FreeBoardVO freeBoardDetail = freeBoardDAO.freeBoardDetail(freeBoardVO);
+		
+		return freeBoardDetail;
+	}
 	/*
 	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO) {
 		
