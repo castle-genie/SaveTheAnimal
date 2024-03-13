@@ -1,6 +1,5 @@
 package com.spring.sanction.vo;
 
-import com.spring.report.vo.ReportVO;
 
 import lombok.Data;
 
@@ -12,6 +11,6 @@ public class SanctionVO {
 	private int sanctionDate;
 	
 	private String boardUser;
-	private ReportVO rvo;
+	private String reportId;
 	
 }

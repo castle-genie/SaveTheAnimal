@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp" %>
 	<!-- 스타일 적용 -->
-    <link rel="stylesheet" href="/resources/include/css/volunteer.css">
+    <link rel="stylesheet" href="/resources/include/css/volunteer/volunteer.css">
 	<!-- 달력 api 적용 -->
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
@@ -62,9 +62,9 @@
             },
             eventClick: function(info) {
                 var volunteerId = info.event.extendedProps.volunteerId;
-                $.ajax({
-                    url: '/volunteer/volunteerDetail' + volunteerId,
-                    method: 'GET',
+                /*$.ajax({
+                    url: '/volunteer/volunteerDetail',
+                    method: 'POST',
                     data: {
                         volunteerId: volunteerId
                     },
@@ -74,7 +74,8 @@
                     error: function(xhr, status, error) {
                         console.error('Error: ', error)
                     }
-                });
+                });*/
+                location.href = "/volunteer/volunteerDetail";
                 info.jsEvent.preventDefault();
             }
         });
@@ -90,18 +91,26 @@
     <link rel="stylesheet" href="/resources/include/assets/css/main.css">
 	</head>
 	<body>
-			<!-- Header -->
+		<!-- Header -->
 		<header id="header">
 			<div class="logo"><a href="index.html">Hielo <span>by TEMPLATED</span></a></div>
 			<a href="#menu">Menu</a>
-		</header><!-- Nav -->
+		</header>
+		<!-- Nav -->
 		<nav id="menu">
 			<ul class="links">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="generic.html">Generic</a></li>
-				<li><a href="elements.html">Elements</a></li>
+				<li><a href="/">Home</a></li>
+				<li><a href="/project/volunteer">봉사모집</a></li>
+				<li><a href="/project/adoption">입양</a></li>
+				<li><a href="donate.html">후원</a>
+				<li><a href="/project/freeboard">자유게시판</a>
+				<li><a href="#">봉사후기게시판</a>
+				<li><a href="#">입양후기게시판</a>
+				<li><a href="#">공지사항</a>
+				<li><a href="/login">로그인</a>
 			</ul>
-		</nav><!-- One -->
+		</nav>
+		<!-- One -->
 		<section id="One" class="wrapper style3">
 			<div class="inner">
 				<header class="align-center">
@@ -109,7 +118,8 @@
 					<h2>봉사 활동 신청</h2>
 				</header>
 			</div>
-		</section><!-- Two -->
+		</section>
+		<!-- Two -->
 		<section id="two" class="wrapper style2">
 			<div class="calendar-container">
 				<div id='calendar'></div>

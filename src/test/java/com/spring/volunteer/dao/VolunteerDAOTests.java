@@ -27,11 +27,11 @@ public class VolunteerDAOTests {
 		log.info("전체 행 갯수 : " + volunteerDAO.volunteerList(volunteerVO));
 	} */
 	
-	/*
+	/* */
 	@Test
 	public void testVolulnteerDetail(){
 		VolunteerVO volunteerVO = new VolunteerVO();
 		volunteerVO.setVolunteerId(1);
 		log.info("적용된 행 갯수: " + volunteerDAO.volunteerDetail(volunteerVO));
-	}*/
+	}
 }
