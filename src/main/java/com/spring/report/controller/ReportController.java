@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.spring.report.service.ReportService;
 import com.spring.report.vo.ReportVO;
 
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+//@Slf4j
 @RequestMapping("/admin/report/*")
 @Controller
 public class ReportController {
@@ -33,7 +33,7 @@ public class ReportController {
 	
 	@GetMapping("reportDetail")
 	public String reportDetail(ReportVO rvo, Model model) {
-		log.info("reportDetail 호출");
+//		log.info("reportDetail 호출");
 		ReportVO detail = reportService.reportDetail(rvo);
 		model.addAttribute("detail", detail);
 		return "admin/report/reportDetail";
@@ -41,9 +41,9 @@ public class ReportController {
 	
 	@PostMapping("reportUpdate")
 	public String reportDelete(ReportVO rvo) {
-		log.info("reportUpdate 호출");
+//		log.info("reportUpdate 호출");
 		reportService.reportUpdate(rvo);
-		log.info("rvo : " + rvo);
+//		log.info("rvo : " + rvo);
 		return "redirect:/admin/report/reportList";
 	}
 	

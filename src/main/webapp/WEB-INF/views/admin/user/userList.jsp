@@ -9,7 +9,7 @@
 	<div class="container">
 		<!-- 여기에 페이지 구현하세요 -->		
 		<div id="userList">
-			<table class="table table-bordered">
+			<table class="table table-striped">
 				<thead>
 					<tr class="text-center">
 					<!-- 12 -->
