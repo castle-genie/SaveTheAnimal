@@ -34,9 +34,67 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 
+
 	@Override
 	public int reportUpdate(ReportVO rvo) {
 		int result = rDao.reportUpdate(rvo);
+		return result;
+	}
+
+
+	@Override
+	public int reportDelete(ReportVO rvo) throws Exception {
+		int result = rDao.reportDelete(rvo);
+		return result;
+		
+	}
+
+
+	@Override
+	public int reportModify(ReportVO rvo) {
+		int result = rDao.reportModify(rvo);
+		return result;
+	}
+
+
+	@Override
+	public int reportInsertFB(ReportVO rvo) throws Exception {
+		int result = rDao.reportInsertFB(rvo);
+		return result;
+	}
+
+
+	@Override
+	public int reportInsertVB(ReportVO rvo) throws Exception {
+		int result = rDao.reportInsertVB(rvo);
+		return result;
+	}
+
+
+	@Override
+	public int reportInsertAB(ReportVO rvo) throws Exception {
+		int result = rDao.reportInsertAB(rvo);
+		return result;
+	}
+
+
+	@Override
+	public int reportInsertFC(ReportVO rvo) throws Exception {
+		int result = rDao.reportInsertFC(rvo);
+		return result;
+	}
+
+
+	@Override
+	public int reportInsertVC(ReportVO rvo) throws Exception {
+		int result = rDao.reportInsertVC(rvo);
+		return result;
+	}
+
+
+	@Override
+	public int reportInsertAC(ReportVO rvo) throws Exception {
+		int result = rDao.reportInsertAC(rvo);
 		return result;
 	}
 

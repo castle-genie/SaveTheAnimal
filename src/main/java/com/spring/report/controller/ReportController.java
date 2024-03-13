@@ -39,11 +39,73 @@ public class ReportController {
 		return "admin/report/reportDetail";
 	}
 	
+	@PostMapping("reportInsertFB")
+	public String reportInsertFB(ReportVO rvo) throws Exception{
+		reportService.reportInsertFB(rvo);
+		return "redirect:/admin/report/reportList";
+	}
+	
+	@PostMapping("reportInsertVB")
+	public String reportInsertVB(ReportVO rvo) throws Exception{
+		reportService.reportInsertVB(rvo);
+		return "redirect:/admin/report/reportList";
+	}
+	
+	@PostMapping("reportInsertAB")
+	public String reportInsertAB(ReportVO rvo) throws Exception{
+		reportService.reportInsertAB(rvo);
+		return "redirect:/admin/report/reportList";
+	}
+	
+	@PostMapping("reportInsertFC")
+	public String reportInsertFC(ReportVO rvo) throws Exception{
+		reportService.reportInsertFC(rvo);
+		return "redirect:/admin/report/reportList";
+	}
+	
+	@PostMapping("reportInsertVC")
+	public String reportInsertVC(ReportVO rvo) throws Exception{
+		reportService.reportInsertVC(rvo);
+		return "redirect:/admin/report/reportList";
+	}
+	
+	@PostMapping("reportInsertAC")
+	public String reportInsertAC(ReportVO rvo) throws Exception{
+		reportService.reportInsertAC(rvo);
+		return "redirect:/admin/report/reportList";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@PostMapping("reportUpdate")
-	public String reportDelete(ReportVO rvo) {
+	public String reportUpdate(ReportVO rvo) {
 //		log.info("reportUpdate 호출");
 		reportService.reportUpdate(rvo);
 //		log.info("rvo : " + rvo);
+		return "redirect:/admin/report/reportList";
+	}
+	
+	@PostMapping("reportDelete")
+	public String reportDelete(ReportVO rvo) throws Exception{
+//		log.info("reportDelete call");
+		reportService.reportDelete(rvo);
+		return "redirect:/admin/report/reportList";
+	}
+	
+	@PostMapping("reportModify")
+	public String reportModify(ReportVO rvo) throws Exception{
+//		log.info("reportModify call");
+		reportService.reportModify(rvo);
 		return "redirect:/admin/report/reportList";
 	}
 	

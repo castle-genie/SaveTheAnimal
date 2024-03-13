@@ -48,6 +48,7 @@
 		where (r.report_status = 1) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
 	</select>
 	
+	
 	<select id="reportDetail" parameterType="report" resultMap="reportMap">
 		select distinct r.report_id, r.report_sort, to_char(r.report_date, 'YYYY-MM-DD') as report_date, r.report_status, r.report_detail,
 		    r.user_id, r.fboard_id, r.vfboard_id, r.afboard_id, r.fcomment_id, r.vfcomment_id, r.afcomment_id ,
@@ -96,11 +97,60 @@
 	
 	</select>
 
+
+	<insert id="reportInsertFB" parameterType="report">
+		insert into report(report_id, report_sort, report_date, report_detail, report_status, fboard_id, user_id)
+		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{fboardId}, #{userId})
+	</insert>
+
+	<insert id="reportInsertVB" parameterType="report">
+		insert into report(report_id, report_sort, report_date, report_detail, report_status, vfboard_id, user_id)
+		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfboardId}, #{userId})
+	</insert>
+
+	<insert id="reportInsertAB" parameterType="report">
+		insert into report(report_id, report_sort, report_date, report_detail, report_status, afboard_id, user_id)
+		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{afboardId}, #{userId})
+	</insert>
+
+	<insert id="reportInsertFC" parameterType="report">
+		insert into report(report_id, report_sort, report_date, report_detail, report_status, fcomment_id, user_id)
+		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{fcommentId}, #{userId})
+	</insert>
+
+	<insert id="reportInsertVC" parameterType="report">
+		insert into report(report_id, report_sort, report_date, report_detail, report_status, vfcomment_id, user_id)
+		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfcommentId}, #{userId})
+	</insert>
+
+	<insert id="reportInsertAC" parameterType="report">
+		insert into report(report_id, report_sort, report_date, report_detail, report_status, afcomment_id, user_id)
+		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{afcommentId}, #{userId})
+	</insert>
+
+
 	<update id="reportUpdate" parameterType="report">
 		update report
 		set report_status = 2
 		where report_id = #{reportId}
 	</update>
 
+
+	<update id="reportModify" parameterType="report">
+		update report
+		set 
+			report_sort = #{reportSort},
+			report_date = sysdate,
+			report_detail = #{reportDetail}
+		where report_id = #{reportId}
+	</update>
+
+	
+	<delete id="reportDelete" parameterType="report">
+		delete from report
+		where report_id = #{reportId}
+	</delete>
+	
+	
 
 </mapper>
