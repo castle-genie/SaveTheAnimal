@@ -16,7 +16,7 @@ public interface UserService {
 	//public int checkDuplicate(UserVO uvo); // 중복 체크 : 아이디, 핸드폰번호, 이메일
 	
 	
-	public UserVO userInfo(UserVO uvo);			// 회원 정보 조회	
+	public UserVO userInfo(String userId);		// 회원 정보 조회	
 	public int pwdConfirm(UserVO uvo);			// 비밀번호 확인
 	public int userUpdate(UserVO uvo); 			// 회원 정보 수정
 	//public int userDelete(UserVO uvo); // 회원 탈퇴

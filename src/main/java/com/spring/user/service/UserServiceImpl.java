@@ -60,9 +60,10 @@ public class UserServiceImpl implements UserService {
 	
 	// 회원 정보 조회
 	@Override
-	public UserVO userInfo(UserVO uvo) {
-		UserVO info = null;
-		info = userDao.userInfo(uvo);
+	public UserVO userInfo(String userId) {
+		UserVO uvo = new UserVO();
+		uvo.setUserId(userId);
+		UserVO info = userDao.userInfo(uvo);
 		return info;
 	}
 	

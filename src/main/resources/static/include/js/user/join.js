@@ -157,13 +157,13 @@ $(function(){
 			return;
 		}		
 		/* 핸드폰번호 중복 검사 확인 */
-		if (idCheck == 0) {
+		if (phoneCheck == 0) {
 			alert("핸드폰번호 중복검사를 진행해주세요");
 			$("#userPhone").focus();
 			return;
 		}
 		/* 이메일 중복 검사 확인 */
-        if (idCheck == 0) {
+        if (emailCheck == 0) {
 			alert("이메일 중복검사를 진행해주세요");
 			$("#userEmail").focus();
 			return;

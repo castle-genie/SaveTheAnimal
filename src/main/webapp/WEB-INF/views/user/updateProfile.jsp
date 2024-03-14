@@ -3,7 +3,21 @@
 <%@ include file="/WEB-INF/views/common/common.jsp" %>
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
-	
+<style>
+	.form-container {
+	    width: 800px; 
+	    margin: 0 auto;
+	}
+	.table-wrapper {
+		overflow: hidden;
+	}
+	.table-wrapper tbody tr td:nth-child(3) {
+    	width: 25%; 
+	}
+	.new-password-area {
+		display:none;
+	}
+</style>
 </head>
 <body class="subpage">
 
@@ -28,22 +42,87 @@
 						<p>Save The Animal</p>
 						<h2>회원 정보 수정</h2>
 					</header>
-					<p><div>updateProfile.jsp</div></p>
-					<form action="/updateProfile" method="post">
-                    <div class="form-group">
-                        <label for="userName">이름:</label>
-                        <input type="text" id="userName" name="userName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="userEmail">이메일:</label>
-                        <input type="email" id="userEmail" name="userEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="userPhone">핸드폰 번호:</label>
-                        <input type="tel" id="userPhone" name="userPhone" required>
-                    </div>
-                    <button type="button">회원정보 수정</button>
-                </form>
+					
+					<div class="form-container">
+						<form id="updateForm">
+							<div class="row uniform">
+								<div class="table-wrapper">
+									<table>
+										<thead><tr><td colspan="3"></td></tr></thead>
+										<tbody>
+											<tr>
+												<td>
+													<label for="userId" class="align-center">아이디</label>
+												</td>
+												<td>
+													<input type="text" name="userId" id="userId" maxlength="15" value="${userInfo.userId}" readonly disabled/>
+												</td>	
+												<td>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="password-toggle align-center">
+					                                    <input type="checkbox" id="passwordToggle">
+					                                    <label for="passwordToggle">비밀번호 수정</label>
+					                                </div>
+												</td>	
+												<td>
+													<input type="password" class="changable" maxlength="20" name="pwdConfirm" id="pwdConfirm" placeholder="체크버튼을 클릭하세요" disabled/>
+													<div class="new-password-area">
+														<br>
+														<input type="password" maxlength="20" name="userPasswd" id="userPasswd" placeholder="새 비밀번호 입력. 영문/숫자 8~20자리"/>
+														<br>
+														<input type="password" maxlength="20" name="userPasswdCheck" id="userPasswdCheck" placeholder="새 비밀번호와 동일하게 입력해주세요."/>
+													</div>
+												</td>
+												<td>
+													<button type="button" class="button alt small" id="pwdConfirmBtn" disabled>비밀번호 확인</button>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="userName" class="align-center">이름</label>
+												</td>	
+												<td>
+													<input type="text" class="changable" maxlength="6" name="userName" id="userName" value="${userInfo.userName}" />
+												</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>
+													<label for="userPhone" class="align-center">핸드폰번호</label>
+												</td>
+												<td>
+													<input type="text" class="changable" name="userPhone" id="userPhone" maxlength="11" value="${userInfo.userPhone}" placeholder="'-' 제외 입력. 중복확인 필수" />
+												</td>
+												<td>
+													<button type="button" class="button alt small" id="phoneCheckBtn" disabled>중복 확인</button>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="userEmail" class="align-center">이메일</label>
+												</td>
+												<td>
+													<input type="email" class="changable" name="userEmail" id="userEmail" value="${userInfo.userEmail}" placeholder="이메일 입력. 중복확인 필수" />
+												</td>
+												<td>
+													<button type="button" class="button alt small" id="emailCheckBtn" disabled>중복 확인</button>
+												</td>
+											</tr>
+										</tbody>
+										<tfoot><tr><td colspan="3"></td></tr></tfoot>
+									</table>
+				                    <div class="text-end">
+				                    	<button type="button" class="button special" id="updateProfileBtn" disabled>회원정보 수정</button>
+				                    	<button type="button" id="updateCancelBtn">취소</button>
+				                    </div>
+								</div>
+							</div>
+						</form>
+	                </div>
+
 				</div>
 			</div>
 		</div>
@@ -71,6 +150,15 @@
 	<script src="/resources/include/assets2/js/skel.min.js"></script>
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
+	<script src="/resources/include/js/user/updateProfile.js"></script>
+	<script>
+	$(function(){		
+		let errorMsg = "${errorMsg}"; 
+		if (errorMsg != "") {
+			alert(errorMsg);
+		}
+	});		
+	</script>
 </body>
 
 </html> 

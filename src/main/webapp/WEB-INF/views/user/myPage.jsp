@@ -24,15 +24,22 @@
 		<div class="inner">
 			<div class="box">
 				<div class="content">
+				<c:if test="${empty userLogin}">
+				  	<h4>로그인이 필요합니다</h4>
+				  	<a href="/login">로그인 바로가기</a>
+				</c:if>
+				<c:if test="${not empty userLogin}">
 					<header class="align-center">
 						<p>Save The Animal</p>
 						<h2>회원 정보</h2>
 					</header>
+					
 					<div class="grid">
 						<!-- 회원 프로필 -->
 						<div class="image fit">   	
 							<div class="my-3 p-4 bg-body rounded shadow-sm">
 							    <h4 class="border-bottom pb-2 mb-0"><strong>My Profile</strong></h4>
+							    <!-- 사용자 정보 출력 -->
 							    <div class="d-flex text-body-secondary pt-3">
 							      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
 								      <rect width="100%" height="100%" fill="#fff"/>											      
@@ -41,7 +48,8 @@
 							        <div class="d-flex justify-content-between">
 							          <strong class="text-gray-dark">이름</strong>
 							        </div>
-							        <span class="d-block">@userName</span>
+							        <!-- 사용자 이름 출력 -->
+							        <span class="d-block">${userInfo.userName}</span>
 							      </div>
 							    </div>
 							    <div class="d-flex text-body-secondary pt-3">
@@ -52,7 +60,7 @@
 							        <div class="d-flex justify-content-between">
 							          <strong class="text-gray-dark">이메일</strong>
 							        </div>
-							        <span class="d-block">@userEmail</span>
+							        <span class="d-block">${userInfo.userEmail}</span>
 							      </div>
 							    </div>
 							    <div class="d-flex text-body-secondary pt-3">
@@ -63,7 +71,7 @@
 							        <div class="d-flex justify-content-between">
 							          <strong class="text-gray-dark">핸드폰번호</strong>
 							        </div>
-							        <span class="d-block">@userPhone</span>
+							        <span class="d-block">${userInfo.userPhone}</span>
 							      	</div>
 							    </div>
 							    <small class="d-block text-end mt-3">
@@ -77,7 +85,10 @@
 							<div class="my-3 p-4 bg-body rounded shadow-sm">
 							    <h4 class="border-bottom pb-2 mb-0"><strong>My Activities</strong></h4>										    
 							    <br/>
-							    <p class="align-right">봉사 레벨 <br> 봉사 횟수</p>
+							    <p class="align-right">
+							    	봉사 레벨 : <strong>Lv. ${userInfo.userLevel}</strong><br>
+							    	봉사 횟수 : <strong>${userInfo.userLevel}</strong> 회
+							    </p>
 							    <div class="d-flex text-body-secondary pt-3">
 							      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
 								      <rect width="100%" height="100%" fill="#fff"/>								      
@@ -147,32 +158,26 @@
 							        </div>
 							        <span class="d-block">결제 예정일, 결제 정보 내역 확인</span>
 							      </div>
-							    </div>
-							    <!-- 템플릿 참고용 -->
-								<!-- <div class="d-flex text-body-secondary pt-3">
-							      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-							      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-							        <div class="d-flex justify-content-between">
-							          <strong class="text-gray-dark">Full Name</strong>
-							          <a href="#">Follow</a>
-							        </div>
-							        <span class="d-block">@username</span>
-							      </div>
-							    </div> -->
+							    </div>							 
 							    <small class="d-block text-end mt-3">
 							      <a href="#">확인하기</a>
 							    </small>
 							  </div>					
 						</div>
-					</div>
-
-					<hr>
-					<div>myPage.jsp 화면</div>
-					<div>하위 메뉴 배치 해서 회원정보 ajax로 불러오기</div>
-					<div>내 정보 수정 : updateProfile.jsp</div>
-					<div>나의 활동, 후원 정보 : 각각 해당 페이지로 이동하여 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
-					<hr>					
+						<hr>
+						<small class="d-block text-end mt-3">
+							<button type="button" id="logoutBtn" class="btn btn-small">로그아웃</button>
+						</small>
+					</div>				
+				</c:if>
+										
 				</div>
+				<hr>
+				<div>myPage.jsp 화면</div>
+				<div>하위 메뉴 배치 해서 회원정보 ajax로 불러오기</div>
+				<div>내 정보 수정 : updateProfile.jsp</div>
+				<div>나의 활동, 후원 정보 : 각각 해당 페이지로 이동하여 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
+				<hr>
 			</div>
 		</div>
 	</section>
@@ -203,7 +208,18 @@
 			// 회원 정보 수정 이동 
 			$("#goUpdateBtn").on("click", function(){				
 				location.href="/updateProfile";
-			});			
+			});		
+			
+			$("#logoutBtn").on("click", function(){
+				alert("로그아웃하여 메인페이지로 이동합니다.");
+				location.href = "/logout";
+			});
+						
+			let errorMsg = "${errorMsg}";
+			if(errorMsg != ""){
+				alert(errorMsg);
+				errorMsg = "";
+			}
 		}); 
 	</script>
 </body>

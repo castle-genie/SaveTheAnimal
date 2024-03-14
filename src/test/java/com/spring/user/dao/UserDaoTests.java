@@ -17,16 +17,14 @@ public class UserDaoTests {
 	@Setter(onMethod_ = @Autowired)
 	private UserDao userDao;
 	
-	@Test
-	// 리스트 가져와서 로그에 출력하기
+	/*@Test
 	public void testUserList() {
 		UserVO uvo = null;
 		List<UserVO> list = userDao.userList(uvo);
 		for (UserVO vo : list) {
 			log.info(vo.toString());
 		}
-	}
-	
+	}*/
 	/*@Test
 	public void testUserLoginProcess() {
 		UserVO uvo = new UserVO();
@@ -59,13 +57,13 @@ public class UserDaoTests {
 		int result = userDao.userUpdate(uvo);
 		log.info("수정된 회원 레코드 수 : " + result);		
 	}*/
-	/*@Test
+	@Test
 	public void testUserInfo() {
 		UserVO uvo = new UserVO();
-		uvo.setUserId("member01");
+		uvo.setUserId("member00");
 		UserVO info = userDao.userInfo(uvo);
 		log.info(info.toString());
-	}*/
+	}
 	/*@Test
 	public void testPwdConfirm() {
 		UserVO uvo = new UserVO();

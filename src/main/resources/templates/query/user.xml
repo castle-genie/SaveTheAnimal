@@ -79,15 +79,16 @@
 	        </when>
 	    </choose>
 	</select>-->
-
+	
+	<!-- 회원 정보 조회 -->
 	<select id="userInfo" parameterType="user" resultMap="userMap">
 		select 
-		    user_id, user_pwd, user_name, user_phone, user_email, user_volcnt, user_level,
-		    to_char(user_date, 'YYYY-MM-DD') as user_date, user_act, user_repcnt
+		    user_id, user_name, user_phone, user_email, user_volcnt, user_level,
+		    to_char(user_date, 'YYYY-MM-DD') as user_date, user_act, user_repcnt, user_adoptChk
 		from users
 		where user_id = #{userId}
 	</select>
-	
+	<!-- 회원 정보 수정 -->
 	<update id="userUpdate" parameterType="user">
 		update users
 		set user_name = #{userName}, user_phone = #{userPhone}, user_email = #{userEmail}

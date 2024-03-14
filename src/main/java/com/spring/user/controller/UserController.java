@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -17,7 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.user.service.UserService;
 import com.spring.user.vo.UserVO;
 
-import lombok.Getter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,18 +31,19 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping("/login")
-	public String userLoginForm() {
-		log.info("user 로그인 화면 호출");
+	public String userLogin() {
+		log.info("user 로그인 화면");
 		return "user/login";
 	}
 	
 	@PostMapping("/login")
-	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras) {
+	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras, HttpSession session) {
 		UserVO userLogin = userService.userLoginProcess(login);
 		
 		String url = "";
 		if (userLogin != null) {
 			model.addAttribute("userLogin", userLogin); 
+			session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
 			url = "/";// 성공하면 메인페이지 이동
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
@@ -136,16 +139,54 @@ public class UserController {
 	
 	
 	@GetMapping("/mypage")
-	public String mypage() {
-		log.info("마이페이지 화면");
-		return "user/myPage";
-	}
+    public String mypage(HttpServletRequest request, Model model, RedirectAttributes ras) {
+		// 세션 가져오기
+		HttpSession session = request.getSession();
+		// 세션에서 사용자 ID 가져오기
+        String userId = (String) session.getAttribute("userId");
+        
+        if (userId == null) {
+            // 세션에 사용자 ID가 없는 경우 메시지를 추가하고 로그인 페이지로 리다이렉트
+            ras.addAttribute("errorMsg", "로그인이 필요합니다.");
+            return "redirect:/login";
+        }       
+        // 사용자 정보 가져오기
+        UserVO userinfo = userService.userInfo(userId);
+        
+        if (userinfo == null) {
+            // 사용자 정보가 없는 경우 메시지를 추가하여 마이페이지로 이동
+        	ras.addAttribute("errorMsg", "사용자 정보를 가져오는데 문제가 발생했습니다.");
+        } else {
+            // 사용자 정보가 있는 경우 모델에 추가
+            model.addAttribute("userInfo", userinfo);
+            //log.info(userinfo.toString());
+        }
+        
+        return "user/myPage";
+    }
 	
 	@GetMapping("/updateProfile")
-	public String updateProfile() {
-		log.info("회원정보수정 화면");
+	public String updateProfile(HttpServletRequest request, Model model) {
+		// 세션 가져오기
+		HttpSession session = request.getSession();
+		// 세션에서 사용자 ID 가져오기
+		String userId = (String) session.getAttribute("userId");
+		
+		// 사용자 정보 가져오기
+        UserVO userinfo = userService.userInfo(userId);
+		model.addAttribute("userInfo", userinfo);
 		return "user/updateProfile";
 	}
+	
+	
+	@ResponseBody
+	@PostMapping(value="/pwdConfirm", produces = "application/json; charset=UTF-8")
+	public int pwdConfirm(@RequestBody UserVO uvo) {	
+		int result = 0;
+		result = userService.pwdConfirm(uvo);
+		return result;			 
+	} 
+	
 	
 	/*@PostMapping("/updateProfile")
 	public String userUpdate(UserVO uvo, Model model, RedirectAttributes ras) {
