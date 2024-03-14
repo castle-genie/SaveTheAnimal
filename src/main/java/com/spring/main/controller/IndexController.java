@@ -12,8 +12,15 @@ public class IndexController {
 		return "project/mainpage";
 		/*
 <<<<<<< HEAD
+*/
+		/*
+<<<<<<< HEAD
 	}	
 =======
+*/
+		/*
+=======
+>>>>>>> 4d18c99ca1a7b4c704ff9eddc23634005d04cdda
 */
 	}
 	
@@ -21,5 +28,10 @@ public class IndexController {
 	public String adminPage() {
 		return"admin/adminMain";
 	}
+	/*
+<<<<<<< HEAD
 //>>>>>>> 1a258f1d5fb851adda884777da4b72107f2a53b9
+=======
+>>>>>>> 4d18c99ca1a7b4c704ff9eddc23634005d04cdda
+*/
 }
