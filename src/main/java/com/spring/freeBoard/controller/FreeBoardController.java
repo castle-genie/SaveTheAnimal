@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.freeBoard.service.FreeBoardService;
 import com.spring.freeBoard.vo.FreeBoardVO;
@@ -30,13 +31,25 @@ public class FreeBoardController {
 		return "board/freeBoardList";
 	}
 	
+	@GetMapping(value = "freeBoardDetail")
+	public String freeBoardDetail(Model model, @RequestParam("fboardId")int fboardId) {
+		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(fboardId));
+		
+		//조회수 +1
+		freeBoardService.plusCnt(fboardId);
+		
+		return "board/freeBoardDetail";
+	}
+	
+	/*
 	@GetMapping(value = "freeBaordDetail")
-	public String freeBoardDeteail(FreeBoardVO freeBoardVO, Model model) {
+	public String freeBoardDetail(FreeBoardVO freeBoardVO, Model model) {
 		FreeBoardVO freeBoardDetail = freeBoardService.freeBoardDetail(freeBoardVO);
 		model.addAttribute("freeBoardDetail", freeBoardDetail);
 		
 		return "board/freeBoardDetail";
 	}
+	*/
 	/*
 	@ResponseBody
 	@GetMapping(value = "/freeBoardList", produces=MediaType.APPLICATION_JSON_VALUE)

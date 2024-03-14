@@ -9,8 +9,15 @@ public interface FreeBoardService {
 	//자유게시판 목록
 	public List<FreeBoardVO> freeBoardList(FreeBoardVO freeBoardVO);
 	
-	//자유게시판 게시글 상세조회
+	//게시글 상세보기
+	public FreeBoardVO freeBoardDetail(int fboardId);
+	
 	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
+	
+	//조회수 증가 메서드
+	public boolean plusCnt(int fboardId);
+	
+	
 	
 	//public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
 

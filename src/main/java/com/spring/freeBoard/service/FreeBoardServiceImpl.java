@@ -22,12 +22,26 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		return freeBoardList;
 	}
 	
+	//자유게시판 글 조회하는 메서드
+	@Override
+	public FreeBoardVO freeBoardDetail(int fboardId) {
+		return freeBoardDAO.freeBoardDetail(fboardId);
+	}
+	
+	
 	@Override
 	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO) {
 		FreeBoardVO freeBoardDetail = freeBoardDAO.freeBoardDetail(freeBoardVO);
 		
 		return freeBoardDetail;
 	}
+	
+	//조회수 증가
+	@Override
+	public boolean plusCnt(int fboardId) {
+		return freeBoardDAO.plusCnt(fboardId);
+	}
+	
 	/*
 	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO) {
 		
