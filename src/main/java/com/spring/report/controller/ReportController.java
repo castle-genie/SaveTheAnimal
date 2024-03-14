@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.spring.report.service.ReportService;
 import com.spring.report.vo.ReportVO;
 
-//import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 
-//@Slf4j
+@Slf4j
 @RequestMapping("/admin/report/*")
 @Controller
 public class ReportController {
 	@Autowired
 	private ReportService reportService;
 	
+	//reportList.jsp 출력 기능
 	@GetMapping("reportList")
 	public String reportList(ReportVO rvo, Model model) {
 //		log.info("reportList 호출");
@@ -30,6 +31,8 @@ public class ReportController {
 		return "admin/report/reportList";		
 	}
 	
+	
+	//reportDetail.jsp 출력 기능
 	@GetMapping("reportDetail")
 	public String reportDetail(ReportVO rvo, Model model) {
 //		log.info("reportDetail 호출");
@@ -38,38 +41,39 @@ public class ReportController {
 		return "admin/report/reportDetail";
 	}
 	
+	//신고기능
 	@PostMapping("reportInsertFB")
-	public String reportInsertFB(ReportVO rvo) throws Exception{
+	public String reportInsertFB(ReportVO rvo){
 		reportService.reportInsertFB(rvo);
 		return "redirect:/admin/report/reportList";
 	}	
 	@PostMapping("reportInsertVB")
-	public String reportInsertVB(ReportVO rvo) throws Exception{
+	public String reportInsertVB(ReportVO rvo){
 		reportService.reportInsertVB(rvo);
 		return "redirect:/admin/report/reportList";
 	}
 	@PostMapping("reportInsertAB")
-	public String reportInsertAB(ReportVO rvo) throws Exception{
+	public String reportInsertAB(ReportVO rvo){
 		reportService.reportInsertAB(rvo);
 		return "redirect:/admin/report/reportList";
 	}
 	@PostMapping("reportInsertFC")
-	public String reportInsertFC(ReportVO rvo) throws Exception{
+	public String reportInsertFC(ReportVO rvo){
 		reportService.reportInsertFC(rvo);
 		return "redirect:/admin/report/reportList";
 	}
 	@PostMapping("reportInsertVC")
-	public String reportInsertVC(ReportVO rvo) throws Exception{
+	public String reportInsertVC(ReportVO rvo){
 		reportService.reportInsertVC(rvo);
 		return "redirect:/admin/report/reportList";
 	}
 	@PostMapping("reportInsertAC")
-	public String reportInsertAC(ReportVO rvo) throws Exception{
+	public String reportInsertAC(ReportVO rvo){
 		reportService.reportInsertAC(rvo);
 		return "redirect:/admin/report/reportList";
 	}
 
-	
+	//신고 처리 시 report_status 수정 기능
 	@PostMapping("reportUpdateFB")
 	public String reportUpdateFB(ReportVO rvo) {
 //		log.info("reportUpdate 호출");
@@ -107,22 +111,30 @@ public class ReportController {
 		return "redirect:/admin/report/reportList";
 	}
 
-
+	//신고 취소 기능
 	@PostMapping("reportDelete")
-	public String reportDelete(ReportVO rvo) throws Exception{
+	public String reportDelete(ReportVO rvo){
 //		log.info("reportDelete call");
 		reportService.reportDelete(rvo);
 		return "redirect:/admin/report/reportList";
 	}
 	
+	//신고 수정 기능
 	@PostMapping("reportModify")
-	public String reportModify(ReportVO rvo) throws Exception{
+	public String reportModify(ReportVO rvo){
 //		log.info("reportModify call");
 		reportService.reportModify(rvo);
 		return "redirect:/admin/report/reportList";
 	}
 	
-
+	//신고 제재 횟수 증가 기능
+	@PostMapping("repcntUpdate")
+	public String repcntUpdate(ReportVO rvo){
+		log.info("repcntUpdate call");
+		System.out.println("userId = " + rvo.getUserId());
+		reportService.repcntUpdate(rvo);
+		return "redirect:/admin/report/reportList";
+	}
 	
 	
 }

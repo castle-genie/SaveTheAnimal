@@ -32,7 +32,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public int reportDelete(ReportVO rvo) throws Exception {
+	public int reportDelete(ReportVO rvo) {
 		int result = rDao.reportDelete(rvo);
 		return result;
 		
@@ -46,32 +46,32 @@ public class ReportServiceImpl implements ReportService {
 
 
 	@Override
-	public int reportInsertFB(ReportVO rvo) throws Exception {
+	public int reportInsertFB(ReportVO rvo) {
 		int result = rDao.reportInsertFB(rvo);
 		return result;
 	}
 	@Override
-	public int reportInsertVB(ReportVO rvo) throws Exception {
+	public int reportInsertVB(ReportVO rvo) {
 		int result = rDao.reportInsertVB(rvo);
 		return result;
 	}
 	@Override
-	public int reportInsertAB(ReportVO rvo) throws Exception {
+	public int reportInsertAB(ReportVO rvo) {
 		int result = rDao.reportInsertAB(rvo);
 		return result;
 	}
 	@Override
-	public int reportInsertFC(ReportVO rvo) throws Exception {
+	public int reportInsertFC(ReportVO rvo) {
 		int result = rDao.reportInsertFC(rvo);
 		return result;
 	}
 	@Override
-	public int reportInsertVC(ReportVO rvo) throws Exception {
+	public int reportInsertVC(ReportVO rvo) {
 		int result = rDao.reportInsertVC(rvo);
 		return result;
 	}
 	@Override
-	public int reportInsertAC(ReportVO rvo) throws Exception {
+	public int reportInsertAC(ReportVO rvo) {
 		int result = rDao.reportInsertAC(rvo);
 		return result;
 	}
@@ -105,6 +105,12 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public int reportUpdateAC(ReportVO rvo) {
 		int result = rDao.reportUpdateAC(rvo);
+		return result;
+	}
+
+	@Override
+	public int repcntUpdate(ReportVO rvo) {
+		int result = rDao.repcntUpdate(rvo);
 		return result;
 	}
 
