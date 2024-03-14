@@ -74,13 +74,13 @@
 										</c:choose>
 									</td>
 									<td class="text-center">${report.boardDate}</td>
-									<td class="text-center">${report.boardUser}</td>
+									<td class="text-center">${report.reportDate}</td>
 								</tr>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="5" class="text-center">신고된 컨텐츠가 존재하지 않습니다.</td>
+								<td colspan="7" class="text-center">신고된 컨텐츠가 존재하지 않습니다.</td>
 							</tr>
 						</c:otherwise>
 					</c:choose>

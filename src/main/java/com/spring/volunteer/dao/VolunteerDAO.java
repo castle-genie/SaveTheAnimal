@@ -11,4 +11,7 @@ public interface VolunteerDAO {
 	public List<VolunteerVO> volunteerList(VolunteerVO volunteerVO);
 	
 	public VolunteerVO volunteerDetail(VolunteerVO volunteerVO);
+	
+	/* admin */
+	
 }

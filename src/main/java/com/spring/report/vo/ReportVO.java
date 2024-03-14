@@ -24,31 +24,8 @@ public class ReportVO {
 	private String boardUser;
 	private String boardContent;
 	private int boardId;
+	private int repcnt;
 	
 	
-//	private String ftitle			= "";
-//	private String vftitle			= "";
-//	private String aftitle			= "";
-//	
-//	private String fuser			= "";
-//	private String vfuser			= "";
-//	private String afuser			= "";
-//	private String fcouser			= "";
-//	private String vfcouser			= "";
-//	private String afcouser			= "";
-//	
-//	private String fdate;
-//	private String vfdate;
-//	private String afdate;
-//	private String fcodate;
-//	private String vfcodate;
-//	private String afcodate;
-//	
-//	private String fcontent			= "";
-//	private String vfcontent		= "";
-//	private String afcontent		= "";
-//	private String fcocontent		= "";
-//	private String vfcocontent		= "";
-//	private String afcocontent		= "";
 	
 }
