@@ -23,24 +23,24 @@
 							<td>제목</td>
 							<td colspan="3">${detail.boardTitle}</td>
 							<td>게시판 분류</td>
-							<td>
+							<td id="boardSort">
 								<c:choose>
-									<c:when test="${report.fboardId != 0}">
+									<c:when test="${detail.fboardId != 0}">
 										자유게시판
 									</c:when>
-									<c:when test="${report.vfboardId != 0}">
+									<c:when test="${detail.vfboardId != 0}">
 										봉사후기게시판
 									</c:when>
-									<c:when test="${report.afboardId != 0}">
+									<c:when test="${detail.afboardId != 0}">
 										입양후이야기
 									</c:when>
-									<c:when test="${report.fcommentId != 0}">
+									<c:when test="${detail.fcommentId != 0}">
 										자유게시판 댓글
 									</c:when>
-									<c:when test="${report.vfcommentId != 0}">
+									<c:when test="${detail.vfcommentId != 0}">
 										봉사후기게시판 댓글
 									</c:when>
-									<c:when test="${report.afcommentId != 0}">
+									<c:when test="${detail.afcommentId != 0}">
 										입양후이야기 댓글
 									</c:when>
 								</c:choose>
@@ -48,13 +48,28 @@
 						</tr>
 						<tr>
 							<td class="col-2">신고분류</td>
-							<td class="col-1">${detail.reportSort}</td>
+							<td class="col-1">
+								<c:choose>
+									<c:when test="${detail.reportSort==1}">
+										욕설
+									</c:when>
+									<c:when test="${detail.reportSort==2}">
+										도배
+									</c:when>
+									<c:when test="${detail.reportSort==3}">
+										광고
+									</c:when>
+									<c:when test="${detail.reportSort==4}">
+										기타
+									</c:when>
+								</c:choose>
+							</td>
 							<td class="col-1">신고일자</td>
 							<td class="col-1">${detail.reportDate}</td>
 							<td class="col-1">작성일자</td>
 							<td class="col-1">${detail.boardDate}</td>
 							<td class="col-2">작성자ID(제재횟수)</td>
-							<td class="col-2 text-start">${detail.boardUser}</td>
+							<td class="col-2 text-start">${detail.boardUser}(${detail.repcnt})</td>
 						</tr>
 						
 					</thead>
