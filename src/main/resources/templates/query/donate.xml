@@ -12,4 +12,9 @@
 		<result column="donate_ahphone" property="do_AHPhone"/>
 		
 	</resultMap>
+	
+	<select id="donateInsert" parameterType="donate">
+		INSERT INTO donate (donate_id, donate_price, donate_pm, donate_sprice, donate_ahname, donate_ahphone)
+		VALUE(donate_seq.NEXTVAL);
+	</select>
 </mapper>
