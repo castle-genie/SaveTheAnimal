@@ -6,10 +6,6 @@
 		<result column="sanction_status" property="sanctionStatus"/>
 		<result column="sanction_result" property="sanctionStatus"/>
 		<result column="sanction_date" property="sanctionStatus"/>
-<<<<<<< HEAD
-
-=======
->>>>>>> 4d18c99ca1a7b4c704ff9eddc23634005d04cdda
 		<result column="report_id" property="reportId"/>	
 	</resultMap>
 	

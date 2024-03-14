@@ -1,0 +1,4 @@
+	#applicationFormBtn { /* 버튼의 id를 이용하여 스타일 지정 */
+		margin-top : 10px;
+		text-align : center;
+	}
