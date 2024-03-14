@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,59 +12,15 @@
 		<script src="/resources/include/js/jquery-3.7.1.min.js"></script>
 		<script src="/resources/include/js/common.js"></script>
 		<link rel="stylesheet" type="text/css" href="/resources/include/css/donatePay.css" />
-		<script>
-		$(function () {
-			  $("#do_price").on("keyup", function () {
-			    // 입력값에서 숫자만 추출합니다.
-			    let num = $(this)
-			      .val()
-			      .replace(/[^0-9]/g, "");
 
-			    // 세 자리마다 콤마를 추가합니다.
-			    num = num.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		<script src="/resources/include/js/donatePay.js"></script>
 
-			    // 변환된 숫자를 입력 상자에 설정합니다.
-			    $(this).val(num);
-			  });
-
-			  // 직접입력 라디오 버튼에 대한 변경 이벤트 처리
-			  $(document).ready(function () {
-			    $(".price_Select").change(function () {
-			      if ($(this).val() === "Select") {
-			        $(".input_Select").prop("disabled", false).focus();
-			      } else {
-			        $(".input_Select").prop("disabled", true).val("");
-			      }
-			    });
-			  });
-
-			  $(document).ready(function () {
-			    $(".price_Select").click(function () {
-			      // 모든 라벨의 클래스 제거
-			      $(".price_Select").parent().removeClass("selected");
-
-			      // 선택된 라벨에 클래스 추가
-			      $(this).parent().addClass("selected");
-			    });
-			  });
-
-			  $("#do_ahPhone").on("keyup", function () {
-			    // 입력값에서 숫자만 추출합니다.
-			    let num = $(this)
-			      .val()
-			      .replace(/[^0-9]/g, "");
-
-			    $(this).val(num);
-			  });
-			});
-
-		</script>
 </head>
 <body>
 <header>
 </header>
 <main>
-    <div class="donatePay_data">
+    <div id="donate_pay" class="donatePay_data">
         <h1>유기견의 가족이 되어주세요</h1>
         <form>
         	<h2>후원 정보</h2>
@@ -86,7 +43,7 @@
                         <td><label><input type="radio" name="do_price" value="Select" class="price_Select">직접입력</label></td> <!-- 텍스트 누를시 다른 체크 박스 강제 아웃 시켜야 한다. -->
                     </tr>
                     <tr>
-                        <td colspan="3"><label for="input_Select"><input type="text" id="do_price" name="do_price" class="input_Select" >원</label></td>
+                        <td colspan="3"><label for="do_price"><input type="text" id="do_price" name="do_price" class="input_Select" >원</label></td>
                     </tr>
                 </tbody>
             </table>
@@ -109,7 +66,7 @@
                     </tr>
                     <tr>
                         <th>카드주 휴대폰</th>
-                        <td><input type="text" id="do_ahPhone" placeholder="' - '없이 입력해주세요" minlength="10" maxlength="11"></td>
+                        <td><input type="text" id="do_ahPhone" placeholder="' - '없이 입력해주세요"  maxlength="11"></td>
                     </tr>
                 </tbody>
             </table>
@@ -123,34 +80,33 @@
         </form>
         
     
-        <button class="donatePayBtn" onclick="serverAuth()">결제하기</button> <!-- FORM에 안들어감 -->
+        <button class="donatePayBtn" id="donate_pay_Btn">결제하기</button> <!-- FORM에 안들어감 -->
     </div>
     <script src="https://pay.nicepay.co.kr/v1/js/"></script>
-    <script>
- // 후원 금액 입력란의 값이 변경될 때마다 실행되는 이벤트 핸들러
-    $("#do_price").on("keyup", function () {
-        // 입력된 금액을 amount 변수에 저장
-        let amount = $(this).val();
-        
-        // 세이브더애니멀_정기후원의 상품 금액으로 설정
-        $("#amount").val(amount);
-    });
-    
-    function serverAuth() {
-    	  AUTHNICE.requestPay({
-    	    clientId: "S2_5cf74e98f5d141f88c7f15beddca90d9",
-    	    method: "kakaopayCard", // 결제수단 "card" 입력시 카드결제로 변경됩니다.
-    	    orderId: "유니크한-주문번호",
-    	    amount: 1000, // 상품 금액
-    	    goodsName: "세이브더애니멀_정기후원", // 상품 이름
-    	    returnUrl: "/main", //API를 호출할 Endpoint 입력
-    	    fnError: function (result) {
-    	      alert("개발자확인용 : " + result.errorMsg + "");
-    	    },
-    	  });
-    	}
 
-    </script>
+	<script>
+	$(document).ready(function() {
+	    $("#donate_pay_Btn").click(function() {
+	        // serverAuth() 함수 호출
+	        serverAuth();
+	    });
+	});
+	
+	function serverAuth() {
+	  AUTHNICE.requestPay({
+	    clientId: 'S2_5cf74e98f5d141f88c7f15beddca90d9',
+	    method: 'kakaopayCard',
+	    orderId: "유니크한 상품 번호",
+	    amount: =(do_price),
+	    goodsName: '나이스페이-상품',
+	    returnUrl: 'http://localhost:8080/donate/donateUnit',
+	    fnError: function (result) {
+	      alert('고객용메시지 : ' + result.msg + '\n개발자확인용 : ' + result.errorMsg + '')
+	    }
+	  });
+	}
+
+	</script>
 </main>
 
 </body>

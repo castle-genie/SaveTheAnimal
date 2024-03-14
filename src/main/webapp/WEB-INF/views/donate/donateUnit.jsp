@@ -17,22 +17,22 @@
             <form>
                 <table id="donate_data">
                     <tr>
-                        <th>결제 수단</th><td>{do_pm}</td>
+                        <th>결제 수단</th><td>${do_pm}</td>
                     </tr>
                     <tr>
-                        <th>결제 금액</th><td>{do_price}</td>
+                        <th>결제 금액</th><td>${do_price}</td>
                     </tr>
                     <tr>
-                        <th>총 결제 금액</th><td>{do_sprice}</td>
+                        <th>총 결제 금액</th><td>${do_sprice}</td>
                     </tr>
                     <tr>
-                        <th>결제 일정</th><td>{do_day}</td>
+                        <th>결제 일정</th><td>${do_day}</td>
                     </tr>
                     <tr>
-                        <th>최초 결제 날짜</th><td>{do_fday}</td>
+                        <th>최초 결제 날짜</th><td>${do_fday}</td>
                     </tr>
                     <tr>
-                        <th>후원번호</th><td>{do_id}</td>
+                        <th>후원번호</th><td>${do_id}</td>
                     </tr>
                 </table>
             </form>
