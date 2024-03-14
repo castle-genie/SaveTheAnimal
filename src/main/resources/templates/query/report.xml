@@ -15,6 +15,7 @@
 		<result column="fcomment_id" property="fcommentId"/>
 		<result column="vfcomment_id" property="vfcommentId"/>
 		<result column="afcomment_id" property="afcommentId"/>
+		<result column="user_repcnt" property="repcnt"/>
 	</resultMap>
 
 	<select id="reportList" parameterType="report" resultMap="reportMap">
@@ -51,7 +52,7 @@
 	
 	<select id="reportDetail" parameterType="report" resultMap="reportMap">
 		select distinct r.report_id, r.report_sort, to_char(r.report_date, 'YYYY-MM-DD') as report_date, r.report_status, r.report_detail,
-		    r.user_id, r.fboard_id, r.vfboard_id, r.afboard_id, r.fcomment_id, r.vfcomment_id, r.afcomment_id ,
+		    r.user_id, r.fboard_id, r.vfboard_id, r.afboard_id, r.fcomment_id, r.vfcomment_id, r.afcomment_id, u.user_repcnt,
 		    case
 		        when r.fboard_id is not null then f.fboard_id
 		        when r.vfboard_id is not null then v.vfboard_id
@@ -81,7 +82,7 @@
 		        when r.vfboard_id is not null then v.user_id
 		        when r.afboard_id is not null then a.user_id
 		        when r.fcomment_id is not null then fc.user_id
-		        when r.vfcomment_id is not null then vc.user_id
+		        when r.vfcomment_id is not null then vc.user_id	
 		        when r.afcomment_id is not null then ac.user_id
 		    end as boardUser,
 		    case
@@ -92,15 +93,16 @@
 		        when r.vfcomment_id is not null then vc.vfcomment_content
 		        when r.afcomment_id is not null then ac.afcomment_content
 		    end as boardContent
-		from report r, freeBoard f, volunteerFeedbackBoard v, adoptionFeedbackBoard a, fcomment fc, vfcomment vc, afcomment ac
-		where r.report_id = #{reportId} and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
+		from report r, freeBoard f, volunteerFeedbackBoard v, adoptionFeedbackBoard a, fcomment fc, vfcomment vc, afcomment ac, users u
+		where (u.user_id=r.user_id) and (r.report_id = #{reportId}) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
 	
 	</select>
 
 
+
 	<insert id="reportInsertFB" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, fboard_id, user_id)
-		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{fboardId}, #{userId})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{fboardId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertVB" parameterType="report">
@@ -110,30 +112,57 @@
 
 	<insert id="reportInsertAB" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, afboard_id, user_id)
-		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{afboardId}, #{userId})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{afboardId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertFC" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, fcomment_id, user_id)
-		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{fcommentId}, #{userId})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{fcommentId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertVC" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, vfcomment_id, user_id)
-		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfcommentId}, #{userId})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfcommentId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertAC" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, afcomment_id, user_id)
-		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{afcommentId}, #{userId})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{afcommentId}, #{userId})
 	</insert>
 
 
-	<update id="reportUpdate" parameterType="report">
+	<update id="reportUpdateFB" parameterType="report">
 		update report
 		set report_status = 2
-		where report_id = #{reportId}
+		where fboard_id = #{boardId}
 	</update>
+	<update id="reportUpdateVB" parameterType="report">
+		update report
+		set report_status = 2
+		where vfboard_id = #{boardId}
+	</update>
+	<update id="reportUpdateAB" parameterType="report">
+		update report
+		set report_status = 2
+		where afboard_id = #{boardId}
+	</update>
+	<update id="reportUpdateFC" parameterType="report">
+		update report
+		set report_status = 2
+		where fcomment_id = #{boardId)}
+	</update>
+	<update id="reportUpdateVC" parameterType="report">
+		update report
+		set report_status = 2
+		where vfcomment_id = #{boardId)}
+	</update>
+	<update id="reportUpdateAC" parameterType="report">
+		update report
+		set report_status = 2
+		where afcomment_id = #{boardId)}
+	</update>
+
+
 
 
 	<update id="reportModify" parameterType="report">

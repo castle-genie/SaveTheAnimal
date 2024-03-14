@@ -14,14 +14,12 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private ReportDao rDao;
 	
-	
 	@Override
 	public List<ReportVO> reportList(ReportVO rvo) {
 		List<ReportVO> list = null;
 		list = rDao.reportList(rvo);
 		return list;
 	}
-
 
 	@Override
 	public ReportVO reportDetail(ReportVO rvo) {
@@ -33,22 +31,12 @@ public class ReportServiceImpl implements ReportService {
 		return detail;
 	}
 
-
-
-	@Override
-	public int reportUpdate(ReportVO rvo) {
-		int result = rDao.reportUpdate(rvo);
-		return result;
-	}
-
-
 	@Override
 	public int reportDelete(ReportVO rvo) throws Exception {
 		int result = rDao.reportDelete(rvo);
 		return result;
 		
 	}
-
 
 	@Override
 	public int reportModify(ReportVO rvo) {
@@ -62,36 +50,26 @@ public class ReportServiceImpl implements ReportService {
 		int result = rDao.reportInsertFB(rvo);
 		return result;
 	}
-
-
 	@Override
 	public int reportInsertVB(ReportVO rvo) throws Exception {
 		int result = rDao.reportInsertVB(rvo);
 		return result;
 	}
-
-
 	@Override
 	public int reportInsertAB(ReportVO rvo) throws Exception {
 		int result = rDao.reportInsertAB(rvo);
 		return result;
 	}
-
-
 	@Override
 	public int reportInsertFC(ReportVO rvo) throws Exception {
 		int result = rDao.reportInsertFC(rvo);
 		return result;
 	}
-
-
 	@Override
 	public int reportInsertVC(ReportVO rvo) throws Exception {
 		int result = rDao.reportInsertVC(rvo);
 		return result;
 	}
-
-
 	@Override
 	public int reportInsertAC(ReportVO rvo) throws Exception {
 		int result = rDao.reportInsertAC(rvo);
@@ -99,7 +77,37 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 
+	@Override
+	public int reportUpdateFB(ReportVO rvo) {
+		int result = rDao.reportUpdateFB(rvo);
+		return result;
+	}
+	@Override
+	public int reportUpdateVB(ReportVO rvo) {
+		int result = rDao.reportUpdateVB(rvo);
+		return result;
+	}
+	@Override
+	public int reportUpdateAB(ReportVO rvo) {
+		int result = rDao.reportUpdateAB(rvo);
+		return result;
+	}
+	@Override
+	public int reportUpdateFC(ReportVO rvo) {
+		int result = rDao.reportUpdateFC(rvo);
+		return result;
+	}
+	@Override
+	public int reportUpdateVC(ReportVO rvo) {
+		int result = rDao.reportUpdateVC(rvo);
+		return result;
+	}
+	@Override
+	public int reportUpdateAC(ReportVO rvo) {
+		int result = rDao.reportUpdateAC(rvo);
+		return result;
+	}
 
-
-
+	
+	
 }

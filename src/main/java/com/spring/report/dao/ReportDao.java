@@ -18,7 +18,14 @@ public interface ReportDao {
 	public int reportInsertVC(ReportVO rvo);
 	public int reportInsertAC(ReportVO rvo);
 	
-	public int reportUpdate(ReportVO rvo);
+	public int reportUpdateFB(ReportVO rvo);
+	public int reportUpdateVB(ReportVO rvo);
+	public int reportUpdateAB(ReportVO rvo);
+	public int reportUpdateFC(ReportVO rvo);
+	public int reportUpdateVC(ReportVO rvo);
+	public int reportUpdateAC(ReportVO rvo);
+	
+	
 	public int reportModify(ReportVO rvo);
 	public int reportDelete(ReportVO rvo);
 	
