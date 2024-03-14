@@ -6,7 +6,6 @@
 		<result column="sanction_status" property="sanctionStatus"/>
 		<result column="sanction_result" property="sanctionStatus"/>
 		<result column="sanction_date" property="sanctionStatus"/>
-
 		<result column="report_id" property="reportId"/>	
 	</resultMap>
 	

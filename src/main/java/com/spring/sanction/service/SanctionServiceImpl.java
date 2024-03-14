@@ -12,7 +12,6 @@ public class SanctionServiceImpl implements SanctionService {
 	@Autowired
 	private SanctionDao sDao;
 	
-	
 	@Override
 	public int sanctionInsert(SanctionVO svo) {
 		int result = sDao.sanctionInsert(svo);

@@ -18,7 +18,7 @@
 				<li><a href="#">봉사후기게시판</a>
 				<li><a href="#">입양후기게시판</a>
 				<li><a href="#">공지사항</a>
-				<li><a href="#">로그인</a>
+				<li><a href="/login">로그인</a>
 			</ul>
 		</nav>
 		<!-- Banner -->
