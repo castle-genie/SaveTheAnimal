@@ -37,5 +37,18 @@ public interface ReportDao {
 	//신고 제재 시 유저별 신고 제재 횟수 변경 기능
 	public int repcntUpdate(ReportVO rvo);
 	
+	//신고 제재 시 게시물 삭제
+	public int contentDeleteFB(ReportVO rvo);
+	public int contentDeleteVB(ReportVO rvo);
+	public int contentDeleteAB(ReportVO rvo);
+	public int contentDeleteFC(ReportVO rvo);
+	public int contentDeleteVC(ReportVO rvo);
+	public int contentDeleteAC(ReportVO rvo);
+	
+	//신고 제재 시 유저 계정 정지
+	public int userStop(ReportVO rvo);
+	
+	//신고 제재 시 유저 계정 삭제
+	public int userDelete(ReportVO rvo);
 	
 }
