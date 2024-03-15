@@ -54,7 +54,7 @@
 						<div class="align-center">
 							<a href="/user/join" class="button alt small">회원가입</a>              
 							<a href="/user/findId" class="button alt small">ID 찾기</a>
-							<a href="#" class="button alt small">비밀번호 찾기</a>
+							<a href="/user/resetPwd" class="button alt small">비밀번호 찾기</a>
 						</div>
 					</c:if>
 					<c:if test="${not empty userLogin}">

@@ -11,7 +11,6 @@ public class IndexController {
 	public String mainpage() {
 		return "project/mainpage";
 	}	
-
 	
 	@GetMapping("admin")
 	public String adminPage() {
@@ -19,3 +18,6 @@ public class IndexController {
 	}
 
 }
+
+
+
