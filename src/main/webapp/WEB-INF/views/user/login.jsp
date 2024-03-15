@@ -52,8 +52,8 @@
 							<button type="button" id="loginBtn" name="loginBtn" class="button special fit big">로그인</button>
 						</div>
 						<div class="align-center">
-							<a href="/join" class="button alt small">회원가입</a>              
-							<a href="/findId" class="button alt small">ID 찾기</a>
+							<a href="/user/join" class="button alt small">회원가입</a>              
+							<a href="/user/findId" class="button alt small">ID 찾기</a>
 							<a href="#" class="button alt small">비밀번호 찾기</a>
 						</div>
 					</c:if>
@@ -101,7 +101,7 @@
 			else {
 				$("#loginForm").attr({
 					"method":"post",
-					"action":"/login"
+					"action":"/user/login"
 				});
 				$("#loginForm").submit();
 			}
@@ -110,7 +110,7 @@
 		
 		$("#logoutBtn").on("click", function(){
 			alert("로그아웃하여 메인페이지로 이동합니다.");
-			location.href = "/logout";
+			location.href = "/user/logout";
 		});
 		
 		let errorMsg = "${errorMsg}";

@@ -1,92 +1,85 @@
-/* 수정 여부 체크용 */
-let pwdCheck = 0; 
-let phoneCheck = 0;
-let emailCheck = 0;
-/* 유효성 확인용 */
-let isChanged = false;
-let isValid = true;
-let nameValid = true;
-let pwdValid = true;
-let phoneValid = true;
-let emailValid = true;
-
-let userId = $('#userId').val();
-
 $(function() {
-	// 수정 폼 값 변경 시 수정 버튼 활성화, 유효성 확인 값 변경
-	$('.changable').on('change keyup', function() {
-		console.log("항목 변경 이벤트");
-        $('#updateProfileBtn').prop('disabled', false);       
-        isChanged = true;
-        isValid = false;
-    });
+    // 각 항목의 변경 여부를 추적하는 변수
+    let stateChanged = false;
+	// 중복체크해야하는 개별 항목의 변경 여부를 추적하는 변수
+	let isPasswordChanged = false; // 비밀번호 수정 버튼 토글시 변경됨
+	let isNameChanged = false;
+    let isPhoneChanged = false;
+    let isEmailChanged = false;
+    // 중복 체크 여부를 추적하는 변수    
+    let isPhoneChecked = false;
+    let isEmailChecked = false;
+    // 기존비밀번호 일치 여부를 추적하는 변수
+    let isPasswordChecked = false;
 	
 	// 입력란 클릭 시 값 선택
     $('#updateForm input:not(#userId)').on('click', function() {
         $(this).select();
-     });   
-     
-        
+    });  
+      
+    // 각 항목 값이 변경될 때마다 실행되는 함수
+    $('.changable').on('input', function() {
+        stateChanged = true; 
+    }); 
+    
+    $('#username').on('input', function() {
+    	isNameChanged = true; 
+	});
+    
+    $('#userPhone').on('input', function() {
+    	isPhoneChecked = false;
+    	isPhoneChanged = true; 
+	});
+	
+	// 이메일 입력란의 값이 변경될 때마다 호출되는 함수
+	$('#userEmail').on('input', function() {
+	    isEmailChecked = false;
+	    isEmailChanged = true; 
+	});
+            
  	// 비밀번호 수정 토글
     $('#passwordToggle').change(function() {
         if ($(this).is(':checked')) {
             $('#pwdConfirm').prop('disabled', false); // 기존 비밀번호 입력란 활성화
             $('#pwdConfirmBtn').prop('disabled', false); // 비밀번호 확인 버튼 활성화
             $('#pwdConfirm').attr('placeholder', '기존 비밀번호 입력'); // placeholder 변경
+			isPasswordChanged = true;
         } else {
 			$('#pwdConfirm').val("");
+			$('#userPasswd').val("");  // 기존에 입력했더라도 체크 해제되면 값 초기화 
+			$('#userPasswdCheck').val("");
             $('#pwdConfirm').prop('disabled', true); // 기존 비밀번호 입력란 비활성화
             $('#pwdConfirmBtn').prop('disabled', true); // 기존 비밀번호 입력란 비활성화
             $('.new-password-area').hide(); // 새 비밀번호 입력란 숨기기
+			isPasswordChanged = false;
+            if (!isPhoneChanged && !isEmailChanged) {
+				stateChanged = false;
+			}
         }
     });   
 
 	// 비밀번호 확인 버튼 클릭 시
-    $('#pwdConfirmBtn').on('click', function() {
-		let pwdConfirm = $('#pwdConfirm').val();
-		let userId = $('#userId').val();
-       
+    $('#pwdConfirmBtn').on('click', function() {		
+		let pwdCf = $('#pwdConfirm').val();
+		let userId = $('#userId').val();       
+		
 		/* ajax 비밀번호 일치 체크 */
-		$.ajax({ 
-			url : "/pwdConfirm",  
-			type : "post",
-			contentType:"application/json",
-			data : JSON.stringify({
-				"userId":userId,
-				"userPasswd":pwdConfirm
-			}),
-			success: function(result) {
-				if (result == 0) {                    
-                    alert("비밀번호가 일치하지 않습니다.");
-                    $("#pwdConfirm").val(""); 
-                    $("#pwdConfirm").focus();              
-                } else { // 일치하면
-					$('#pwdConfirm').prop('disabled', true); // 기존 비밀번호 입력란 비활성화
-					$('#pwdConfirmBtn').prop('disabled', true); // 비밀번호 확인 버튼 비활성화
-					$('#pwdConfirm').attr('placeholder', '아래에 새 비밀번호를 입력하세요.'); // placeholder 변경
-					$('.new-password-area').show(); // 새 비밀번호 입력란 보이기
-					$('#userPasswd').focus(); // 새 비밀번호 입력란으로 포커스 이동.
-					pwdCheck = 1; // 새로운 비밀번호 변경 하였음!! 	
-									         
-                }
-			},
-			error: (xhr, textStatus, errorThrown) => {
-				alert("AJAX 요청 실패:\n"+ textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
-			}
-		});
+		pwdConfirm(userId, pwdCf);
+		if (pwdConfirm) {
+			stateChanged = true;
+			isPasswordChecked = true;
+		}		
     });    
     
     // 핸드폰 번호 입력란의 값이 변경될 때마다 호출되는 함수
 	$('#userPhone').on('input', function() {
-		console.log("핸드폰 변경");
-
-		isChanged = false;
+		stateChanged = true;
 	    // 입력된 값이 있는지 확인
 	    let phoneNumber = $(this).val();
 	    if (phoneNumber.trim() !== '') {
 	        // 입력된 값이 있으면 중복 확인 버튼을 활성화
 	        $('#phoneCheckBtn').prop('disabled', false);
-	        phoneValid = false;
+	        isPhoneChecked = false;
 	    } 
 	});
 
@@ -102,40 +95,23 @@ $(function() {
             $("#userPhone").focus();
             return;
         }
-        /* ajax 중복 체크 */	
-        $.ajax({ 
-			url : "/phoneCheck",  
-			type : "post",
-			data : {
-				"userPhone":userPhone
-			},
-			success: function(result) {
-				if (result === 1) {                    
-                    alert("존재하는 번호입니다.");
-                    $("#userPhone").val(""); 
-                    $("#userPhone").focus();              
-                } else {
-                    alert("사용가능한 번호입니다.");
-                    $('#phoneCheckBtn').prop('disabled', true);               
-                    phoneCheck = 1; 
-                    phoneValid = true;
-                }
-			},
-			error: (xhr, textStatus, errorThrown) => {
-				alert("AJAX 요청 실패:\n"+ textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
-			}
-		});	            
+        /* ajax 중복 체크 */
+        phoneCheck(userPhone);
+        if (phoneCheck) {
+			isPhoneChecked = true;
+			$('#phoneCheckBtn').prop('disabled', true);
+		}                  
 	});
 	
     // 이메일 입력란의 값이 변경될 때마다 호출되는 함수
 	$('#userEmail').on('input', function() {
-		emailValid = false;
+		stateChanged = true;
 	    // 입력된 값이 있는지 확인
-	    let email = $(this).val();
-	    if (email.trim() !== '') {
+	    let userEmail = $(this).val();
+	    if (userEmail.trim() !== '') {
 	        // 입력된 값이 있으면 중복 확인 버튼을 활성화
 	        $('#emailCheckBtn').prop('disabled', false);
-	        isValid = false;
+	        isEmailChecked = false;
 	    } 
 	});
 
@@ -143,7 +119,7 @@ $(function() {
 	$("#emailCheckBtn").on("click", function(){
         let userEmail = $("#userEmail").val();
         const emailPattern = /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-        if (!chkData("#userEmail", "핸드폰번호를")) {
+        if (!chkData("#userEmail", "이메일을")) {
 			return;
         } else if(!emailPattern.test(userEmail)) {
             alert("유효하지 않은 이메일 주소입니다. 다시 입력하세요.");
@@ -152,54 +128,46 @@ $(function() {
             return;
         }
         /* ajax 중복 체크 */
-        $.ajax({ 
-			url : "/emailCheck",  
-			type : "post",
-			data : {
-				"userEmail":userEmail
-			},
-			success: function(result) {
-				if (result === 1) {                    
-                    alert("존재하는 이메일입니다.");
-                    $("#userEmail").val(""); 
-                    $("#userEmail").focus();              
-                } else {
-                    alert("사용가능한 이메일입니다.");
-                    $('#emailCheckBtn').prop('disabled', true); 
-                    emailCheck = 1;
-                	emailValid = true;
-                }
-			},
-			error: (xhr, textStatus, errorThrown) => {
-				alert("AJAX 요청 실패:\n"+ textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
-			}
-		});            
+        emailCheck(userEmail);
+        if (emailCheck) {
+			isEmailChecked = true;
+			$('#emailCheckBtn').prop('disabled', true);
+		}                          
 	});
 
 
 
-
-
-
-       
-
-// 회원정보 수정 버튼 클릭 시
-    $('#updateProfileBtn').on('click', function() {
+	// 회원정보 수정 버튼 클릭 시
+    $('#updateProfileBtn').on('click', function() {	        
+	    let userId = $("#userId").val();   
+        let userPasswd = $("#userPasswd").val();
+        let userPasswdCheck = $("#userPasswdCheck").val();
+        let userName = $("#userName").val();
+        let userphone = $("#userphone").val();
+        let userEmail = $("#userEmail").val();
+        console.log(userId);
+        
+        if (!stateChanged) {
+			alert("변경된 항목이 없습니다.");
+			return;
+		} 
+		
+		if (!chkData("#userName", "이름을")) return;
+		if (!chkData("#userPhone", "핸드폰번호를")) return;
+		if (!chkData("#userEmail", "이메일을")) return;		
+		
         /* 새로운 비밀번호 유효성 검사 */
-        if (pwdCheck == 1) {
-	        let userPasswd = $("#userPasswd").val();
-	        const pwdPattern = /(^[a-zA-Z0-9]{8,20}$)/g;
-	        
+        if (isPasswordChanged && isPasswordChecked) { // 비밀번호 수정버튼 체크, 기존 비밀 번호를 확인했다면
+	        const pwdPattern = /(^[a-zA-Z0-9]{8,20}$)/g;        
 			if (!chkData("#userPasswd", "비밀번호를")) {
 				return;		
-	        }else if (!pwdPattern.test(userPasswd)) {
+	        } else if (!pwdPattern.test(userPasswd)) {
 	            alert("비밀번호는 영문/숫자 8 ~ 20자리로 입력해주세요.");
 	            $("#userPasswd").val("");
 	            $("#userPasswd").focus();
 	            return;
 	        }
-	             
-	        let userPasswdCheck = $("#userPasswdCheck").val();
+	                     
 	        if (!chkData("#userPasswdCheck", "비밀번호 확인을")) {
 				return;		        
 	        } else if (userPasswd != userPasswdCheck) {// 비밀번호 일치여부 확인
@@ -209,60 +177,150 @@ $(function() {
 	            return;
 	        }
 		}
+					
         /* 이름 입력 검사 (한글 2~6자) */
-        let userName = $("#userName").val();
-		const namePattern = /^[가-힣]{2,6}$/g; 
-		if (!chkData("#userName", "이름을")) {
-			return;
-		// 한글 2~6자 유효성 검사
-        } else if(!namePattern.test(userName)) {
-            alert("이름은 한글 2~6자로 입력해주세요");
-            $("#userName").val("");
-            $("#userName").focus();
-            return;
-        } else {
-			nameValid = true;
-		}
-		
-		if (pwdValid && nameValid && phoneValid && emailValid) {
-			isValid = true;
-		}
-		
-		
-		
-		console.log(isValid? "유효" : "유효하지 않음");
-		console.log(isChanged? "값 변경됨" : "변경 없음");
-		
-		
-		if (isChanged) {
-			if(isValid) {
-				
-				if (confirm("입력한 값으로 수정하시겠습니까?")){
-					/*$("#updateForm").attr({
-						method="post",
-						action="/updateProfile"
-					});
-					$("#updateForm").submit();*/
-					alert("회원정보 수정 성공");
-				} else {
-					alert("회원정보 수정 취소");
-				}
-			}
-		} else {
-			console.log("변경된 항목이 없습니다.");
-			return;
+        if (isNameChanged) {
+			const namePattern = /^[가-힣]{2,6}$/g; 
+			if (!chkData("#userName", "이름을")) {
+				return;
+			// 한글 2~6자 유효성 검사
+	        } else if(!namePattern.test(userName)) {
+	            alert("이름은 한글 2~6자로 입력해주세요");
+	            $("#userName").val("");
+	            $("#userName").focus();
+	            return;
+	        } 
+	        isNameChanged = false;
 		}
 
+		if (isPhoneChanged && !isPhoneChecked) {
+			alert("핸드폰번호 중복검사를 진행해야 합니다.");
+			$('#phoneCheckBtn').prop('disabled', false);
+			return;				
+		}
+		
+		if (isEmailChanged && !isEmailChecked) {
+			alert("이메일 중복검사를 진행해야 합니다.");
+			$('#emailCheckBtn').prop('disabled', false);
+			return;				
+		}
+
+
+		if (confirm("입력한 값으로 수정하시겠습니까?")){
+			$("#updateForm").attr({
+				method:"post",
+				action:"/user/updateProfile"
+			});
+			$("#updateForm").submit();
+			alert("회원정보 수정 성공");
+		} else {
+			alert("회원정보 수정 취소");
+		}
+					
+			
     });
 
 
 	//취소버튼
 	$("#updateCancelBtn").on("click", function() {
+		// 초기값으로 폼 리셋
 		$("#updateForm").each(function(){
 			console.log("취소버튼");			
 			this.reset();
-			$('#updateProfileBtn').prop('disabled', true);
-		})
+		});
+		// 상태 값 초기화
+        stateChanged = false;
+        isPhoneChecked = false;
+        isEmailChecked = false;
+    	isPasswordChecked = false;
 	});
   
 });
+
+
+// 비밀번호 일치 확인 함수 : 일치하면 true
+function pwdConfirm(userId, pwdCf) {
+	$.ajax({ 
+		url : "/user/pwdConfirm",  
+		type : "post",
+		contentType:"application/json",
+		data : JSON.stringify({
+			"userId":userId,
+			"userPasswd":pwdCf
+		}),
+		success: function(result) {
+			if (result == 0) {                    
+                alert("비밀번호가 일치하지 않습니다.");
+                $("#pwdConfirm").val(""); 
+                $("#pwdConfirm").focus();   
+                return false;           
+            } else { // 일치하면
+				$('#pwdConfirm').prop('disabled', true); // 기존 비밀번호 입력란 비활성화
+				$('#pwdConfirmBtn').prop('disabled', true); // 비밀번호 확인 버튼 비활성화
+				$('#pwdConfirm').attr('placeholder', '아래에 새 비밀번호를 입력하세요.'); // placeholder 변경
+				$('.new-password-area').show(); // 새 비밀번호 입력란 보이기
+				$('#userPasswd').focus(); // 새 비밀번호 입력란으로 포커스 이동. 	
+            	return true;								         
+            }
+		},
+		error: (xhr, textStatus, errorThrown) => {
+			alert("AJAX 요청 실패:\n"+ textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
+			return false;
+		}
+	});
+}
+
+// 핸드폰번호 중복 체크 함수 : 중복하지 않으면 true
+function phoneCheck(userPhone) {
+	$.ajax({ 
+		url : "/user/phoneCheck",  
+		type : "post",
+		data : {
+			"userPhone":userPhone
+		},
+		success: function(result) {
+			if (result === 1) {                    
+                alert("존재하는 번호입니다.");
+                $("#userPhone").val(""); 
+                $("#userPhone").focus();  
+                return false;            
+            } else {
+                alert("사용가능한 번호입니다.");
+                $('#phoneCheckBtn').prop('disabled', true);               
+             	return true;					
+            }
+		},
+		error: (xhr, textStatus, errorThrown) => {
+			alert("AJAX 요청 실패:\n"+ textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
+			return false; 
+		}
+	});	
+}
+
+
+// 이메일 중복체크 함수 : 중복하지 않으면 true
+function emailCheck(userEmail) {
+	$.ajax({ 
+		url : "/user/emailCheck",  
+		type : "post",
+		data : {
+			"userEmail":userEmail
+		},
+		success: function(result) {
+			if (result === 1) {                    
+                alert("존재하는 이메일입니다.");
+                $("#userEmail").val(""); 
+                $("#userEmail").focus(); 
+                return false;             
+            } else {
+                alert("사용가능한 이메일입니다.");
+                $('#emailCheckBtn').prop('disabled', true); 
+                return true;
+            }
+		},
+		error: (xhr, textStatus, errorThrown) => {
+			alert("AJAX 요청 실패:\n"+ textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
+			return false;
+		}
+	});	
+}

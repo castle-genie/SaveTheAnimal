@@ -131,23 +131,23 @@
 	        } else {
 	        	$("#findId").attr({
 	        		method:"post",
-	        		action:"/findId"
+	        		action:"/user/findId"
 	        	});
 	        	$("#findId").submit();
 	        }			
 		});
 		
 		$("#resetPwdBtn").on("click", function(){
-			location.href="/resetPwd";
+			location.href="/user/resetPwd";
 		});
 		
 		$("#loginBtn").on("click", function(){
-			location.href="/login";			
+			location.href="/user/login";			
 		});
 		
 		$("#logoutBtn").on("click", function(){
 			alert("로그아웃하여 메인페이지로 이동합니다.");
-			location.href = "/logout";
+			location.href = "/user/logout";
 		});
 		
 		let msg = "${msg}";

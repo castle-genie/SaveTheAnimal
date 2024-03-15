@@ -45,6 +45,7 @@
 					
 					<div class="form-container">
 						<form id="updateForm">
+							<%-- <input type="hidden" name="boardNumber" id="boardNumber" value="${userInfo.userId}"/> --%>
 							<div class="row uniform">
 								<div class="table-wrapper">
 									<table>
@@ -55,7 +56,7 @@
 													<label for="userId" class="align-center">아이디</label>
 												</td>
 												<td>
-													<input type="text" name="userId" id="userId" maxlength="15" value="${userInfo.userId}" readonly disabled/>
+													<input type="text" name="userId" id="userId" maxlength="15" value="${userInfo.userId}" readonly/>
 												</td>	
 												<td>
 												</td>
@@ -68,7 +69,7 @@
 					                                </div>
 												</td>	
 												<td>
-													<input type="password" class="changable" maxlength="20" name="pwdConfirm" id="pwdConfirm" placeholder="체크버튼을 클릭하세요" disabled/>
+													<input type="password"  maxlength="20" name="pwdConfirm" id="pwdConfirm" placeholder="체크버튼을 클릭하세요" disabled/>
 													<div class="new-password-area">
 														<br>
 														<input type="password" maxlength="20" name="userPasswd" id="userPasswd" placeholder="새 비밀번호 입력. 영문/숫자 8~20자리"/>
@@ -115,7 +116,7 @@
 										<tfoot><tr><td colspan="3"></td></tr></tfoot>
 									</table>
 				                    <div class="text-end">
-				                    	<button type="button" class="button special" id="updateProfileBtn" disabled>회원정보 수정</button>
+				                    	<button type="button" class="button special" id="updateProfileBtn">회원정보 수정</button>
 				                    	<button type="button" id="updateCancelBtn">취소</button>
 				                    </div>
 								</div>

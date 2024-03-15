@@ -23,7 +23,7 @@ public interface UserDao {
 	//public int checkDuplicate(UserVO uvo); // 중복 체크 : 아이디, 핸드폰번호, 이메일
 	
 	public UserVO userInfo(UserVO uvo); 		// 내정보 확인 - 상세 조회	
-	public int userUpdate(UserVO uvo); 			// 회원정보 수정
+	public int updateProfile(UserVO uvo); 			// 회원정보 수정
 	public int pwdConfirm(UserVO uvo);			// 비밀번호 일치 확인
 	
 	public List<UserVO> userList(UserVO uvo); //회원 목록 조회

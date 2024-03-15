@@ -68,8 +68,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public int userUpdate(UserVO uvo) {
-		int result = userDao.userUpdate(uvo);
+	public int updateProfile(UserVO uvo) {
+		int result = userDao.updateProfile(uvo);
 		return result;
 	}
 	

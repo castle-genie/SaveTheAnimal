@@ -89,7 +89,7 @@
 		where user_id = #{userId}
 	</select>
 	<!-- 회원 정보 수정 -->
-	<update id="userUpdate" parameterType="user">
+	<update id="updateProfile" parameterType="user">
 		update users
 		set user_name = #{userName}, user_phone = #{userPhone}, user_email = #{userEmail}
 		<if test="userPasswd != ''">	

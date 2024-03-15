@@ -26,13 +26,18 @@
 				<div class="content">
 				<c:if test="${empty userLogin}">
 				  	<h4>로그인이 필요합니다</h4>
-				  	<a href="/login">로그인 바로가기</a>
+				  	<a href="/login" class="button">로그인 바로가기</a>
 				</c:if>
 				<c:if test="${not empty userLogin}">
 					<header class="align-center">
 						<p>Save The Animal</p>
 						<h2>회원 정보</h2>
 					</header>
+					
+					<%-- post 방식으로 전송 시 반드시 form 태그 추가해 주어야 합니다. --%>
+			 		<form name="data" id="data" method="post">
+			 			<input type="hidden" name="userId" value="${userInfo.userId}"/>
+			 		</form>
 					
 					<div class="grid">
 						<!-- 회원 프로필 -->
@@ -87,7 +92,7 @@
 							    <br/>
 							    <p class="align-right">
 							    	봉사 레벨 : <strong>Lv. ${userInfo.userLevel}</strong><br>
-							    	봉사 횟수 : <strong>${userInfo.userLevel}</strong> 회
+							    	봉사 횟수 : <strong>${userInfo.userVolcnt}</strong> 회
 							    </p>
 							    <div class="d-flex text-body-secondary pt-3">
 							      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -172,13 +177,13 @@
 				</c:if>
 										
 				</div>
-				<hr>
-				<div>myPage.jsp 화면</div>
-				<div>하위 메뉴 배치 해서 회원정보 ajax로 불러오기</div>
-				<div>내 정보 수정 : updateProfile.jsp</div>
-				<div>나의 활동, 후원 정보 : 각각 해당 페이지로 이동하여 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
-				<hr>
 			</div>
+			<hr>
+			<div>myPage.jsp 화면</div>
+			<div>하위 메뉴 배치 해서 회원정보 ajax로 불러오기</div>
+			<div>내 정보 수정 : updateProfile.jsp</div>
+			<div>나의 활동, 후원 정보 : 각각 해당 페이지로 이동하여 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
+			<hr>
 		</div>
 	</section>
 	
@@ -207,12 +212,12 @@
 		$(function(){
 			// 회원 정보 수정 이동 
 			$("#goUpdateBtn").on("click", function(){				
-				location.href="/updateProfile";
+				location.href="/user/updateProfile";
 			});		
 			
 			$("#logoutBtn").on("click", function(){
 				alert("로그아웃하여 메인페이지로 이동합니다.");
-				location.href = "/logout";
+				location.href = "/user/logout";
 			});
 						
 			let errorMsg = "${errorMsg}";

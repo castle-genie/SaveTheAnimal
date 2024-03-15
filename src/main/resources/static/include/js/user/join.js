@@ -25,7 +25,7 @@ $(function(){
         }
         /* ajax 중복 체크 */
 		$.ajax({ 
-			url : "/idCheck",  
+			url : "/user/idCheck",  
 			type : "post",
 			data : {
 				"userId":userId
@@ -69,7 +69,7 @@ $(function(){
         }
         /* ajax 중복 체크 */
         $.ajax({ 
-			url : "/phoneCheck",  
+			url : "/user/phoneCheck",  
 			type : "post",
 			data : {
 				"userPhone":userPhone
@@ -110,7 +110,7 @@ $(function(){
         }
         /* ajax 중복 체크 */
         $.ajax({ 
-			url : "/emailCheck",  
+			url : "/user/emailCheck",  
 			type : "post",
 			data : {
 				"userEmail":userEmail
@@ -216,7 +216,7 @@ $(function(){
 		if (confirm("회원가입을 진행하시겠습니까?")){			
 			$("#joinForm").attr({
 				"method":"post",
-				"action":"/join"				
+				"action":"/user/join"				
 			});
 			$("#joinForm").submit();
 			alert("회원가입 성공");

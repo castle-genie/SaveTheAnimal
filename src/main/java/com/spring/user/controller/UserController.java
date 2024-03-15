@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -26,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @SessionAttributes("userLogin")
 @Slf4j
+@RequestMapping("/user/*")
 public class UserController {
 	@Setter(onMethod_ = @Autowired)
 	private UserService userService;
@@ -40,16 +42,15 @@ public class UserController {
 	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras, HttpSession session) {
 		UserVO userLogin = userService.userLoginProcess(login);
 		
-		String url = "";
+		
 		if (userLogin != null) {
 			model.addAttribute("userLogin", userLogin); 
 			session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
-			url = "/";// 성공하면 메인페이지 이동
+			return "/project/mainpage";// 성공하면 메인페이지 이동
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
-			url = "/login";
+			return "redirect:/user/login";
 		}
-		return "redirect:"+url;
 	}
 	
 	@GetMapping("/logout")
@@ -72,10 +73,10 @@ public class UserController {
 		
 		result = userService.userJoin(uvo);
 		if (result ==1) {
-			url="/project/mainpage";
+			url="/";
 		} else {
 			ras.addFlashAttribute("errorMsg", "입력에 문제가 있어 다시 진행해 주세요.");
-			url="/join";
+			url="/user/join";
 		}
 		return "redirect:"+url;
 	}
@@ -126,7 +127,7 @@ public class UserController {
 			return "user/findId";
 		} else { 
 			ras.addFlashAttribute("msg", "가입 이메일이 아닙니다.");
-			return "redirect:/findId";
+			return "redirect:/user/findId";
 		}
 	}
 	
@@ -173,8 +174,8 @@ public class UserController {
 		String userId = (String) session.getAttribute("userId");
 		
 		// 사용자 정보 가져오기
-        UserVO userinfo = userService.userInfo(userId);
-		model.addAttribute("userInfo", userinfo);
+        UserVO userInfo = userService.userInfo(userId);
+		model.addAttribute("userInfo", userInfo);
 		return "user/updateProfile";
 	}
 	
@@ -188,21 +189,24 @@ public class UserController {
 	} 
 	
 	
-	/*@PostMapping("/updateProfile")
-	public String userUpdate(UserVO uvo, Model model, RedirectAttributes ras) {
+	@PostMapping("/updateProfile")
+	public String updateProfile(UserVO uvo, Model model, RedirectAttributes ras) {
 		log.info("회원정보 수정");
 		int result = 0;
-		String url = "";
+		log.info(uvo.toString());
+		result = userService.updateProfile(uvo);
 		
-		//result = userService.userUpdate(uvo);
-		if (result ==1) {
-			url="user/myPage";
+		if (result == 1) {		
+			UserVO userInfo = userService.userInfo(uvo.getUserId());
+			log.info("업데이트 성공");
+			model.addAttribute("userInfo", userInfo);
+			return "user/myPage";
 		} else {
 			ras.addFlashAttribute("errorMsg", "업데이트에 문제가 있어 다시 진행해 주세요.");
-			url="/updateProfile";
+			return "redirect:/user/updateProfile";
 		}
-		return "redirect:"+url;
-	}*/
+
+	}
 	
 	@GetMapping("/admin/userList")
 	public String userList(@ModelAttribute UserVO uvo, Model model) {
