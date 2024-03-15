@@ -20,4 +20,14 @@ public class VolunteerServiceImpl implements VolunteerService {
 		return volunteerList;
 	}
 
+	@Override
+	public VolunteerVO volunteerDetail(VolunteerVO volunteerVO) {
+		VolunteerVO volunteerDetail = null; 
+		volunteerDetail = volunteerDAO.volunteerDetail(volunteerVO);
+		if(volunteerDetail != null) {
+			volunteerDetail.setVolunteerDetail(volunteerDetail.getVolunteerDetail().replaceAll("\n", "<br />"));
+		}
+		return volunteerDetail;
+	}
+
 }

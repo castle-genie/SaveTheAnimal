@@ -7,6 +7,16 @@
 		<typeAlias type="com.spring.user.vo.UserVO" alias="user" />
 		<typeAlias type="com.spring.volunteer.vo.VolunteerVO" alias="volunteer" />
 		<typeAlias type="com.spring.sanction.vo.SanctionVO" alias="sanction"/>
+<<<<<<< HEAD
 		<typeAlias type="com.spring.freeBoard.vo.FreeBoardVO" alias="freeBoard"/>
+=======
+		
+		
+		
+		
+		
+		
+		<typeAlias type="com.spring.application.vo.ApplicationVO" alias="application" />
+>>>>>>> f88698c18ec78c66c2a37e68f578dfeb5b1496b8
 	</typeAliases>
 </configuration>
