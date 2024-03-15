@@ -17,6 +17,6 @@ public class IndexController {
 	public String adminPage() {
 		return"admin/adminMain";
 	}
-	}
 	
 	
+}

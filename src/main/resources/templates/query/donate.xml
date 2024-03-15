@@ -12,4 +12,15 @@
 		<result column="donate_ahphone" property="do_AHPhone"/>
 		
 	</resultMap>
+	
+	<select id="donateInsert" parameterType="donate">
+		INSERT INTO donate (donate_id, donate_price, donate_pm, donate_sprice, donate_ahname, donate_ahphone)
+		VALUE(donate_seq.NEXTVAL), #{do_price}, #{do_PM}, #{do_Sprice}, {do_AHName}, {do_AHPhone};
+	</select>
+	
+	<select id="donateList" parameterType="donate" resultMap="donateMap">
+		SELECT donate_pm, donate_price, donate_sprice, donate_day, donate_fday, doate_id
+		FROM donate
+		WHERE
+	</select>
 </mapper>
