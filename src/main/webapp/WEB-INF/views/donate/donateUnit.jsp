@@ -27,8 +27,8 @@
                 <b>후원 정보</b>
                 </div>
                 </td>
-                <td><button type="button" id="donateUpdateBtn">후원변경 하기</button></td>
-                <td><button type="button" id="donateDeleteBtn">후원해지 하기</button></td>
+                <td><button type="button" id="donateUpdateBtn" class="unit_Btn">후원변경 하기</button></td>
+                <td><button type="button" id="donateDeleteBtn" class="unit_Btn">후원해지 하기</button></td>
                 </tr>
             </table>
 

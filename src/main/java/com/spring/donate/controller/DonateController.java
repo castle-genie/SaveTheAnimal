@@ -25,4 +25,14 @@ public class DonateController {
 	public String donateUpdate(DonateVO doVO ) {
 		return "/donate/donateUpdate";
 	}
+	
+	@GetMapping("/donateDelete_check")
+	public String donateDelete_check(DonateVO dovo) {
+		return "/donate/donateDelete_check";
+	}
+	
+	@GetMapping("/donateDelete")
+	public String donateDelete(DonateVO dovo) {
+		return "/donate/donateDelete";
+	}
 }

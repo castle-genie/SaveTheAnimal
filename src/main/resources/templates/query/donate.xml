@@ -21,6 +21,6 @@
 	<select id="donateList" parameterType="donate" resultMap="donateMap">
 		SELECT donate_pm, donate_price, donate_sprice, donate_day, donate_fday, doate_id
 		FROM donate
-		WHERE
+		VALUE
 	</select>
 </mapper>

@@ -41,29 +41,33 @@ $(function (){
 			    $(this).val(num);
 			  });
 			  
-			// 라디오 버튼 변경 시 호출되는 함수
-		        $('input[name="do_price"]').change(function() {
-		            var selectedValue = $('input[name="do_price"]:checked').val(); // 선택된 라디오 버튼의 값 가져오기
-		            var inputAmount = $('.input_Select').val(); // 직접입력된 값 가져오기
-		            var amount_num = 0;
-
-		            if (selectedValue === 'Select') {
-		                // 직접입력이 선택된 경우
-		                var userInput = parseInt(inputAmount);
-		                if (!isNaN(userInput)) {
-		                	amount_num = userInput;
-		                }
-		            } else {
-		                // 다른 라디오 버튼이 선택된 경우
-		                amount_num = parseInt(selectedValue);
-		            }
-
-		            // amount 값을 설정하는 부분 (여기서는 예시로 console.log로 출력)
-		            console.log('설정된 금액:', amount_num);
-		        });
+		/*	  
+			  function calculateAmount() {
+			    var selectedValue = $('input[name="do_price"]:checked').val(); // 선택된 라디오 버튼의 값 가져오기
+			    var inputAmount = $('.input_Select').val(); // 직접입력된 값 가져오기
+			    var amount = 0;
+			
+			    if (selectedValue === 'Select') {
+			        // 직접입력이 선택된 경우
+			        var userInput = parseInt(inputAmount);
+			        if (!isNaN(userInput)) {
+			            amount_num = userInput;
+			        }
+			    } else {
+			        // 다른 라디오 버튼이 선택된 경우
+			        amount_num = parseInt(selectedValue);
+			    }
+			
+			    return amount; // 계산된 값을 반환
+			}
+			
+			$('input[name="do_price"]').change(function() {
+			    var amount = calculateAmount(); // 함수 호출하여 amount 값 설정
+			    // 설정된 amount 값을 원하는 곳에서 사용
+			    console.log('설정된 금액:', amount);
 			});
+		*/  
 
-	
 	
 	$("#dontePayBtn").on("click", ()=> {
 		console.log("결제 입력정보 확인");
@@ -81,4 +85,7 @@ $(function (){
 			
 		})
 		
+});
+
+
 });
