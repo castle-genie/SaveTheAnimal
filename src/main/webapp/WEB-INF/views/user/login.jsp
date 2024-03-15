@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp" %>    
-<link rel="stylesheet" href="/resources/include/assets/css/main.css">
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
 <style>
 	.form-container {
 	    width: 55%; 
@@ -11,24 +12,9 @@
 </head>
 <body class="subpage">
 
-	<!-- Header -->
-	<header id="header">
-		<div class="logo"><a href="index.html">Hielo <span>by TEMPLATED</span></a></div>
-		<a href="#menu">Menu</a>
-	</header><!-- Nav -->
-	<nav id="menu">
-		<ul class="links">
-			<li><a href="/">Home</a></li>
-			<li><a href="/project/volunteer">봉사모집</a></li>
-			<li><a href="/project/adoption">입양</a></li>
-			<li><a href="donate.html">후원</a>
-			<li><a href="/project/freeboard">자유게시판</a>
-			<li><a href="#">봉사후기게시판</a>
-			<li><a href="#">입양후기게시판</a>
-			<li><a href="#">공지사항</a>
-			<li><a href="/login">로그인</a>
-		</ul>
-	</nav><!-- One -->
+	<!-- Header, Nav -->
+	<%@ include file="/WEB-INF/views/project/generic.jspf" %>
+	<!-- One -->
 	<section id="One" class="wrapper style3">
 		<div class="inner">
 			<header class="align-center">
@@ -46,29 +32,29 @@
 							<p>Save The Animal</p>
 							<h2>회원 로그인</h2>
 						</header>						
-							<div class="form-container">
-								<form id="loginForm">
-							<div class="row uniform">
-								<div class="6u$ 12u$(large)">
-									<label for="userId">아이디</label>
-								</div>								
-								<div class="6u$ 12u$(large)">
-									<input type="text" name="userId" id="userId"  placeholder="ID" />									
+						<div class="form-container">
+							<form id="loginForm">
+								<div class="row uniform">
+									<div class="6u$ 12u$(large)">
+										<label for="userId">아이디</label>
+									</div>								
+									<div class="6u$ 12u$(large)">
+										<input type="text" name="userId" id="userId"  placeholder="ID" />									
+									</div>
+									<div class="6u$ 12u$(large)">
+										<label for="userPasswd">비밀번호</label>
+									</div>	
+									<div class="6u$ 12u$(large)">	
+										<input type="password" name="userPasswd" id="userPasswd"  placeholder="Password" />
+									</div>
 								</div>
-								<div class="6u$ 12u$(large)">
-									<label for="userPasswd">비밀번호</label>
-								</div>	
-								<div class="6u$ 12u$(large)">	
-									<input type="password" name="userPasswd" id="userPasswd"  placeholder="Password" />
-								</div>
-							</div>
 							</form>
-						<button type="button" id="loginBtn" name="loginBtn" class="button special fit big">로그인</button>
+							<button type="button" id="loginBtn" name="loginBtn" class="button special fit big">로그인</button>
 						</div>
 						<div class="align-center">
-							<a href="/join" class="button alt small">회원가입</a>              
-							<a href="/findId" class="button alt small">ID 찾기</a>
-							<a href="#" class="button alt small">비밀번호 찾기</a>
+							<a href="/user/join" class="button alt small">회원가입</a>              
+							<a href="/user/findId" class="button alt small">ID 찾기</a>
+							<a href="/user/resetPwd" class="button alt small">비밀번호 찾기</a>
 						</div>
 					</c:if>
 					<c:if test="${not empty userLogin}">
@@ -102,6 +88,11 @@
 	
 	
 	<!-- Scripts -->
+	<script src="/resources/include/assets2/js/jquery.min.js"></script>
+	<script src="/resources/include/assets2/js/jquery.scrollex.min.js"></script>
+	<script src="/resources/include/assets2/js/skel.min.js"></script>
+	<script src="/resources/include/assets2/js/util.js"></script>
+	<script src="/resources/include/assets2/js/main.js"></script>
 	<script>
 	$(function(){
 		$("#loginBtn").on("click", function(){
@@ -110,7 +101,7 @@
 			else {
 				$("#loginForm").attr({
 					"method":"post",
-					"action":"/login"
+					"action":"/user/login"
 				});
 				$("#loginForm").submit();
 			}
@@ -119,7 +110,7 @@
 		
 		$("#logoutBtn").on("click", function(){
 			alert("로그아웃하여 메인페이지로 이동합니다.");
-			location.href = "/logout";
+			location.href = "/user/logout";
 		});
 		
 		let errorMsg = "${errorMsg}";
