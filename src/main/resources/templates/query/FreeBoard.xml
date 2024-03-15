@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.freeBoard.dao.FreeBoardDAO">
+<mapper namespace="com.spring.FreeBoard.dao.FreeBoardDAO">
 	<resultMap type="freeBoard" id="freeBoardMap">
 		<id column="fboard_id" property="fboardId"/>
 		<result column="fboard_title" property="fboardTitle"/>
@@ -33,11 +33,40 @@
 		FROM 	freeBoard
 		WHERE	fboard_id = #{fboardId}
 	</select>
-	 -->
+	-->
+	
+	<!-- 게시판 insert -->
+	<insert id="freeBoardCreate" parameterType="freeBoard">
+		<!--  
+		<selectKey keyProperty="fboard_id" order="BEFORE" resultType="int">
+			SELECT freeBoard_seq.NEXTVAL FROM DUAL
+		</selectKey>
+		-->
+		<!-- 
+		INSERT INTO freeBoard (fboard_id, fboard_title, fboard_content, user_id)
+		VALUES (${fboardId}, ${fboardTitle}, ${fboardContent}, ${userId})
+		-->
+		insert into freeBoard (fboard_id, fboard_title, fboard_content, user_id)
+		VALUES (freeBoard_seq.nextval, ${fboardTitle}, ${fboardContent}, ${userId})
+	</insert>
 	<!-- 조회수 +1 -->
 	<update id="plusCnt" parameterType="freeBoard">
 		UPDATE 	freeBoard SET fboard_cnt = fboard_cnt +1 
 		WHERE 	fboard_id = ${fboardId}
 	</update>
+	
+	<!-- 게시글 수정 -->
+	<update id="update" parameterType="freeBoard">
+		UPDATE 	freeBoard
+		SET 	fboard_title 		= ${fboardTitle}
+				fboard_content	 	= ${fboardContent}
+		WHERE	fboard_id 			= ${fboardId}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="freeBoardDelete" parameterType="freeBoard">
+		DELETE FROM freeBoard 
+		WHERE	fboard_id = ${fboardId}
+	</delete>
 	
 </mapper>

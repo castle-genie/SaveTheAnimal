@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.comment.dao.FcommentDAO">
+	<!--  
+	<resultMap type="fcomment" id="fcommentMap">
+		<id column="fcomment_id" property="fcommentId"/>
+		<result column="fcomment_content" property="fcommentContent"/>
+		<result column="fcomment_date" property="fcommentDate"/>
+		<result column="fboard_id" property="fboardId"/>
+		<result column="user_id" property="userId"/>
+	</resultMap>
+	-->
+	
+	<!-- 자유게시판 댓글 조회 -->
+	<!--  
+	<select id="readFcomment" parameterType="fcomment" resultMap="fcommentMap">
+		SELECT
+				fcomment_id, fcomment_content, fcomment_date, user_id
+		FROM 	Fcomment
+		WHERE 	fboard_id = ${fboardId}
+	</select>
+	-->
+	<!--  댓글 입력 -->
+	<insert id="insertReply">
+		INSERT INTO Fcomment (fcomment_id, fcomment_content, fboard_id, user_id)
+		VALUES (Fcomment_seq.NEXTVAL, ${fcommentContent}, ${fboardId}, ${userId})
+	</insert>
+	
+	<!-- 댓글 목록 -->
+	<select id="listReply" resultType="com.spring.comment.vo.FcommentVO">
+		SELECT fcomment_id, fcomment_content, fboard_id, user_id AS userName, fcomment_date, fcomment_updatedate
+		FROM	Fcomment 
+	</select>
+</mapper>

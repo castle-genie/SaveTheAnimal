@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.spring.freeBoard.vo.FreeBoardVO;
+import com.spring.FreeBoard.dao.FreeBoardDAO;
+import com.spring.FreeBoard.vo.FreeBoardVO;
 
 import lombok.extern.slf4j.Slf4j;
 

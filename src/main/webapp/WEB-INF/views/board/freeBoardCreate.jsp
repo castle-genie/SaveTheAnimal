@@ -27,24 +27,37 @@
 				<div class="content">
 					<header class="align-center">
 						<p>부제목</p>
-						<h2>${freeBoard.fboardTitle}</h2>
+						<h2>글 작성하는 페이지</h2>
 					</header>
-					<p>${freeBoard.fboardContent}</p>
-					<p>
-						작성자: ${freeBoard.userId} <span style="float: right;"><fmt:formatDate
-								value="${freeBoard.fboardDate }" pattern="yyyy.MM.dd" /></span>
-					</p>
-					<br>
-					<ul class="actions">
-						<li><a href="freeBoardList"  class="button special">목록</a></li>
-						<input type="button" value="수정" onclick="location.href='modify?fboardId=${freeBoard.fboardId}'">
-						<input type="button" value="삭제" onclick="del(${freeBoard.fboardId})">
-					</ul>
+					<form method="post" action="/board/freeBoardList">
+						<div class="row uniform">
+							<div class="12u$">
+								<input type="text" name="fboardTitle" id="fboardTitle" placeholder="제목">
+							</div>
+							<div class="12u$">
+								<textarea name="fboardContent" id="fboardContent" placeholder="내용"
+									rows="6"></textarea>
+							</div>
+							<div class="12u$">
+								<input type="text" name="userId" id="userId" placeholder="작성자">
+							</div>
+							<div class="12u$">
+								<ul class="actions">
+									<li>
+										<input type="submit" value="등록">
+									</li>
+									<li>
+										<a href="/board/freeBoardList" class="button">취소</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
+		</div>
 	</section>
-
 	<!-- Footer -->
 	<footer id="footer">
 		<div class="container">
@@ -70,12 +83,29 @@
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
 </body>
+<!--  
 <script>
-	function del(fboardId) {
-		var chk = confirm("정말 삭제하시겠습니까?");
-		if (chk) {
-			location.href='delete?fboardId=' + fboardId;
-		}
+function goWrite(frm) {
+	var fboardTitle = frm.fboardTitle.value;
+	//var writer = frm.writer.value;
+	var fboardContent = frm.fboardContent.value;
+	
+	if (fboardTitle.trim() == ''){
+		alert("제목을 입력해주세요");
+		return false;
 	}
+	
+	if (writer.trim() == ''){
+		alert("작성자를 입력해주세요");
+		return false;
+	}
+	
+	if (fboardContent.trim() == ''){
+		alert("내용을 입력해주세요");
+		return false;
+	}
+	frm.submit();
+}
 </script>
+-->
 </html>

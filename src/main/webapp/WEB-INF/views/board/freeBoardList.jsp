@@ -19,7 +19,6 @@
 			</header>
 		</div>
 	</section>
-
 	<!-- Two -->
 	<section id="two" class="wrapper style2">
 		<div class="inner">
@@ -54,7 +53,7 @@
 					</div>
 					<br>
 						<ul class="actions">
-							<li><a href="(글쓰기폼 경로)" " class="button special">글쓰기</a></li>
+							<li><a href="/board/freeBoardCreate" " class="button special">글쓰기</a></li>
 						</ul>
 				</div>
 			</div>

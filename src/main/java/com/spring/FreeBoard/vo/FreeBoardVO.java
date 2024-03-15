@@ -1,4 +1,4 @@
-package com.spring.freeBoard.vo;
+package com.spring.FreeBoard.vo;
 
 import java.sql.Date;
 import lombok.Data;
