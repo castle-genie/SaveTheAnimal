@@ -21,4 +21,8 @@ public class DonateController {
 		return "/donate/donateUnit";
 	}
 	
+	@GetMapping("/donateUpdate")
+	public String donateUpdate(DonateVO doVO ) {
+		return "/donate/donateUpdate";
+	}
 }

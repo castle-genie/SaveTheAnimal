@@ -11,9 +11,9 @@
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="/resources/include/js/jquery-3.7.1.min.js"></script>
 		<script src="/resources/include/js/common.js"></script>
-		<link rel="stylesheet" type="text/css" href="/resources/include/css/donatePay.css" />
+		<link rel="stylesheet" type="text/css" href="/resources/include/css/donate/donatePay.css" />
 
-		<script src="/resources/include/js/donatePay.js"></script>
+		<script src="/resources/include/js/donate/donatePay.js"></script>
 
 </head>
 <body>
@@ -97,7 +97,7 @@
 	    clientId: 'S2_5cf74e98f5d141f88c7f15beddca90d9',
 	    method: 'kakaopayCard',
 	    orderId: "유니크한 상품 번호",
-	    amount: =(do_price),
+	    amount: amount_num(Integer),
 	    goodsName: '나이스페이-상품',
 	    returnUrl: 'http://localhost:8080/donate/donateUnit',
 	    fnError: function (result) {

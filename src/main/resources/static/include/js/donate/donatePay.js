@@ -1,6 +1,5 @@
 $(function (){
 	
-	$(function () {
 			  $("#do_price").on("keyup", function () {
 			    // 입력값에서 숫자만 추출합니다.
 			    let num = $(this)
@@ -81,5 +80,5 @@ $(function (){
 			}
 			
 		})
-	})	
+		
 });

@@ -7,5 +7,12 @@
 		<typeAlias type="com.spring.user.vo.UserVO" alias="user" />
 		<typeAlias type="com.spring.volunteer.vo.VolunteerVO" alias="volunteer" />
 		<typeAlias type="com.spring.sanction.vo.SanctionVO" alias="sanction"/>
+		
+		
+		
+		
+		
+		
+		<typeAlias type="com.spring.application.vo.ApplicationVO" alias="application" />
 	</typeAliases>
 </configuration>
