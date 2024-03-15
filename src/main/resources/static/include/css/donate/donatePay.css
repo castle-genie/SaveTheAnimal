@@ -1,5 +1,5 @@
 h1{
-    color: red;
+    color: rgb(0, 0, 0);
 }
 
 h2{
@@ -8,7 +8,7 @@ h2{
 
 body{
     height: 100%;
-    background: url(/protoType_save_the_animal/image/1056_931_1532.jpg ) no-repeat;
+    background: url(/resources/images/donate/saveTheAnimal.jpg) no-repeat;
     background-size: cover;
 }
 
@@ -16,7 +16,7 @@ body{
 .donatePay_data{
     background-color: white;
     border-top: solid 10px;
-    border-color: red;
+    border-color: rgb(0, 0, 0);
     border-radius: 10px;
     padding: 40px;
     margin: 100px;
@@ -44,7 +44,7 @@ body{
     border-radius: 5px;
     padding-right: 50px;
     padding-left: 50px;
-    background-color: red;
+    background-color: rgb(0, 0, 0);
     color: white;
 }
 
@@ -92,7 +92,7 @@ body{
 }
 
 .selected {
-    background-color: rgb(255, 182, 172); /* 선택된 항목의 배경색 */
+    background-color: rgb(192, 192, 192); /* 선택된 항목의 배경색 */
 }
 
 .donatePayBtn{
