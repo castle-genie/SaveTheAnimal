@@ -26,6 +26,14 @@ public interface ReportService {
 	public int reportUpdateAC(ReportVO rvo);
 	
 	public int repcntUpdate(ReportVO rvo);
+	public int contentDeleteFB(ReportVO rvo);
+	public int contentDeleteVB(ReportVO rvo);
+	public int contentDeleteAB(ReportVO rvo);
+	public int contentDeleteFC(ReportVO rvo);
+	public int contentDeleteVC(ReportVO rvo);
+	public int contentDeleteAC(ReportVO rvo);
+	public int userStop(ReportVO rvo);
+	public int userDelete(ReportVO rvo);
 
 	
 }

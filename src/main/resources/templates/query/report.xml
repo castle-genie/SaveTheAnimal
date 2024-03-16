@@ -211,6 +211,45 @@
 	</update>
 	
 	
+	<!-- 신고 제재시 게시물 삭제 기능 -->
+	<delete id="contentDeleteFB" parameterType="report">
+		delete from freeboard
+		where fboard_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteVB" parameterType="report">
+		delete from volunteerFeedbackBoard
+		where vfboard_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteAB" parameterType="report">
+		delete from adoptionFeedbackBoard
+		where afboard_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteFC" parameterType="report">
+		delete from fcomment
+		where fcomment_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteVC" parameterType="report">
+		delete from vfcomment
+		where vfcomment_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteAC" parameterType="report">
+		delete from afcomment
+		where afcomment_id = #{boardId}
+	</delete>
+	
+	<!-- 신고 제재 시 유저 계정 정지 -->
+	<update id="userStop" parameterType="report">
+		update users
+			set user_act = 2
+		where user_id = #{boardUser}
+	</update>
+	
+	<!-- 신고 제재 시 유저 계정 삭제 -->
+	<delete id="userDelete" parameterType="report">
+		delete from users
+		where user_id = #{boardUser}
+	</delete>
+	
 	
 	
 
