@@ -13,12 +13,12 @@
 				<li><a href="/">Home</a></li>
 				<li><a href="/project/volunteer">봉사모집</a></li>
 				<li><a href="/project/adoption">입양</a></li>
-				<li><a href="donate.html">후원</a>
+				<li><a href="/donate/donatepay">후원</a>
 				<li><a href="/project/freeboard">자유게시판</a>
 				<li><a href="#">봉사후기게시판</a>
 				<li><a href="#">입양후기게시판</a>
 				<li><a href="#">공지사항</a>
-				<li><a href="/login">로그인</a>
+				<li><a href="/user/login">로그인</a>
 			</ul>
 		</nav>
 		<!-- Banner -->
