@@ -119,6 +119,13 @@ public class ReportController {
 		return "redirect:/report/reportList";
 	}
 	
+	//신고 수정 폼 데이터
+	@GetMapping("reportUpdateForm")
+	public void reportUpdateForm(ReportVO rvo, Model model) {
+		ReportVO reportUpdateData = reportService.reportUpdateForm(rvo);
+		model.addAttribute("reportUpdateData", reportUpdateData);
+	}
+	
 	//신고 수정 기능
 	@PostMapping("reportModify")
 	public String reportModify(ReportVO rvo){

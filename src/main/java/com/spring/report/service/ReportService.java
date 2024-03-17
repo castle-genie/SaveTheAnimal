@@ -34,6 +34,7 @@ public interface ReportService {
 	public int contentDeleteAC(ReportVO rvo);
 	public int userStop(ReportVO rvo);
 	public int userDelete(ReportVO rvo);
+	public ReportVO reportUpdateForm(ReportVO rvo);
 
 	
 }

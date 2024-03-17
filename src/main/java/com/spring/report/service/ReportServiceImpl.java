@@ -163,6 +163,12 @@ public class ReportServiceImpl implements ReportService {
 		int result = rDao.userDelete(rvo);
 		return result;
 	}
+
+	@Override
+	public ReportVO reportUpdateForm(ReportVO rvo) {
+		ReportVO reportUpdateData = rDao.reportDetail(rvo);
+		return reportUpdateData;
+	}
 	
 	
 	

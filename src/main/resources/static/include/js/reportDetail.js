@@ -7,27 +7,26 @@ $(function(){
 	const afcomment = '입양후이야기 댓글';
 	const boardSort = document.getElementById("boardSort").innerText;
 	const repcnt = document.getElementById("repcnt").value;
+ 
+    // AJAX 요청을 수행하고 프로미스를 반환하는 함수 정의
+    function ajaxRequest(url, data) {
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                type: "post",
+                url: url,
+                data: data,
+                success: function(response) {
+                    resolve(response);
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
+    }
 
 	//신고 제재 버튼
 	$("#sanctionBtn").on("click", () => {
-		console.log("btncheck");
-	    // AJAX 요청을 수행하고 프로미스를 반환하는 함수 정의
-	    function ajaxRequest(url, data) {
-	        return new Promise(function(resolve, reject) {
-	            $.ajax({
-	                type: "post",
-	                url: url,
-	                data: data,
-	                success: function(response) {
-	                    resolve(response);
-	                },
-	                error: function(error) {
-	                    reject(error);
-	                }
-	            });
-	        });
-	    }
-	
 	    // 첫 번째 AJAX 요청
 	    //sanction table insert
 	    ajaxRequest("/sanction/sanctionInsert", $("#f_data").serialize())
