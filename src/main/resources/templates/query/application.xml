@@ -16,4 +16,11 @@
 		FROM application
 		WHERE volunteer_id = #{volunteerId}
 	</select>
+	
+	<select id="applicationList" resultMap="applicationMap" resultType="application">
+		SELECT user_id, user_name as userName, volunteer_id
+		FROM users inner join application
+		USING (user_id)
+		WHERE volunteer_id = #{volunteerId}
+	</select>
 </mapper>

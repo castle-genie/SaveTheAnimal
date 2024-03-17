@@ -159,7 +159,7 @@
 		  <div class="modal-content">
 		    <span class="close">&times;</span>
 		    <div class="container">
-		    <form id="volunteerForm">
+		    <form id="applicatoioForm">
 		      <h2>봉사활동 신청</h2>
 		      <!-- 아이디 입력란(백엔드에서 처리) -->
 		      <!-- 봉사공고 아이디(팝업 뜨게한 버튼 누른 페이지의 volunteerId) -->
@@ -171,7 +171,7 @@
 		        <label for="promise">봉사 다짐</label>
 		        <textarea id="promise" name="promise" rows="4" required></textarea>
 		      </div>
-		      <button type="submit" id="applicationBtn">신청하기</button>
+		      <button type="button" id="applicationBtn">신청하기</button>
 		    </form>
 		  </div>
 		  </div>	
@@ -200,6 +200,36 @@
 	<script src="/resources/include/assets2/js/skel.min.js"></script>
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
+	<script>
+		// 로그인 상태를 확인하는 함수
+		function checkLoggedIn() {
+			 // 세션 스토리지에서 사용자 아이디를 가져옴
+		    var userId = sessionStorage.getItem('userId');
+		    console.log('userId:', userId);
+		    
+		    // 사용자 아이디가 있는지 확인하고 반환
+		    if(userId !== null) {
+		        return true; // 로그인 상태
+		    } else {
+		        return false; // 비로그인 상태
+		    }
+		}	
+	
+		$(function() {
+		    $("#applicationBtn").on("click", function() {
+		        if (!checkLoggedIn()) { // 사용자가 로그인하지 않은 경우
+		            alert('로그인이 필요합니다.');
+		            window.location.href = "/login"; // 로그인 페이지로 이동
+		        } else { // 사용자가 로그인한 경우
+		            $("#applicationForm").attr({
+		                method : "post",
+		                action : "/application/submit"
+		            });
+		            $("#applicationForm").submit(); // 폼 제출
+		        }
+		    });
+		});
+	</script>
 </body>
 
 </html> 
