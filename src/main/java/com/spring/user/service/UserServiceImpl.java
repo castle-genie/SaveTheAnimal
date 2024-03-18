@@ -73,6 +73,11 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 	
+	@Override
+	public int userWithdrawal(UserVO uvo) {
+		int result = userDao.userWithdrawal(uvo);
+		return result;
+	}
 	
 	// 회원 목록 조회
 	@Override
@@ -81,6 +86,7 @@ public class UserServiceImpl implements UserService {
 		list = userDao.userList(uvo);
 		return list;
 	}
+
 
 	
 

@@ -49,7 +49,8 @@ $(function() {
 			$('#userPasswd').val("");  // 기존에 입력했더라도 체크 해제되면 값 초기화 
 			$('#userPasswdCheck').val("");
             $('#pwdConfirm').prop('disabled', true); // 기존 비밀번호 입력란 비활성화
-            $('#pwdConfirmBtn').prop('disabled', true); // 기존 비밀번호 입력란 비활성화
+            $('#pwdConfirm').prop('readonly', true); // 기존 비밀번호 입력란 비활성화
+            $('#pwdConfirmBtn').prop('disabled', true); // 기존 비밀번호 버튼 비활성화
             $('.new-password-area').hide(); // 새 비밀번호 입력란 숨기기
 			isPasswordChanged = false;
             if (!isPhoneChanged && !isEmailChanged) {
@@ -140,6 +141,7 @@ $(function() {
 	// 회원정보 수정 버튼 클릭 시
     $('#updateProfileBtn').on('click', function() {	        
 	    let userId = $("#userId").val();   
+	    let pwdConfirm = $("#pwdConfirm").val();
         let userPasswd = $("#userPasswd").val();
         let userPasswdCheck = $("#userPasswdCheck").val();
         let userName = $("#userName").val();
@@ -166,7 +168,10 @@ $(function() {
 	            $("#userPasswd").val("");
 	            $("#userPasswd").focus();
 	            return;
-	        }
+	        } else if (pwdConfirm == userPasswd) {
+				alert("기존 비밀번호와 다른 새로운 비밀번호를 입력하세요.");
+				return;
+			}
 	                     
 	        if (!chkData("#userPasswdCheck", "비밀번호 확인을")) {
 				return;		        
@@ -228,6 +233,7 @@ $(function() {
 			console.log("취소버튼");			
 			this.reset();
 		});
+		$('.new-password-area').hide(); // 새 비밀번호 입력란 숨기기
 		// 상태 값 초기화
         stateChanged = false;
         isPhoneChecked = false;
@@ -257,7 +263,7 @@ function pwdConfirm(userId, pwdCf) {
             } else { // 일치하면
 				$('#pwdConfirm').prop('disabled', true); // 기존 비밀번호 입력란 비활성화
 				$('#pwdConfirmBtn').prop('disabled', true); // 비밀번호 확인 버튼 비활성화
-				$('#pwdConfirm').attr('placeholder', '아래에 새 비밀번호를 입력하세요.'); // placeholder 변경
+				//$('#pwdConfirm').attr('placeholder', '아래에 새 비밀번호를 입력하세요.'); // placeholder 변경
 				$('.new-password-area').show(); // 새 비밀번호 입력란 보이기
 				$('#userPasswd').focus(); // 새 비밀번호 입력란으로 포커스 이동. 	
             	return true;								         

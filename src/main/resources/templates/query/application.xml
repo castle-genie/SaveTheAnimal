@@ -16,4 +16,23 @@
 		FROM application
 		WHERE volunteer_id = #{volunteerId}
 	</select>
+	
+	<select id="applicationList" resultMap="applicationMap" resultType="application">
+		SELECT user_id, user_name as userName, volunteer_id
+		FROM users inner join application
+		USING (user_id)
+		WHERE volunteer_id = #{volunteerId}
+	</select>
+	
+	<insert id="applicationSubmit" parameterType="application">
+		INSERT INTO application
+		VALUES(application_seq.nextval, sysdate, #{applicationComment}, #{userId}, #{volunteerId}, default)
+	</insert>
+	
+	<!-- <select id="applicationView" resultMap="applicationMap" parameterType="application">
+		SELECT volunteer_id, volunteer_title, application_comment
+		FROM volunteer inner join application
+		using(volunteer_id)
+		WHERE user_id = #{userId}
+	</select> -->
 </mapper>

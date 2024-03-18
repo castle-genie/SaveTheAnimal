@@ -38,6 +38,11 @@
 		<div class="inner">
 			<div class="box">
 				<div class="content">
+				<c:if test="${empty userLogin}">
+				  	<h4>로그인이 필요합니다</h4>
+				  	<a href="/user/login" class="button">로그인 바로가기</a>
+				</c:if>
+				<c:if test="${not empty userLogin}">
 					<header class="align-center">
 						<p>Save The Animal</p>
 						<h2>회원 정보 수정</h2>
@@ -123,7 +128,7 @@
 							</div>
 						</form>
 	                </div>
-
+				</c:if>
 				</div>
 			</div>
 		</div>

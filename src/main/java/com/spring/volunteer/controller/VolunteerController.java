@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.volunteer.service.VolunteerService;
 import com.spring.volunteer.vo.VolunteerVO;
@@ -23,6 +25,9 @@ public class VolunteerController {
 	@Autowired
 	private VolunteerService service;
 	
+	/* users */
+	
+	// 봉사일정 리스트 구현
 	@ResponseBody
 	@GetMapping(value="/volunteerList", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<VolunteerVO> volunteerList(VolunteerVO volunteerVO) {
@@ -31,6 +36,7 @@ public class VolunteerController {
 		return volunteerList;
 	}
 	
+	// 봉사 일정 상세 정보 구현
 	@GetMapping("/volunteerDetail")
 	public String volunteerDetail(VolunteerVO volunteerVO, Model model) {
 		VolunteerVO volunteerDetail = null;
@@ -38,4 +44,88 @@ public class VolunteerController {
 		model.addAttribute("detail", volunteerDetail);
 		return "/volunteer/volunteerDetail";
 	}
+	
+	/* admin */
+	// 봉사 일정 리스트 구현(관리자 페이지)
+	@ResponseBody
+	@GetMapping(value="/adminVolunteerList", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<VolunteerVO> adminvolunteerList(VolunteerVO volunteerVO) {
+		List<VolunteerVO> volunteerList = null;
+		volunteerList = service.volunteerList(volunteerVO);
+		return volunteerList;
+	}
+	
+	// 봉사 입력 양식 이동
+	@GetMapping("/volunteerWriteForm")
+	public String volunteerWriteForm(VolunteerVO volunteerVO) {
+		return "/admin/volunteer/volunteerWriteForm";
+	}
+	
+	// 봉사 공고 입력 구현
+	@PostMapping("/volunteerInsert") 
+	public String volunteerInsert(VolunteerVO volunteerVO, RedirectAttributes ras) throws Exception {
+		int result = 0;
+		String url = "";
+		
+		result = service.volunteerInsert(volunteerVO);
+		if(result == 1) {
+			url = "/project/adminVolunteerList";
+		} else {
+			ras.addFlashAttribute("errorMsg", "입력에 문제가 있어 다시 진행해 주세요.");
+			url = "/volunteer/volunteerWriteForm";
+		}
+		return "redirect:"+url;
+	}
+	
+	// 관리자 페이지 봉사 공고 상세 정보
+	@GetMapping("/adminVolunteerDetail")
+	public String adminVolunteerDetail(VolunteerVO volunteerVO, Model model) {
+		VolunteerVO adminVolunteerDetail = null;
+		adminVolunteerDetail = service.volunteerDetail(volunteerVO);
+		model.addAttribute("detail", adminVolunteerDetail);
+		return "/admin/volunteer/adminVolunteerDetail";
+	}
+	
+	// 관리자 페이지 봉사 공고 수정 폼 이동
+	@GetMapping("/volunteerUpdateForm")
+	public String volunteerUpdateForm(VolunteerVO volunteerVO, Model model) {
+		VolunteerVO volunteerUpdateForm = null;
+		volunteerUpdateForm = service.volunteerUpdateForm(volunteerVO);
+		model.addAttribute("updateList", volunteerUpdateForm);
+		return "/admin/volunteer/volunteerUpdateForm";
+	}
+	
+	// 관리자 페이지 봉사 공고 수정
+	@PostMapping("/volunteerUpdate")
+	public String volunteerUpdate(VolunteerVO volunteerVO) {
+		int result = 0;
+		String url = "";
+		
+		result = service.volunteerUpdate(volunteerVO);
+		int num = volunteerVO.getVolunteerId();
+		if(result == 1) {
+			url = "/volunteer/adminVolunteerDetail?volunteerId="+num;
+		}
+		return "redirect:"+url;
+	}
+	
+	// 관리자 페이지 봉사 공고 삭제
+	@GetMapping("/volunteerDelete")
+	public String volunteerDelete(VolunteerVO volunteerVO) {
+		int result = 0;
+		String url = "";
+		
+		result = service.volunteerDelete(volunteerVO);
+		if(result == 1) {
+			url = "/project/adminVolunteerList";
+		}
+		return "redirect:"+url;
+	}
+	
+	// progress 1 로 바꾸기
+	@PostMapping("/updateVolunteerProgress1") 
+	public ResponseEntity<String> updateVolunteerProgress1(VolunteerVO volunteerVO) {
+		service.updateVolunteerProgress1(volunteerVO);
+        return ResponseEntity.ok("volunteer_progress가 업데이트되었습니다.");
+    }
 }
