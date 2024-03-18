@@ -57,13 +57,13 @@ public class UserDaoTests {
 		int result = userDao.userUpdate(uvo);
 		log.info("수정된 회원 레코드 수 : " + result);		
 	}*/
-	@Test
+	/*@Test
 	public void testUserInfo() {
 		UserVO uvo = new UserVO();
 		uvo.setUserId("member00");
 		UserVO info = userDao.userInfo(uvo);
 		log.info(info.toString());
-	}
+	}*/
 	/*@Test
 	public void testPwdConfirm() {
 		UserVO uvo = new UserVO();
@@ -125,6 +125,13 @@ public class UserDaoTests {
 		uvo.setUserEmail("member01@naver.com");
 		uvo.setUserPasswd("12341234");
 		int result = userDao.resetPasswd(uvo);
+		log.info((result==1) ? "성공" : "실패");
+	}*/
+	/*@Test
+	public void testUserWithdrawal() {
+		UserVO uvo = new UserVO();
+		uvo.setUserId("member10");
+		int result = userDao.userWithdrawal(uvo);
 		log.info((result==1) ? "성공" : "실패");
 	}*/
 	
