@@ -13,8 +13,9 @@ public interface UserDao {
 	
 	public UserVO userLoginProcess(UserVO uvo); // 유저 로그인		
 	
-	public UserVO findId(UserVO uvo); 			// 아이디 찾기		
-	public int resetPasswd(UserVO uvo);			// 비밀번호 재설정
+	public UserVO findId(UserVO uvo); 				// 아이디 찾기		
+	public int findUserByIdAndEmail(UserVO uvo); // 아이디 이메일로 유저 확인
+	public int resetPasswd(UserVO uvo);				// 비밀번호 재설정
 	
 	public int userJoin(UserVO uvo); 			// 회원 가입	
 	public int idCheck(UserVO uvo);				// 아이디 중복 체크

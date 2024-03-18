@@ -27,6 +27,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public int findUserByIdAndEmail(UserVO uvo) {
+		int result = userDao.findUserByIdAndEmail(uvo);
+		return result;
+	}
+	
+	@Override
+	public int resetPasswd(UserVO uvo) {
+		int result = userDao.resetPasswd(uvo);
+		return result;
+	}
+
+	@Override
 	public int userJoin(UserVO uvo) {
 		int result = userDao.userJoin(uvo); 
 		return result;
@@ -86,9 +98,6 @@ public class UserServiceImpl implements UserService {
 		list = userDao.userList(uvo);
 		return list;
 	}
-
-
-	
 
 
 

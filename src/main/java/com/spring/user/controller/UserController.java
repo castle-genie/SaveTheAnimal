@@ -41,12 +41,11 @@ public class UserController {
 	@PostMapping("/login")
 	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras, HttpSession session) {
 		UserVO userLogin = userService.userLoginProcess(login);
-		
-		
+				
 		if (userLogin != null) {
 			model.addAttribute("userLogin", userLogin); 
 			session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
-			return "/project/mainpage";// 성공하면 메인페이지 이동
+			return "redirect:/";// 성공하면 메인페이지 이동
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
 			return "redirect:/user/login";
@@ -54,10 +53,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/logout")
-	public String logout(SessionStatus sessionStatus) {
+	public String logout(SessionStatus sessionStatus, HttpSession session) {
 		log.info("user 로그아웃 처리");
 		sessionStatus.setComplete();
-		return "/project/mainpage"; // 메인페이지 이동
+		session.removeAttribute("userId");
+		return "redirect:/"; // 메인페이지 이동
 	}
 	
 	@GetMapping("/join")
@@ -133,8 +133,34 @@ public class UserController {
 	
 	@GetMapping("/resetPwd")
 	public String resetPwd() {
-		log.info("아이디 찾기 화면");
+		log.info("비밀번호 재설정 화면");
 		return "user/resetPwd";
+	}
+	
+	@ResponseBody
+	@PostMapping("/resetPwd")
+	public String resetPwd(@RequestBody UserVO uvo, Model model, RedirectAttributes ras) {
+		log.info("임시비밀번호 업데이트 호출");	
+		log.info(uvo.toString());
+		int result = 0;		
+		result = userService.resetPasswd(uvo);
+
+		if (result == 1) {		
+			log.info("업데이트 성공");
+			model.addAttribute("result", result);
+		} else {
+			log.info("업데이트 실패");
+			ras.addFlashAttribute("msg", "임시비밀번호 발급 처리에 문제가 있어 다시 진행해 주세요.");
+		}
+		return "redirect:/user/resetPwd";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/findUserByIdAndEmail", produces="application/json; charset=UTF-8")
+	public int findUserByIdAndEmail(@RequestBody UserVO uvo) {
+		int result = 0;
+		result = userService.findUserByIdAndEmail(uvo);
+		return result;
 	}
 	
 	
@@ -147,9 +173,7 @@ public class UserController {
         String userId = (String) session.getAttribute("userId");
         
         if (userId == null) {
-            // 세션에 사용자 ID가 없는 경우 메시지를 추가하고 로그인 페이지로 리다이렉트
-            ras.addAttribute("errorMsg", "로그인이 필요합니다.");
-            return "redirect:/login";
+            return "user/myPage"; // 로그인 유도하는 화면을 보여줌
         }       
         // 사용자 정보 가져오기
         UserVO userinfo = userService.userInfo(userId);
@@ -234,6 +258,5 @@ public class UserController {
 		return "admin/user/userList";
 	}
 	
-	
-	
+
 }

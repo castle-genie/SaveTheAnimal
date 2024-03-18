@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/common/common.jsp" %>
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
-	
+
 </head>
 <body class="subpage">
 
@@ -196,9 +196,9 @@
 				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 				<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 				<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-				<c:if test="${not empty userLogin}">
+				<%-- <c:if test="${not empty userLogin}">
 				  	<li><a onmouseover="this.style.color='white'" onmouseout="this.style.color='grey'" style="text-decoration: none;" href="/user/logout"> LOGOUT </a></li>
-				</c:if>
+				</c:if> --%>
 			</ul>
 		</div>
 	</footer>

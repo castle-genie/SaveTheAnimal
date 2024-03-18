@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
 <style>
 	.left-margin {
-		margin-left: 50px;
+		margin-left: 10%;
 		font-size: 1.1em;
 	}
 	.span-black-and-bold {
@@ -80,7 +80,7 @@
 							  </div>
 							</div>						
 						</c:if>
-					</c:if> 
+					</c:if>
 					<c:if test="${not empty userLogin}">
 					  	<h4>${userLogin.userName}님이 로그인하였습니다.</h4>
 					  	<button type="button" id="logoutBtn">로그아웃</button>
