@@ -3,7 +3,12 @@
 <%@ include file="/WEB-INF/views/common/common.jsp" %>
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
-	
+	<script>
+	   var userId = "<%= session.getAttribute("userId") %>";
+	   function applicationView() {
+		   location.href="/application/applicationView?userId=" + userId;
+	   }
+	</script>
 </head>
 <body class="subpage">
 
@@ -101,7 +106,7 @@
 							      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
 							        <div class="d-flex justify-content-between">
 							          <strong class="text-gray-dark">봉사활동 신청내역</strong>
-							          <a href="#">확인하기</a>
+							          <a onclick="applicationView()">확인하기</a>
 							        </div>
 							        <span class="d-block">신청한 봉사 일정 보여주기</span>
 							      </div>

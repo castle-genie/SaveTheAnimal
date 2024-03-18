@@ -1,10 +1,13 @@
 package com.spring.application.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.application.dao.ApplicationDAO;
 import com.spring.application.vo.ApplicationVO;
+import com.spring.volunteer.vo.VolunteerVO;
 
 @Service
 public class ApplicationServcieImpl implements ApplicationService{
@@ -16,5 +19,24 @@ public class ApplicationServcieImpl implements ApplicationService{
 		int applicationCount = 0;
 		applicationCount = applicationDAO.applicationCount(applicationVO);
 		return applicationCount;
+	}
+
+	@Override
+	public List<ApplicationVO> applicationList(ApplicationVO applicationVO) {
+		List<ApplicationVO> applicationList = applicationDAO.applicationList(applicationVO);
+		return applicationList;
+	}
+
+	@Override
+	public int applicationSubmit(ApplicationVO applicationVO) {
+		int applicationSubmit = 0;
+		applicationSubmit = applicationDAO.applicationSubmit(applicationVO);
+		return applicationSubmit;
+	}
+
+	@Override
+	public List<ApplicationVO> applicationView(ApplicationVO applicationVO) {
+		List<ApplicationVO> applicationView = applicationDAO.applicationList(applicationVO);
+		return applicationView;
 	}
 }
