@@ -11,7 +11,7 @@ import com.spring.sanction.vo.SanctionVO;
 //import lombok.extern.slf4j.Slf4j;
 
 //@Slf4j
-@RequestMapping("/admin/sanction/*")
+@RequestMapping("/sanction/*")
 @Controller
 public class SanctionController {
 	
@@ -25,7 +25,7 @@ public class SanctionController {
 
 		sanctionService.sanctionInsert(svo);
 
-		return "redirect:/admin/report/reportList";
+		return "redirect:/report/reportList";
 	}
 	
 	
