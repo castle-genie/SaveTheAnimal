@@ -100,12 +100,7 @@
 			<div>비밀번호 재설정을 위한 회원 확인 페이지</div>
 		</div>
 	</section>
-	
-	
-	
-	
-	
-	
+
 	<!-- Footer -->
 	<footer id="footer">
 		<div class="container">
