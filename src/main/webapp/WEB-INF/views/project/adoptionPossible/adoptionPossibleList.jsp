@@ -8,10 +8,9 @@
 	</div>
 	<div class="container">
 		<!-- 여기에 페이지 구현하세요 -->
-	
 	<body>
 	<div class ="container">
-		<div class="text-center"><h3>동물 리스트</h3></div>
+		<div class="text-center"><h3>입양 가능 동물 리스트</h3></div>
 		
 		<form id="detailForm">
 			<input type="hidden" id="animalId" name="animalId"/>
@@ -39,11 +38,8 @@
 		        </div>
 		    </form>
 		</div>
-
 		
-		<div id="animalSearch" class="text-right"></div>
-		
-		<div id="animalList">
+		<div id="apList">
 			<table summary="게시판 리스트" class="table table-striped">
 				<thead>
 					<tr class="text-center">
@@ -61,8 +57,8 @@
 				</thead>
 				<tbody id="list">
 					<c:choose>
-						<c:when test="${not empty animalList }">
-							<c:forEach var="animal" items="${animalList }" varStatus="status">
+						<c:when test="${not empty apList }">
+							<c:forEach var="animal" items="${apList }" varStatus="status">
 								<tr class = "text-center id" data-num="${ animal.animalId}">
 									
 									<td>${animal.animalId}</td>
@@ -99,19 +95,16 @@
 			</table>
 		</div>
 		
-		<div class = "text-end">
-			<button type="button" id="insertFormBtn" class ="btn btn-success btn-sm">새로 등록 하기</button>
-		</div>		
 	</div>
-	<script src="/resources/include/js/animal/animalList.js"></script>
+	<script src="/resources/include/js/ap/apList.js"></script>
 	<script>
 		$(function(){
 			/* 검색 후 검색 대상과 검색 단어 출력 */
-			let word="<c:out value='${animalVO.keyword}' />";
+			let word="<c:out value='${adoptionPossibleVO.keyword}' />";
 			let value="";
 			if(word!=""){
-				$("#keyword").val("<c:out value='${animalVO.keyword}' />");
-				$("#search").val("<c:out value='${animalVO.search}' />");
+				$("#keyword").val("<c:out value='${adoptionPossibleVO.keyword}' />");
+				$("#search").val("<c:out value='${adoptionPossibleVO.search}' />");
 			
 				if($("#search").val()!='animal_status'){
 					//:contains()는 특정 텍스트를 포함한 요소반환 	
@@ -128,7 +121,7 @@
 				}
 			}
 		});	
-</script>
+	</script>
 </body>
 	
 	</div>
@@ -150,4 +143,3 @@
 
 
 </html>
-
