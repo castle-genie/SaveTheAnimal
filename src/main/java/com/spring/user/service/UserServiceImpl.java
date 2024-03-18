@@ -1,5 +1,7 @@
 package com.spring.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +23,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO findId(UserVO uvo) {
 		UserVO result = userDao.findId(uvo);
-		return result;
-	}
-	
-	@Override
-	public int findIdCheck(UserVO uvo) {
-		int result = 0;
-		result = userDao.findIdCheck(uvo);
 		return result;
 	}
 
@@ -65,16 +60,26 @@ public class UserServiceImpl implements UserService {
 	
 	// 회원 정보 조회
 	@Override
-	public UserVO userInfo(UserVO uvo) {
-		UserVO info = null;
-		info = userDao.userInfo(uvo);
+	public UserVO userInfo(String userId) {
+		UserVO uvo = new UserVO();
+		uvo.setUserId(userId);
+		UserVO info = userDao.userInfo(uvo);
 		return info;
 	}
 	
 	@Override
-	public int userUpdate(UserVO uvo) {
-		int result = userDao.userUpdate(uvo);
+	public int updateProfile(UserVO uvo) {
+		int result = userDao.updateProfile(uvo);
 		return result;
+	}
+	
+	
+	// 회원 목록 조회
+	@Override
+	public List<UserVO> userList(UserVO uvo) {
+		List<UserVO> list = null;
+		list = userDao.userList(uvo);
+		return list;
 	}
 
 	

@@ -5,5 +5,6 @@ import java.util.List;
 import com.spring.donate.vo.DonateVO;
 
 public interface DonateService {
-	List<DonateVO> donateList (DonateVO dovo);
+	public List<DonateVO> donateList (DonateVO dovo);
+	public int donateInsert (DonateVO dovo);
 }

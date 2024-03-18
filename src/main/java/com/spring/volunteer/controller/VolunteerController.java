@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -120,4 +121,11 @@ public class VolunteerController {
 		}
 		return "redirect:"+url;
 	}
+	
+	// progress 1 로 바꾸기
+	@PostMapping("/updateVolunteerProgress1") 
+	public ResponseEntity<String> updateVolunteerProgress1(VolunteerVO volunteerVO) {
+		service.updateVolunteerProgress1(volunteerVO);
+        return ResponseEntity.ok("volunteer_progress가 업데이트되었습니다.");
+    }
 }

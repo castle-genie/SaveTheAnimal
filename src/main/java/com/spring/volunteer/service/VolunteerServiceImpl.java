@@ -31,6 +31,13 @@ public class VolunteerServiceImpl implements VolunteerService {
 		return volunteerDetail;
 	}
 	
+	@Override
+	public int updateVolunteerProgress1(VolunteerVO volunteerVO) {
+		int updateVolunteerProgress1 = 0;
+		updateVolunteerProgress1 = volunteerDAO.updateVolunteerProgress1(volunteerVO);
+		return updateVolunteerProgress1;
+	}
+	
 	/* admin */
 	@Override
 	public int volunteerInsert(VolunteerVO volunteerVO) {

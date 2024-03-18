@@ -26,4 +26,17 @@ public class ApplicationServcieImpl implements ApplicationService{
 		List<ApplicationVO> applicationList = applicationDAO.applicationList(applicationVO);
 		return applicationList;
 	}
+
+	@Override
+	public int applicationSubmit(ApplicationVO applicationVO) {
+		int applicationSubmit = 0;
+		applicationSubmit = applicationDAO.applicationSubmit(applicationVO);
+		return applicationSubmit;
+	}
+
+	@Override
+	public List<ApplicationVO> applicationView(ApplicationVO applicationVO) {
+		List<ApplicationVO> applicationView = applicationDAO.applicationList(applicationVO);
+		return applicationView;
+	}
 }

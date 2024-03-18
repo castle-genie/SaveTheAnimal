@@ -1,6 +1,7 @@
 package com.spring.application.vo;
 
 import com.spring.user.vo.UserVO;
+import com.spring.volunteer.vo.VolunteerVO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,8 +17,10 @@ public class ApplicationVO extends UserVO{
 	private int volunteerId;			// 봉사 공고 아이디
 	private String userName;            // 유저 이름
 	
+	
 	  // userName 필드를 설정하는 메서드
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    
 }

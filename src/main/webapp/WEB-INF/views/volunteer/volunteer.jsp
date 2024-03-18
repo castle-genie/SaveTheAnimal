@@ -147,6 +147,14 @@
 	<script src="/resources/include/assets2/js/skel.min.js"></script>
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
+	<script>
+	$(function(){		
+		let errorMsg = "${errorMsg}"; 
+		if (errorMsg != "") {
+			alert(errorMsg);
+		}
+	});
+	</script>
 </body>
 
 </html> 

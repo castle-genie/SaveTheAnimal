@@ -27,13 +27,13 @@ public class VolunteerDAOTests {
 		log.info("전체 행 갯수 : " + volunteerDAO.volunteerList(volunteerVO));
 	} */
 	
-	/* 
+	/* */
 	@Test
 	public void testVolulnteerDetail(){
 		VolunteerVO volunteerVO = new VolunteerVO();
-		volunteerVO.setVolunteerId(1);
+		volunteerVO.setVolunteerId(9);
 		log.info("적용된 행 갯수: " + volunteerDAO.volunteerDetail(volunteerVO));
-	}*/
+	}
 	
 	/*
 	@Test
@@ -64,10 +64,11 @@ public class VolunteerDAOTests {
 		log.info("적용된 행 갯수 : " + volunteerDAO.volunteerUpdate(volunteerVO));
 	}*/
 	
+	/* 
 	@Test
 	public void testVolunteerDelete() {
 		VolunteerVO volunteerVO = new VolunteerVO();
 		volunteerVO.setVolunteerId(7);
 		log.info("적용된 행 갯수 : " + volunteerDAO.volunteerDelete(volunteerVO));
-	}
+	}*/
 }
