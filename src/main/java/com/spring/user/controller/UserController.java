@@ -173,7 +173,9 @@ public class UserController {
         String userId = (String) session.getAttribute("userId");
         
         if (userId == null) {
-            return "user/myPage"; // 로그인 유도하는 화면을 보여줌
+            // 세션에 사용자 ID가 없는 경우 메시지를 추가하고 로그인 페이지로 리다이렉트
+            ras.addAttribute("errorMsg", "로그인이 필요합니다.");
+            return "user/myPage";
         }       
         // 사용자 정보 가져오기
         UserVO userinfo = userService.userInfo(userId);

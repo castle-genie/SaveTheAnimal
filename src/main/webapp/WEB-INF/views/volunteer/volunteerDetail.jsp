@@ -38,6 +38,7 @@
 		};
 			
 		$(function() {
+			var userId = "<%= session.getAttribute("userId") %>";
 			var volunteerId = ${ detail.volunteerId };
 			/* 지도 api 추가 스크립트 */
 			var mapVisible = false;
@@ -74,6 +75,7 @@
 				    } 
 				});    
 			})
+			
 			/* 참가 인원 구하기 스크립트 */
 			$.ajax({
                 url: '/application/'+volunteerId,
@@ -85,6 +87,22 @@
                     var tr = '<tr><th>모집 인원</th><td>' + applicationCount + '명 / ' + '${detail.volunteerLimit}명' + '</td></tr>';
                     // 위에서 생성한 tr을 해당 행 앞에 추가합니다.
                     $('table tbody tr:nth-child(3)').before(tr);
+                    
+                    $("#applicationBtn").on("click", function() {
+           			 	if ('${detail.volunteerLimit}' == applicationCount) {
+           		            	alert('이미 신청자가 다 찼습니다.');
+           		        } else if(userId == "null") {
+       		            	if(confirm("로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?")) {
+       		            		location.href="/user/login";
+       		            	} 
+           		        } else {
+           		        	$("#applicationForm").attr({
+           		        		method : "post",
+           		        		action : "/application/applicationSubmit"
+           		        	});
+           		        	$("#applicationForm").submit();
+           		        }
+           		    });
                 },
                 error: function(xhr, status, error) {
                     console.error('Error: ', error)
@@ -143,6 +161,7 @@
 						  <div id="map"></div>
 						  <div class="button-container">
 						        <a href="#" class="button" onclick="openModal()">봉사 신청하기</a>
+   						        <a href="/project/volunteer" class="button">목록 돌아가기</a>
 						  </div>
 						  <div class="underline"></div>
 						  <div class="details" style="text-align: left;">
@@ -159,19 +178,19 @@
 		  <div class="modal-content">
 		    <span class="close">&times;</span>
 		    <div class="container">
-		    <form id="volunteerForm">
+		    <form id="applicationForm">
 		      <h2>봉사활동 신청</h2>
 		      <!-- 아이디 입력란(백엔드에서 처리) -->
 		      <!-- 봉사공고 아이디(팝업 뜨게한 버튼 누른 페이지의 volunteerId) -->
-		      <input type="hidden" id="volunteerId" name="volunteerId" value="여기에_봉사공고_아이디_입력">
+		      <input type="hidden" id="volunteerId" name="volunteerId" value="${ detail.volunteerId }">
 		      <!-- 로그인 정보로 얻어온 회원 아이디(백엔드에서 처리) -->
-		      <input type="hidden" id="userId" name="userId" value="여기에_회원_아이디_입력">
+		      <input type="hidden" id="userId" name="userId" value="<%= session.getAttribute("userId") %>">
 		      <div class="form-group">
-		        <!-- 봉사 다짐 입력란 -->
-		        <label for="promise">봉사 다짐</label>
-		        <textarea id="promise" name="promise" rows="4" required></textarea>
+		        <!-- 봉사 다짐 입력란 -->	
+		        <label for="applicationComment">봉사 다짐</label>
+		        <textarea id="applicationComment" name="applicationComment" rows="4"></textarea>
 		      </div>
-		      <button type="submit" id="applicationBtn">신청하기</button>
+		      <button type="button" id="applicationBtn">신청하기</button>
 		    </form>
 		  </div>
 		  </div>	

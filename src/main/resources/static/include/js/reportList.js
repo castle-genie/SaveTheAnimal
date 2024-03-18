@@ -7,7 +7,7 @@ $(function(){
 
 		$("#detailForm").attr({
 			"method":"get",
-			"action":"/admin/report/reportDetail"
+			"action":"/report/reportDetail"
 		});
 
 		$("#detailForm").submit();

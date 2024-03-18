@@ -7,13 +7,40 @@
 		<result column="application_date" property="applicationDate" />
 		<result column="application_comment" property="applicationComment" />
 		<result column="applicatoin_result" property="applicationResult" />
-		<result column="user_id" property="userId" />
-		<result column="volunteer_id" property="volunteerId" />
+		<!-- <result column="user_id" property="userId" /> -->
+		<!-- <result column="volunteer_id" property="volunteerId" /> -->
+		<association property="user">
+			<result column="user_id" property="userId" /> 
+			<result column="user_name" property="userName" /> 
+		</association> 
+		<association property="volunteer">
+			 <result column="volunteer_id" property="volunteerId" /> 
+			<result column="volunteer_title" property="volunteerTitle" />
+		</association>
 	</resultMap>
 	
 	<select id="applicationCount" resultType="int" parameterType="application">
 		SELECT count(*)
 		FROM application
-		WHERE volunteer_id = #{volunteerId}
+		WHERE volunteer_id = #{volunteer.volunteerId}
+	</select>
+	
+	<select id="applicationList" resultMap="applicationMap" resultType="application">
+		SELECT user_id, user_name, volunteer_id
+		FROM users inner join application
+		USING (user_id)
+		WHERE volunteer_id = #{volunteer.volunteerId}
+	</select>
+	
+	<insert id="applicationSubmit" parameterType="application">
+		INSERT INTO application
+		VALUES(application_seq.nextval, sysdate, #{applicationComment}, #{userId}, #{volunteerId}, default)
+	</insert>
+	
+	<select id="applicationView" resultMap="applicationMap" parameterType="application">
+		SELECT volunteer_id, volunteer_title, application_comment
+		FROM volunteer inner join application
+		using(volunteer_id)
+		WHERE user_id = #{user.userId}
 	</select>
 </mapper>
