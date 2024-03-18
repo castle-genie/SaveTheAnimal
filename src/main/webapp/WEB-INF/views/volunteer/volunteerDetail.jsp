@@ -97,10 +97,11 @@
            		                method : "post",
            		                action : "/application/applicationSubmit"
            		            });
+           		            
            		            $("#applicationForm").submit();
            		        }
            		    });
-                    
+                    cd
                     // applicationCount 와 volunteerLimit을 비교해 volunteer_progress 를 업데이트
                     if(applicationCount == '${detail.volunteerLimit}') {
                     	// Ajax를 사용해 volunteer_progress 값을 업데이트
