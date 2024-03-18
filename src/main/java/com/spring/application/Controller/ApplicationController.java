@@ -34,7 +34,7 @@ public class ApplicationController {
 	@GetMapping("/{volunteerId}")
 	public int applicationCount(@PathVariable("volunteerId") int volunteerId, ApplicationVO applicationVO) {
 		int applicationCount = 0;
-		applicationVO.setVolunteerId(volunteerId);
+		applicationVO.getVolunteer().setVolunteerId(volunteerId);
 		applicationCount = service.applicationCount(applicationVO);
 		return applicationCount;
 	}
@@ -43,23 +43,13 @@ public class ApplicationController {
 	@PostMapping("/{volunteerId}")
 	public List<ApplicationVO> applicationList(@PathVariable("volunteerId") int volunteerId, ApplicationVO applicationVO) {
 		List<ApplicationVO> applicationList = null;
-		applicationVO.setVolunteerId(volunteerId);
+		applicationVO.getVolunteer().setVolunteerId(volunteerId);
 		applicationList = service.applicationList(applicationVO);
 		return applicationList;
 	}
 	
 	@PostMapping("/applicationSubmit")
 	public String applicationSubmit(HttpServletRequest request, Model model, RedirectAttributes ras, ApplicationVO applicationVO) {
-		// 세션 가져오기
-		HttpSession session = request.getSession();
-		// 세션에서 사용자 ID 가져오기
-        String userId = (String) session.getAttribute("userId");
-        
-        if (userId == null) {
-            // 세션에 사용자 ID가 없는 경우 메시지를 추가하고 로그인 페이지로 리다이렉트
-            ras.addAttribute("errorMsg", "로그인이 필요합니다.");
-            return "redirect:/user/login";
-        }  
         int result = 0;
         String url = "";
         
@@ -74,7 +64,7 @@ public class ApplicationController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/applicationList") 
+	@GetMapping("/applicationList")
 	public List<ApplicationVO> applicationView(ApplicationVO applicationVO) {
 		List<ApplicationVO> applicationView = null;
 		applicationView = service.applicationList(applicationVO);
