@@ -2,9 +2,17 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.spring.report.vo.ReportVO" alias="report"/>
+		<typeAlias type="com.spring.donate.vo.DonateVO" alias="donate"/>
+		<typeAlias type="com.spring.user.vo.UserVO" alias="user" />
+		<typeAlias type="com.spring.volunteer.vo.VolunteerVO" alias="volunteer" />
+		<typeAlias type="com.spring.sanction.vo.SanctionVO" alias="sanction"/>
+		<typeAlias type="com.spring.counseling.vo.CounselingVO" alias="counseling"/>
 		<typeAlias type="com.spring.adoption.possible.vo.AdoptionPossibleVO" alias="adoptionPossible"/>
 		<typeAlias type="com.spring.map.vo.MapVO" alias="center"/>
 		<typeAlias type="com.spring.animal.vo.AnimalVO" alias="animal"/>
-		<typeAlias type="com.spring.adoption.vo.AdoptionVO" alias="adoption"/>
+		<typeAlias type="com.spring.adoption.vo.AdoptionVO" alias="adoption"/>		
+		
+		<typeAlias type="com.spring.application.vo.ApplicationVO" alias="application" />
 	</typeAliases>
 </configuration>

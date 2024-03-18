@@ -46,7 +46,7 @@
 		
 		
 		<div class="text-center">
-			<table class="table table-bordered">
+			<table class="table table-dark table-striped-columns">
 				<thead>
 					<tr>
 						
