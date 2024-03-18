@@ -174,6 +174,7 @@
 						  <div id="map"></div>
 						  <div class="button-container">
 						        <a href="#" class="button" onclick="openModal()">봉사 신청하기</a>
+   						        <a href="/project/volunteer" class="button">목록 돌아가기</a>
 						  </div>
 						  <div class="underline"></div>
 						  <div class="details" style="text-align: left;">

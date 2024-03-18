@@ -16,12 +16,7 @@
             headerToolbar: {
                 left: 'prevYear,prev,next,nextYear today',
                 center: 'title',
-                right: 'customButton dayGridMonth,dayGridWeek,dayGridDay'
-            },
-            customButtons: {
-                customButton: {
-                    text: "일정 추가"
-                }
+                right: 'dayGridMonth,dayGridWeek,dayGridDay'
             },
             initialDate: '2024-03-22',
             navLinks: false,

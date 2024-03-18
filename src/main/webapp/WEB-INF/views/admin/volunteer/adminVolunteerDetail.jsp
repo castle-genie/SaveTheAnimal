@@ -144,6 +144,9 @@
 					    </div>
 					  </div>
 					  <div id="map"></div>
+					  <div class="button-container">
+							<a href="/project/adminVolunteerList" class="button">목록 돌아가기</a>
+					  </div>
 					  <div class="underline"></div>
 					  <div class="details" style="text-align: left;">
 					    <h2>세부사항</h2>
