@@ -1,7 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp" %>
-<body>
-    <div class="container">
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
+	
+</head>
+<body class="subpage">
+
+<%@ include file="/WEB-INF/views/project/generic.jspf" %>   
+
+	<!-- One -->
+	<section id="One" class="wrapper style3">
+		<div class="inner">
+			<header class="align-center">
+				<p>Save The Animal</p>
+				<h2>adoptionView</h2>
+			</header>
+		</div>
+	</section>
+
+	<!-- Two -->
+	<section id="two" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<header class="align-center">
+						<p>입양 가능 동물 리스트</p>
+						<h2>입양 공고</h2>
+					</header>
+					<div>
+						 <div class="container">
         <div class="text-center">
             <h3>입양 가능 동물 리스트</h3>
         </div>
@@ -19,10 +47,7 @@
                                        class="card-img-top l"  alt="Animal Image">
                                     <div class="card-body">
                                         <table>
-                                        	<tr class = "text-center id" data-num="${animal.animalId}">
-				
-												<td class="id">${animal.animalId}</td>
-                                        	<tr >
+                              
                                         		<td class="goDetail">
                                         		 <td class="goDetail">
     												<a href="/ap/apDetail?animalId=${animal.animalId}">${animal.animalName}</a>
@@ -38,9 +63,7 @@
                                         	<tr>
                                         		<td><p class="card-text gender">${animal.animalGender}</p></td>
                                         	</tr>
-                                        	<tr>
-                                        		<td> <p class="card-text temp0">${animal.animalTemp}</p></td>
-                                        	</tr>
+                                        	
                                                     
                                         </table>
                                     </div>
@@ -58,5 +81,9 @@
         </div>
     </div>
    <script src="/resources/include/js/ap/apList.js"></script>
-</body>
-
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
