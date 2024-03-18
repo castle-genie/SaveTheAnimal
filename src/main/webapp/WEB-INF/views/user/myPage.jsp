@@ -41,7 +41,7 @@
 					
 					<%-- post 방식으로 전송 시 반드시 form 태그 추가해 주어야 합니다. --%>
 			 		<form name="data" id="data" method="post">
-			 			<input type="hidden" name="userId" value="${userInfo.userId}"/>
+			 			<input type="hidden" name="userId" id="userId" value="${userInfo.userId}"/>
 			 		</form>
 					
 					<div class="grid">
@@ -177,6 +177,7 @@
 						<hr>
 						<small class="d-block text-end mt-3">
 							<button type="button" id="logoutBtn" class="btn btn-small">로그아웃</button>
+							<button type="button" id="withdrawalBtn" class="btn btn-small">회원탈퇴</button>
 						</small>
 					</div>				
 				</c:if>
@@ -200,11 +201,14 @@
 				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 				<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 				<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+				<c:if test="${not empty userLogin}">
+				  	<li><a onmouseover="this.style.color='white'" onmouseout="this.style.color='grey'" style="text-decoration: none;" href="/user/logout"> LOGOUT </a></li>
+				</c:if>
 			</ul>
 		</div>
 	</footer>
 	<div class="copyright">
-		Made with <a href="https://templated.co/">Templated</a>.
+		Made with <a href="https://templated.co/">templated</a>.		
 	</div>
 
 	<!-- Scripts -->
@@ -213,23 +217,14 @@
 	<script src="/resources/include/assets2/js/skel.min.js"></script>
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
+	<script src="/resources/include/js/user/myPage.js"></script>
 	<script>	
-		$(function(){
-			// 회원 정보 수정 이동 
-			$("#goUpdateBtn").on("click", function(){				
-				location.href="/user/updateProfile";
-			});		
-			
-			$("#logoutBtn").on("click", function(){
-				alert("로그아웃하여 메인페이지로 이동합니다.");
-				location.href = "/user/logout";
-			});
-						
+		$(function(){			
 			let errorMsg = "${errorMsg}";
 			if(errorMsg != ""){
 				alert(errorMsg);
 				errorMsg = "";
-			}
+			}			
 		}); 
 	</script>
 </body>

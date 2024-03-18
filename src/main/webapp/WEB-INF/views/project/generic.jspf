@@ -16,11 +16,17 @@
 			<li><a href="/project/volunteer">봉사모집</a></li>
 			<li><a href="/project/adoption">입양</a></li>
 			<li><a href="donate.html">후원</a>
-			<li><a href="/project/freeboard">자유게시판</a>
+			<li><a href="/board/freeBoardList">자유게시판</a>
 			<li><a href="#">봉사후기게시판</a>
 			<li><a href="#">입양후기게시판</a>
 			<li><a href="#">공지사항</a>
-			<li><a href="/user/login">로그인</a>
+			<c:if test="${empty userLogin}">
+				<li><a href="/user/login">로그인</a>
+			</c:if>
+			<c:if test="${not empty userLogin}">
+				<li><a href="/user/mypage">My page</a>
+				<!-- <li><a href="/user/logout">로그아웃</a></li> -->
+			</c:if>
 		</ul>
 	</nav>
 	

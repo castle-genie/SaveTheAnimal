@@ -209,6 +209,25 @@ public class UserController {
 
 	}
 	
+	
+	@PostMapping("/userWithdrawal")
+	public String userWithdrawal(UserVO uvo, RedirectAttributes ras) {
+		log.info("회원탈퇴 처리");
+		
+		int result = 0;
+		String url = "";
+		
+		result = userService.userWithdrawal(uvo);
+		if (result ==1) {
+			url="/user/logout"; // 로그아웃 처리
+		} else {
+			ras.addFlashAttribute("errorMsg", "탈퇴처리에 문제가 있어 다시 진행해 주세요.");
+			url="/user/mypage"; // 마이페이지
+		}
+		return "redirect:"+url;
+	}
+	
+	
 	@GetMapping("/admin/userList")
 	public String userList(@ModelAttribute UserVO uvo, Model model) {
 		List<UserVO> userList = userService.userList(uvo);
