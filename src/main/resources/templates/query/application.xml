@@ -7,8 +7,15 @@
 		<result column="application_date" property="applicationDate" />
 		<result column="application_comment" property="applicationComment" />
 		<result column="applicatoin_result" property="applicationResult" />
-		<result column="user_id" property="userId" />
+		<!-- <result column="user_id" property="userId" /> -->
 		<result column="volunteer_id" property="volunteerId" />
+		<association property="user">
+			<result column="user_id" property="userId" /> 
+			<result column="user_name" property="userName" /> 
+		</association> 
+		<!-- <association property="volunteer">
+			<result column="volunteer_title" property="volunteerTitle" />
+		</association> -->
 	</resultMap>
 	
 	<select id="applicationCount" resultType="int" parameterType="application">
@@ -18,7 +25,7 @@
 	</select>
 	
 	<select id="applicationList" resultMap="applicationMap" resultType="application">
-		SELECT user_id, user_name as userName, volunteer_id
+		SELECT user_id, user_name, volunteer_id
 		FROM users inner join application
 		USING (user_id)
 		WHERE volunteer_id = #{volunteerId}

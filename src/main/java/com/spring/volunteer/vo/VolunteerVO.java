@@ -17,4 +17,5 @@ public class VolunteerVO {
 	private String volunteerCost;		// 봉사활동 비용
 	private String volunteerLocation;	// 봉사활동 장소
 	private int volunteerProgress;		// 봉사활동 게시물 현재 정보
+	
 }

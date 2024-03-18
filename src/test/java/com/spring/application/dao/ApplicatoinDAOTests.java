@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.spring.application.vo.ApplicationVO;
+import com.spring.volunteer.vo.VolunteerVO;
 
 import lombok.extern.slf4j.Slf4j;
 

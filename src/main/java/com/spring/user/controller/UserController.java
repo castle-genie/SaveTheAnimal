@@ -46,7 +46,7 @@ public class UserController {
 		if (userLogin != null) {
 			model.addAttribute("userLogin", userLogin); 
 			session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
-			return "/project/mainpage";// 성공하면 메인페이지 이동
+			return "redirect:/";// 성공하면 메인페이지 이동
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
 			return "redirect:/user/login";
@@ -54,10 +54,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/logout")
-	public String logout(SessionStatus sessionStatus) {
+	public String logout(SessionStatus sessionStatus, HttpSession session) {
 		log.info("user 로그아웃 처리");
 		sessionStatus.setComplete();
-		return "/project/mainpage"; // 메인페이지 이동
+		session.removeAttribute("userId");
+		return "redirect:/"; // 메인페이지 이동
 	}
 	
 	@GetMapping("/join")
@@ -149,7 +150,7 @@ public class UserController {
         if (userId == null) {
             // 세션에 사용자 ID가 없는 경우 메시지를 추가하고 로그인 페이지로 리다이렉트
             ras.addAttribute("errorMsg", "로그인이 필요합니다.");
-            return "redirect:/login";
+            return "user/myPage";
         }       
         // 사용자 정보 가져오기
         UserVO userinfo = userService.userInfo(userId);
