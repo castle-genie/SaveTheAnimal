@@ -1,6 +1,7 @@
-package com.spring.animal.vo;
+package com.spring.adoption.vo;
 
 import org.springframework.web.multipart.MultipartFile;
+
 
 import com.spring.common.vo.CommonVO;
 
@@ -9,7 +10,17 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class AnimalVO extends CommonVO { 
+public class AdoptionVO extends CommonVO{
+	private int adoptionId=0;
+	private String adoptionContent="";
+	private String adoptionDate;
+	private String adoptionTitle="";
+	private int adoptionCnt=0;
+	private String adoptionStatus="";
+	private String adoptionLevel="";
+	private String adoptionPasswd="";
+	private String adminId;
+	
 	private int animalId =0;
 	private String animalSpecies="";
 	private String animalAge="";
@@ -23,9 +34,9 @@ public class AnimalVO extends CommonVO {
 	private String animalName="";
 	private String animalPasswd="";
 	private int readcnt=0;
-	
-	private String adminId="";
+
+	private String animalFile = "";
 	
 	private MultipartFile file;
-	private String animalFile = "";
+	private String adoptionFile = "";
 }
