@@ -32,7 +32,7 @@
 			    	console.log(response);
 			        var list = '<ul>';
 			        $.each(response, function(index, item) {
-			            list += '<li>아이디: ' + item.userId + ', 성함: ' + item.userName + '</li>';
+			            list += '<li>아이디: ' + item.user.userId + ', 성함: ' + item.user.userName + '</li>';
 			        });
 			        list += '</ul>';
 			        $('#appList').html(list);

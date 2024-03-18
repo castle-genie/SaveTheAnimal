@@ -30,7 +30,12 @@ public class ApplicatoinDAOTests {
 	@Test
 	public void applicationList() {
 	    ApplicationVO applicationVO = new ApplicationVO();
-	    applicationVO.setVolunteerId(9); // volunteerId 설정
+	    // VolunteerVO 객체 생성 및 volunteerId 설정
+	    //VolunteerVO volunteerVO = new VolunteerVO();
+	    //volunteerVO.setVolunteerId(9);
+	    
+	    // applicationVO에 volunteerVO 설정
+	    applicationVO.getVolunteer().setVolunteerId(9);
 	    List<ApplicationVO> applicationList = applicationDAO.applicationList(applicationVO); // volunteerId가 설정된 applicationVO로 쿼리 실행
 	    
 	    if (applicationList != null) {

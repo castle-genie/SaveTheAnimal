@@ -34,7 +34,7 @@ public class ApplicationController {
 	@GetMapping("/{volunteerId}")
 	public int applicationCount(@PathVariable("volunteerId") int volunteerId, ApplicationVO applicationVO) {
 		int applicationCount = 0;
-		applicationVO.setVolunteerId(volunteerId);
+		applicationVO.getVolunteer().setVolunteerId(volunteerId);
 		applicationCount = service.applicationCount(applicationVO);
 		return applicationCount;
 	}
@@ -43,7 +43,7 @@ public class ApplicationController {
 	@PostMapping("/{volunteerId}")
 	public List<ApplicationVO> applicationList(@PathVariable("volunteerId") int volunteerId, ApplicationVO applicationVO) {
 		List<ApplicationVO> applicationList = null;
-		applicationVO.setVolunteerId(volunteerId);
+		applicationVO.getVolunteer().setVolunteerId(volunteerId);
 		applicationList = service.applicationList(applicationVO);
 		return applicationList;
 	}
