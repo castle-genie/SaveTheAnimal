@@ -29,13 +29,18 @@
 						<p>부제목</p>
 						<h2>글 작성하는 페이지</h2>
 					</header>
-					<form method="post" action="/board/freeBoardList">
+					<form method="post" action="/board/freeBoardCreate">
 						<div class="row uniform">
+							<!--  
 							<div class="12u$">
-								<input type="text" name="fboardTitle" id="fboardTitle" placeholder="제목">
+								<input type="text" name="fboardId" id="fboardId" placeholder="fboardId를 입력해주세요.">
+							</div>
+							-->
+							<div class="12u$">
+								<input type="text" name="fboardTitle" id="fboardTitle" placeholder="제목을 입력해주세요.">
 							</div>
 							<div class="12u$">
-								<textarea name="fboardContent" id="fboardContent" placeholder="내용"
+								<textarea name="fboardContent" id="fboardContent" placeholder="내용을 입력해주세요."
 									rows="6"></textarea>
 							</div>
 							<div class="12u$">

@@ -53,7 +53,7 @@
 					</div>
 					<br>
 						<ul class="actions">
-							<li><a href="/board/freeBoardCreate" class="button special">글쓰기</a></li>
+							<li><a href="/board/freeBoardCreate"  class="button special">글쓰기</a></li>
 						</ul>
 				</div>
 			</div>
