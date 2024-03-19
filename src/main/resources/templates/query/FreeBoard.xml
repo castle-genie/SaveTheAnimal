@@ -11,15 +11,16 @@
 		<result column="user_id" property="userId"/>
 	</resultMap>
 	
+	
 	<!-- 자유게시판 목록 -->
-	<select id="freeBoardList" parameterType="freeBoard" resultMap="freeBoardMap">
+	<select id="freeBoardList" parameterType="FreeBoard" resultMap="freeBoardMap">
 		SELECT 	fboard_id, fboard_title, fboard_like, user_id, fboard_cnt, fboard_date
 		FROM 	freeBoard
 		ORDER BY fboard_id DESC
 	</select>
 	
 	<!--  자유게시판 글 상세조회 -->
-	<select id="freeBoardDetail" parameterType="freeBoard" resultMap="freeBoardMap">
+	<select id="freeBoardDetail" parameterType="FreeBoard" resultMap="freeBoardMap">
 		SELECT 	* 
 		FROM 	freeBoard
 		WHERE 	fboard_id = #{fboardId}
@@ -35,38 +36,39 @@
 	</select>
 	-->
 	
-	<!-- 게시판 insert -->
-	<insert id="freeBoardCreate" parameterType="freeBoard">
-		<!--  
-		<selectKey keyProperty="fboard_id" order="BEFORE" resultType="int">
-			SELECT freeBoard_seq.NEXTVAL FROM DUAL
+	<!-- 게시판 등록 -->
+	<insert id="insertFreeBoard" parameterType="FreeBoard">
+		<selectKey keyProperty="fboardId" order="BEFORE" resultType="int">
+			SELECT freeBoard_seq.nextval from DUAL
 		</selectKey>
-		-->
-		<!-- 
-		INSERT INTO freeBoard (fboard_id, fboard_title, fboard_content, user_id)
-		VALUES (${fboardId}, ${fboardTitle}, ${fboardContent}, ${userId})
-		-->
 		insert into freeBoard (fboard_id, fboard_title, fboard_content, user_id)
-		VALUES (freeBoard_seq.nextval, ${fboardTitle}, ${fboardContent}, ${userId})
+		VALUES (#{fboardId}, #{fboardTitle}, #{fboardContent}, #{userId})
 	</insert>
+	
+	
 	<!-- 조회수 +1 -->
-	<update id="plusCnt" parameterType="freeBoard">
+	<update id="plusCnt" parameterType="FreeBoard">
 		UPDATE 	freeBoard SET fboard_cnt = fboard_cnt +1 
-		WHERE 	fboard_id = ${fboardId}
+		WHERE 	fboard_id = #{fboardId}
 	</update>
 	
 	<!-- 게시글 수정 -->
-	<update id="update" parameterType="freeBoard">
+	<update id="updateFreeBoard" parameterType="FreeBoard">
+		<!--  
 		UPDATE 	freeBoard
-		SET 	fboard_title 		= ${fboardTitle}
-				fboard_content	 	= ${fboardContent}
-		WHERE	fboard_id 			= ${fboardId}
+		SET 	fboard_title 		= #{fboardTitle}
+				fboard_content	 	= #{fboardContent}
+		WHERE	fboard_id 			= #{fboardId}
+		-->
+		UPDATE freeBoard
+		SET fboard_title = #{fboardTitle}, fboard_content = #{fboardContent}
+		WHERE	fboard_id = #{fboardId}
 	</update>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="freeBoardDelete" parameterType="freeBoard">
+	<delete id="freeBoardDelete" parameterType="FreeBoard">
 		DELETE FROM freeBoard 
-		WHERE	fboard_id = ${fboardId}
+		WHERE	fboard_id = #{fboardId}
 	</delete>
 	
 </mapper>
