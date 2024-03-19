@@ -20,14 +20,23 @@
 	</resultMap>
 	
 	<select id="animalList" parameterType="animal" resultMap="animalMap">
-		SELECT animal_id, animal_species, animal_name, animal_gender,animal_status,
-		animal_kg,animal_color,animal_temp,readcnt, 
-		TO_CHAR(animal_regist, 'YYYY-MM-DD') AS animal_regist,animal_file 
-		FROM animal
-		<where>
-			<include refid="animalSearch"></include>
-		</where>
-		ORDER BY animal_id DESC
+		 <![CDATA[
+	    SELECT
+	      animal_id, animal_species, animal_name, TO_CHAR(animal_regist, 'YYYY-MM-DD') AS animal_regist, readcnt, animal_file,animal_gender,
+	      animal_status,animal_kg,animal_color,animal_temp
+	    FROM (
+	      		SELECT /*+INDEX_DESC(animal pk_animal)*/
+	        	ROWNUM AS rnum,animal_id, animal_species, animal_name, animal_regist, readcnt, animal_file,animal_gender,
+	      animal_status,animal_kg,animal_color,animal_temp
+	      			FROM animal
+	      		WHERE]]>
+	   			<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+	    			<include refid="animalSearch"></include>
+	   			</trim>
+	   		<![CDATA[ rownum <= #{pageNum} * #{amount}
+	      	) animalList
+	    		WHERE rnum > (#{pageNum} - 1) * #{amount}
+	  		]]>
 	</select>
 	
 	<update id="readCntUpdate" parameterType="animal">

@@ -4,7 +4,7 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h1 class="h2">봉사공고</h1>
+		<h1 class="h2">동물 관리</h1>
 	</div>
 	<div class="container">
 		<!-- 여기에 페이지 구현하세요 -->
@@ -62,11 +62,15 @@
 							<table class="table mb-0">
 								
 								<tr>
-									<c:if test="${not empty detail.animalFile }">		
-										<td class="text-start" rowspan="9">
-											<img src="/uploadStorage/animal/${detail.animalFile }" class="rounded" width="300px"/>
-										</td>		
-									</c:if>
+									<td rowspan="9">
+										<c:if test="${not empty detail.animalFile}">
+										    <img src="/uploadStorage/animal/${detail.animalFile}" class="rounded img-fluid" style="max-width: 300px; max-height: 250px;" />
+										</c:if>
+										<c:if test="${empty detail.animalFile}">
+										    <img src="/resources/images/common/noanimal.jpg" class="rounded img-fluid" style="max-width: 300px; max-height: 250px;" />
+										</c:if>
+
+									</td>
 									<td class="col-3">이름</td>
 									<td class="text-start">${detail.animalName }</td>
 								</tr>

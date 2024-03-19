@@ -66,7 +66,9 @@
 					<tr>
 						
 						<td class="col_3">동물 ID</td>
-						<td>${detail.animalId }</td>
+						<td>${detail.animalId }(조회수 : ${detail.readcnt })</td>
+						<td>작성일</td>
+						<td>${detail.animalRegist}</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -75,11 +77,14 @@
 							<table class="table mb-0">
 								
 								<tr>
-									<c:if test="${not empty detail.animalFile }">		
-										<td class="text-start" rowspan="9">
-											<img src="/uploadStorage/animal/${detail.animalFile }" class="rounded" width="300px"/>
-										</td>		
-									</c:if>
+									<td rowspan="9">
+										<c:if test="${not empty detail.animalFile}">
+										    <img src="/uploadStorage/animal/${detail.animalFile}" class="rounded img-fluid" />
+										</c:if>
+										<c:if test="${empty detail.animalFile}">
+										    <img src="/resources/images/common/noanimal.jpg" class="rounded img-fluid" />
+										</c:if>
+									</td>
 									<td class="col-3">이름</td>
 									<td class="text-start">${detail.animalName }</td>
 								</tr>
@@ -154,6 +159,7 @@
 			</table>
 		</div>
 		<jsp:include page="../map/mapList.jsp" />	
+		<jsp:include page="weather.jsp" />	
 	</div>	
 	<script src="/resources/include/js/adoption/adoptionDetail.js"></script>		
 					</div>

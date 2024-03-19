@@ -30,10 +30,25 @@
 	</resultMap>
 	
 	<select id="adoptionList" parameterType="adoption" resultMap="adoptionMap">
-		SELECT adoption_id, adoption_title, adoption_status, TO_CHAR(adoption_date, 'YYYY-MM-DD') AS adoption_date, adoption_cnt, adoption_level
-		FROM adoption
-		ORDER BY adoption_id DESC
+	    <![CDATA[
+	    SELECT
+	      adoption_id, adoption_title, adoption_status, TO_CHAR(adoption_date, 'YYYY-MM-DD') AS adoption_date, adoption_cnt, adoption_level
+	
+	    FROM (
+	      		SELECT /*+INDEX_DESC(adoption pk_adoption)*/
+	        	ROWNUM AS rnum, adoption_id, adoption_title, adoption_status, adoption_date, adoption_cnt, adoption_level
+	      			FROM adoption
+	      		WHERE]]>
+	   			<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+	    			<include refid="adoptionSearch"></include>
+	   			</trim>
+	   		<![CDATA[ rownum <= #{pageNum} * #{amount}
+	      	) adoptionList
+	    		WHERE rnum > (#{pageNum} - 1) * #{amount}
+	  		]]>
 	</select>
+
+
 	
  	<update id="readCntUpdate" parameterType="adoption">
 		UPDATE adoption
@@ -77,10 +92,10 @@
 	
 	<select id="adoptionDetail" parameterType="adoption" resultMap="adoptionMap">
 		select an.animal_id, an.animal_name, an.animal_species, an.animal_gender, 
-		an.animal_kg, an.animal_age,
+		an.animal_kg, an.animal_age,an.animal_file,an.readcnt
 		an.animal_age,an.animal_color,an.animal_status,an.animal_memo,an.animal_temp, 
 		ad.adoption_id, ad.adoption_title,ad.adoption_level,ad.adoption_status,ad.adoption_date,
-		ad.adoption_cnt,ad.adoption_file,ad.adoption_thumb
+		ad.adoption_cnt,ad.adoption_file,ad.adoption_thumb,ad.adoption_content
 		from animal an  join adoption ad  on an.animal_id = ad.animal_id
 		where ad.adoption_id = #{adoptionId}
 	</select> 
