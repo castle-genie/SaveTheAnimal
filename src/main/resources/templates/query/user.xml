@@ -14,12 +14,12 @@
 		<result column="user_level" property="userLevel"/>
 		<result column="user_adoptChk" property="userAdoptChk"/>
 	</resultMap>
-
-	<!-- 로그인 -->
+	
+	<!-- 로그인 : 회원 상태 조건 추가 -->
 	<select id="userLoginProcess" parameterType="user" resultMap="userMap">
 		select user_id, user_name
 		from users
-		where user_id = #{userId} and user_pwd = #{userPasswd}
+		where user_id = #{userId} and user_pwd = #{userPasswd} and user_act = 1
 	</select>
 	
 	<!-- 아이디 찾기 -->
@@ -29,12 +29,12 @@
 		where user_email = #{userEmail}
 	</select>
 	
-	<!-- 회원아이디 여부 체크 -->
-	<select id="findIdCheck" parameterType="user" resultType="int">
-		select count(*) 
-		from users
-		where user_email = #{userEmail}
-	</select>
+	<!-- 비밀번호 재설정 -->
+	<update id="resetPasswd" parameterType="user">
+		update users
+		set user_pwd = #{userPasswd} 
+		where user_id = #{userId} and user_email = #{userEmail}
+	</update>
 	
 	<!-- 회원 가입 -->
 	<insert id="userJoin" parameterType="user">
@@ -78,8 +78,18 @@
 	        </when>
 	    </choose>
 	</select>-->
-
-	<update id="userUpdate" parameterType="user">
+	
+	<!-- 회원 정보 조회 -->
+	<select id="userInfo" parameterType="user" resultMap="userMap">
+		select 
+		    user_id, user_name, user_phone, user_email, user_volcnt, user_level,
+		    to_char(user_date, 'YYYY-MM-DD') as user_date, user_act, user_repcnt, user_adoptChk
+		from users
+		where user_id = #{userId} 
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateProfile" parameterType="user">
 		update users
 		set user_name = #{userName}, user_phone = #{userPhone}, user_email = #{userEmail}
 		<if test="userPasswd != ''">	
@@ -88,14 +98,7 @@
 		where user_id = #{userId}
 	</update>
 	
-	<select id="userInfo" parameterType="user" resultMap="userMap">
-		select 
-		    user_id, user_pwd, user_name, user_phone, user_email, user_volcnt, user_level,
-		    to_char(user_date, 'YYYY-MM-DD') as user_date, user_act, user_repcnt
-		from users
-		where user_id = #{userId}
-	</select>
-	
+	<!-- 비밀번호 일치 확인 -->
 	<select id="pwdConfirm" parameterType="user" resultType="int">
 		select nvl((
 		            select 1 from users
@@ -103,5 +106,22 @@
 		          ), 0) as state
 		from dual
 	</select>
+	
+	<!-- 회원 탈퇴 : 회원상태 변경 -->
+	<delete id="userWithdrawal" parameterType="user">
+        <!-- DELETE FROM users WHERE user_id = #{userId} -->
+        update users
+		set user_act = 0 
+		where user_id = #{userId}
+    </delete>
+	
+	<!-- 회원 목록 기본 조회 -->
+	<select id="userList" parameterType="user" resultMap="userMap">
+		select user_id, user_name, user_phone, user_email, to_char(user_date, 'YYYY-MM-DD') as user_date, 
+			   user_act, user_repcnt, user_volcnt, user_level, user_adoptChk
+		from users
+		order by user_date
+	</select>
+		
 
 </mapper>

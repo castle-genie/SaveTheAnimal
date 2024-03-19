@@ -18,6 +18,11 @@
 		<result column="user_repcnt" property="repcnt"/>
 	</resultMap>
 
+	<!-- 	reportList.jsp 출력을 위한 select 문
+			case when 문을 통해 report table에 id를 가지고 있는 콘텐츠의 정보를 select 한다.
+			report table 뿐만 아니라 신고 기능이 있는 6가지 콘텐츠 테이블을 조인해 조회한다.
+			where 조건문에서도 or 연산자를 통해 각 콘텐츠 테이블의 아이디 유무를 확인한다.
+			또한 where절에서 report_id를 1로 규정해 이미 제재 처리된 신고 콘텐츠는 표시하지 않는다.	-->
 	<select id="reportList" parameterType="report" resultMap="reportMap">
 		select distinct r.report_id, r.report_sort, to_char(r.report_date, 'YYYY-MM-DD') as report_date, r.report_status,
 		    r.user_id, r.fboard_id, r.vfboard_id, r.afboard_id, r.fcomment_id, r.vfcomment_id, r.afcomment_id ,
@@ -49,7 +54,11 @@
 		where (r.report_status = 1) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
 	</select>
 	
-	
+	<!-- 	reportDetail.jsp 출력을 위한 select 문
+			case when 문을 통해 report table에 id를 가지고 있는 콘텐츠의 정보를 select 한다.
+			report table 뿐만 아니라 신고 기능이 있는 6가지 콘텐츠 테이블을 조인해 조회한다.
+			where 조건문에서도 or 연산자를 통해 각 콘텐츠 테이블의 아이디 유무를 확인한다.
+			또한 user_repcnt를 users 테이블에서 가져오기 위해 user_id를 users table과 report table에서 비교한다.	-->
 	<select id="reportDetail" parameterType="report" resultMap="reportMap">
 		select distinct r.report_id, r.report_sort, to_char(r.report_date, 'YYYY-MM-DD') as report_date, r.report_status, r.report_detail,
 		    r.user_id, r.fboard_id, r.vfboard_id, r.afboard_id, r.fcomment_id, r.vfcomment_id, r.afcomment_id, u.user_repcnt,
@@ -94,12 +103,18 @@
 		        when r.afcomment_id is not null then ac.afcomment_content
 		    end as boardContent
 		from report r, freeBoard f, volunteerFeedbackBoard v, adoptionFeedbackBoard a, fcomment fc, vfcomment vc, afcomment ac, users u
-		where (u.user_id=r.user_id) and (r.report_id = #{reportId}) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
+		where (u.user_id = (select user_id from freeboard where fboard_id = (select fboard_id from report where report_id = #{reportId}))) and (r.report_id = #{reportId}) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
 	
 	</select>
 
 
-
+	<!-- 	신고기능 report table에 신고 정보를 기록하는 기능
+			report_id는 시퀀스를 통해 자동생성
+			report_sort, report_detail은 report.jsp에서 입력받아 사용
+			report_date는 sysdate를 사용
+			report status는 기본값 1 사용
+			boardId, user_id는 콘텐츠에서 가져오기
+			신고버튼을 누른 콘텐츠에 따라 각자 다른 insert 문 사용 				-->
 	<insert id="reportInsertFB" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, fboard_id, user_id)
 		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{fboardId}, #{userId})
@@ -107,7 +122,7 @@
 
 	<insert id="reportInsertVB" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, vfboard_id, user_id)
-		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfboardId}, #{userId})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfboardId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertAB" parameterType="report">
@@ -130,7 +145,9 @@
 		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{afcommentId}, #{userId})
 	</insert>
 
-
+	<!-- 	신고제재 처리 기능
+			관리자가 신고 제재 혹은 무시 처리 할 시 
+			report table에 report_status를 2로 변경  -->
 	<update id="reportUpdateFB" parameterType="report">
 		update report
 		set report_status = 2
@@ -164,7 +181,9 @@
 
 
 
-
+	<!-- 	신고 수정 기능
+			report table에서 report_sort, report_detail 수정 기능
+			report_date는 sysdate를 활용해 수정 -->
 	<update id="reportModify" parameterType="report">
 		update report
 		set 
@@ -174,11 +193,70 @@
 		where report_id = #{reportId}
 	</update>
 
-	
+	<!-- 	신고 취소 기능
+			report table에서 report_id를 기준으로 행 삭제	 -->
 	<delete id="reportDelete" parameterType="report">
 		delete from report
 		where report_id = #{reportId}
 	</delete>
+	
+	<!-- 	신고 제재시 회원의 제재 횟수 증가시키는 기능
+			users table의 user_repcnt를 1 증가시키기
+			reportDetail.jsp에서 sanctionBtn을 click하면 실행됨
+			user_id를 기준으로 처리됨							 -->
+	<update id="repcntUpdate" parameterType="report">
+		update users
+			set user_repcnt = user_repcnt + 1
+		where user_id = #{boardUser}
+	</update>
+	
+	
+	<!-- 신고 제재시 게시물 삭제 기능 -->
+	<delete id="contentDeleteFB" parameterType="report">
+		delete from freeboard
+		where fboard_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteVB" parameterType="report">
+		delete from volunteerFeedbackBoard
+		where vfboard_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteAB" parameterType="report">
+		delete from adoptionFeedbackBoard
+		where afboard_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteFC" parameterType="report">
+		delete from fcomment
+		where fcomment_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteVC" parameterType="report">
+		delete from vfcomment
+		where vfcomment_id = #{boardId}
+	</delete>
+	<delete id="contentDeleteAC" parameterType="report">
+		delete from afcomment
+		where afcomment_id = #{boardId}
+	</delete>
+	
+	<!-- 신고 제재 시 유저 계정 정지 -->
+	<update id="userStop" parameterType="report">
+		update users
+			set user_act = 2
+		where user_id = #{boardUser}
+	</update>
+	
+	<!-- 신고 제재로 정지된 계정 복구 -->
+	<update id="userGo" parameterType="report">
+		update users
+			set user_act = 1
+		where user_id = #{boardUser}
+	</update>
+	
+	<!-- 신고 제재 시 유저 계정 삭제 -->
+	<delete id="userDelete" parameterType="report">
+		delete from users
+		where user_id = #{boardUser}
+	</delete>
+	
 	
 	
 

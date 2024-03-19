@@ -20,5 +20,10 @@ public class ModifyController {
 	public String showCalendar() {
         return "/volunteer/volunteer";
     }
+	
+	@GetMapping("/adminVolunteerList")
+	public String adminVolunteerList() {
+		return "/admin/volunteer/adminVolunteerList";
+	}
 }
 	

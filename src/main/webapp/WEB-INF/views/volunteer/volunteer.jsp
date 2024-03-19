@@ -16,12 +16,7 @@
             headerToolbar: {
                 left: 'prevYear,prev,next,nextYear today',
                 center: 'title',
-                right: 'customButton dayGridMonth,dayGridWeek,dayGridDay'
-            },
-            customButtons: {
-                customButton: {
-                    text: "일정 추가"
-                }
+                right: 'dayGridMonth,dayGridWeek,dayGridDay'
             },
             initialDate: '2024-03-22',
             navLinks: false,
@@ -147,6 +142,14 @@
 	<script src="/resources/include/assets2/js/skel.min.js"></script>
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
+	<script>
+	$(function(){		
+		let errorMsg = "${errorMsg}"; 
+		if (errorMsg != "") {
+			alert(errorMsg);
+		}
+	});
+	</script>
 </body>
 
 </html> 

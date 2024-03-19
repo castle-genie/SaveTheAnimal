@@ -7,8 +7,22 @@
 	<!-- css 적용 -->
 	<link rel="stylesheet" href="/resources/include/css/volunteer/volunteerDetail.css">
 	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94063d37acee8b8586233e93d841bf07&libraries=services"></script>
 	<script>
+		function formatDateTime(elementId) {
+	        // elementId에 해당하는 요소를 가져옴
+	        var element = $('#' + elementId);
+	
+	        // 가져온 요소의 텍스트 값을 읽어옴
+	        var dateTime = element.text();
+	
+	     // moment.js를 사용하여 날짜와 시간을 원하는 형식으로 변환
+	        var formattedDateTime = moment(dateTime).format('YYYY-MM-DD A h:mm').replace('AM', '오전').replace('PM', '오후');
+	
+	        // 변환된 값을 해당 요소에 설정
+	        element.text(formattedDateTime);
+	    }
 		// 모달 팝업 열기
 		function openModal() {
 		  var modal = document.getElementById("myModal");
@@ -38,6 +52,8 @@
 		};
 			
 		$(function() {
+			formatDateTime('volunteerDue');
+			var userId = "<%= session.getAttribute("userId") %>";
 			var volunteerId = ${ detail.volunteerId };
 			/* 지도 api 추가 스크립트 */
 			var mapVisible = false;
@@ -74,19 +90,61 @@
 				    } 
 				});    
 			})
+			
 			/* 참가 인원 구하기 스크립트 */
 			$.ajax({
                 url: '/application/'+volunteerId,
                 method: 'GET',
                 dataType : 'json',
-                success: function(applicationCount) {
+                success: function(applicationCount) {	
                 	// applicationCount를 가져오는 데 성공했을 때만 실행됩니다.
                     // 가져온 applicationCount 값을 사용하여 해당 행(tr)에 추가합니다.
                     var tr = '<tr><th>모집 인원</th><td>' + applicationCount + '명 / ' + '${detail.volunteerLimit}명' + '</td></tr>';
                     // 위에서 생성한 tr을 해당 행 앞에 추가합니다.
                     $('table tbody tr:nth-child(3)').before(tr);
+                    
+                    $("#applicationBtn").on("click", function() {
+           			 	if ('${detail.volunteerLimit}' == applicationCount) {
+           		            	alert('이미 신청자가 다 찼습니다.');
+           		            	closeModal();
+           		        } else if(userId == "null") {
+       		            	if(confirm("로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?")) {
+       		            		location.href="/user/login";
+       		            	} 
+           		        } else {
+           		        	$.ajax({
+           		        	    url: "/application/applicationCheck",
+           		        	    type: "POST",
+           		        	    data: {
+           		        	        userId,
+           		        	        volunteerId
+           		        	    },
+           		        	    success: function(response) {
+           		        	        console.log("result : " + response);
+
+           		        	        // 응답이 1인 경우 이미 신청한 공고임을 알림
+           		        	        if (response == 1) {
+           		        	            if (confirm("이미 신청한 공고 입니다.")) {
+           		        	                location.href = "/project/volunteer";
+           		        	            }
+           		        	        } else {
+           		        	            $("#applicationForm").attr({
+           		        	                method: "post",
+           		        	                action: "/application/applicationSubmit"
+           		        	            });
+           		        	            $("#applicationForm").submit();
+           		        	        }
+           		        	    },
+           		        	    error: function(xhr, status, error) {
+           		        	        // 에러 처리
+           		        	        console.error("Error:", error);
+           		        	        // 여기에서 에러 처리 및 사용자에게 알림을 표시할 수 있습니다.
+           		        	    }
+           		        	})
+           		    	}
+                	})
                 },
-                error: function(xhr, status, error) {
+               	error: function(xhr, status, error) {
                     console.error('Error: ', error)
                 }
             });
@@ -122,15 +180,15 @@
 						      	<tbody>
 						      		<tr>
 						      			<th>활동 날짜</th>
-						      			<td>${ detail.volunteerTime }</td>
+						      			<td id="volunteerTime">${ detail.volunteerTime }</td>
 					      			</tr>
 					      			<tr>
 						      			<th>신청 마감</th>
-						      			<td>${ detail.volunteerDue }</td>
+						      			<td id="volunteerDue">${ detail.volunteerDue }</td>
 					      			</tr>
 					      			<tr>
 						      			<th>참가 비용</th>
-						      			<td>${ detail.volunteerCost }</td>
+						      			<td id="volunteerCost">${ detail.volunteerCost }</td>
 					      			</tr>
 					      			<tr>
 						      			<th>주 소</th>
@@ -143,6 +201,7 @@
 						  <div id="map"></div>
 						  <div class="button-container">
 						        <a href="#" class="button" onclick="openModal()">봉사 신청하기</a>
+   						        <a href="/project/volunteer" class="button">목록 돌아가기</a>
 						  </div>
 						  <div class="underline"></div>
 						  <div class="details" style="text-align: left;">
@@ -159,19 +218,19 @@
 		  <div class="modal-content">
 		    <span class="close">&times;</span>
 		    <div class="container">
-		    <form id="volunteerForm">
+		    <form id="applicationForm">
 		      <h2>봉사활동 신청</h2>
 		      <!-- 아이디 입력란(백엔드에서 처리) -->
 		      <!-- 봉사공고 아이디(팝업 뜨게한 버튼 누른 페이지의 volunteerId) -->
-		      <input type="hidden" id="volunteerId" name="volunteerId" value="여기에_봉사공고_아이디_입력">
+		      <input type="hidden" id="volunteerId" name="volunteerId" value="${ detail.volunteerId }">
 		      <!-- 로그인 정보로 얻어온 회원 아이디(백엔드에서 처리) -->
-		      <input type="hidden" id="userId" name="userId" value="여기에_회원_아이디_입력">
+		      <input type="hidden" id="userId" name="userId" value="<%= session.getAttribute("userId") %>">
 		      <div class="form-group">
-		        <!-- 봉사 다짐 입력란 -->
-		        <label for="promise">봉사 다짐</label>
-		        <textarea id="promise" name="promise" rows="4" required></textarea>
+		        <!-- 봉사 다짐 입력란 -->	
+		        <label for="applicationComment">봉사 다짐</label>
+		        <textarea id="applicationComment" name="applicationComment" rows="4"></textarea>
 		      </div>
-		      <button type="submit" id="applicationBtn">신청하기</button>
+		      <button type="button" id="applicationBtn">신청하기</button>
 		    </form>
 		  </div>
 		  </div>	

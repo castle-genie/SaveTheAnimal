@@ -19,7 +19,6 @@
 			</header>
 		</div>
 	</section>
-
 	<!-- Two -->
 	<section id="two" class="wrapper style2">
 		<div class="inner">
@@ -29,7 +28,7 @@
 						<table class="alt">
 							<thead>
 								<tr>
-									<td><center>제목</center></td>
+									<td class="text-center">제목</td>
 									<td>작성자</td>
 									<td>좋아요</td>
 									<td>조회수</td>
@@ -53,9 +52,16 @@
 						</table>
 					</div>
 					<br>
+						<c:if test="${empty userLogin}">
 						<ul class="actions">
-							<li><a href="(글쓰기폼 경로)" " class="button special">글쓰기</a></li>
+							<li><a href="/user/login"  class="button special" onclick="alert('글을 작성하려면 로그인이 필요합니다')">글쓰기</a></li>
 						</ul>
+						</c:if>
+						<c:if test="${not empty userLogin}">
+						<ul class="actions">
+							<li><a href="/board/freeBoardCreate"  class="button special">글쓰기</a></li>
+						</ul>
+						</c:if>
 				</div>
 			</div>
 		</div>

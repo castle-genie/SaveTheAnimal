@@ -1,5 +1,7 @@
 package com.spring.user.dao;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +17,14 @@ public class UserDaoTests {
 	@Setter(onMethod_ = @Autowired)
 	private UserDao userDao;
 	
+	/*@Test
+	public void testUserList() {
+		UserVO uvo = null;
+		List<UserVO> list = userDao.userList(uvo);
+		for (UserVO vo : list) {
+			log.info(vo.toString());
+		}
+	}*/
 	/*@Test
 	public void testUserLoginProcess() {
 		UserVO uvo = new UserVO();
@@ -50,7 +60,7 @@ public class UserDaoTests {
 	/*@Test
 	public void testUserInfo() {
 		UserVO uvo = new UserVO();
-		uvo.setUserId("member01");
+		uvo.setUserId("member00");
 		UserVO info = userDao.userInfo(uvo);
 		log.info(info.toString());
 	}*/
@@ -107,6 +117,22 @@ public class UserDaoTests {
 		//uvo.setUserEmail("member01@naver.com");
 		int result = userDao.checkDuplicate(uvo);
 		log.info((result==1) ? "존재함" : "사용가능");
+	}*/
+	/*@Test
+	public void testResetPasswd() {
+		UserVO uvo = new UserVO();
+		uvo.setUserId("member00");
+		uvo.setUserEmail("member01@naver.com");
+		uvo.setUserPasswd("12341234");
+		int result = userDao.resetPasswd(uvo);
+		log.info((result==1) ? "성공" : "실패");
+	}*/
+	/*@Test
+	public void testUserWithdrawal() {
+		UserVO uvo = new UserVO();
+		uvo.setUserId("member10");
+		int result = userDao.userWithdrawal(uvo);
+		log.info((result==1) ? "성공" : "실패");
 	}*/
 	
 }

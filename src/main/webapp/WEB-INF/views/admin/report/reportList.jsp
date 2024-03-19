@@ -21,7 +21,7 @@
 						<th class="col-md-1">신고번호</th>
 						<th class="col-md-2">글분류</th>
 						<th class="col-md-4">제목</th>
-						<th class="col-md-2">작성자ID(제재횟수)</th>
+						<th class="col-md-2">작성자ID</th>
 						<th class="col-md-1">신고분류</th>
 						<th class="col-md-1">작성일자</th>
 						<th class="col-md-1">신고일자</th>

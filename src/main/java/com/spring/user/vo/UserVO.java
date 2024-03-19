@@ -13,9 +13,9 @@ public class UserVO {
 	private String userPhone	= "";
 	private String userEmail 	= "";
 	private Date userDate;
-	private int userAct 		= 1;
-	private int userRepcnt 		= 0;
-	private int userVolcnt 		= 0;
-	private int userLevel 		= 1;
-	private int userAdoptChk 	= 0;
+	private int userAct=0; 		
+	private int userRepcnt=0; 		
+	private int userVolcnt=0; 		
+	private int userLevel=0; 		
+	private int userAdoptChk=0;	
 }

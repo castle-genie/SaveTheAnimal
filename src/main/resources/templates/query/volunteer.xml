@@ -26,9 +26,53 @@
 	<!-- 봉사 공고 상세정보 -->
 	<select id="volunteerDetail" parameterType="volunteer" resultMap="volunteerMap">
 		SELECT volunteer_id, volunteer_detail, volunteer_date, volunteer_title, volunteer_cnt,
-			   volunteer_time, volunteer_due, volunteer_limit, volunteer_cost, volunteer_location, volunteer_progress
+			   volunteer_time, 
+			   volunteer_due, 
+			   volunteer_limit, volunteer_cost, volunteer_location, volunteer_progress
 	    FROM volunteer
 	    WHERE volunteer_id = #{volunteerId}
 	</select>
+	
+	<!-- 관리자 페이지에서 봉사 공고 입력하기 -->
+	<insert id="volunteerInsert" parameterType="volunteer">
+		INSERT INTO volunteer
+		VALUES(volunteer_seq.nextval, #{volunteerDetail}, sysdate, #{volunteerTitle}, default, #{volunteerTime}, 
+			   #{volunteerDue}, #{volunteerLimit}, 
+			   <choose>
+	               <when test="volunteerCost != null and volunteerCost != ''">
+	                   #{volunteerCost}
+	               </when>
+	               <otherwise>
+	                   default
+	               </otherwise>
+	           </choose>
+			   , #{volunteerLocation}, default, 'admin')
+	</insert>
+	
+	<!-- 관리자 페이지에서 봉사 공고 수정하기 -->
+	<update id="volunteerUpdate" parameterType="volunteer">
+		    UPDATE volunteer
+		    SET volunteer_title = #{volunteerTitle}, volunteer_time = #{volunteerTime}, volunteer_due = #{volunteerDue},
+		        volunteer_limit = #{volunteerLimit},
+		        <if test="volunteerCost != ''">
+		        	volunteer_cost = #{volunteerCost},
+		        </if>
+		        <if test="volunteerCost == ''">
+		        	volunteer_cost = default,
+		        </if>
+		        volunteer_location = #{volunteerLocation}, volunteer_detail = #{volunteerDetail}
+		    WHERE volunteer_id = #{volunteerId}
+	</update>
+	
+	<delete id="volunteerDelete" parameterType="volunteer">
+		DELETE FROM volunteer
+		WHERE volunteer_id = #{volunteerId}
+	</delete>
+	
+	<update id="updateVolunteerProgress1" parameterType="volunteer">
+		UPDATE volunteer
+		SET volunteer_progress = 1
+		WHERE volunteer_id = #{volunteerId}
+	</update>
 </mapper>
 
