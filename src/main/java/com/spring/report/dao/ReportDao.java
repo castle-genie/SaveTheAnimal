@@ -48,6 +48,9 @@ public interface ReportDao {
 	//신고 제재 시 유저 계정 정지
 	public int userStop(ReportVO rvo);
 	
+	//신고 제재로 정지된 계정 복구
+	public int userGo(ReportVO rvo);
+	
 	//신고 제재 시 유저 계정 삭제
 	public int userDelete(ReportVO rvo);
 	

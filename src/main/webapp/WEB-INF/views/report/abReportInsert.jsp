@@ -17,8 +17,9 @@
 			<div class="modal-body">
 				
 				<form id="f_data">
-					<input type="hidden" name="fboardId" value="${freeBoard.fboardId}"/>
-					<input type="hidden" name="boardUser" value="${freeBoard.userId}"/>
+					<input type="hidden" name="fboardId" value="${afboard.afboardId}"/>
+					<input type="hidden" name="boardUser" value="${afboard.userId}"/>
+					<input type="hidden" name="userId" id="userId" value="<%= session.getAttribute("userId") %>">
 					<fieldset>
 						<legend class="modal-title fs-6 my-3"><strong>신고 분류</strong></legend>
 						<div>
