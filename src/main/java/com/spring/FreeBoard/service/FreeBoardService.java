@@ -18,7 +18,7 @@ public interface FreeBoardService {
 	public boolean plusCnt(int fboardId);
 	
 	//게시글 등록하는 메서드
-	public int freeBoardCreate(FreeBoardVO freeBoardVO);
+	public int insertFreeBoard(FreeBoardVO freeBoardVO);
 	//public void freeBoardCreate(FreeBoardVO freeBoardVO);
 	
 	//게시글 수정

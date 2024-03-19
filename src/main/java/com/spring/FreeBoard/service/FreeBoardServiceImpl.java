@@ -43,8 +43,8 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 	//게시글 등록
 	@Override
-	public int freeBoardCreate(FreeBoardVO freeBoardVO) {
-		return freeBoardDAO.freeBoardCreate(freeBoardVO);
+	public int insertFreeBoard(FreeBoardVO freeBoardVO) {
+		return freeBoardDAO.insertFreeBoard(freeBoardVO);
 	}
 	
 	//게시글 수정

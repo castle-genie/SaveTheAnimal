@@ -50,22 +50,21 @@ public class FreeBoardController {
 	}
 	
 	//게시글 등록하는 페이지 접속
-	
 	@GetMapping(value = "freeBoardCreate")
-	public String freeBoardCreate(){
+	public String getCreate() throws Exception{
 		return "board/freeBoardCreate";
 	}
 	
-	//게시글 등록
+	//게시글 등록하기
 	@PostMapping(value = "freeBoardCreate")
-	public String freeBoardCreate(FreeBoardVO freeBoardVO) {
+	public String freeBoardCreate(FreeBoardVO freeBoardVO){
 		
+		freeBoardService.insertFreeBoard(freeBoardVO);
 		
-		freeBoardService.freeBoardCreate(freeBoardVO);
+		//return "redirect:/board/freeBoardDetail?fboardId=" + freeBoardVO.getFboardId();
 		
-		return "redirect:/board/freeBoardDetail?fboardId=" + freeBoardVO.getFboardId();
+		return "redirect:/board/freeBoardList";
 	}
-	
 	//게시글 수정
 	@PostMapping(value = "freeBoardModify")
 	//@RequestMapping(value = "update", method = RequestMethod.POST)
