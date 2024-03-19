@@ -39,7 +39,7 @@
 						<li><a href="freeBoardList"  class="button special">목록</a></li>
 						<li><input type="button" value="수정" onclick="location.href='modify?fboardId=${freeBoard.fboardId}'"></li>
 						<li><input type="button" value="삭제" onclick="del(${freeBoard.fboardId})"></li>
-						<li><%@ include file="/WEB-INF/views/project/fbReportInsert.jsp"%></li>
+						<li><%@ include file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
 					</ul>
 				</div>
 			</div>
