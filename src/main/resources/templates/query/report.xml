@@ -103,7 +103,7 @@
 		        when r.afcomment_id is not null then ac.afcomment_content
 		    end as boardContent
 		from report r, freeBoard f, volunteerFeedbackBoard v, adoptionFeedbackBoard a, fcomment fc, vfcomment vc, afcomment ac, users u
-		where (u.user_id = r.user_id) and (r.report_id = #{reportId}) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
+		where (u.user_id = (select user_id from freeboard where fboard_id = (select fboard_id from report where report_id = 2))) and (r.report_id = #{reportId}) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
 	
 	</select>
 

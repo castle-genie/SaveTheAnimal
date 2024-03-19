@@ -4,9 +4,6 @@
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
 	
-	<script>
-	   var userId = "<%= session.getAttribute("userId") %>";
-	</script>
 	<!-- css 적용 -->
 	<link rel="stylesheet" href="/resources/include/css/volunteer/volunteerDetail.css">
 	
@@ -41,6 +38,7 @@
 		};
 			
 		$(function() {
+			var userId = "<%= session.getAttribute("userId") %>";
 			var volunteerId = ${ detail.volunteerId };
 			/* 지도 api 추가 스크립트 */
 			var mapVisible = false;
@@ -77,6 +75,7 @@
 				    } 
 				});    
 			})
+			
 			/* 참가 인원 구하기 스크립트 */
 			$.ajax({
                 url: '/application/'+volunteerId,
@@ -90,33 +89,20 @@
                     $('table tbody tr:nth-child(3)').before(tr);
                     
                     $("#applicationBtn").on("click", function() {
-           			 if ('${detail.volunteerLimit}' == applicationCount) {
-           		            alert('이미 신청자가 다 찼습니다.');
+           			 	if ('${detail.volunteerLimit}' == applicationCount) {
+           		            	alert('이미 신청자가 다 찼습니다.');
+           		        } else if(userId == "null") {
+       		            	if(confirm("로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?")) {
+       		            		location.href="/user/login";
+       		            	} 
            		        } else {
-           		            $("#applicationForm").attr({
-           		                method : "post",
-           		                action : "/application/applicationSubmit"
-           		            });
-           		            
-           		            $("#applicationForm").submit();
+           		        	$("#applicationForm").attr({
+           		        		method : "post",
+           		        		action : "/application/applicationSubmit"
+           		        	});
+           		        	$("#applicationForm").submit();
            		        }
            		    });
-                    cd
-                    // applicationCount 와 volunteerLimit을 비교해 volunteer_progress 를 업데이트
-                    if(applicationCount == '${detail.volunteerLimit}') {
-                    	// Ajax를 사용해 volunteer_progress 값을 업데이트
-                    	$.ajax({
-                    		url : '/volunteer/updateVolunteerProgress1',
-                    		method : 'POST',
-                    		success : function(response) {
-                    			volunteerProgress = 1;
-                    		},
-                    		 error: function(xhr, status, error) {
-                                 console.error('Error: ', error);
-                             }
-                    	})
-                    	console.log("${ detail.volunteerProgress }");
-                    }
                 },
                 error: function(xhr, status, error) {
                     console.error('Error: ', error)

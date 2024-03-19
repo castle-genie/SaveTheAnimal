@@ -28,7 +28,7 @@
 						<table class="alt">
 							<thead>
 								<tr>
-									<td><center>제목</center></td>
+									<td class="text-center">제목</td>
 									<td>작성자</td>
 									<td>좋아요</td>
 									<td>조회수</td>
