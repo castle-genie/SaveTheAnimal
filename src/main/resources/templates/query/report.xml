@@ -103,7 +103,7 @@
 		        when r.afcomment_id is not null then ac.afcomment_content
 		    end as boardContent
 		from report r, freeBoard f, volunteerFeedbackBoard v, adoptionFeedbackBoard a, fcomment fc, vfcomment vc, afcomment ac, users u
-		where (u.user_id = (select user_id from freeboard where fboard_id = (select fboard_id from report where report_id = 2))) and (r.report_id = #{reportId}) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
+		where (u.user_id = (select user_id from freeboard where fboard_id = (select fboard_id from report where report_id = #{reportId}))) and (r.report_id = #{reportId}) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
 	
 	</select>
 
@@ -117,32 +117,32 @@
 			신고버튼을 누른 콘텐츠에 따라 각자 다른 insert 문 사용 				-->
 	<insert id="reportInsertFB" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, fboard_id, user_id)
-		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{fboardId}, #{boardUser})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{fboardId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertVB" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, vfboard_id, user_id)
-		values(#{reportId}, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfboardId}, #{boardUser})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfboardId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertAB" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, afboard_id, user_id)
-		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{afboardId}, #{boardUser})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{afboardId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertFC" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, fcomment_id, user_id)
-		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{fcommentId}, #{boardUser})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{fcommentId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertVC" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, vfcomment_id, user_id)
-		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfcommentId}, #{boardUser})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{vfcommentId}, #{userId})
 	</insert>
 
 	<insert id="reportInsertAC" parameterType="report">
 		insert into report(report_id, report_sort, report_date, report_detail, report_status, afcomment_id, user_id)
-		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{afcommentId}, #{boardUser})
+		values(report_seq.nextval, #{reportSort}, sysdate, #{reportDetail}, 1, #{afcommentId}, #{userId})
 	</insert>
 
 	<!-- 	신고제재 처리 기능
@@ -241,6 +241,13 @@
 	<update id="userStop" parameterType="report">
 		update users
 			set user_act = 2
+		where user_id = #{boardUser}
+	</update>
+	
+	<!-- 신고 제재로 정지된 계정 복구 -->
+	<update id="userGo" parameterType="report">
+		update users
+			set user_act = 1
 		where user_id = #{boardUser}
 	</update>
 	
