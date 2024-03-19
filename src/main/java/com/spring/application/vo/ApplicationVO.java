@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Data
 //@EqualsAndHashCode(callSuper=false)
 public class ApplicationVO /* extends UserVO */{
-	private int applicationId;			// 신청 ID
+	private int applicationId=0;			// 신청 ID
 	private String applicationDate;		// 신청 날짜
 	private String applicationComment;	// 신청 다짐
 	private int applicationResult;		// 봉사 결과

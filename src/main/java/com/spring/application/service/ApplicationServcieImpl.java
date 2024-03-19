@@ -1,4 +1,4 @@
-package com.spring.application.Service;
+package com.spring.application.service;
 
 import java.util.List;
 
@@ -35,8 +35,21 @@ public class ApplicationServcieImpl implements ApplicationService{
 	}
 
 	@Override
-	public List<ApplicationVO> applicationView(ApplicationVO applicationVO) {
-		List<ApplicationVO> applicationView = applicationDAO.applicationList(applicationVO);
+	public List<ApplicationVO> applicationView(String userId) {
+		List<ApplicationVO> applicationView = applicationDAO.applicationView(userId);
 		return applicationView;
+	}
+	
+	@Override
+	public int applicationDelete(ApplicationVO applicationVO) {
+		int applicationDelete = applicationDAO.applicationDelete(applicationVO);
+		return applicationDelete;
+	}
+
+	@Override
+	public int applicatoinCheck(ApplicationVO applicatinoVO) {
+		int applicationCheck = 0;
+		applicationCheck = applicationDAO.applicationCheck( applicatinoVO);
+		return applicationCheck;
 	}
 }
