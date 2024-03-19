@@ -27,7 +27,7 @@ public class ReportController {
 //		log.info("reportList 호출");
 		List<ReportVO> reportList = reportService.reportList(rvo);
 		model.addAttribute("reportList", reportList);
-		
+//		System.out.println(reportList);
 		return "admin/report/reportList";		
 	}
 	
@@ -44,8 +44,9 @@ public class ReportController {
 	//신고기능
 	@PostMapping("reportInsertFB")
 	public String reportInsertFB(ReportVO rvo){
+		log.info("reportInsert 호출");
 		reportService.reportInsertFB(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/board/freeBoardList";
 	}	
 	@PostMapping("reportInsertVB")
 	public String reportInsertVB(ReportVO rvo){

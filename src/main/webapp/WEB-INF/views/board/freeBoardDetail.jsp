@@ -35,10 +35,11 @@
 								value="${freeBoard.fboardDate }" pattern="yyyy.MM.dd" /></span>
 					</p>
 					<br>
-					<ul class="actions">
+					<ul class="actions text-end">
 						<li><a href="freeBoardList"  class="button special">목록</a></li>
-						<input type="button" value="수정" onclick="location.href='modify?fboardId=${freeBoard.fboardId}'">
-						<input type="button" value="삭제" onclick="del(${freeBoard.fboardId})">
+						<li><input type="button" value="수정" onclick="location.href='modify?fboardId=${freeBoard.fboardId}'"></li>
+						<li><input type="button" value="삭제" onclick="del(${freeBoard.fboardId})"></li>
+						<li><%@ include file="/WEB-INF/views/project/fbReportInsert.jsp"%></li>
 					</ul>
 				</div>
 			</div>
@@ -69,6 +70,8 @@
 	<script src="/resources/include/assets2/js/skel.min.js"></script>
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
+	<script src="/resources/include/js/reportInsert.js"></script>
+	
 </body>
 <script>
 	function del(fboardId) {
