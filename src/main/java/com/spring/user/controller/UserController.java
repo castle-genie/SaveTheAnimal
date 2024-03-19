@@ -41,8 +41,7 @@ public class UserController {
 	@PostMapping("/login")
 	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras, HttpSession session) {
 		UserVO userLogin = userService.userLoginProcess(login);
-		
-		
+				
 		if (userLogin != null) {
 			model.addAttribute("userLogin", userLogin); 
 			session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
@@ -134,8 +133,34 @@ public class UserController {
 	
 	@GetMapping("/resetPwd")
 	public String resetPwd() {
-		log.info("아이디 찾기 화면");
+		log.info("비밀번호 재설정 화면");
 		return "user/resetPwd";
+	}
+	
+	@ResponseBody
+	@PostMapping("/resetPwd")
+	public String resetPwd(@RequestBody UserVO uvo, Model model, RedirectAttributes ras) {
+		log.info("임시비밀번호 업데이트 호출");	
+		log.info(uvo.toString());
+		int result = 0;		
+		result = userService.resetPasswd(uvo);
+
+		if (result == 1) {		
+			log.info("업데이트 성공");
+			model.addAttribute("result", result);
+		} else {
+			log.info("업데이트 실패");
+			ras.addFlashAttribute("msg", "임시비밀번호 발급 처리에 문제가 있어 다시 진행해 주세요.");
+		}
+		return "redirect:/user/resetPwd";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/findUserByIdAndEmail", produces="application/json; charset=UTF-8")
+	public int findUserByIdAndEmail(@RequestBody UserVO uvo) {
+		int result = 0;
+		result = userService.findUserByIdAndEmail(uvo);
+		return result;
 	}
 	
 	
@@ -235,6 +260,5 @@ public class UserController {
 		return "admin/user/userList";
 	}
 	
-	
-	
+
 }

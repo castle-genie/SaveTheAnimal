@@ -80,6 +80,27 @@ public class UserDaoTests {
 		UserVO result = userDao.findId(uvo);
 		log.info(result.toString());
 	}*/
+	
+	/*@Test
+	public void testFindUserByIdAndEmail() {
+		UserVO uvo = new UserVO();
+		uvo.setUserId("member02");
+		uvo.setUserEmail("member02@naver.com");
+		
+		int result = userDao.findUserByIdAndEmail(uvo);
+		log.info((result==1) ? "회원 확인" : "회원 정보 불일치");
+	}*/
+	/*@Test
+	public void testResetPasswd() {
+		UserVO uvo = new UserVO();
+		uvo.setUserId("member02");
+		uvo.setUserEmail("member02@naver.com");
+		
+		uvo.setUserPasswd("12341234");
+		int result = userDao.resetPasswd(uvo);
+		log.info((result==1) ? "성공" : "실패");
+	}*/
+	
 	/*@Test
 	public void testFindIdCheck() {
 		UserVO uvo = new UserVO();
