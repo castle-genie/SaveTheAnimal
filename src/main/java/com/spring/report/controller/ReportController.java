@@ -182,13 +182,25 @@ public class ReportController {
 		return "redirect:/report/reportList";
 	}
 	
-	@PostMapping("userStop")
-	public String userStop(ReportVO rvo) {
-		log.info("userStop call");
-		System.out.println(rvo);
-		reportService.userStop(rvo);
+//	@PostMapping("userStop")
+//	public String userStop(ReportVO rvo) {
+//		log.info("userStop call");
+//		reportService.userStop(rvo);
+//		return "redirect:/report/reportList";
+//	}
+//	@PostMapping("userGo")
+//	public String userGo(ReportVO rvo) {
+//		log.info("userGo call");
+//		reportService.userGo(rvo);
+//		return "redirect:/report/reportList";
+//	}	
+	@PostMapping("userGoStop")
+	public String userGoStop(ReportVO rvo) {
+		log.info("userGoStop call");
+		reportService.userGoStop(rvo);
 		return "redirect:/report/reportList";
 	}
+	
 	
 	@PostMapping("userDelete")
 	public String userDelete(ReportVO rvo) {

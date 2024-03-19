@@ -3,6 +3,7 @@ package com.spring.report.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.spring.report.dao.ReportDao;
@@ -150,13 +151,6 @@ public class ReportServiceImpl implements ReportService {
 		return result;
 	}
 
-	//신고 제재 시 유저 계정 정지
-	@Override
-	public int userStop(ReportVO rvo) {
-		int result = rDao.userStop(rvo);
-		return result;
-	}
-
 	//신고 제재 시 유저 계정 삭제
 	@Override
 	public int userDelete(ReportVO rvo) {
@@ -169,7 +163,24 @@ public class ReportServiceImpl implements ReportService {
 		ReportVO reportUpdateData = rDao.reportDetail(rvo);
 		return reportUpdateData;
 	}
-	
-	
+
+	//신고 제재 시 유저 계정 정지
+	public int userStop(ReportVO rvo) {
+		int result = rDao.userStop(rvo);
+		return result;
+	}
+	public int userGo(ReportVO rvo) {
+		int result = rDao.userGo(rvo);
+		return result;
+	}
+    @Override
+    @Scheduled(fixedRate = 604800000) // 1주일은 604,800,000밀리초
+    public void userGoStop(ReportVO rvo) {
+        // userStop 메소드 호출
+        userStop(rvo);
+
+        // userGo 메소드 호출 (일주일 후에 실행됨)
+        userGo(rvo);
+    }
 	
 }
