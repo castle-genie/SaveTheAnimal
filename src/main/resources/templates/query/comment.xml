@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.comment.dao.FcommentDAO">
-	<!--  
 	<resultMap type="fcomment" id="fcommentMap">
 		<id column="fcomment_id" property="fcommentId"/>
 		<result column="fcomment_content" property="fcommentContent"/>
@@ -9,26 +8,32 @@
 		<result column="fboard_id" property="fboardId"/>
 		<result column="user_id" property="userId"/>
 	</resultMap>
-	-->
-	
+
 	<!-- 자유게시판 댓글 조회 -->
-	<!--  
-	<select id="readFcomment" parameterType="fcomment" resultMap="fcommentMap">
+	<select id="FcommenteList" parameterType="int" resultMap="fcommentMap">
 		SELECT
-				fcomment_id, fcomment_content, fcomment_date, user_id
+				fcomment_id, fcomment_content, fcomment_date, fboard_id, user_id
 		FROM 	Fcomment
-		WHERE 	fboard_id = ${fboardId}
+		WHERE 	fcomment_id = #{fcommentId}
 	</select>
-	-->
-	<!--  댓글 입력 -->
-	<insert id="insertReply">
-		INSERT INTO Fcomment (fcomment_id, fcomment_content, fboard_id, user_id)
-		VALUES (Fcomment_seq.NEXTVAL, ${fcommentContent}, ${fboardId}, ${userId})
+	
+	<!-- 자유게시판 댓글 작성 -->
+	<insert id="FcommentInsert" parameterType="com.spring.comment.vo.FcommentVO">
+		INSERT INTO Fcomment (fcomment_content, fcomment_date, fboard_id, user_id)
+		VALUES (#{fcommentConent}, sysdate , #{fboardId}, ${userId})
 	</insert>
 	
-	<!-- 댓글 목록 -->
-	<select id="listReply" resultType="com.spring.comment.vo.FcommentVO">
-		SELECT fcomment_id, fcomment_content, fboard_id, user_id AS userName, fcomment_date, fcomment_updatedate
-		FROM	Fcomment 
-	</select>
+	<!-- 자유게시판 댓글 수정 -->
+	<update id="FcommentModify" parameterType="com.spring.comment.vo.FcommentVO">
+		UPDATE Fcomment
+		SET fcomment_content = #{fcommentContent}, user_id = #{userId}
+		WHERE fcomment_id = #{fcommentId} and fboard_id = #{fboardId}  
+	</update>
+	
+	<!-- 자유게시판 댓글 삭제 -->
+	<delete id="FcommentDelete" parameterType="com.spring.comment.vo.FcommentVO">
+		DELETE
+		FROM Fcomment
+		WHERE fcomment_id = #{fcommentId} and fboard_id = #{fboardId}
+	</delete>
 </mapper>

@@ -48,10 +48,16 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 	
 	//게시글 수정
+	/*
 	@Override
 	public void update(FreeBoardVO freeBoardVO) throws Exception {
 		
 		freeBoardDAO.update(freeBoardVO);
+	}
+	*/
+	@Override
+	public boolean updateFreeBoard(FreeBoardVO freeBoardVO) {
+		return freeBoardDAO.updateFreeBoard(freeBoardVO);
 	}
 	
 	//게시글 삭제

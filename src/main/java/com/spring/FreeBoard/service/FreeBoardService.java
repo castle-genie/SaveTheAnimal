@@ -22,7 +22,8 @@ public interface FreeBoardService {
 	//public void freeBoardCreate(FreeBoardVO freeBoardVO);
 	
 	//게시글 수정
-	public void update(FreeBoardVO freeBoardVO) throws Exception;
+	//public void update(FreeBoardVO freeBoardVO) throws Exception;
+	public boolean updateFreeBoard(FreeBoardVO freeBoardVO);
 	
 	//게시글 삭제
 	//public void delete(int fboardId) throws Exception;
