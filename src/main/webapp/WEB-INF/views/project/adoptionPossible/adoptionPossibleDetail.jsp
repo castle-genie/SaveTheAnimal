@@ -63,8 +63,7 @@
 		<div class="text-center">
 			<table class="table table-bordered">
 				<thead>
-					<tr>
-						
+					<tr>					
 						<td class="col_3">동물 ID</td>
 						<td>${detail.animalId }(조회수 : ${detail.readcnt })</td>
 						<td>작성일</td>
@@ -77,7 +76,7 @@
 							<table class="table mb-0">
 								
 								<tr>
-									<td rowspan="9">
+									<td colspan="4">
 										<c:if test="${not empty detail.animalFile}">
 										    <img src="/uploadStorage/animal/${detail.animalFile}" class="rounded img-fluid" />
 										</c:if>
@@ -85,34 +84,31 @@
 										    <img src="/resources/images/common/noanimal.jpg" class="rounded img-fluid" />
 										</c:if>
 									</td>
-									<td class="col-3">이름</td>
-									<td class="text-start">${detail.animalName }</td>
+									
 								</tr>
 								<tr>
+									<td class="col-3">이름</td>
+									<td class="text-start">${detail.animalName }</td>
 									<td>분류</td>
 									<td class="text-start">${detail.animalSpecies }</td>
 								</tr>
 								<tr>
 									<td>성별</td>
 									<td class="text-start">${detail.animalGender }</td>
-								</tr>
-								<tr>
 									<td>무게</td>
 									<td class="text-start">${detail.animalKg }</td>
 								</tr>
+			
 								<tr>
 									<td>나이</td>
 									<td class="text-start">${detail.animalAge }</td>
-								</tr>
-								<tr>
 									<td>색깔</td>
 									<td class="text-start">${detail.animalColor }</td>
 								</tr>
+								
 								<tr>
 									<td>중성화 유무</td>
 									<td class="text-start">${detail.animalStatus }</td>
-								</tr>
-								<tr>
 									<td>특이사항</td>
 									<td class="text-start">${detail.animalMemo }</td>
 								</tr>
@@ -157,7 +153,16 @@
 					</tr>
 				</tbody>
 			</table>
+			<div class="text-center">
+			    <img src="/resources/images/adoption/adoption1.png" alt="Adoption Image 1" class="img-fluid" style="max-width: 100%; height: auto;" />
+			    <img src="/resources/images/adoption/adoption2.png" alt="Adoption Image 2" class="img-fluid" style="max-width: 100%; height: auto;" />
+			    <img src="/resources/images/adoption/adoption3.png" alt="Adoption Image 3" class="img-fluid" style="max-width: 100%; height: auto;" />
+			    <img src="/resources/images/adoption/adoption4.png" alt="Adoption Image 4" class="img-fluid" style="max-width: 100%; height: auto;" />
+			</div>
 		</div>
+		<br>
+		<br>
+		<br>
 		<jsp:include page="../map/mapList.jsp" />	
 		<jsp:include page="weather.jsp" />	
 	</div>	
