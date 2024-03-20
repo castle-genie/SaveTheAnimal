@@ -7,8 +7,22 @@
 	<!-- css 적용 -->
 	<link rel="stylesheet" href="/resources/include/css/volunteer/volunteerDetail.css">
 	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94063d37acee8b8586233e93d841bf07&libraries=services"></script>
 	<script>
+		function formatDateTime(elementId) {
+	        // elementId에 해당하는 요소를 가져옴
+	        var element = $('#' + elementId);
+	
+	        // 가져온 요소의 텍스트 값을 읽어옴
+	        var dateTime = element.text();
+	
+	     // moment.js를 사용하여 날짜와 시간을 원하는 형식으로 변환
+	        var formattedDateTime = moment(dateTime).format('YYYY-MM-DD A h:mm').replace('AM', '오전').replace('PM', '오후');
+	
+	        // 변환된 값을 해당 요소에 설정
+	        element.text(formattedDateTime);
+	    }
 		// 모달 팝업 열기
 		function openModal() {
 		  var modal = document.getElementById("myModal");
@@ -38,6 +52,7 @@
 		};
 			
 		$(function() {
+			formatDateTime('volunteerDue');
 			var userId = "<%= session.getAttribute("userId") %>";
 			var volunteerId = ${ detail.volunteerId };
 			/* 지도 api 추가 스크립트 */
@@ -81,7 +96,7 @@
                 url: '/application/'+volunteerId,
                 method: 'GET',
                 dataType : 'json',
-                success: function(applicationCount) {
+                success: function(applicationCount) {	
                 	// applicationCount를 가져오는 데 성공했을 때만 실행됩니다.
                     // 가져온 applicationCount 값을 사용하여 해당 행(tr)에 추가합니다.
                     var tr = '<tr><th>모집 인원</th><td>' + applicationCount + '명 / ' + '${detail.volunteerLimit}명' + '</td></tr>';
@@ -91,20 +106,45 @@
                     $("#applicationBtn").on("click", function() {
            			 	if ('${detail.volunteerLimit}' == applicationCount) {
            		            	alert('이미 신청자가 다 찼습니다.');
+           		            	closeModal();
            		        } else if(userId == "null") {
        		            	if(confirm("로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?")) {
        		            		location.href="/user/login";
        		            	} 
            		        } else {
-           		        	$("#applicationForm").attr({
-           		        		method : "post",
-           		        		action : "/application/applicationSubmit"
-           		        	});
-           		        	$("#applicationForm").submit();
-           		        }
-           		    });
+           		        	$.ajax({
+           		        	    url: "/application/applicationCheck",
+           		        	    type: "POST",
+           		        	    data: {
+           		        	        userId,
+           		        	        volunteerId
+           		        	    },
+           		        	    success: function(response) {
+           		        	        console.log("result : " + response);
+
+           		        	        // 응답이 1인 경우 이미 신청한 공고임을 알림
+           		        	        if (response == 1) {
+           		        	            if (confirm("이미 신청한 공고 입니다.")) {
+           		        	                location.href = "/project/volunteer";
+           		        	            }
+           		        	        } else {
+           		        	            $("#applicationForm").attr({
+           		        	                method: "post",
+           		        	                action: "/application/applicationSubmit"
+           		        	            });
+           		        	            $("#applicationForm").submit();
+           		        	        }
+           		        	    },
+           		        	    error: function(xhr, status, error) {
+           		        	        // 에러 처리
+           		        	        console.error("Error:", error);
+           		        	        // 여기에서 에러 처리 및 사용자에게 알림을 표시할 수 있습니다.
+           		        	    }
+           		        	})
+           		    	}
+                	})
                 },
-                error: function(xhr, status, error) {
+               	error: function(xhr, status, error) {
                     console.error('Error: ', error)
                 }
             });
@@ -140,15 +180,15 @@
 						      	<tbody>
 						      		<tr>
 						      			<th>활동 날짜</th>
-						      			<td>${ detail.volunteerTime }</td>
+						      			<td id="volunteerTime">${ detail.volunteerTime }</td>
 					      			</tr>
 					      			<tr>
 						      			<th>신청 마감</th>
-						      			<td>${ detail.volunteerDue }</td>
+						      			<td id="volunteerDue">${ detail.volunteerDue }</td>
 					      			</tr>
 					      			<tr>
 						      			<th>참가 비용</th>
-						      			<td>${ detail.volunteerCost }</td>
+						      			<td id="volunteerCost">${ detail.volunteerCost }</td>
 					      			</tr>
 					      			<tr>
 						      			<th>주 소</th>

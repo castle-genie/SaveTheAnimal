@@ -26,12 +26,13 @@ public interface FreeBoardDAO {
 	public boolean plusCnt(int fboardId);
 	
 	//게시글 등록하는 메서드
-	public int freeBoardCreate(FreeBoardVO freeBoardVO);
+	public int insertFreeBoard(FreeBoardVO freeBoardVO);
 	
 	//public void freeBoardCreate(FreeBoardVO freeBoardVO);
 	
 	//게시글 수정
-	public void update(FreeBoardVO freeBoardVO) throws Exception;
+	//public void update(FreeBoardVO freeBoardVO) throws Exception;
+	public boolean updateFreeBoard(FreeBoardVO freeBoardVO);
 	
 	//게시글 삭제
 	//public void delete(int fboardId) throws Exception;
