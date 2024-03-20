@@ -33,7 +33,7 @@ public interface FcommentDAO {
 	
 	//댓글 삭제
 	public FcommentVO FcommentDelete(FcommentVO fcommentvo) throws Exception;
-	 
+	
 	
 	
 	

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/common.jsp"%> 
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<%@ include file="/WEB-INF/views/common/common.jsp"%>
+<meta name="robots"
+	content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="stylesheet" href="/resources/include/assets2/css/main.css">
 
 </head>
@@ -39,69 +40,31 @@
 					<ul class="actions text-end">
 						<li><a href="freeBoardList" class="button special">목록</a></li>
 						<c:if test="${sessionScope.userId eq freeBoard.userId}">
-							<li><input type="button" value="수정" onclick="location.href='freeBoardModify?fboardId=${freeBoard.fboardId}'"></li>
-							<li><input type="button" value="삭제" onclick="del(${freeBoard.fboardId})"></li>
-							</c:if>
+							<li><input type="button" value="수정"
+								onclick="location.href='freeBoardModify?fboardId=${freeBoard.fboardId}'"></li>
+							<li><input type="button" value="삭제"
+								onclick="del(${freeBoard.fboardId})"></li>
+						</c:if>
 						<c:if test="${empty userLogin}">
-						<li>
-							<a href = "/user/login" onclick="alert('신고하려면 로그인이 필요합니다')">
-								<button type="button" class="btn btn-primary button special">신고</button>
-							</a>
-						</li>
+							<li><a href="/user/login"
+								onclick="alert('신고하려면 로그인이 필요합니다')">
+									<button type="button" class="btn btn-primary button special">신고</button>
+							</a></li>
 						</c:if>
 						<c:if test="${not empty userLogin}">
-							<li><%@ include file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
+							<li><%@ include
+									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
 						</c:if>
 					</ul>
 				</div>
 				<!-- 댓글 시작 -->
 				<div>
-				<hr />
-				<ul>
-					<!--  
-					<li>
-						<div>
-							<p>첫번째 댓글 작성자</p>
-							<p>첫번째 댓글</p>
-						</div>
-					</li>
-					<li>
-						<div>
-							<p>두번째 댓글 작성자</p>
-							<p>두번째 댓글</p>
-						</div>
-					</li>
-					<li>
-						<div>
-							<p>세번째 댓글 작성자</p>
-							<p>세번째 댓글</p>
-						</div>
-					</li>
-					-->
-					<c:forEach items="${fcomment}" var="fcomment">
-					<li>
-						<div>
-							<p>${fcomment.userId} / ${fcomment.fcommentDate}</p>
-							<p>${fcomment.fcommentContent}</p>
-						</div>
-					</li>
-					</c:forEach>
-				</ul>
-				<div>
-					<form method="post" action="/reply/write">
-
-						<p>
-							<label>댓글 작성자</label> <input type="text" name="writer">
-						</p>
-						<p>
-							<textarea rows="5" cols="50" name="content"></textarea>
-						</p>
-						<p>
-							<input type="hidden" name="fboardId" value="${freeBoard.fboardId}">
-							<button type="submit">댓글 작성</button>
-						</p>
-					</form>
-				</div>
+					<hr />
+					<div>
+						<input type="text" id="userId" placeholder="댓글작성자">
+						<input type="text" id="fcommentContent" placeholder="댓글내용">
+						<button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
+					</div>
 				</div>
 				<!-- 댓글 종료 -->
 			</div>
@@ -140,6 +103,27 @@
 		if (chk) {
 			location.href='delete?fboardId=' + fboardId;
 		}
+	}
+	const commentWrite = () =>{
+		const writer = document.getElementById("userId").value;
+		const contents = document.getElementById("fcommentContent").value;
+		const board = '${freeBoard.fboardId}';
+		$.ajax({
+			type: "post",
+			url: "/comment/save",
+			data: {
+				userId: writer,
+				fcommentContent: contents,
+				fboardId: board
+			},
+			dataType: "json",
+			success: function(commentList){
+				console.log("댓글작성완료");
+			},
+			error: function() {
+				console.log("댓글작성실패");
+			}
+		});
 	}
 </script>
 </html>

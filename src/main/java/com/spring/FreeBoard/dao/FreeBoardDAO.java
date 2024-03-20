@@ -40,6 +40,5 @@ public interface FreeBoardDAO {
 	
 	
 	
-	//public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
 
 }
