@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.common.vo.PageDTO;
 import com.spring.user.service.UserService;
 import com.spring.user.vo.UserVO;
 
@@ -136,23 +138,34 @@ public class UserController {
 		log.info("비밀번호 재설정 화면");
 		return "user/resetPwd";
 	}
-	
-	@ResponseBody
-	@PostMapping("/resetPwd")
-	public String resetPwd(@RequestBody UserVO uvo, Model model, RedirectAttributes ras) {
-		log.info("임시비밀번호 업데이트 호출");	
-		log.info(uvo.toString());
-		int result = 0;		
-		result = userService.resetPasswd(uvo);
 
-		if (result == 1) {		
+	@PostMapping("/resetPwd")
+	public String resetPwd(UserVO uvo, Model model, RedirectAttributes ras) {
+		log.info("임시비밀번호 업데이트 호출");	
+		log.info(uvo.toString());	
+		
+		// 임시 비밀번호 생성
+		String tempPassword = userService.generateTempPasswd();
+		log.info(tempPassword);
+		uvo.setUserPasswd(tempPassword);
+		
+		int isUpdate = 0;
+		isUpdate = userService.resetPasswd(uvo);
+		
+		UserVO result = new UserVO(); // 비밀번호 담을 vo 생성
+		result.setUserPasswd(tempPassword);
+	
+		
+		if (isUpdate == 1 && result != null) {		
 			log.info("업데이트 성공");
+			model.addAttribute("isUpdate", isUpdate);
 			model.addAttribute("result", result);
+			return "user/resetPwd";
 		} else {
 			log.info("업데이트 실패");
 			ras.addFlashAttribute("msg", "임시비밀번호 발급 처리에 문제가 있어 다시 진행해 주세요.");
+			return "redirect:/user/resetPwd";
 		}
-		return "redirect:/user/resetPwd";
 	}
 	
 	@ResponseBody
@@ -253,12 +266,17 @@ public class UserController {
 	}
 	
 	
-	@GetMapping("/admin/userList")
+	@GetMapping("/userList")
 	public String userList(@ModelAttribute UserVO uvo, Model model) {
 		List<UserVO> userList = userService.userList(uvo);
 		model.addAttribute("userList", userList);
+		
+		int total = userService.userListCnt(uvo);
+		
+		model.addAttribute("pageMaker", new PageDTO(uvo, total));				
 		return "admin/user/userList";
 	}
 	
+
 
 }

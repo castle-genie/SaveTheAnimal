@@ -31,10 +31,8 @@ public interface UserDao {
 	// 삭제되어야하는 자식테이블 항목.. 게시판 다, 봉사 신청, 입양 상담, 후원 
 	// cascade 해야하는 항목?
 	
-	public List<UserVO> userList(UserVO uvo); //회원 목록 조회
-
-	
-	//public int userListCnt(UserVO uvo); // users 테이블의 전체 레코드 수 : 페이징처리시 필요
+	public List<UserVO> userList(UserVO uvo); //회원 목록 조회	
+	public int userListCnt(UserVO uvo); // users 테이블의 전체 레코드 수 : 페이징처리시 필요
 	
 	
 }

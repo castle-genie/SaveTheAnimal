@@ -188,12 +188,12 @@
 										
 				</div>
 			</div>
-			<hr>
+			<!-- <hr>
 			<div>myPage.jsp 화면</div>
 			<div>하위 메뉴 배치 해서 회원정보 ajax로 불러오기</div>
 			<div>내 정보 수정 : updateProfile.jsp</div>
 			<div>나의 활동, 후원 정보 : 각각 해당 페이지로 이동하여 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
-			<hr>
+			<hr> -->
 		</div>
 	</section>
 	

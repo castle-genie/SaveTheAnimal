@@ -25,7 +25,7 @@
 		<div class="inner">
 			<header class="align-center">
 				<p>Save The Animal</p>
-				<h2>회원 가입 페이지</h2>
+				<h2>회원 가입</h2>
 			</header>
 		</div>
 	</section><!-- Two -->
@@ -35,7 +35,7 @@
 				<div class="content">
 					<header class="align-center">
 						<p>Save The Animal</p>
-						<h2>회원 가입</h2>
+						<h2>회원 정보 입력</h2>
 					</header>
 					<div class="form-container">
 						<form id="joinForm" name="joinForm">
@@ -80,7 +80,8 @@
 													<label for="userPhone" class="align-center" >핸드폰번호</label>
 												</td>
 												<td>
-													<input type="text" name="userPhone" id="userPhone" maxlength="11" placeholder="'-' 제외 입력" />
+													<input type="text" name="userPhone" id="userPhone" maxlength="13" placeholder="'-' 제외 입력"
+													 />
 												</td>
 												<td>
 													<button type="button" class="button alt small" id="phoneCheckBtn">중복 확인</button>
@@ -126,9 +127,9 @@
 					</div>
 				</div>
 			</div>
-			<div>join.jsp 화면</div>
+			<!-- <div>join.jsp 화면</div>
 			<div>아이디, 비밀번호, 비밀번호확인, 이름, 이메일, 핸드폰번호, 약관동의 체크박스 입력 폼</div>
-			<div>회원가입하기 버튼 : 입력 버튼 누르고 성공시 메인페이지 이동 및 메뉴 접근 가능! 로그인 버튼 대신 마이페이지 메뉴 생성?</div>
+			<div>회원가입하기 버튼 : 입력 버튼 누르고 성공시 메인페이지 이동 및 메뉴 접근 가능! 로그인 버튼 대신 마이페이지 메뉴 생성?</div> -->
 		</div>
 	</section>
 	<!-- Footer -->
