@@ -10,6 +10,17 @@ function selectAll(selectAll) {
 
 $(function(){
 	
+	/* 이름은 한글만 입력받게 하기 */
+	$("#userName").on("input", function(){
+		this.value = this.value.replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g, '');	
+	});
+	
+	/* 핸드폰번호는 숫자만 입력받게 하기 */
+	$("#userPhone").on("input", function(){
+		this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+	});
+
+	
 	/* 아이디 유효성 체크, 중복 체크 */
 	$("#idCheckBtn").on("click", function(){
 		/* 아이디 유효성 검사 (첫글자 영문자로, 두번째부터 영문자와 숫자로 6글자 이상 15글자 이하.) */
@@ -53,6 +64,7 @@ $(function(){
 		//console.log("아이디 입력값 변경 이벤트");
 		idCheck = 0; // 중복체크 진행하도록 유도
 	});
+
 	
 	/* 핸드폰 번호 유효성 체크, 중복 체크 */	
 	$("#phoneCheckBtn").on("click", function(){
@@ -99,7 +111,6 @@ $(function(){
 	/* 이메일 유효성 체크, 중복 체크 */	
 	$("#emailCheckBtn").on("click", function(){
         let userEmail = $("#userEmail").val();
-        //const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/;
         const emailPattern = /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
         if (!chkData("#userEmail", "이메일을")) { return;	
         }else if(!emailPattern.test(userEmail)) {
@@ -187,7 +198,7 @@ $(function(){
 			return;	
         // 비밀번호 일치여부 확인
         } else if (userPasswd != userPasswdCheck) {
-            //$("input[name='error']").attr("placeholder", "비밀번호와 비밀번호 확인은 일치해야 합니다.");
+            $("span[name='error']").attr("placeholder", "비밀번호와 비밀번호 확인은 일치해야 합니다.");
             alert("비밀번호와 비밀번호 확인은 일치해야 합니다.\n다시 입력해 주세요.");
             $("#userPasswdCheck").val("");
             $("#userPasswdCheck").focus();
@@ -227,3 +238,25 @@ $(function(){
 	});
 		
 });
+
+function phoneFormat(phoneNumber) {
+	console.log("phoneFormat()호출");
+  // 특수문자 제거
+  const value = phoneNumber.replace(/[^0-9]/g, '');
+  console.log(value);
+  // 00 OR 000 지정
+  const firstLength = value.length > 9 ? 3 : 2;
+
+  // ({2,3}) - ({3,4}) - ({4})
+  return [
+    // 첫번째 구간 (00 or 000)
+    value.slice(0, firstLength),
+    // 두번째 구간 (000 or 0000)
+    value.slice(firstLength, value.length - 4),
+    // 남은 마지막 모든 숫자
+    value.slice(value.length - 4),
+  ].join('-');
+}
+
+
+

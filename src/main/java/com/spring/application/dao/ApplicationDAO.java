@@ -26,4 +26,6 @@ public interface ApplicationDAO {
 	// 봉사 공고 신청 여부 확인
 	public int applicationCheck(ApplicationVO applicationVO);
 	
+	// 봉사 실행 여부에 따라 봉사 활동 증가
+	public int increaseUserVolCnt(String[] userIds);
 }

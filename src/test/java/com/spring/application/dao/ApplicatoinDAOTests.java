@@ -1,5 +1,9 @@
 package com.spring.application.dao;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -7,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.spring.application.vo.ApplicationVO;
+import com.spring.user.vo.UserVO;
 import com.spring.volunteer.vo.VolunteerVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -87,6 +92,7 @@ public class ApplicatoinDAOTests {
 		log.info("삭제된 행 : " + applicationDAO.applicationDelete(applicationVO));
 	}*/
 	
+	/*
 	@Test
 	public void applicationCheckTest() {
 		ApplicationVO applicationVO = new ApplicationVO();
@@ -94,5 +100,13 @@ public class ApplicatoinDAOTests {
 		applicationVO.getVolunteer().setVolunteerId(3);
 		int applicatinoCheck = applicationDAO.applicationCheck(applicationVO);
 		log.info("반환 결과 : " + applicatinoCheck);
+	} */
+	
+	/* */
+	@Test
+	public void testUpdateUserVolCnt() {
+		 // 테스트할 사용자 ID 목록
+		String[] userIds = {"member10", "member11"};
+		log.info("반환 갯수 : " + applicationDAO.increaseUserVolCnt(userIds));
 	}
 }

@@ -117,7 +117,7 @@ public class ReportController {
 	public String reportDelete(ReportVO rvo){
 //		log.info("reportDelete call");
 		reportService.reportDelete(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/board/freeBoardList";
 	}
 	
 	//신고 수정 폼 데이터

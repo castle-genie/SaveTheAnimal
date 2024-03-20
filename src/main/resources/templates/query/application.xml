@@ -12,6 +12,7 @@
 		<association property="user">
 			<result column="user_id" property="userId" /> 
 			<result column="user_name" property="userName" /> 
+			<result column="user_volcnt" property="userVolcnt" />
 		</association> 
 		<association property="volunteer">
 			<result column="volunteer_id" property="volunteerId" /> 
@@ -57,4 +58,14 @@
 		USING (user_id)
 		WHERE user_id = #{user.userId} AND volunteer_id = #{volunteer.volunteerId}
 	</select>
+	
+	<update id="increaseUserVolCnt" parameterType="java.lang.String" >
+    UPDATE users
+    SET user_volcnt = user_volcnt + 1
+    WHERE user_id IN
+    <foreach collection="array" item="userId" open="(" separator="," close=")">
+        #{userId}
+    </foreach>
+</update>
+
 </mapper>

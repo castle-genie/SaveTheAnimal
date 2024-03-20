@@ -19,7 +19,7 @@
 		<div class="inner">
 			<header class="align-center">
 				<p>Save The Animal</p>
-				<h2>회원 로그인 페이지</h2>
+				<h2>로그인</h2>
 			</header>
 		</div>
 	</section><!-- Two -->
@@ -63,11 +63,11 @@
 					</c:if>
 				</div>
 			</div>
-		<div>login.jsp 화면</div>
+		<!-- <div>login.jsp 화면</div>
 		<div>아이디, 비밀번호 입력 폼</div>
 		<div>로그인 버튼 : 입력 버튼 누르고 성공시 메인페이지 이동 실패시 알림메시지 띄우고 현재페이지 재요청</div>
 		<div>아이디 찾기 : </div>
-		<div>비밀번호 재설정 : </div>
+		<div>비밀번호 재설정 : </div> -->
 		</div>
 	</section>
 	<!-- Footer -->
