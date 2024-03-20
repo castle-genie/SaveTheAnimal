@@ -1,5 +1,6 @@
 package com.spring.user.service;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,11 @@ import com.spring.user.vo.UserVO;
 import lombok.Setter;
 @Service
 public class UserServiceImpl implements UserService {
+	//랜덤 임시 비밀번호 생성을 위한 필드 설정
+	private static final char[] CHAR_SET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+    private static final SecureRandom random = new SecureRandom();
+    private static final int PASSWORD_LENGTH = 10;
+    
 	@Setter(onMethod_ = @Autowired)
 	private UserDao userDao;
 
@@ -25,6 +31,31 @@ public class UserServiceImpl implements UserService {
 		UserVO result = userDao.findId(uvo);
 		return result;
 	}
+
+	@Override
+	public int findUserByIdAndEmail(UserVO uvo) {
+		int result = userDao.findUserByIdAndEmail(uvo);
+		return result;
+	}
+	
+	// 임시 비밀번호 재설정
+	@Override
+	public int resetPasswd(UserVO uvo) {
+		int result = userDao.resetPasswd(uvo);
+		return result;
+	}
+	
+	// 임시 비밀번호 랜덤으로 생성
+	@Override
+	public String generateTempPasswd() {
+		StringBuilder tempPassword = new StringBuilder(PASSWORD_LENGTH);
+        for (int i = 0; i < PASSWORD_LENGTH; i++) {
+            char randomChar = CHAR_SET[random.nextInt(CHAR_SET.length)];
+            tempPassword.append(randomChar);
+        }
+        return tempPassword.toString();
+	}
+
 
 	@Override
 	public int userJoin(UserVO uvo) {
@@ -79,19 +110,101 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 	
-	// 회원 목록 조회
+	// 회원 목록 조회 + 마스킹 처리
 	@Override
 	public List<UserVO> userList(UserVO uvo) {
 		List<UserVO> list = null;
 		list = userDao.userList(uvo);
+		
+		// 리스트의 각 데이터 항목을 마스킹 처리
+	    if (list != null && !list.isEmpty()) {
+	        for (UserVO user : list) {
+	            maskUserData(user);
+	        }
+	    }		
 		return list;
+	}
+	
+	@Override
+	public int userListCnt(UserVO uvo) {
+		return userDao.userListCnt(uvo);
+	}
+	
+	// 사용자 정보 마스킹 처리 메서드
+	private void maskUserData(UserVO user) {
+		String maskedId = transferMasking(user.getUserId(), 2, user.getUserId().length() -10); // 아이디는 앞 2글자를 제외 사이 8자리를 마스킹
+		String maskedName = transferNameMasking(user.getUserName());
+		String maskedEmail = transferEmailMasking(user.getUserEmail());
+		String maskedPhone = transferPhoneMasking(user.getUserPhone());
+		
+		user.setUserId(maskedId);
+		user.setUserName(maskedName);
+		user.setUserEmail(maskedEmail);
+		user.setUserPhone(maskedPhone);
+		
+	}
+
+	private String transferMasking(String target, int startIndex, int endIndex) {
+		if(target == null) {
+	        return "";
+	    } else {
+	        String result = "";
+	        target = target.trim();
+	        int length = target.length();
+	        String[] alphabets = target.split("");
+	        for(int i = 0; i < length; i++) {
+	            result += (i < startIndex || i >= (length - endIndex)) ? alphabets[i] : "*";
+	        }
+	        return result;
+	    }
+
+	}
+
+	private String transferNameMasking(String name) {
+	    if(name == null) {
+	        return "";
+	    } else {
+	        if(name.length() > 2) {
+	            return transferMasking(name, 1, 1);
+	        } else {
+	            return transferMasking(name, 1, 0);
+	        }
+	    }
+	}
+
+	private String transferEmailMasking(String email) {
+	    if(email == null) {
+	        return "";
+	    } else {
+	        if(email.contains("@")) {
+	            String[] data = email.split("@");
+	            int endIndex = data[1].length() - data[1].indexOf(".");
+	            return transferMasking(data[0], 1, 0) + "@" + transferMasking(data[1], 1, endIndex);
+	        } else {
+	            return email;
+	        }
+	    }
+	}
+	
+	private String transferPhoneMasking(String phone) {
+	    if(phone == null) {
+	        return "";
+	    } else {
+	        if(phone.contains("-")) {
+	            String[] data = phone.split("-");
+	            StringBuilder sb = new StringBuilder();
+	            for(int i = 0; i < data.length; i++) {
+	                sb.append(i > 0 ? "-" : "");
+	                sb.append(i == 1 ? transferMasking(data[i], 0, 0) : data[i]);
+	            }
+	            return sb.toString();
+	        } else {
+	        	// 하이픈이 없는 경우 사이 4자리를 마스킹 처리
+	            return transferMasking(phone, 3, phone.length()-7); 
+	        }
+	    }
 	}
 
 
-	
 
-
-
-	
-	
 }
