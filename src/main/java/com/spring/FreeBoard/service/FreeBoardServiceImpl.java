@@ -63,9 +63,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	//게시글 삭제
 	@Override
 	public int deleteFreeBoard(FreeBoardVO freeBoardVO) {
-		log.info("test");
+		log.info("deleteFreeBoard 메서드 실행");
 		int deletefreeboard = freeBoardDAO.deleteFreeBoard(freeBoardVO);
-		log.info("test"+ deletefreeboard);
+		log.info("deleteFreeBoard 메서드 실행완료"+ deletefreeboard);
 		return deletefreeboard;
 		//return freeBoardDAO.freeBoardDelete(fboardId);
 	}

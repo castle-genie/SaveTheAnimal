@@ -11,36 +11,32 @@
 
 	<!-- 자유게시판 댓글 조회 -->
 	<select id="fcommentList" parameterType="fcomment" resultMap="fcommentMap">
-		SELECT
-				fcomment_id, fcomment_content, fcomment_date, fboard_id, user_id
+		SELECT	fcomment_id, fcomment_content, fcomment_date, fboard_id, user_id
 		FROM 	Fcomment
 		WHERE 	fcomment_id = #{fcommentId}
 		ORDER BY fcomment_id DESC
 	</select>
 	
 	<!-- 자유게시판 댓글 작성 -->
-	<!--  
-	<insert id="FcommentInsert" parameterType="com.spring.comment.vo.FcommentVO">
-		INSERT INTO Fcomment (fcomment_content, fcomment_date, fboard_id, user_id)
-		VALUES (#{fcommentConent}, sysdate , #{fboardId}, ${userId})
+	<insert id="fcommentInsert" parameterType="fcomment">
+		<selectKey keyProperty="fcommentId" resultType="int" order="BEFORE">
+			select Fcomment_seq.nextval from dual
+		</selectKey>
+		INSERT INTO Fcomment (fcomment_id, fcomment_content, fcomment_date, fboard_id, user_id)
+		VALUES (#{fcommentId}, #{fcommentContent}, sysdate, #{fboardId}, #{userId})
 	</insert>
-	-->
 	
 	<!-- 자유게시판 댓글 수정 -->
-	<!--  
-	<update id="FcommentModify" parameterType="com.spring.comment.vo.FcommentVO">
+	<update id="fcommentUpdate" parameterType="fcomment">
 		UPDATE Fcomment
-		SET fcomment_content = #{fcommentContent}, user_id = #{userId}
-		WHERE fcomment_id = #{fcommentId} and fboard_id = #{fboardId}  
+		SET fcomment_content = #{fcommentContent}, fcomment_date = sysdate
+		WHERE fcomment_id = #{fcommentId}  
 	</update>
-	-->
 	
 	<!-- 자유게시판 댓글 삭제 -->
-	<!--  
-	<delete id="FcommentDelete" parameterType="com.spring.comment.vo.FcommentVO">
+	<delete id="fcommentDelete" parameterType="fcomment">
 		DELETE
 		FROM Fcomment
-		WHERE fcomment_id = #{fcommentId} and fboard_id = #{fboardId}
+		WHERE fcomment_id = #{fcommentId}
 	</delete>
-	-->
 </mapper>

@@ -62,13 +62,13 @@ public class FreeBoardController {
 	*/
 	// 게시글 조회
 	@GetMapping(value = "freeBoardDetail")
-	public String freeBoardDetail(Model model, FreeBoardVO freeBoardVO) {
+	public String freeBoardDetail(Model model, FreeBoardVO freeBoardVO){
 		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(freeBoardVO));
 		
-		
+		log.info("조회수증가 명령");
 		//조회수 +1
 		freeBoardService.plusCnt(freeBoardVO);
-		
+		log.info("조회수증가 완료");
 		
 		return "board/freeBoardDetail";
 		
@@ -127,7 +127,7 @@ public class FreeBoardController {
 		
 		log.info("삭제" + freeBoardVO);
 		freeBoardService.deleteFreeBoard(freeBoardVO);
-		log.info("삭제2");
+		log.info("삭제완료");
 		return "redirect:/board/freeBoardList";
 	}
 	

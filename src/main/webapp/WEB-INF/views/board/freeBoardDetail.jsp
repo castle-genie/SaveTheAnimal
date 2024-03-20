@@ -57,22 +57,9 @@
 									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
 						</c:if>
 					</ul>
+					<%@ include file="/WEB-INF/views/board/fcomment.jsp"%>
 				</div>
 				<!-- 댓글 시작 -->
-				<hr />
-				<form method="post" action="/reply/write">
-
-					<p>
-						<label>댓글 작성자</label> <input type="text" name="writer">
-					</p>
-					<p>
-						<textarea rows="5" cols="50" name="content"></textarea>
-					</p>
-					<p>
-						<input type="hidden" name="fboardId" value="${freeBoard.fboardId}">
-						<button type="submit">댓글 작성</button>
-					</p>
-				</form>
 			</div>
 		</div>
 		<!-- 댓글 종료 -->
