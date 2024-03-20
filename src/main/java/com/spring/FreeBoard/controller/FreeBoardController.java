@@ -62,45 +62,23 @@ public class FreeBoardController {
 	*/
 	// 게시글 조회
 	@GetMapping(value = "freeBoardDetail")
-<<<<<<< HEAD
-	public String freeBoardDetail(Model model, @RequestParam("fboardId")int fboardId)throws Exception{
-		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(fboardId));
-		
-=======
 	public String freeBoardDetail(Model model, FreeBoardVO freeBoardVO){
 		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(freeBoardVO));
->>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06
 		
 		log.info("조회수증가 명령");
 		//조회수 +1
-<<<<<<< HEAD
-		freeBoardService.plusCnt(fboardId);
-=======
 		freeBoardService.plusCnt(freeBoardVO);
 		log.info("조회수증가 완료");
 		
 		return "board/freeBoardDetail";
->>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06
 		
-		//댓글 조회
 		/*
+		//댓글 조회
 		List<FcommentVO> fcommentList = fcommentService.list(fboardId);
 		model.addAttribute("fcommentList", fcommentList);
-		*/
-		/*
-		List<FcommentVO> fcomment;
-		fcomment = fcommentService.list(fboardId);
-		model.addAttribute("fcomment", fcomment);
-		*/
-		/*
-		List<FcommentVO> fcomment;
-		fcomment = fcommentService.list(fboardId);
-		model.addAttribute("fcomment", fcomment);
-		*/
 		
-		return "board/freeBoardDetail";
-		
-		
+		return "fcommentList";
+		*/
 		/*
 		//댓글 조회
 		List<FcommentVO> fcomment;
