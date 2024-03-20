@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
@@ -19,7 +20,11 @@
 			</header>
 		</div>
 	</section>
-
+					<input type="" name="fboardId" value="${freeBoard.fboardId}"/>
+					<input type="" name="reportId" value="${freeBoard.reportId}"/>
+					<input type="" name="boardUser" value="${freeBoard.userId}"/>
+					<input type="" name="boardUser" value="${freeBoard.reUserId}"/>
+					<input type="" name="boardUser" value="${sessionScope.userId}"/>
 	<!-- Two -->
 	<section id="two" class="wrapper style2">
 		<div class="inner">
@@ -46,6 +51,7 @@
 								onclick="del(${freeBoard.fboardId})"></li>
 						</c:if>
 						<c:if test="${empty userLogin}">
+<<<<<<< HEAD
 							<li><a href="/user/login"
 								onclick="alert('신고하려면 로그인이 필요합니다')">
 									<button type="button" class="btn btn-primary button special">신고</button>
@@ -54,10 +60,30 @@
 						<c:if test="${not empty userLogin}">
 							<li><%@ include
 									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
+=======
+							<li>
+								<a href="/user/login" onclick="alert('신고하려면 로그인이 필요합니다')">
+									<button type="button" class="btn btn-primary button special">신고</button>
+								</a>
+							</li>
+						</c:if>
+						<c:if test="${not empty userLogin}">
+							<c:choose>
+								<c:when test="${freeBoard.reUserId eq sessionScope.userId}">
+									<li><%@ include file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
+								</c:when>
+								<c:otherwise>
+									<li><%@ include file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
+								</c:otherwise>
+								
+							</c:choose>
+>>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06
 						</c:if>
 					</ul>
+					<%@ include file="/WEB-INF/views/board/fcomment.jsp"%>
 				</div>
 				<!-- 댓글 시작 -->
+<<<<<<< HEAD
 				<div>
 					<hr />
 					<div>
@@ -67,8 +93,11 @@
 					</div>
 				</div>
 				<!-- 댓글 종료 -->
+=======
+>>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06
 			</div>
 		</div>
+		<!-- 댓글 종료 -->
 	</section>
 	<!-- Footer -->
 	<footer id="footer">
@@ -95,13 +124,14 @@
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
 	<script src="/resources/include/js/reportInsert.js"></script>
+	<script src="/resources/include/js/reportUpdate.js"></script>
 
 </body>
 <script>
 	function del(fboardId) {
 		var chk = confirm("정말 삭제하시겠습니까?");
 		if (chk) {
-			location.href='delete?fboardId=' + fboardId;
+			location.href='delete?fboardId='+fboardId;
 		}
 	}
 	const commentWrite = () =>{

@@ -17,35 +17,58 @@
 	</insert>
 	-->
 	<!-- 자유게시판 댓글 조회 -->
+<<<<<<< HEAD:src/main/resources/templates/query/comment.xml
 	<!--  
 	<select id="FcommentList" parameterType="int" resultMap="fcommentMap">
 		SELECT
 				fcomment_id, fcomment_content, fcomment_date, fboard_id, user_id
+=======
+	<select id="fcommentList" parameterType="fcomment" resultMap="fcommentMap">
+		SELECT	fcomment_id, fcomment_content, fcomment_date, fboard_id, user_id
+>>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06:src/main/resources/templates/query/fcomment.xml
 		FROM 	Fcomment
 		WHERE 	fcomment_id = #{fcommentId}
+		ORDER BY fcomment_id DESC
 	</select>
 	-->
 	<!-- 자유게시판 댓글 작성 -->
+<<<<<<< HEAD:src/main/resources/templates/query/comment.xml
 	<!--  
 	<insert id="FcommentInsert" parameterType="com.spring.comment.vo.FcommentVO">
 		INSERT INTO Fcomment (fcomment_content, fcomment_date, fboard_id, user_id)
 		VALUES (#{fcommentConent}, sysdate , #{fboardId}, ${userId})
+=======
+	<insert id="fcommentInsert" parameterType="fcomment">
+		<selectKey keyProperty="fcommentId" resultType="int" order="BEFORE">
+			select Fcomment_seq.nextval from dual
+		</selectKey>
+		INSERT INTO Fcomment (fcomment_id, fcomment_content, fcomment_date, fboard_id, user_id)
+		VALUES (#{fcommentId}, #{fcommentContent}, sysdate, #{fboardId}, #{userId})
+>>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06:src/main/resources/templates/query/fcomment.xml
 	</insert>
 	-->
 	<!-- 자유게시판 댓글 수정 -->
+<<<<<<< HEAD:src/main/resources/templates/query/comment.xml
 	<!--  
 	<update id="FcommentModify" parameterType="com.spring.comment.vo.FcommentVO">
+=======
+	<update id="fcommentUpdate" parameterType="fcomment">
+>>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06:src/main/resources/templates/query/fcomment.xml
 		UPDATE Fcomment
-		SET fcomment_content = #{fcommentContent}, user_id = #{userId}
-		WHERE fcomment_id = #{fcommentId} and fboard_id = #{fboardId}  
+		SET fcomment_content = #{fcommentContent}, fcomment_date = sysdate
+		WHERE fcomment_id = #{fcommentId}  
 	</update>
 	-->
 	<!-- 자유게시판 댓글 삭제 -->
+<<<<<<< HEAD:src/main/resources/templates/query/comment.xml
 	<!--
 	<delete id="FcommentDelete" parameterType="com.spring.comment.vo.FcommentVO">
+=======
+	<delete id="fcommentDelete" parameterType="fcomment">
+>>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06:src/main/resources/templates/query/fcomment.xml
 		DELETE
 		FROM Fcomment
-		WHERE fcomment_id = #{fcommentId} and fboard_id = #{fboardId}
+		WHERE fcomment_id = #{fcommentId}
 	</delete>
 	-->
 </mapper>
