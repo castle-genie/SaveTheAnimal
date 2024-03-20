@@ -54,19 +54,13 @@
 	
 	<!-- 게시글 수정 -->
 	<update id="updateFreeBoard" parameterType="FreeBoard">
-		<!--  
-		UPDATE 	freeBoard
-		SET 	fboard_title 		= #{fboardTitle}
-				fboard_content	 	= #{fboardContent}
-		WHERE	fboard_id 			= #{fboardId}
-		-->
 		UPDATE freeBoard
 		SET fboard_title = #{fboardTitle}, fboard_content = #{fboardContent}
 		WHERE	fboard_id = #{fboardId}
 	</update>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="freeBoardDelete" parameterType="FreeBoard">
+	<delete id="deleteFreeBoard" parameterType="FreeBoard">
 		DELETE FROM freeBoard 
 		WHERE	fboard_id = #{fboardId}
 	</delete>
