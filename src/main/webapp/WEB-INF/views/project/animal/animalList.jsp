@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/admin/admin.jspf"%>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -62,7 +61,7 @@
                             <c:forEach var="animal" items="${animalList}" varStatus="status">
                                 <tr class="text-center id" data-num="${animal.animalId}">
                                     
-                                    <td>${animal.animalId}</td>
+                                    <td class="id">${animal.animalId}</td>
                                     <td>
                                         <img src="<c:if test='${not empty animal.animalFile}'>/uploadStorage/animal/${animal.animalFile}</c:if>
                                          <c:if test='${empty animal.animalFile}'>/resources/images/common/noanimal.jpg</c:if>"
@@ -78,7 +77,7 @@
                                     <td class="temp0">${animal.animalTemp}</td>
                                     <td class="regist">${animal.animalRegist}</td>
                                     <td class="readcnt">${animal.readcnt}</td>
-                                    
+                                  </tr>  
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
@@ -95,7 +94,6 @@
 		</div>	
 	</div>
 	
-	 
     <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <c:if test="${pageMaker.prev}">
@@ -116,7 +114,7 @@
             </ul>
         </nav>
 
-	
+	</div>
 	
 	<script src="/resources/include/js/animal/animalList.js"></script>
 	<script>
@@ -144,17 +142,10 @@
 			}
 		});	
 	</script>
+</main>
 </body>
 
-</div>
 
-
-</main>
-
-
-
-</div>
-</div>
 <script src="/resources/include/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/resources/include/assets/js/color-modes.js"></script>
 <script src="/resources/include/js/common.js"></script>
@@ -164,6 +155,6 @@
 	crossorigin="anonymous"></script>
 <script src="/resources/include/js/dashboard.js"></script>
 
-</body>
+
 </html>
 
