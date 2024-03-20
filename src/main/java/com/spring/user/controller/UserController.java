@@ -152,7 +152,7 @@ public class UserController {
 		int isUpdate = 0;
 		isUpdate = userService.resetPasswd(uvo);
 		
-		UserVO result = new UserVO(); // 비밀번호 담을 vo 생성
+		UserVO result = new UserVO(); // 임시 비밀번호 vo
 		result.setUserPasswd(tempPassword);
 	
 		
