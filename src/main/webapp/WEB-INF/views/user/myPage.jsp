@@ -4,9 +4,13 @@
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
 	<script>
-	   var userId = "<%= session.getAttribute("userId") %>";
 	   function applicationView() {
-		   location.href="/application/applicationView?userId=" + userId;
+		/*    $("#data").attr({
+			   method:"get",
+			   action:"/application/applicationView"
+		   });
+		   $("#data").submit(); */
+		   location.href="/application/applicationView";
 	   }
 	</script>
 </head>
@@ -39,10 +43,10 @@
 						<h2>회원 정보</h2>
 					</header>
 					
-					<%-- post 방식으로 전송 시 반드시 form 태그 추가해 주어야 합니다. --%>
+					<%-- post 방식으로 전송 시 반드시 form 태그 추가해 주어야 합니다. 
 			 		<form name="data" id="data" method="post">
 			 			<input type="hidden" name="userId" id="userId" value="${userInfo.userId}"/>
-			 		</form>
+			 		</form>--%>
 					
 					<div class="grid">
 						<!-- 회원 프로필 -->

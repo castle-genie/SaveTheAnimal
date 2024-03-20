@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.FreeBoard.service.FreeBoardService;
@@ -29,15 +28,20 @@ public class FreeBoardController {
 	@Autowired
 	private FreeBoardService freeBoardService;
 	
+	@Autowired
+	private FcommentService fcommentService;
 	
+
 	@GetMapping(value = "freeBoardList")
 	public String freeBoardList(FreeBoardVO freeBoardVO, Model model) {
 		List<FreeBoardVO> freeBoardList = freeBoardService.freeBoardList(freeBoardVO);
 		model.addAttribute("freeBoardList", freeBoardList);
 		
 		return "board/freeBoardList";
+		
 	}
-	
+	/*
+	// 게시글 조회
 	@GetMapping(value = "freeBoardDetail")
 	public String freeBoardDetail(Model model, @RequestParam("fboardId")int fboardId) {
 		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(fboardId));
@@ -47,35 +51,70 @@ public class FreeBoardController {
 		freeBoardService.plusCnt(fboardId);
 		
 		return "board/freeBoardDetail";
+		
+		//댓글 조회
+		List<FcommentVO> fcomment;
+		fcomment = fcommenetService.list(fboardId);
+		model.addAttribute("fcomment", fcomment);
+		
+		return "/comment/fcomment";
+	}
+	*/
+	// 게시글 조회
+	@GetMapping(value = "freeBoardDetail")
+	public String freeBoardDetail(Model model, @RequestParam("fboardId")int fboardId) {
+		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(fboardId));
+		
+		
+		//조회수 +1
+		freeBoardService.plusCnt(fboardId);
+		return "board/freeBoardDetail";
+		
+		/*
+		//댓글 조회
+		List<FcommentVO> fcommentList = fcommentService.list(fboardId);
+		model.addAttribute("fcommentList", fcommentList);
+		
+		return "fcommentList";
+		*/
+		/*
+		//댓글 조회
+		List<FcommentVO> fcomment;
+		fcomment = fcommentService.list(fboardId);
+		model.addAttribute("fcomment", fcomment);
+		
+		return "/comment/fcomment";
+		*/
 	}
 	
 	//게시글 등록하는 페이지 접속
-	
 	@GetMapping(value = "freeBoardCreate")
-	public String freeBoardCreate(){
+	public String getCreate() throws Exception{
 		return "board/freeBoardCreate";
 	}
 	
-	//게시글 등록
+	//게시글 등록하기
 	@PostMapping(value = "freeBoardCreate")
-	public String freeBoardCreate(FreeBoardVO freeBoardVO) {
+	public String freeBoardCreate(FreeBoardVO freeBoardVO){
 		
+		freeBoardService.insertFreeBoard(freeBoardVO);
 		
-		freeBoardService.freeBoardCreate(freeBoardVO);
+		//return "redirect:/board/freeBoardDetail?fboardId=" + freeBoardVO.getFboardId();
 		
-		return "redirect:/board/freeBoardDetail?fboardId=" + freeBoardVO.getFboardId();
+		return "redirect:/board/freeBoardList";
 	}
-	
 	//게시글 수정
-	@PostMapping(value = "freeBoardModify")
-	//@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(FreeBoardVO freeBoardVO) throws Exception{
-		
-		freeBoardService.update(freeBoardVO);
-		
-		return "redirect:/board/freeBoardModify";
+	@GetMapping(value = "freeBoardModify")
+	public String modify(@RequestParam("fboardId")int fboardId, Model model) {
+		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(fboardId));
+		return "board/freeBoardModify";
 	}
 	
+	@PostMapping(value = "freeBoardModify")
+	public String modify(FreeBoardVO freeBoardVO) {
+		freeBoardService.updateFreeBoard(freeBoardVO);
+		return "redirect:/board/freeBoardDetail?fboardId="+freeBoardVO.getFboardId();
+	}
 	
 	//게시글 삭제
 	@GetMapping(value = "delete")
@@ -84,6 +123,9 @@ public class FreeBoardController {
 		freeBoardService.freeBoardDelete(fboardId);
 		return "redirect:/board/freeBoardList";
 	}
+	
+	
+	
 	
 	/*
 	@GetMapping(value = "freeBaordDetail")

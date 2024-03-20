@@ -2,75 +2,51 @@ $(function(){
 	const userId = document.getElementById("userId").value;
 
 	$("#fbReportInsertBtn").on("click", () => {	
-		if(userId != "null"){	
-			$("#f_data").attr({
-				"method": "post",
-				"action": "/report/reportInsertFB"
-			});
-			$("#f_data").submit();
-		}else{
-			alert("로그인 후 이용 가능한 서비스입니다.");
-		}
+		$("#f_data").attr({
+			"method": "post",
+			"action": "/report/reportInsertFB"
+		});
+		$("#f_data").submit();
 	});
 	
 	$("#vbReportInsertBtn").on("click", () => {
-		if(userId != "null"){	
-			$("#f_data").attr({
-				"method": "post",
-				"action": "/report/reportInsertVB"
-			});
-			$("#f_data").submit();
-		}else{
-			alert("로그인 후 이용 가능한 서비스입니다.");
-		}
+		$("#f_data").attr({
+			"method": "post",
+			"action": "/report/reportInsertVB"
+		});
+		$("#f_data").submit();
 	});
 	
 	$("#abReportInsertBtn").on("click", () => {
-		if(userId != "null"){	
-			$("#f_data").attr({
-				"method": "post",
-				"action": "/report/reportInsertFA"
-			});
-			$("#f_data").submit();
-		}else{
-			alert("로그인 후 이용 가능한 서비스입니다.");
-		}
+		$("#f_data").attr({
+			"method": "post",
+			"action": "/report/reportInsertFA"
+		});
+		$("#f_data").submit();
 	});
 	
 	$("#fcReportInsertBtn").on("click", () => {
-		if(userId != "null"){	
-			$("#f_data").attr({
-				"method": "post",
-				"action": "/report/reportInsertFC"
-			});
-			$("#f_data").submit();
-		}else{
-			alert("로그인 후 이용 가능한 서비스입니다.");
-		}
+		$("#f_data").attr({
+			"method": "post",
+			"action": "/report/reportInsertFC"
+		});
+		$("#f_data").submit();
 	});
 	
 	$("#vcReportInsertBtn").on("click", () => {
-		if(userId != "null"){	
-			$("#f_data").attr({
-				"method": "post",
-				"action": "/report/reportInsertVC"
-			});
-			$("#f_data").submit();
-		}else{
-			alert("로그인 후 이용 가능한 서비스입니다.");
-		}
+		$("#f_data").attr({
+			"method": "post",
+			"action": "/report/reportInsertVC"
+		});
+		$("#f_data").submit();
 	});
 	
 	$("#acReportInsertBtn").on("click", () => {
-		if(userId != "null"){	
-			$("#f_data").attr({
-				"method": "post",
-				"action": "/report/reportInsertAC"
-			});
-			$("#f_data").submit();
-		}else{
-			alert("로그인 후 이용 가능한 서비스입니다.");
-		}
+		$("#f_data").attr({
+			"method": "post",
+			"action": "/report/reportInsertAC"
+		});
+		$("#f_data").submit();
 	});
 	
 	

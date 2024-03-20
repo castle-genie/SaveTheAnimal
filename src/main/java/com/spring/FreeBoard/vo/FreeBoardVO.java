@@ -13,6 +13,6 @@ public class FreeBoardVO {
 	private int fboardLike;			//자유글 좋아요수
 	private int fboardCnt;			//자유글 조회수
 	
-	private String userId;	//자유글 작성자 회원ID 	
+	public String userId			="";	//자유글 작성자 회원ID 	
 
 }

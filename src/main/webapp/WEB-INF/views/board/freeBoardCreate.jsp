@@ -36,15 +36,20 @@
 								<input type="text" name="fboardId" id="fboardId" placeholder="fboardId를 입력해주세요.">
 							</div>
 							-->
-							<div class="12u$">
+							<div class="12u$">제목
+							
 								<input type="text" name="fboardTitle" id="fboardTitle" placeholder="제목을 입력해주세요.">
 							</div>
-							<div class="12u$">
+							<div class="12u$">내용
+								<!--  
 								<textarea name="fboardContent" id="fboardContent" placeholder="내용을 입력해주세요."
 									rows="6"></textarea>
+								-->
+								<textarea cols="100" wrap="hard" name="fboardContent" id="fboardContent" placeholder="내용을 입력해주세요"
+									rows="6"></textarea>
 							</div>
-							<div class="12u$">
-								<input type="text" name="userId" id="userId" placeholder="작성자">
+							<div class="12u$">작성자
+								<input type="text" name="userId" id="userId" value="${sessionScope.userId}" readonly>
 							</div>
 							<div class="12u$">
 								<ul class="actions">
@@ -88,8 +93,12 @@
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
 </body>
-<!--  
 <script>
+<!--
+const fboardContent = document.querySelector('#fboardContent');
+fboardContent.innerHTML = '${freeBoard.fboardContent}';
+-->
+<!--
 function goWrite(frm) {
 	var fboardTitle = frm.fboardTitle.value;
 	//var writer = frm.writer.value;
@@ -111,6 +120,6 @@ function goWrite(frm) {
 	}
 	frm.submit();
 }
-</script>
 -->
+</script>
 </html>

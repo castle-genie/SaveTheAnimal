@@ -27,19 +27,30 @@
 				<div class="content">
 					<header class="align-center">
 						<p>부제목</p>
-						<h2>글 작성하는 페이지</h2>
+						<h2>글 수정하는 페이지</h2>
 					</header>
-					<form method="post" action="/board/freeBoardCreate">
+					<form method="post" action="/board/freeBoardModify">
 						<div class="row uniform">
 							<div class="12u$">
-								<input type="text" name="fboardTitle" id="fboardTitle" placeholder="제목">
+								<input type="hidden" name="fboardId" id="fboardId" value="${freeBoard.fboardId}">
 							</div>
 							<div class="12u$">
-								<textarea name="fboardContent" id="fboardContent" placeholder="내용"
-									rows="6"></textarea>
+								<input type="text" name="fboardTitle" id="fboardTitle" placeholder="제목" 
+								value="${freeBoard.fboardTitle}">
 							</div>
 							<div class="12u$">
-								<input type="text" name="userId" id="userId" placeholder="작성자">
+								<textarea cols="100" wrap="hard" name="fboardContent" id="fboardContent" placeholder="내용을 입력해주세요"
+									rows="6">${freeBoard.fboardContent}</textarea>
+								<!--  
+								<input type="text" name="fboardContent" id="fboardContent" placeholder="내용"
+									value = "${freeBoard.fboardContent}">
+								-->
+							</div>
+							<div class="12u$">
+								<!--  
+								<input type="text" name="userId" id="userId" placeholder="작성자" value="${freeBoard.userId}">
+								-->
+								<input type="text" name="userId" id="userId" value="${sessionScope.userId}" readonly>
 							</div>
 							<div class="12u$">
 								<ul class="actions">
@@ -55,7 +66,6 @@
 					</form>
 				</div>
 			</div>
-		</div>
 		</div>
 	</section>
 	<!-- Footer -->
@@ -83,8 +93,12 @@
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
 </body>
-<!--  
 <script>
+<!--
+	const fboardContent = document.querySelector('#fboardContent');
+	fboardContent.innerHTML = '${freeBoard.fboardContent}';
+-->
+<!--
 function goWrite(frm) {
 	var fboardTitle = frm.fboardTitle.value;
 	//var writer = frm.writer.value;
@@ -106,6 +120,6 @@ function goWrite(frm) {
 	}
 	frm.submit();
 }
-</script>
 -->
+</script>
 </html>
