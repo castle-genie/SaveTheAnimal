@@ -122,10 +122,4 @@ public class VolunteerController {
 		return "redirect:"+url;
 	}
 	
-	// progress 1 로 바꾸기
-	@PostMapping("/updateVolunteerProgress1") 
-	public ResponseEntity<String> updateVolunteerProgress1(VolunteerVO volunteerVO) {
-		service.updateVolunteerProgress1(volunteerVO);
-        return ResponseEntity.ok("volunteer_progress가 업데이트되었습니다.");
-    }
 }

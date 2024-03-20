@@ -52,4 +52,11 @@ public class ApplicationServcieImpl implements ApplicationService{
 		applicationCheck = applicationDAO.applicationCheck( applicatinoVO);
 		return applicationCheck;
 	}
+
+	@Override
+	public int increaseUserVolCnt(String[] userIds) {
+		int increaseUserVolCnt = 0;
+		increaseUserVolCnt = applicationDAO.increaseUserVolCnt(userIds);
+		return increaseUserVolCnt;
+	}
 }

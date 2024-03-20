@@ -16,4 +16,6 @@ public interface ApplicationService {
 	public int applicationDelete(ApplicationVO applicationVO);
 	
 	public int applicatoinCheck(ApplicationVO applicatinoVO);
+	
+	public int increaseUserVolCnt(String[] userIds);
 }
