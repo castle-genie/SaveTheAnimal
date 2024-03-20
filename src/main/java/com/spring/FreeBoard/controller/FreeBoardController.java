@@ -62,12 +62,14 @@ public class FreeBoardController {
 	*/
 	// 게시글 조회
 	@GetMapping(value = "freeBoardDetail")
-	public String freeBoardDetail(Model model, @RequestParam("fboardId")int fboardId) {
-		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(fboardId));
+	public String freeBoardDetail(Model model, FreeBoardVO freeBoardVO) {
+		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(freeBoardVO));
 		
 		
 		//조회수 +1
-		freeBoardService.plusCnt(fboardId);
+		freeBoardService.plusCnt(freeBoardVO);
+		
+		
 		return "board/freeBoardDetail";
 		
 		/*
@@ -105,65 +107,28 @@ public class FreeBoardController {
 	}
 	//게시글 수정
 	@GetMapping(value = "freeBoardModify")
-	public String modify(@RequestParam("fboardId")int fboardId, Model model) {
-		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(fboardId));
+	public String modify(FreeBoardVO freeBoardVO, Model model) {
+		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(freeBoardVO));
 		return "board/freeBoardModify";
 	}
 	
 	@PostMapping(value = "freeBoardModify")
 	public String modify(FreeBoardVO freeBoardVO) {
+		log.info("수정");
 		freeBoardService.updateFreeBoard(freeBoardVO);
+		log.info("수정2");
 		return "redirect:/board/freeBoardDetail?fboardId="+freeBoardVO.getFboardId();
 	}
 	
 	//게시글 삭제
 	@GetMapping(value = "delete")
 	//@RequestMapping(value = "delete", method = RequestMethod.POST)
-	public String delete(@RequestParam("fboardId")int fboardId){
-		freeBoardService.freeBoardDelete(fboardId);
+	public String delete(FreeBoardVO freeBoardVO){
+		
+		log.info("삭제" + freeBoardVO);
+		freeBoardService.deleteFreeBoard(freeBoardVO);
+		log.info("삭제2");
 		return "redirect:/board/freeBoardList";
 	}
 	
-	
-	
-	
-	/*
-	@GetMapping(value = "freeBaordDetail")
-	public String freeBoardDetail(FreeBoardVO freeBoardVO, Model model) {
-		FreeBoardVO freeBoardDetail = freeBoardService.freeBoardDetail(freeBoardVO);
-		model.addAttribute("freeBoardDetail", freeBoardDetail);
-		
-		return "board/freeBoardDetail";
-	}
-	*/
-	/*
-	@ResponseBody
-	@GetMapping(value = "/freeBoardList", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<FreeBoardVO> freeBoardList(FreeBoardVO freeBoardVO){
-		List<FreeBoardVO> freeBoardList = null;
-		freeBoardList = freeBoardservice.freeBoardList(freeBoardVO);
-		//return "redirect:/board/freeBoardList";
-		
-		return freeBoardList;
-	}
-	*/
-	/*
-	@ResponseBody
-	@GetMapping(value = "freeBoardList")
-	public String freeBoardList(FreeBoardVO freeBoardVO, Model model) {
-		List<FreeBoardVO> freeBoardList = freeBoardService.freeBoardList(freeBoardVO);
-		model.addAttribute("freeBoardList", freeBoardList);
-		
-		return "freeBoardList";
-	}
-	*/
-	/*
-	@GetMapping("freeBoardList")
-	public String freeBoardList(Model model) throws Exception{
-		List<FreeBoardVO> list = freeBoardService.freeBoardList();
-		model.addAttribute("list", list);
-		return "board/freeBoardList";
-		
-	}
-	*/
 }
