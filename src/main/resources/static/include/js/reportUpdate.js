@@ -8,4 +8,11 @@ $(function(){
 		});
 		$("#f_data").submit();
 	});
+	$("#fbReportCancelBtn").on("click", () => {	
+		$("#f_data").attr({
+			"method": "post",
+			"action": "/report/reportDelete"
+		});
+		$("#f_data").submit();
+	});
 })

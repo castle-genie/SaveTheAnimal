@@ -20,11 +20,6 @@
 			</header>
 		</div>
 	</section>
-					<input type="" name="fboardId" value="${freeBoard.fboardId}"/>
-					<input type="" name="reportId" value="${freeBoard.reportId}"/>
-					<input type="" name="boardUser" value="${freeBoard.userId}"/>
-					<input type="" name="boardUser" value="${freeBoard.reUserId}"/>
-					<input type="" name="boardUser" value="${sessionScope.userId}"/>
 	<!-- Two -->
 	<section id="two" class="wrapper style2">
 		<div class="inner">

@@ -106,6 +106,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="fbReportUpdateBtn" class="btn btn-primary button special">수정하기</button>
+				<button type="button" id="fbReportCancelBtn" class="btn btn-primary button">신고취소</button>
 			</div>
 		</div>
 	</div>
