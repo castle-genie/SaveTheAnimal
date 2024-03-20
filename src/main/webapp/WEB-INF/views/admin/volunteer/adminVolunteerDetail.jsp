@@ -32,7 +32,10 @@
 			    	console.log(response);
 			        var list = '<ul>';
 			        $.each(response, function(index, item) {
-			            list += '<li>아이디: ' + item.user.userId + ', 성함: ' + item.user.userName + '</li>';
+			            list += '<li>아이디: ' + item.user.userId + ', 성함: ' + item.user.userName + ', ';
+			            list += "참가<input type='radio' name='absent" + index + "' value='참여' checked />"
+			            list += "불참<input type='radio' name='absent" + index + "' value='불참' />"
+			            list += '</li>';
 			        });
 			        list += '</ul>';
 			        $('#appList').html(list);
