@@ -20,7 +20,11 @@
 			</header>
 		</div>
 	</section>
-
+					<input type="" name="fboardId" value="${freeBoard.fboardId}"/>
+					<input type="" name="reportId" value="${freeBoard.reportId}"/>
+					<input type="" name="boardUser" value="${freeBoard.userId}"/>
+					<input type="" name="boardUser" value="${freeBoard.reUserId}"/>
+					<input type="" name="boardUser" value="${sessionScope.userId}"/>
 	<!-- Two -->
 	<section id="two" class="wrapper style2">
 		<div class="inner">
@@ -47,14 +51,22 @@
 								onclick="del(${freeBoard.fboardId})"></li>
 						</c:if>
 						<c:if test="${empty userLogin}">
-							<li><a href="/user/login"
-								onclick="alert('신고하려면 로그인이 필요합니다')">
+							<li>
+								<a href="/user/login" onclick="alert('신고하려면 로그인이 필요합니다')">
 									<button type="button" class="btn btn-primary button special">신고</button>
-							</a></li>
+								</a>
+							</li>
 						</c:if>
 						<c:if test="${not empty userLogin}">
-							<li><%@ include
-									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
+							<c:choose>
+								<c:when test="${freeBoard.reUserId eq sessionScope.userId}">
+									<li><%@ include file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
+								</c:when>
+								<c:otherwise>
+									<li><%@ include file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
+								</c:otherwise>
+								
+							</c:choose>
 						</c:if>
 					</ul>
 					<%@ include file="/WEB-INF/views/board/fcomment.jsp"%>
@@ -89,6 +101,7 @@
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
 	<script src="/resources/include/js/reportInsert.js"></script>
+	<script src="/resources/include/js/reportUpdate.js"></script>
 
 </body>
 <script>
