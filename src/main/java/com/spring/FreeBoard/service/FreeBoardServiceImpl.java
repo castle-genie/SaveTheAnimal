@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import com.spring.FreeBoard.dao.FreeBoardDAO;
 import com.spring.FreeBoard.vo.FreeBoardVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class FreeBoardServiceImpl implements FreeBoardService{
 	
 	@Autowired
@@ -23,10 +26,12 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 	
 	//자유게시판 글 조회하는 메서드
+	/*
 	@Override
 	public FreeBoardVO freeBoardDetail(int fboardId) {
 		return freeBoardDAO.freeBoardDetail(fboardId);
 	}
+	*/
 	
 	
 	@Override
@@ -38,8 +43,8 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	
 	//조회수 증가
 	@Override
-	public boolean plusCnt(int fboardId) {
-		return freeBoardDAO.plusCnt(fboardId);
+	public boolean plusCnt(FreeBoardVO freeBoardVO) {
+		return freeBoardDAO.plusCnt(freeBoardVO);
 	}
 	//게시글 등록
 	@Override
@@ -48,48 +53,22 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 	
 	//게시글 수정
-	/*
 	@Override
-	public void update(FreeBoardVO freeBoardVO) throws Exception {
-		
-		freeBoardDAO.update(freeBoardVO);
-	}
-	*/
-	@Override
-	public boolean updateFreeBoard(FreeBoardVO freeBoardVO) {
-		return freeBoardDAO.updateFreeBoard(freeBoardVO);
+	public int updateFreeBoard(FreeBoardVO freeBoardVO) {
+		int  updatefreeboard = freeBoardDAO.updateFreeBoard(freeBoardVO);
+		return updatefreeboard;
+		//return freeBoardDAO.updateFreeBoard(freeBoardVO);
 	}
 	
 	//게시글 삭제
 	@Override
-	public boolean freeBoardDelete(int fboardId) {
-		return freeBoardDAO.freeBoardDelete(fboardId);
+	public int deleteFreeBoard(FreeBoardVO freeBoardVO) {
+		log.info("test");
+		int deletefreeboard = freeBoardDAO.deleteFreeBoard(freeBoardVO);
+		log.info("test"+ deletefreeboard);
+		return deletefreeboard;
+		//return freeBoardDAO.freeBoardDelete(fboardId);
 	}
-	/*
-	@Override
-	public void delete(int fboardId) throws Exception {
-		freeBoardDAO.delete(fboardId);
-	}
-	*/
-	
-	/*
-	@Override
-	public int freeBoardCreate(FreeBoardVO freeBoardVO) {
-		int result = freeBoardDAO.freeBoardCreate(freeBoardVO);
-		return result;
-	}
-	*/
-	/*
-	@Override
-	public void freeBoardCreate(FreeBoardVO freeBoardVO) {
-	}
-	*/
-	
-	/*
-	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO) {
-		
-	}
-	*/
 	
 	
 	

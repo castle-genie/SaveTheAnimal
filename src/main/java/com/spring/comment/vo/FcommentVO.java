@@ -18,10 +18,10 @@ public class FcommentVO {
 	*/
 	
 	
-	private int fcommentId;			//댓글 고유ID
-	private String fcommentContent;		//댓글 내용
+	private int fcommentId				=0;			//댓글 고유ID
+	private String fcommentContent		="";		//댓글 내용
 	private Date fcommentDate;			//댓글 작성일
-	private int fboardId;				//자유글ID
-	private String userId;				//댓글 작성자 회원ID
+	private int fboardId				=0;				//자유글ID
+	private String userId				="";				//댓글 작성자 회원ID
 
 }
