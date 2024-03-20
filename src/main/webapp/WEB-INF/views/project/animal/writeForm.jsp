@@ -124,9 +124,7 @@
 	
 	
 	</div>
-	<div>
-		<%@ include file="/WEB-INF/views/project/report.jsp"%>
-	</div>
+	
 	
 </main>
 </div>

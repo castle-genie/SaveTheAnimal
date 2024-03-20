@@ -23,11 +23,11 @@
 		 <![CDATA[
 	    SELECT
 	      animal_id, animal_species, animal_name, TO_CHAR(animal_regist, 'YYYY-MM-DD') AS animal_regist, readcnt, animal_file,animal_gender,
-	      animal_status,animal_kg,animal_color,animal_temp
+	      animal_status,animal_kg,animal_color,animal_temp, animal_age , animal_level , animal_passwd
 	    FROM (
 	      		SELECT /*+INDEX_DESC(animal pk_animal)*/
 	        	ROWNUM AS rnum,animal_id, animal_species, animal_name, animal_regist, readcnt, animal_file,animal_gender,
-	      animal_status,animal_kg,animal_color,animal_temp
+	      animal_status,animal_kg,animal_color,animal_temp, animal_age , animal_level ,animal_passwd
 	      			FROM animal
 	      		WHERE]]>
 	   			<trim prefix="(" suffix=") AND" prefixOverrides="AND">
@@ -91,7 +91,7 @@
 	        animal_status = #{animalStatus},
 	        animal_memo = #{animalMemo},
 	        animal_temp = #{animalTemp},
-	        animal_regist = sysdate,
+	        animal_regist = sysdate
 	        <if test="animalPasswd != ''">
 	            , animal_passwd = #{animalPasswd}
 	        </if>

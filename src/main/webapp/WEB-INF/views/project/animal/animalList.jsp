@@ -64,12 +64,9 @@
                                     
                                     <td>${animal.animalId}</td>
                                     <td>
-                                        <c:if test="${not empty animal.animalFile}">
-                                            <img src="animal/${animal.animalFile}" class="rounded w-50 h-50"/>
-                                        </c:if>
-                                        <c:if test="${empty animal.animalFile}">
-                                            <img src="/resources/images/common/noanimal.jpg" class="rounded w-100 h-100"/>
-                                        </c:if>
+                                        <img src="<c:if test='${not empty animal.animalFile}'>/uploadStorage/animal/${animal.animalFile}</c:if>
+                                         <c:if test='${empty animal.animalFile}'>/resources/images/common/noanimal.jpg</c:if>"
+                                       class="card-img-top l"  alt="Animal Image">
                                     </td>
                                     <td class="goDetail text-start">
                                         ${animal.animalName}
@@ -151,9 +148,7 @@
 
 </div>
 
-	<div>
-		<%@ include file="/WEB-INF/views/project/report.jsp"%>
-	</div>
+
 </main>
 
 
