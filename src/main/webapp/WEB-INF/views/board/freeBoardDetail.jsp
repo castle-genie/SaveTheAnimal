@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp"%> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<meta name="robots"
-	content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="stylesheet" href="/resources/include/assets2/css/main.css">
 
 </head>
@@ -39,39 +37,21 @@
 					</p>
 					<br>
 					<ul class="actions text-end">
-<<<<<<< HEAD
 						<li><a href="freeBoardList" class="button special">목록</a></li>
-						<!--  
-						<c:if test="${not empty userLogin}">
-						<li><input type="button" value="수정"
-							onclick="location.href='freeBoardModify?fboardId=${freeBoard.fboardId}'"></li>
-						<li><input type="button" value="삭제"
-							onclick="del(${freeBoard.fboardId})"></li>
-						</c:if>
-						-->
 						<c:if test="${sessionScope.userId eq freeBoard.userId}">
-						<li><input type="button" value="수정"
-							onclick="location.href='freeBoardModify?fboardId=${freeBoard.fboardId}'"></li>
-						<li><input type="button" value="삭제"
-							onclick="del(${freeBoard.fboardId})"></li>
-						</c:if>
+							<li><input type="button" value="수정" onclick="location.href='freeBoardModify?fboardId=${freeBoard.fboardId}'"></li>
+							<li><input type="button" value="삭제" onclick="del(${freeBoard.fboardId})"></li>
+							</c:if>
 						<c:if test="${empty userLogin}">
 						<li>
-						<a href = "/user/login" onclick="alert('신고하려면 로그인이 필요합니다')">
-						<%@ include
-								file="/WEB-INF/views/project/fbReportInsert.jsp"%>
-						</a></li>
+							<a href = "/user/login" onclick="alert('신고하려면 로그인이 필요합니다')">
+								<button type="button" class="btn btn-primary button special">신고</button>
+							</a>
+						</li>
 						</c:if>
 						<c:if test="${not empty userLogin}">
-						<li><%@ include
-								file="/WEB-INF/views/project/fbReportInsert.jsp"%></li>
+							<li><%@ include file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
 						</c:if>
-=======
-						<li><a href="freeBoardList"  class="button special">목록</a></li>
-						<li><input type="button" value="수정" onclick="location.href='modify?fboardId=${freeBoard.fboardId}'"></li>
-						<li><input type="button" value="삭제" onclick="del(${freeBoard.fboardId})"></li>
-						<li><%@ include file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
->>>>>>> e2b3b43754b01575476f5435007ea23169198062
 					</ul>
 				</div>
 				<!-- 댓글 시작 -->
