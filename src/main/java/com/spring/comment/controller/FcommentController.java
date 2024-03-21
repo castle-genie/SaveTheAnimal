@@ -16,24 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.comment.service.FcommentService;
 import com.spring.comment.vo.FcommentVO;
 
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping(value = "/fcomment")
+@RequestMapping("/fcomment")
 @Slf4j
 public class FcommentController {
 	
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private FcommentService fcommentService;
 
 	@GetMapping(value = "/all/{fboardId}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<FcommentVO> replyList(@PathVariable("fboardId") Integer fboardId, FcommentVO fcommentvo) {
-		log.info("ReplyList 호출");
+	public List<FcommentVO> fcommentList(@PathVariable("${fboardId}") int fboardId, FcommentVO fcommentvo) {
+		log.info("fcommentList 호출");
 		
-		List<FcommentVO> fcommentlist = null;
-		fcommentlist = fcommentService.fcommentList(fcommentvo);
-		return fcommentlist;
+		List<FcommentVO> entity = null;
+		entity = fcommentService.fcommentList(fcommentvo);
+		return entity;
 	}
 	
 /**************************************************************

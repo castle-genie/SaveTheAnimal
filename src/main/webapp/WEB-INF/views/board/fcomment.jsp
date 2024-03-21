@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/common.jsp"%>
 <body>
 
 	<div class="container">
@@ -10,7 +11,6 @@
 					<div class="col-sm-3">
 						<input type="text" name="userId" id="userId" class="form-control" />
 					</div>
-					<!--<button type="button" id="replyInsertBtn" class="btn btn-primary col-sm-1 sendBtn mx-2">저장</button>-->
 					<button type="button" id="replyInsertBtn" class="btn btn-primary col-sm-1 sendBtn mx-2">저장</button>
 				</div>
 				<div class="row mb-3">
@@ -22,10 +22,8 @@
 			</form>
 		</div>
 		<!-- 댓글 목록 -->	
-		<div class="content">
-		<p>왜 안보이냐</p>
-		<div id="commentList">
-			<div class="card mb-2" id="item-template">
+		<div class="reply" id="fcommentList">
+			<div class="box" id="item-template">
 				<div class="card-header">
 					<span class="name"></span>
 					<span class="date"></span>
@@ -37,9 +35,7 @@
 				</div>
 			</div>
 		</div>
-		<p>이건보이냐</p>
 		</div>
-	</div>
 	<script>
 		$(function() {	
 			let fboardId = ${detail.fboardId};
@@ -109,12 +105,12 @@
 		}
 
 		function template(fcommentId, userId, fcommentContent, fcommentDate) {
-			let $div = $('#commentList');
-
+			let $div = $('#fcommentList');
+			
 			let $element = $('#item-template').clone().removeAttr('id');
-
+			
 			$element.attr("data-num", fcommentId);
-			$elementaddClass("reply");
+			$element.addClass("reply");
 			$element.find('.name').html(userId);
 			$element.find('.card-header .date').html(" / " + fcommentDate);
 			$element.find('.card-header .card-text').html(fcommentContent);

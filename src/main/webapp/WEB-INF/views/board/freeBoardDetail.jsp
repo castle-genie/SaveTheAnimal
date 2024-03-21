@@ -20,6 +20,11 @@
 			</header>
 		</div>
 	</section>
+					<input type="" name="fboardId" value="${freeBoard.fboardId}"/>
+					<input type="" name="reportId" value="${freeBoard.reportId}"/>
+					<input type="" name="boardUser" value="${freeBoard.userId}"/>
+					<input type="" name="boardUser" value="${freeBoard.reUserId}"/>
+					<input type="" name="boardUser" value="${sessionScope.userId}"/>
 	<!-- Two -->
 	<section id="two" class="wrapper style2">
 		<div class="inner">
@@ -46,16 +51,6 @@
 								onclick="del(${freeBoard.fboardId})"></li>
 						</c:if>
 						<c:if test="${empty userLogin}">
-<<<<<<< HEAD
-							<li><a href="/user/login"
-								onclick="alert('신고하려면 로그인이 필요합니다')">
-									<button type="button" class="btn btn-primary button special">신고</button>
-							</a></li>
-						</c:if>
-						<c:if test="${not empty userLogin}">
-							<li><%@ include
-									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
-=======
 							<li>
 								<a href="/user/login" onclick="alert('신고하려면 로그인이 필요합니다')">
 									<button type="button" class="btn btn-primary button special">신고</button>
@@ -72,27 +67,20 @@
 								</c:otherwise>
 								
 							</c:choose>
->>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06
 						</c:if>
 					</ul>
 					<%@ include file="/WEB-INF/views/board/fcomment.jsp"%>
 				</div>
-				<!-- 댓글 시작 -->
-<<<<<<< HEAD
-				<div>
-					<hr />
-					<div>
-						<input type="text" id="userId" placeholder="댓글작성자">
-						<input type="text" id="fcommentContent" placeholder="댓글내용">
-						<button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
-					</div>
-				</div>
-				<!-- 댓글 종료 -->
-=======
->>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06
+				<p>테스트</p>
+				<p>${Fcomment.fcommentContent}</p>
+				<p>${Fcomment.fcommentId}</p>
+				<p>테스트</p>
+				<p>${Fcomment.fcommentDate}</p>
+				<p>${Fcomment.userId}</p>
+				<p>$(freeBoard.fboardContent)</p>
+				<p>${freeBoard.fboardContent}</p>
 			</div>
 		</div>
-		<!-- 댓글 종료 -->
 	</section>
 	<!-- Footer -->
 	<footer id="footer">
@@ -128,27 +116,6 @@
 		if (chk) {
 			location.href='delete?fboardId='+fboardId;
 		}
-	}
-	const commentWrite = () =>{
-		const writer = document.getElementById("userId").value;
-		const contents = document.getElementById("fcommentContent").value;
-		const board = '${freeBoard.fboardId}';
-		$.ajax({
-			type: "post",
-			url: "/comment/save",
-			data: {
-				userId: writer,
-				fcommentContent: contents,
-				fboardId: board
-			},
-			dataType: "json",
-			success: function(commentList){
-				console.log("댓글작성완료");
-			},
-			error: function() {
-				console.log("댓글작성실패");
-			}
-		});
 	}
 </script>
 </html>

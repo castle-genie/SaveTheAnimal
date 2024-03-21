@@ -19,15 +19,19 @@ public class FcommentServiceImpl implements FcommentService{
 	
 	@Override
 	public List<FcommentVO> fcommentList(FcommentVO fcommentvo){
+		log.info("댓글조회시작");
 		List<FcommentVO> fcommentlist = null;
 		fcommentlist = fcommentDAO.fcommentList(fcommentvo);
-		
+		log.info("댓글조회완료");
+		/*
+		List<FcommentVO> fcommentlist = fcommentDAO.fcommentList(fcommentvo);
+		*/
 		return fcommentlist;
 	}
 	
 	@Override
 	public int fcommentInsert(FcommentVO fcommentvo){
-		log.info("댓글삽입명령");
+		log.info("댓글삽입");
 		int result = 0;
 		result = fcommentDAO.fcommentInsert(fcommentvo);
 		return result;
