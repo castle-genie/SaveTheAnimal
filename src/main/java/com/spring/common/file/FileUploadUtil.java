@@ -35,10 +35,10 @@ public class FileUploadUtil {
 		log.info("업로드 파일명 : " + org_name);
 		
 		//파일명 변경 (중복되지 않게)
-		if(org_name != null && (!org_name.equals(""))) {
+		if(org_name != null && (!org_name.equals(""))) { 
 			real_name = fileName + "_" + System.currentTimeMillis() + "_" +org_name; //저장할 파일 이름
 			
-			String docRoot = "C:/uploadStorage/"+fileName; 
+			String docRoot = "classpath:/static/images/storage/"+fileName; 
 			makeDir(docRoot);
 			
 			File fileAdd = new File(docRoot+"/" +real_name);
@@ -53,13 +53,31 @@ public class FileUploadUtil {
 		log.info("fileDelete 호출 성공 " );
 		boolean result = false;
 		String dirName = fileName.substring(0, fileName.indexOf("_"));
-		String docRoot = "C:/uploadStorage/" + dirName;
+		String docRoot = "classpath:/static/images/storage/" + dirName;
 		File fileDelete = new File(docRoot+ "/" + fileName);
 		
 		if(fileDelete.exists() && fileDelete.isFile()) {
 			result = fileDelete.delete();
 		}
 		log.info("파일 삭제 여부 (true/false) : " + result);
+	}
+	
+	/******************************************************************************** 
+	 * 파일 수정 메서드
+	 * 이미지 경로 및 파일명 : board/board_1658205347977_cat.jpg
+	 * 참고 : fileDelete(String folderName, String fileName)
+	 ********************************************************************************/
+	public static void fileUpdate(String fileName) throws IOException {
+		log.info("fileUpdate 호출 성공");
+		boolean result = false;
+		String dirName = fileName.substring(0, fileName.indexOf("_"));
+		String docRoot = "classpath:/static/images/storage/"+dirName;
+		File fileUpdate = new File(docRoot+"/"+fileName);
+		
+		if(fileUpdate.exists() && fileUpdate.isFile()) {
+			result = fileUpdate.createNewFile();
+		}
+		log.info("파일 수정 여부(true/false) : " + result);
 	}
 	
 	

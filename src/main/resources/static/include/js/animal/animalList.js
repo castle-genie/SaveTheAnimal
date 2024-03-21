@@ -13,6 +13,13 @@ $(function(){
 		$("#detailForm").submit();
 	});
 	
+	/*페이징 처리 이벤트*/
+	$(".page-item a").on("click", function(e){
+		e.preventDefault();
+		$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+		goPage();
+	});
+	
 	
 	$("#insertFormBtn").on("click", ()=>{
 		location.href = "/animal/writeForm";

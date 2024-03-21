@@ -13,11 +13,11 @@ public interface VolunteerService {
 	public int updateVolunteerProgress1(VolunteerVO volunteerVO);
 	
 	/* admin */
-	public int volunteerInsert(VolunteerVO volunteerVO);
+	public int volunteerInsert(VolunteerVO volunteerVO) throws Exception;
 	
 	public VolunteerVO volunteerUpdateForm(VolunteerVO volunteerVO);
 	
-	public int volunteerUpdate(VolunteerVO volunteerVO);
+	public int volunteerUpdate(VolunteerVO volunteerVO) throws Exception;
 	
-	public int volunteerDelete(VolunteerVO volunteerVO);
+	public int volunteerDelete(VolunteerVO volunteerVO) throws Exception;;
 }
