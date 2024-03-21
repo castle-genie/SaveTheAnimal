@@ -5,12 +5,11 @@
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
 	<script>
 	   function applicationView() {
-		/*    $("#data").attr({
+			$("#data").attr({
 			   method:"get",
 			   action:"/application/applicationView"
 		   });
-		   $("#data").submit(); */
-		   location.href="/application/applicationView";
+		   $("#data").submit(); 
 	   }
 	</script>
 </head>
@@ -43,10 +42,10 @@
 						<h2>회원 정보</h2>
 					</header>
 					
-					<%-- post 방식으로 전송 시 반드시 form 태그 추가해 주어야 합니다. 
+					<%-- post 방식으로 전송 시 반드시 form 태그 추가해 주어야 합니다. --%>
 			 		<form name="data" id="data" method="post">
 			 			<input type="hidden" name="userId" id="userId" value="${userInfo.userId}"/>
-			 		</form>--%>
+			 		</form>
 					
 					<div class="grid">
 						<!-- 회원 프로필 -->
@@ -100,7 +99,7 @@
 							    <h4 class="border-bottom pb-2 mb-0"><strong>My Activities</strong></h4>										    
 							    <br/>
 							    <p class="align-right">
-							    	봉사 레벨 : <strong>Lv. ${userInfo.userLevel}</strong><br>
+							    	봉사 레벨 : <strong>Lv. <fmt:formatNumber type="number" maxFractionDigits="0" value="${Math.floor(userInfo.userVolcnt/3+1)}" /></strong><br>
 							    	봉사 횟수 : <strong>${userInfo.userVolcnt}</strong> 회
 							    </p>
 							    <div class="d-flex text-body-secondary pt-3">

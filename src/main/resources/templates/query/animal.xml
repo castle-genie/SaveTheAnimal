@@ -20,21 +20,24 @@
 	</resultMap>
 	
 	<select id="animalList" parameterType="animal" resultMap="animalMap">
-		SELECT animal_id, animal_species, animal_name, animal_gender,animal_status,
-		animal_kg,animal_color,animal_temp,readcnt, 
-		TO_CHAR(animal_regist, 'YYYY-MM-DD') AS animal_regist,animal_file 
-		FROM animal
-		<where>
-			<include refid="animalSearch"></include>
-		</where>
-		ORDER BY animal_id DESC
+		 <![CDATA[
+	    SELECT
+	      animal_id, animal_species, animal_name, TO_CHAR(animal_regist, 'YYYY-MM-DD') AS animal_regist, readcnt, animal_file,animal_gender,
+	      animal_status,animal_kg,animal_color,animal_temp, animal_age ,  animal_passwd
+	    FROM (
+	      		SELECT /*+INDEX_DESC(animal pk_animal)*/
+	        	ROWNUM AS rnum,animal_id, animal_species, animal_name, animal_regist, readcnt, animal_file,animal_gender,
+	      animal_status,animal_kg,animal_color,animal_temp, animal_age , animal_passwd
+	      			FROM animal
+	      		WHERE]]>
+	   			<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+	    			<include refid="animalSearch"></include>
+	   			</trim>
+	   		<![CDATA[ rownum <= #{pageNum} * #{amount}
+	      	) animalList
+	    		WHERE rnum > (#{pageNum} - 1) * #{amount}
+	  		]]>
 	</select>
-	
-	<update id="readCntUpdate" parameterType="animal">
-		UPDATE animal
-		SET readcnt = readcnt + 1
-		WHERE animal_id = #{animalId}
-	</update>
 	
 	<!-- 전체 레코드 수 조회 -->
 	<select id="animalListCnt" parameterType="animal" resultType="int">
@@ -44,10 +47,19 @@
 		</trim> 
 	</select>
 	
+	<update id="readCntUpdate" parameterType="animal">
+		UPDATE animal
+		SET readcnt = readcnt + 1
+		WHERE animal_id = #{animalId}
+	</update>
+	
+	
+	
 	<insert id="animalInsert" parameterType="animal">
 		<selectKey keyProperty="animalId" resultType="int" order="BEFORE">
-			select animal_seq.nextval from dual
+		    SELECT animal_seq.nextval FROM dual
 		</selectKey>
+
 		INSERT INTO animal(animal_id, animal_name, animal_species,animal_gender, animal_kg, animal_age,  animal_status,animal_memo,animal_color,animal_temp,animal_passwd,animal_file,admin_id)
 		VALUES(#{animalId}, #{animalName}, #{animalSpecies},#{animalGender},#{animalKg},#{animalAge} , #{animalStatus},#{animalMemo},#{animalColor},#{animalTemp},#{animalPasswd},#{animalFile},#{adminId})
 	</insert>
@@ -93,9 +105,11 @@
 
 
 	
-	<delete id ="animalDelete" parameterType="animal">
-		DELETE FROM animal WHERE animal_id = #{animalId}
+	<delete id="animalDelete" parameterType="animal">
+	    DELETE FROM animal WHERE animal_id = #{animalId}
+	    CASCADE
 	</delete>
+
 		
 	<!-- 게시판 리스트 기본 조회 -->
 	<!-- <select id="boardList" parameterType="board" resultMap="boardMap">

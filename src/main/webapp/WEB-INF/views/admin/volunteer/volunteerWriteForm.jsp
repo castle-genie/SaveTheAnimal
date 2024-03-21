@@ -31,7 +31,7 @@
         <textarea id="volunteerDetail" name="volunteerDetail" rows="4" cols="50"></textarea><br><br>
         
         <label for="volunteerThumbnail">공고 썸네일</label><br>
-		<input type="file" id="volunteerThumbnail" name="volunteerThumbnail"><br><br>
+		<input type="file" id="file" name="file"><br><br>
         
         <input type="button" value="제출" id="insertBtn">
     </form>

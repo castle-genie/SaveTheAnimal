@@ -13,6 +13,13 @@ $(function(){
 		$("#detailForm").submit();
 	});
 	
+	/*페이징 처리 이벤트*/
+	$(".page-item a").on("click", function(e){
+		e.preventDefault();
+		$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+		goPage();
+	});
+
 	
 	$("#insertFormBtn").on("click", ()=>{
 		location.href = "/adoption/writeForm";
@@ -37,6 +44,8 @@ $(function(){
 	});
 	
 	
+	
+	
 	//검색 버튼 클릭시 처리 이벤트
 	$("#searchData").on("click", function(){
 		if($("#search").val()!="all"){
@@ -45,6 +54,7 @@ $(function(){
 		goPage();
 	});
 });
+
 
 
 //검색을 위한 실질적인 처리 함수
@@ -58,3 +68,4 @@ function goPage(){
 	});
 	$("#f_search").submit();
 }
+
