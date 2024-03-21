@@ -26,6 +26,7 @@
 		<%-- post방식으로 전송 시 반드시 form 태그 추가해주어야 합니다. --%>
 		<form name="f_data" id="f_data" method="post">
 			<input type="hidden" name="applicationId" id="applicationId" >
+			<input type="hidden" name="userId" id="userId" value="${ userLogin.userId }" />
 		</form>
 		<div class="inner">
 			<div class="box">
