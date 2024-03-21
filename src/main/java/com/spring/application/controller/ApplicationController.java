@@ -1,20 +1,14 @@
 package com.spring.application.controller;
 
 import java.net.http.HttpRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.CacheControl;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -24,9 +18,6 @@ import com.spring.application.vo.ApplicationVO;
 import com.spring.user.vo.UserVO;
 import com.spring.volunteer.vo.VolunteerVO;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -72,11 +63,7 @@ public class ApplicationController {
 	}
 	
 	@GetMapping("/applicationView")
-	public String applicationView(HttpServletRequest request, Model model) {
-		// 세션 가져오기
-		HttpSession session = request.getSession();
-		// 세션에서 사용자 ID 가져오기
-        String userId = (String) session.getAttribute("userId");
+	public String applicationView(String userId, Model model) {
 		List<ApplicationVO> applicationView = null;
 		applicationView = service.applicationView(userId);
 		model.addAttribute("view", applicationView);
@@ -84,33 +71,31 @@ public class ApplicationController {
 	}
 	
 	@PostMapping("/applicationDelete")
-	public String applicationDelete(HttpServletRequest request, ApplicationVO applicationVO, RedirectAttributes ras){
+	public String applicationDelete(ApplicationVO applicationVO, String userId,RedirectAttributes ras){
 		int result = 0;
 		String url = "";
 		
-		// 세션 가져오기
-		HttpSession session = request.getSession();
-		// 세션에서 사용자 ID 가져오기
-        String userId = (String) session.getAttribute("userId");
         if (userId == null) {
             // 세션에 사용자 ID가 없는 경우 메시지를 추가하고 로그인 페이지로 리다이렉트
             ras.addAttribute("errorMsg", "로그인이 필요합니다.");
             return "user/myPage";
         } 
-        
+        log.info("로그인 테스트 2");
 		result = service.applicationDelete(applicationVO);
 		if(result == 1) {
-			url = "/application/applicationView";
+			System.out.println(applicationVO);
+			url = "/application/applicationView?userId="+userId;
 		} else {
 			ras.addFlashAttribute("errorMsg", "취소에 실패했습니다. 잠시후에 다시시도해 주세요.");
 			url = "/application/applicationView";
 		}
+		log.info("로그인 테스트 3");
 		return "redirect:"+url;
 	}
 	
 	@ResponseBody
 	@PostMapping("/applicationCheck")
-	public int applicationCheck(HttpServletRequest request, ApplicationVO applicationVO, VolunteerVO volunteer, UserVO user) {
+	public int applicationCheck(ApplicationVO applicationVO, VolunteerVO volunteer, UserVO user) {
 		applicationVO.getUser().setUserId(user.getUserId());
         applicationVO.getVolunteer().setVolunteerId(volunteer.getVolunteerId());
         int applicationCheck = service.applicatoinCheck(applicationVO);
