@@ -46,6 +46,14 @@
 								onclick="del(${freeBoard.fboardId})"></li>
 						</c:if>
 						<c:if test="${empty userLogin}">
+							<li><a href="/user/login"
+								onclick="alert('신고하려면 로그인이 필요합니다')">
+									<button type="button" class="btn btn-primary button special">신고</button>
+							</a></li>
+						</c:if>
+						<c:if test="${not empty userLogin}">
+							<li><%@ include
+									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
 							<li>
 								<a href="/user/login" onclick="alert('신고하려면 로그인이 필요합니다')">
 									<button type="button" class="btn btn-primary button special">신고</button>
@@ -64,22 +72,10 @@
 							</c:choose>
 						</c:if>
 					</ul>
+					<!-- 댓글 시작 -->
+					<%@ include file="/WEB-INF/views/board/fcomment.jsp"%>
+					<!-- 댓글 종료 -->
 				</div>
-				<!-- 댓글 시작 -->
-				<hr />
-				<form method="post" action="/reply/write">
-
-					<p>
-						<label>댓글 작성자</label> <input type="text" name="writer">
-					</p>
-					<p>
-						<textarea rows="5" cols="50" name="content"></textarea>
-					</p>
-					<p>
-						<input type="hidden" name="fboardId" value="${freeBoard.fboardId}">
-						<button type="submit">댓글 작성</button>
-					</p>
-				</form>
 			</div>
 		</div>
 		<!-- 댓글 종료 -->
