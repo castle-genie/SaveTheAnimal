@@ -59,6 +59,12 @@
 	
 	<!-- 게시글 수정 -->
 	<update id="updateFreeBoard" parameterType="FreeBoard">
+		<!--  
+		UPDATE 	freeBoard
+		SET 	fboard_title 		= #{fboardTitle}
+				fboard_content	 	= #{fboardContent}
+		WHERE	fboard_id 			= #{fboardId}
+		-->
 		UPDATE freeBoard
 		SET fboard_title = #{fboardTitle}, fboard_content = #{fboardContent}
 		WHERE	fboard_id = #{fboardId}
