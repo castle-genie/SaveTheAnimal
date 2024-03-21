@@ -1,94 +1,103 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <body>
-
 	<div class="container">
 		<div class="content">
 			<form id="replyForm" name="replyForm">
 				<div class="row mb-3">
-				<label for="userId" class="col-sm-1 col-form-label">작성자</label>
+					<label for="userId" class="col-sm-1 col-form-label">작성자</label>
 					<div class="col-sm-3">
-						<input type="text" name="userId" id="userId" class="form-control" />
+						<input type="text" name="userId" id="userId" class="form-control"
+							readonly value="${userLogin.userId}" />
 					</div>
-					<!--<button type="button" id="replyInsertBtn" class="btn btn-primary col-sm-1 sendBtn mx-2">저장</button>-->
-					<button type="button" id="replyInsertBtn" class="btn btn-primary col-sm-1 sendBtn mx-2">저장</button>
+					<button type="button" id="replyInsertBtn"
+						class="btn btn-primary col-sm-1 sendBtn mx-2">저장</button>
 				</div>
 				<div class="row mb-3">
 					<label for="fcommentContent" class="col-sm-1 col-form-label">내용</label>
 					<div class="col-sm-11">
-						<textarea name="fcommentContent" id="fcommentContent" class="form-control" rows="3"></textarea>
+						<textarea name="fcommentContent" id="fcommentContent"
+							class="form-control" rows="3"></textarea>
 					</div>
 				</div>
 			</form>
 		</div>
-		<!-- 댓글 목록 -->	
-		<div class="content">
-		<p>왜 안보이냐</p>
+		<!-- 댓글 목록 시작 -->
 		<div id="commentList">
 			<div class="card mb-2" id="item-template">
 				<div class="card-header">
-					<span class="name"></span>
-					<span class="date"></span>
-					<button type="button" data-btn="upBtn" class="btn btn-primary btn-sm">수정하기</button>
-					<button type="button" data-btn="delBtn" class="btn btn-primary btn-sm">삭제하기</button>
+					<span class="name"></span> <span class="date"></span>
+
+					<button type="button" data-btn="upBtn"
+						class="btn btn-primary btn-sm">수정하기</button>
+					<button type="button" data-btn="delBtn"
+						class="btn btn-primary btn-sm">삭제하기</button>
 				</div>
 				<div class="card-body">
 					<p class="card-text"></p>
 				</div>
 			</div>
 		</div>
-		<p>이건보이냐</p>
-		</div>
+		<!-- 댓글 목록 종료 -->
 	</div>
 	<script>
-		$(function() {	
-			let fboardId = ${detail.fboardId};
+		$(function() {
+			//기본 댓글 목록 불러오기
+			let fboardId = '${freeBoard.fboardId}';
+			console.log(fboardId)
 			listAll(fboardId);
-			
-			$(document).on("click", "#replyInsertBtn", function(){
-				let insertUrl = "/fcomment/replyInsert";
-				
-				let value = JSON.stringify({
-					fboardId:fboardId,
-					userId:$("#userId").val(),
-					fcommentContent:$("#fcommentContent").val()
-				});
-				
-				$.ajax({
-					url : insertUrl,
-					type : "post",
-					headers : {
-						"Content-Type":"application/json"
-					},
-					dataType:"text", 
-					data : value,
-					error: function(xhr, textStatus, errorThrown){
-						alert(textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
-					},
-					beforeSend: function(){
-						if(!checkForm("#fcommentContent", "댓글내용을")) 	return false;
-					},
-					success : function(result){
-						if(result=="SUCCESS"){
-							alert("댓글 등록이 완료되었습니다.");
-							dataReset();
-							listAll(fboardId);
-						}
-					}
-				});
-				
-			});
-						
-			
+
+			//글입력을 위한 Ajax 연동 처리
+			$(document).on(
+					"click",
+					"#replyInsertBtn",
+					function() {
+						let insertUrl = "/fcomment/fcommentInsert";
+
+						// JSON.stringify(): JavaScript 값이나 객체를 JSON 문자열로 변환
+						let value = JSON.stringify({
+							fboardId : fboardId,
+							userId : $("#userId").val(),
+							fcommentContent : $("#fcommentContent").val()
+						});
+
+						$.ajax({
+							url : insertUrl, // 전송 url
+							type : "post", // 전송 method 방식
+							headers : {
+								"Content-Type" : "application/json"
+							},
+							dataType : "text",
+							data : value,
+							error : function(xhr, textStatus, errorThrown) {
+								alert(textStatus + " (HTTP-" + xhr.status
+										+ " / " + errorThrown + ")");
+							},
+							beforeSend : function() {
+								if (!checkForm("#fcommentContent", "댓글내용을"))
+									return false;
+							},
+							success : function(result) {
+								if (result == "SUCCESS") {
+									alert("댓글 등록이 완료되었습니다.");
+									dataReset();
+									listAll(fboardId);
+								}
+							}
+						});
+
+					});
+
 		});
+
 		//댓글 목록 보여주는 함수
-		
 		function listAll(fboardId) {
-			$(".reply").detach(); //detach(): 선택한 요소를 DOM트리에서 삭제
+			console.log(fboardId)
+			$(".fcomment").detach(); //detach(): 선택한 요소를 DOM트리에서 삭제
 			let url = "/fcomment/all/" + fboardId;
 			$.getJSON(
 					url,
-					function(data) {
+					function(data) { //data = [{fcommentId:1, userId:"홍길동"}, ...{}]
 						$(data).each(
 								function(index) {
 									let fcommentId = this.fcommentId;
@@ -100,24 +109,48 @@
 
 									template(fcommentId, userId,
 											fcommentContent, fcommentDate);
+									//$("#commentList").append(fcommentId + userId + fcommentContent + fcommentDate + "<br/>");
+									applyButtonVisibility();
+									
 
 								});
 					}).fail(function() {
-				alert("덧글 목록을 불러오는데 실패하였습니다. 잠시후에 다시 시도해 주세요.");
+				console.log(fboardId)
+				alert("댓글 목록을 불러오는데 실패하였습니다. 잠시후에 다시 시도해 주세요.");
 			});
-
 		}
 
+		function applyButtonVisibility() {
+			$(".card").each(function() {
+				let nameValue = $(this).find(".name").text(); //현재 댓글의 작성자 가져오기
+				let upBtn = $(this).find("[data-btn='upBtn']"); //현재 댓글의 수정 버튼
+				let delBtn = $(this).find("[data-btn='delBtn']"); //현재 댓글의 삭제 버튼
+
+				if (nameValue === "${userLogin.userId}") {
+					// 조건을 충족할 때 수행할 작업
+					// 수정 버튼과 삭제 버튼 보이기
+					upBtn.show(); //수정 버튼 보이기
+					delBtn.show(); //삭제 버튼 보이기
+				} else {
+					//	조건을 충족하지 않을 때 수행할 작업
+					// 수정 버튼과 삭제 버튼 숨기기
+					upBtn.hide(); //수정 버튼 숨기기
+					delBtn.hide(); //삭제 버튼 숨기기
+				}
+			});
+		}
+
+		/* 새로운 글을 화면에 추가하기 위한 함수*/
 		function template(fcommentId, userId, fcommentContent, fcommentDate) {
 			let $div = $('#commentList');
 
 			let $element = $('#item-template').clone().removeAttr('id');
 
 			$element.attr("data-num", fcommentId);
-			$elementaddClass("reply");
+			$element.addClass("fcomment");
 			$element.find('.name').html(userId);
 			$element.find('.card-header .date').html(" / " + fcommentDate);
-			$element.find('.card-header .card-text').html(fcommentContent);
+			$element.find('.card-body .card-text').html(fcommentContent);
 
 			$div.append($element);
 		}
@@ -136,8 +169,9 @@
 		}
 
 		$(document).on("click", "button[data-btn='delBtn']", function() {
+			let fboardId = '${freeBoard.fboardId}';
 			let fcommentId = $(this).parents("div.card").attr("data-num");
-			console.log(fcommentId);
+			console.log(fboardId);
 			deleteBtn(fboardId, fcommentId);
 		})
 
@@ -180,6 +214,7 @@
 
 		//수정을 위한 Ajax 연동 처리
 		$(document).on("click", "#replyUpdateBtn", function() {
+
 
 			let fcommentId = $(this).attr("data-rnum");
 			$.ajax({

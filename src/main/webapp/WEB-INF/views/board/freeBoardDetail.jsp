@@ -46,7 +46,6 @@
 								onclick="del(${freeBoard.fboardId})"></li>
 						</c:if>
 						<c:if test="${empty userLogin}">
-<<<<<<< HEAD
 							<li><a href="/user/login"
 								onclick="alert('신고하려면 로그인이 필요합니다')">
 									<button type="button" class="btn btn-primary button special">신고</button>
@@ -55,7 +54,6 @@
 						<c:if test="${not empty userLogin}">
 							<li><%@ include
 									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
-=======
 							<li>
 								<a href="/user/login" onclick="alert('신고하려면 로그인이 필요합니다')">
 									<button type="button" class="btn btn-primary button special">신고</button>
@@ -72,24 +70,12 @@
 								</c:otherwise>
 								
 							</c:choose>
->>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06
 						</c:if>
 					</ul>
+					<!-- 댓글 시작 -->
 					<%@ include file="/WEB-INF/views/board/fcomment.jsp"%>
+					<!-- 댓글 종료 -->
 				</div>
-				<!-- 댓글 시작 -->
-<<<<<<< HEAD
-				<div>
-					<hr />
-					<div>
-						<input type="text" id="userId" placeholder="댓글작성자">
-						<input type="text" id="fcommentContent" placeholder="댓글내용">
-						<button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
-					</div>
-				</div>
-				<!-- 댓글 종료 -->
-=======
->>>>>>> a85d71ee7582a32dafdaf288a388a4093451ac06
 			</div>
 		</div>
 		<!-- 댓글 종료 -->
@@ -128,27 +114,6 @@
 		if (chk) {
 			location.href='delete?fboardId='+fboardId;
 		}
-	}
-	const commentWrite = () =>{
-		const writer = document.getElementById("userId").value;
-		const contents = document.getElementById("fcommentContent").value;
-		const board = '${freeBoard.fboardId}';
-		$.ajax({
-			type: "post",
-			url: "/comment/save",
-			data: {
-				userId: writer,
-				fcommentContent: contents,
-				fboardId: board
-			},
-			dataType: "json",
-			success: function(commentList){
-				console.log("댓글작성완료");
-			},
-			error: function() {
-				console.log("댓글작성실패");
-			}
-		});
 	}
 </script>
 </html>

@@ -44,11 +44,13 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	//조회수 증가
 	@Override
 	public boolean plusCnt(FreeBoardVO freeBoardVO) {
+		log.info("조회수증가 메서드(ServiceImpl)");
 		return freeBoardDAO.plusCnt(freeBoardVO);
 	}
 	//게시글 등록
 	@Override
 	public int insertFreeBoard(FreeBoardVO freeBoardVO) {
+		log.info("게시글등록 메서드(ServiceImpl)");
 		return freeBoardDAO.insertFreeBoard(freeBoardVO);
 	}
 	

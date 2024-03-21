@@ -13,7 +13,7 @@
 	<select id="fcommentList" parameterType="fcomment" resultMap="fcommentMap">
 		SELECT	fcomment_id, fcomment_content, fcomment_date, fboard_id, user_id
 		FROM 	Fcomment
-		WHERE 	fcomment_id = #{fcommentId}
+		WHERE 	fboard_id = #{fboardId}
 		ORDER BY fcomment_id DESC
 	</select>
 	

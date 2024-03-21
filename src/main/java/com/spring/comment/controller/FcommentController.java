@@ -16,25 +16,36 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.comment.service.FcommentService;
 import com.spring.comment.vo.FcommentVO;
 
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+/***************************************************************************************
+ * 참고 : @RestController (@Controller + @ResponesBody)
+ * Controller가 REST 방식을 처리하기 위한 것임을 명시. (기존의 특정한 JSP와 같은 뷰를 만들어 
+ * 내는 것이 목적이 아닌 REST 방식의 데이터 처리를 위해서 사용하는(데이터 자체를 반환) 어노테이션이다.
+ * @ResponesBody: 일반적인 JSP와 같은 뷰로 전달되는 게 아니라 데이터 자체를 전달하기 위한 용도이다.
+ * @PathVariable: URL 경로에 있는 값을 파라미터로 추출하려고 할 때 사용한다.
+ * @RequestBody: JSON 데이터를 원하는 타입으로 바인딩 처리한다.{name:value}
+ ***************************************************************************************/
+
 @RestController
-@RequestMapping(value = "/fcomment")
+@RequestMapping("/fcomment/*")
 @Slf4j
 public class FcommentController {
 	
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private FcommentService fcommentService;
 
-	@GetMapping(value = "/all/{fboardId}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<FcommentVO> replyList(@PathVariable("fboardId") Integer fboardId, FcommentVO fcommentvo) {
-		log.info("ReplyList 호출");
+	@GetMapping(value = "all/{fboardId}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<FcommentVO> fcommentList(@PathVariable("fboardId") int fboardId, FcommentVO fcommentvo) {
+		log.info("fcommentList 호출");
 		
 		List<FcommentVO> fcommentlist = null;
+		fcommentvo.setFboardId(fboardId);
 		fcommentlist = fcommentService.fcommentList(fcommentvo);
 		return fcommentlist;
 	}
+	
+	
 	
 /**************************************************************
 * 댓글 글쓰기 구현하기
@@ -48,9 +59,9 @@ public class FcommentController {
 * 현재 요청 URL : http://localhost:8080/replies/replyInsert
 **************************************************************/	
 	
-	@PostMapping(value = "replyInsert", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
-	public String replyInsert(@RequestBody FcommentVO fcommentvo) {
-		log.info("replyInsert 호출 성공");
+	@PostMapping(value = "fcommentInsert", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String fcommentInsert(@RequestBody FcommentVO fcommentvo) {
+		log.info("fcommentInsert 호출 성공");
 		log.info("FcommentVO : " + fcommentvo);
 		int result = 0;
 		
@@ -58,19 +69,20 @@ public class FcommentController {
 		return(result==1) ? "SUCCESS":"FAILURE";
 	}
 	
-	@DeleteMapping(value = "/{replyNumber}", produces = MediaType.TEXT_PLAIN_VALUE)
-	public String replyDelete(@PathVariable("replyNumber") int replyNumber, FcommentVO fcommentvo) {
-		fcommentvo.setFcommentId(replyNumber);
+	@DeleteMapping(value = "/{fcommentId}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String fcommentDelete(@PathVariable("fcommentId") int fcommentId, FcommentVO fcommentvo) {
+		fcommentvo.setFcommentId(fcommentId);
 		int result = fcommentService.fcommentDelete(fcommentvo);
 		return(result==1)?"SUCCESS":"FAILURE";
 	}
 	
-	@PutMapping(value = "/{replyNumber}",
+	@PutMapping(value = "/{fcommentId}",
 			consumes = "application/json",
 			produces = MediaType.TEXT_PLAIN_VALUE)
-	public String replyUpdate(@PathVariable("replyNumber") int replyNumber, @RequestBody FcommentVO fcommentvo) {
-		fcommentvo.setFcommentId(replyNumber);
+	public String fcommentUpdate(@PathVariable("fcommentId") int fcommentId, @RequestBody FcommentVO fcommentvo) {
+		fcommentvo.setFcommentId(fcommentId);
 		int result = fcommentService.fcommentUpdate(fcommentvo);
 		return(result==1)?"SUCCESS":"FAILURE";
 	}
+	
 }

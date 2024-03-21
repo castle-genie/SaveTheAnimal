@@ -28,8 +28,6 @@ public class FreeBoardController {
 	@Autowired
 	private FreeBoardService freeBoardService;
 	
-	@Autowired
-	private FcommentService fcommentService;
 	
 
 	@GetMapping(value = "freeBoardList")
@@ -65,10 +63,8 @@ public class FreeBoardController {
 	public String freeBoardDetail(Model model, FreeBoardVO freeBoardVO){
 		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(freeBoardVO));
 		
-		log.info("조회수증가 명령");
 		//조회수 +1
 		freeBoardService.plusCnt(freeBoardVO);
-		log.info("조회수증가 완료");
 		
 		return "board/freeBoardDetail";
 		
