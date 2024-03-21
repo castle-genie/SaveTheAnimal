@@ -12,16 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.common.vo.PageDTO;
 import com.spring.user.service.UserService;
 import com.spring.user.vo.UserVO;
-
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +44,7 @@ public class UserController {
 				
 		if (userLogin != null) {
 			model.addAttribute("userLogin", userLogin); 
-			session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
+			//session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
 			return "redirect:/";// 성공하면 메인페이지 이동
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
@@ -58,7 +56,7 @@ public class UserController {
 	public String logout(SessionStatus sessionStatus, HttpSession session) {
 		log.info("user 로그아웃 처리");
 		sessionStatus.setComplete();
-		session.removeAttribute("userId");
+		//session.removeAttribute("userId");
 		return "redirect:/"; // 메인페이지 이동
 	}
 	
@@ -179,38 +177,36 @@ public class UserController {
 	
 	
 	@GetMapping("/mypage")
-    public String mypage(HttpServletRequest request, Model model, RedirectAttributes ras) {
-		// 세션 가져오기
-		HttpSession session = request.getSession();
-		// 세션에서 사용자 ID 가져오기
-        String userId = (String) session.getAttribute("userId");
+    public String mypage(@SessionAttribute("userLogin") UserVO userLogin, Model model, RedirectAttributes ras) {
+		//log.info("mypage 호출");
+		// 세션에서 ID 가져오기
+        String userId = (String) userLogin.getUserId();
+        log.info(userId);
         
         if (userId == null) {
             // 세션에 사용자 ID가 없는 경우 메시지를 추가하고 로그인 페이지로 리다이렉트
             ras.addAttribute("errorMsg", "로그인이 필요합니다.");
             return "user/myPage";
-        }       
-        // 사용자 정보 가져오기
-        UserVO userinfo = userService.userInfo(userId);
-        
-        if (userinfo == null) {
-            // 사용자 정보가 없는 경우 메시지를 추가하여 마이페이지로 이동
-        	ras.addAttribute("errorMsg", "사용자 정보를 가져오는데 문제가 발생했습니다.");
-        } else {
-            // 사용자 정보가 있는 경우 모델에 추가
-            model.addAttribute("userInfo", userinfo);
-            //log.info(userinfo.toString());
+        } else {   
+	        // 사용자 정보 가져오기
+	        UserVO userinfo = userService.userInfo(userId);
+	        
+	        if (userinfo == null) {
+	            // 사용자 정보가 없는 경우 메시지를 추가하여 마이페이지로 이동
+	        	ras.addAttribute("errorMsg", "사용자 정보를 가져오는데 문제가 발생했습니다.");
+	        } else {
+	            // 사용자 정보가 있는 경우 모델에 추가
+	            model.addAttribute("userInfo", userinfo);
+	            //log.info(userinfo.toString());
+	        }	        
+	        return "user/myPage";
         }
-        
-        return "user/myPage";
     }
 	
 	@GetMapping("/updateProfile")
-	public String updateProfile(HttpServletRequest request, Model model) {
-		// 세션 가져오기
-		HttpSession session = request.getSession();
-		// 세션에서 사용자 ID 가져오기
-		String userId = (String) session.getAttribute("userId");
+	public String updateProfile(@SessionAttribute("userLogin") UserVO userLogin, Model model) {
+		// 세션에서 ID 가져오기
+        String userId = (String) userLogin.getUserId();
 		
 		// 사용자 정보 가져오기
         UserVO userInfo = userService.userInfo(userId);
@@ -268,6 +264,7 @@ public class UserController {
 	
 	@GetMapping("/userList")
 	public String userList(@ModelAttribute UserVO uvo, Model model) {
+		log.info("userList 호출");
 		List<UserVO> userList = userService.userList(uvo);
 		model.addAttribute("userList", userList);
 		
@@ -277,6 +274,15 @@ public class UserController {
 		return "admin/user/userList";
 	}
 	
-
+	/* 자바단에서 세션에서 꺼내온 값 사용하는 방법 
+	@GetMapping("/board")
+	public String process(@SessionAttribute("adminLogin") AdminLoginVO adminLoginVO) {
+		adminLoginVO.getAdminId(); // 세션에서 얻은 값.
+		return "";
+	}*/
+	
+	/* jsp : ${adminLogin.adminId} */
+	
+	/* javascript : let adminId = "${adminLogin.adminId}"; */
 
 }

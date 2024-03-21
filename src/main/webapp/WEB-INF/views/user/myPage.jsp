@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ include file="/WEB-INF/views/common/common.jsp" %>
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
@@ -100,7 +101,7 @@
 							    <h4 class="border-bottom pb-2 mb-0"><strong>My Activities</strong></h4>										    
 							    <br/>
 							    <p class="align-right">
-							    	봉사 레벨 : <strong>Lv. ${userInfo.userLevel}</strong><br>
+							    	봉사 레벨 : <strong>Lv. ${userInfo.userVolcnt/ 3 + 1 }</strong><br>
 							    	봉사 횟수 : <strong>${userInfo.userVolcnt}</strong> 회
 							    </p>
 							    <div class="d-flex text-body-secondary pt-3">

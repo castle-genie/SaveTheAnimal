@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.115.4">
-    <title>관리자 첫 화면</title>
+    <title>SaveTheAnimal Admin Page</title>
 	
 	<link rel="shortcut icon" href="/resources/images/common/icon.png" />
 	<link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
@@ -155,7 +155,7 @@
 	  <c:if test="${empty adminLogin}">
 	  <form id="loginForm">
 	    <!-- <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-	    <h1 class="h3 mb-3 fw-normal">관리자 로그인 페이지</h1>
+	    <h1 class="h3 mb-3 fw-normal">SaveTheAnimal<br>관리자 로그인 페이지</h1>
 	
 	    <div class="form-floating">
 	      <input type="text" class="form-control"
@@ -180,7 +180,7 @@
 	  </c:if>
 	  
 	  <c:if test="${not empty adminLogin}">
-	  	<h3>${adminLogin.adminName}님 환영합니다.</h3>
+	  	<h3>${adminLogin.adminId}님 환영합니다.</h3>
 	  	<button type="button" id="logoutBtn">로그아웃</button>
 	  </c:if>
 	</main>

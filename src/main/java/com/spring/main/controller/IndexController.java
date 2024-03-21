@@ -10,11 +10,19 @@ public class IndexController {
 	@GetMapping("/")
 	public String mainpage() {
 		return "project/mainpage";
-	}	
+	}		
 	
+	// 로그인 처리 후 첫화면 수정
+	@GetMapping("adminLogin")
+	public String adminLogin() {
+		return "admin/login";
+	}
+	
+	/* 관리자 메인 페이지 */
 	@GetMapping("admin")
-	public String adminPage() {
-		return"admin/adminMain";
+	public String adminMain() {
+		return "admin/adminMain";
 	}
 
+	
 }

@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+//import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,7 +43,7 @@ public class AdminLoginController {
 	@GetMapping("/login")
 	public String loginForm() {
 		log.info("admin 로그인 화면 호출");
-		return "admin/main"; // /WEB-INF/views/admin/main.jsp로 포워드 (관리자 시작페이지로 구분)
+		return "admin/login"; // /WEB-INF/views/admin/login.jsp로 포워드 (관리자 시작페이지로 구분)
 	}
 	
 	/***********************************************************************************
@@ -66,25 +66,25 @@ public class AdminLoginController {
 		//log.info("loginProcess 호출");		
 		AdminLoginVO adminLogin = adminLoginService.loginProcess(login);
 		
-		/* 로그인 확인 */
+		/* 로그인 확인 
 		if (adminLogin != null) {
 			model.addAttribute("adminLogin", adminLogin);			
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패");
 		}		
 		return "redirect:/admin/login"; // 리다이렉트하는 시점 이후 한번만 출력되게 함
-		
-		/* 실제 로직
+		*/
+		/* 실제 로직 */
 		String url = "";
 		if (adminLogin != null) {
 			model.addAttribute("adminLogin", adminLogin); // 성공하면 관리자페이지 첫화면으로 이동하기
 			//url = "/admin/board/boardList";
-			url = "/admin/member/MemberList";
+			url = "/admin"; 
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패");
 			url = "/admin/login";
 		}
-		return "redirect:"+url;*/
+		return "redirect:"+url;
 	}
 	
 	/********************************************************************

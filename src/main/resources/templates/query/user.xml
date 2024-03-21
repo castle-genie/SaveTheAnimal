@@ -86,10 +86,10 @@
 	    </choose>
 	</select>-->
 	
-	<!-- 회원 정보 조회 -->
+	<!-- 회원 정보 조회 : 3/21 user_level 컬럼 삭제 -->
 	<select id="userInfo" parameterType="user" resultMap="userMap">
 		select 
-		    user_id, user_name, user_phone, user_email, user_volcnt, user_level,
+		    user_id, user_name, user_phone, user_email, user_volcnt,
 		    to_char(user_date, 'YYYY-MM-DD') as user_date, user_act, user_repcnt, user_adoptChk
 		from users
 		where user_id = #{userId} 
@@ -132,14 +132,12 @@
 	
 	<!-- 아래 두개 sql 중복코드 따로 떼어서 정의함!! where과 trim 명시 확인 -->
 	<sql id="userSearch">
-		<if test="search=='b_title'">
-			<![CDATA[ b_title like '%'|| #{keyword} ||'%' ]]>
+		<if test="search=='userAct'">
+			<![CDATA[ user_act = #{keyword} ]]>
 		</if>
-		<if test="search=='b_content'">
-			<![CDATA[ b_content like '%'|| #{keyword} ||'%' ]]>
-		</if>
-		<if test="search=='b_name'">
-			<![CDATA[ b_name like '%'|| #{keyword} ||'%' ]]>
+
+		<if test="search=='userDate'">
+			<![CDATA[ to_char(user_date, 'YYYY-MM-DD') between #{startDate} and #{endDate} ]]>
 		</if>
 	</sql>
 	
@@ -152,7 +150,7 @@
 		</trim>
 	</select>
 	
-	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) 및 댓글 갯수 구하기 -->
+	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) : 3/21 user_level 컬럼 삭제 -->
     <!-- 힌트(hint): 개발자가 데이터베이스에 어떤 방식으로 실행해 줘야 하는지를 명시하기 때문에 강제성을 부여한다. 
                구문: /*+로 시작하고 */ 로 종료된다. 
                /*+ INDEX_DESC(테이블명 인덱스명[기본키 설정시 제약조건명으로 인덱스 자동 생성])*/ -->
@@ -161,10 +159,10 @@
        <![CDATA[ 
          SELECT 
                user_id, user_name, user_phone, user_email, to_char(user_date, 'YYYY-MM-DD') as user_date, 
-			   user_act, user_repcnt, user_volcnt, user_level, user_adoptChk   
+			   user_act, user_repcnt, user_volcnt, user_adoptChk   
          FROM (
                  SELECT /*+ INDEX_DESC(users pk_users) */ 
-                      rownum as rnum, user_id, user_name, user_phone, user_email, user_date, user_act, user_repcnt, user_volcnt, user_level, user_adoptChk
+                      rownum as rnum, user_id, user_name, user_phone, user_email, user_date, user_act, user_repcnt, user_volcnt, user_adoptChk
                  FROM users
                  WHERE ]]>
                  <trim prefix="(" suffix=") AND " prefixOverrides="AND">
