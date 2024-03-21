@@ -1,12 +1,12 @@
-package com.spring.FreeBoard.service;
+package com.spring.board.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.FreeBoard.dao.FreeBoardDAO;
-import com.spring.FreeBoard.vo.FreeBoardVO;
+import com.spring.board.dao.FreeBoardDAO;
+import com.spring.board.vo.FreeBoardVO;
 
 import lombok.extern.slf4j.Slf4j;
 
