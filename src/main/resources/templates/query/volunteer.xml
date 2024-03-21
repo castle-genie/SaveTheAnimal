@@ -14,11 +14,12 @@
 		<result column="volunteer_location" property="volunteerLocation"/>
 		<result column="volunteer_progress" property="volunteerProgress"/>
 		<result column="admin_id" property="adminId" />
+		<result column="volunteer_file" property="volunteerFIle" />
 	</resultMap>
 	
 	<!-- 봉사 공고 리스트 달력에 표현하기 -->
 	<select id="volunteerList" parameterType="volunteer" resultMap="volunteerMap"> 
-		SELECT volunteer_id, volunteer_Time, volunteer_title, volunteer_progress 
+		SELECT volunteer_id, volunteer_Time, volunteer_title
 		FROM volunteer 
 		ORDER BY volunteer_id DESC 
 	</select>
@@ -28,7 +29,7 @@
 		SELECT volunteer_id, volunteer_detail, volunteer_date, volunteer_title, volunteer_cnt,
 			   volunteer_time, 
 			   volunteer_due, 
-			   volunteer_limit, volunteer_cost, volunteer_location, volunteer_progress
+			   volunteer_limit, volunteer_cost, volunteer_location, volunteer_file
 	    FROM volunteer
 	    WHERE volunteer_id = #{volunteerId}
 	</select>
@@ -46,7 +47,7 @@
 	                   default
 	               </otherwise>
 	           </choose>
-			   , #{volunteerLocation}, default, 'admin')
+			   , #{volunteerLocation}, default, 'admin', #{volunteerFile})
 	</insert>
 	
 	<!-- 관리자 페이지에서 봉사 공고 수정하기 -->
@@ -60,7 +61,10 @@
 		        <if test="volunteerCost == ''">
 		        	volunteer_cost = default,
 		        </if>
-		        volunteer_location = #{volunteerLocation}, volunteer_detail = #{volunteerDetail}
+		        volunteer_location = #{volunteerLocation}, volunteer_detail = #{volunteerDetail}, volunteer_file=#{volunteerFile}
+		        <if test="volunteerFile != ''">
+		    	, volunteer_file = #{volunteerFile}    
+		        </if>
 		    WHERE volunteer_id = #{volunteerId}
 	</update>
 	
@@ -68,11 +72,5 @@
 		DELETE FROM volunteer
 		WHERE volunteer_id = #{volunteerId}
 	</delete>
-	
-	<update id="updateVolunteerProgress1" parameterType="volunteer">
-		UPDATE volunteer
-		SET volunteer_progress = 1
-		WHERE volunteer_id = #{volunteerId}
-	</update>
 </mapper>
 

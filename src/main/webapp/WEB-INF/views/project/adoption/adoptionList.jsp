@@ -1,100 +1,99 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/admin/admin.jspf"%>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-	<div
-		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h1 class="h2">봉사공고</h1>
-	</div>
-	<div class="container">
-		<!-- 여기에 페이지 구현하세요 -->
-		
-	<div class ="container">
-		<div class="text-center"><h3>입양 공고 리스트</h3></div>
-		
-		<form id="detailForm">
-			<input type="hidden" id="adoptionId" name="adoptionId"/>
-		</form>
-		
-		<div id="adoptionSearch">
-		    <form id="f_search" name="f_search">
-		        <div class="row g-2 align-items-center">
-		            <label for="search">검색조건</label>
-		        </div>
-		        <div class="col-auto">
-		            <select id="search" name="search" class="form-select form-select-sm" >
-		                <option value="all">전체 목록 조회</option>
-		                <option value="adoption_id">공고 ID</option>
-		                <option value="adoption_title">공고 제목</option>
-		                <option value="adoption_level">공고 레벨</option>
-		                <option value="adoption_temp">공고 상태</option>
-		            </select>
-		        </div>
-		        <div class="col-auto">
-		            <input type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" class="form-control form-control-sm" />
-		        </div>
-		        <div class="col-auto">
-		            <button type="button" id="searchData" class="btn btn-success btn-sm">검색</button>
-		        </div>
-		    </form>
-		</div>
-
-		
-		<div id="adoptionSearch" class="text-right"></div>
-		
-		<div id="adoptionList">
-			<table summary="게시판 리스트" class="table table-striped">
-				<thead>
-					<tr class="text-center">
-						<th class="col-md-1">공고 ID</th>
-						<th class="col-md-1">공고 제목</th>		
-						<th class="col-md-1">공고 레벨</th>
-						<th class="col-md-1">공고 상태</th>
-						<th class="col-md-2">작성일</th>
-						<th class="col-md-1">조회수</th>
-					</tr>
-				</thead>
-				<tbody id="list">
-					<c:choose>
-						<c:when test="${not empty adoptionList }">
-							<c:forEach var="adoption" items="${adoptionList }" varStatus="status">
-								<tr class = "text-center id" data-num="${ adoption.adoptionId}">
-									
-									<td class="id">${adoption.adoptionId}</td>
-									<%-- <td>
-										<c:if test="${not empty adoption.adoptionFile }">
-											<img src="/uploadStorage/adoption/${adoption.adoptionFile}"
-											class="rounded w-50 h-50"/>
-										</c:if>
-										<c:if test="${empty adoption.adoptionFile }">
-											<img src="/resources/images/common/noimage.jpg"
-											class="rounded w-100 h-100"/>
-										</c:if>
-									</td> --%>
-									<td class="goDetail text-start">
-									${adoption.adoptionTitle}
-									</td>
-									<td class="adoptionLevel">${adoption.adoptionLevel }</td>
-									<td class="aoptionStatus">${adoption.adoptionStatus }</td>
-									<td class="adoptionDate">${adoption.adoptionDate}</td>
-									<td class ="adoptionCnt">${adoption.adoptionCnt }</td>
-									
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-						<tr>
-							<td colspan="5" class ="text-center">등록된 게시물이 존재하지 않습니다</td>
-						</tr>
-						</c:otherwise>
-					</c:choose>	
-				</tbody>
-			</table>
-		</div>
-		
-		<div class = "text-end">
-			<button type="button" id="insertFormBtn" class ="btn btn-success btn-sm">새로 등록 하기</button>
-		</div>		
-	</div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">입양 공고</h1>
+    </div>
+    <div class="container">
+        <!-- 여기에 페이지 구현하세요 -->
+        <div class="container">
+            <div class="text-center"><h3>입양 공고 리스트</h3></div>
+            <form id="detailForm">
+                <input type="hidden" id="adoptionId" name="adoptionId"/>
+            </form>
+            <div id="adoptionSearch">
+                <form id="f_search" name="f_search">
+                    <input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cvo.pageNum}">
+                    <input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount}">
+                    <div class="row g-2 align-items-center">
+                        <label for="search">검색조건</label>
+                    </div>
+                    <div class="col-auto">
+                        <select id="search" name="search" class="form-select form-select-sm" >
+                            <option value="all">전체 목록 조회</option>
+                            <option value="adoption_id">공고 ID</option>
+                            <option value="adoption_title">공고 제목</option>
+                            <option value="adoption_level">공고 레벨</option>
+                            <option value="adoption_temp">공고 상태</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" id="searchData" class="btn btn-success btn-sm">검색</button>
+                    </div>
+                </form>
+            </div>
+            <div id="adoptionSearch" class="text-right"></div>
+            <div id="adoptionList">
+                <table summary="게시판 리스트" class="table table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th class="col-md-1">공고 ID</th>
+                            <th class="col-md-1">공고 제목</th>
+                            <th class="col-md-1">공고 레벨</th>
+                            <th class="col-md-1">공고 상태</th>
+                            <th class="col-md-2">작성일</th>
+                            <th class="col-md-1">조회수</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list">
+                        <c:choose>
+                            <c:when test="${not empty adoptionList}">
+                                <c:forEach var="adoption" items="${adoptionList}" varStatus="status">
+                                    <tr class="text-center id" data-num="${adoption.adoptionId}">
+                                        <td class="id">${adoption.adoptionId}</td>
+                                        <td class="goDetail text-start">${adoption.adoptionTitle}</td>
+                                        <td class="adoptionLevel">${adoption.adoptionLevel}</td>
+                                        <td class="adoptionStatus">${adoption.adoptionStatus}</td>
+                                        <td class="adoptionDate">${adoption.adoptionDate}</td>
+                                        <td class="adoptionCnt">${adoption.adoptionCnt}</td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <tr>
+                                    <td colspan="5" class="text-center">등록된 게시물이 존재하지 않습니다</td>
+                                </tr>
+                            </c:otherwise>
+                        </c:choose>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-end">
+                <button type="button" id="insertFormBtn" class="btn btn-success btn-sm">새로 등록 하기</button>
+            </div>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <c:if test="${pageMaker.prev}">
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                </c:if>
+                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                    <li class="page-item ${pageMaker.cvo.pageNum == num ? 'active':''}">
+                        <a href="${num}" class="page-link" href="#">${num}</a>
+                    </li>
+                </c:forEach>
+                <c:if test="${pageMaker.next}">
+                    <li class="page-item">
+                        <a href="${pageMaker.endPage + 1}" class="page-link" href="#">Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
 	<script src="/resources/include/js/adoption/adoptionList.js"></script>
 	<script>
 		$(function(){
@@ -124,9 +123,7 @@
 </body>
 	
 	</div>
-	<div>
-		<%@ include file="/WEB-INF/views/project/report.jsp"%>
-	</div>
+	
 	
 </main>
 </div>
