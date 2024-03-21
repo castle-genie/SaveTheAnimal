@@ -10,15 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-<<<<<<< HEAD:src/main/java/com/spring/FreeBoard/controller/FreeBoardController.java
-import com.spring.FreeBoard.service.FreeBoardService;
-import com.spring.FreeBoard.vo.FreeBoardVO;
-=======
 import com.spring.board.service.FreeBoardService;
 import com.spring.board.vo.FreeBoardVO;
-import com.spring.comment.service.FcommentService;
-import com.spring.comment.vo.FcommentVO;
->>>>>>> cf85781f2979ac1fafe8de7846a6bb1e0acce694:src/main/java/com/spring/board/controller/FreeBoardController.java
 
 import lombok.extern.slf4j.Slf4j;
 

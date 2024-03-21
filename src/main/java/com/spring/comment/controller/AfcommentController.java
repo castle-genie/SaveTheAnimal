@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.comment.service.FcommentService;
-import com.spring.comment.vo.FcommentVO;
+import com.spring.comment.service.AfcommentService;
+import com.spring.comment.vo.AfcommentVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,21 +28,21 @@ import lombok.extern.slf4j.Slf4j;
  ***************************************************************************************/
 
 @RestController
-@RequestMapping("/fcomment/*")
+@RequestMapping("/afcomment/*")
 @Slf4j
-public class FcommentController {
+public class AfcommentController {
 	
 	@Autowired
-	private FcommentService fcommentService;
+	private AfcommentService afcommentService;
 
-	@GetMapping(value = "all/{fboardId}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<FcommentVO> fcommentList(@PathVariable("fboardId") int fboardId, FcommentVO fcommentvo) {
-		log.info("fcommentList 호출");
+	@GetMapping(value = "all/{afboardId}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<AfcommentVO> afcommentList(@PathVariable("afboardId") int afboardId, AfcommentVO afcommentvo) {
+		log.info("afcommentList 호출");
 		
-		List<FcommentVO> fcommentlist = null;
-		fcommentvo.setFboardId(fboardId);
-		fcommentlist = fcommentService.fcommentList(fcommentvo);
-		return fcommentlist;
+		List<AfcommentVO> afcommentlist = null;
+		afcommentvo.setAfboardId(afboardId);
+		afcommentlist = afcommentService.afcommentList(afcommentvo);
+		return afcommentlist;
 	}
 	
 	
@@ -59,29 +59,29 @@ public class FcommentController {
 * 현재 요청 URL : http://localhost:8080/replies/replyInsert
 **************************************************************/	
 	
-	@PostMapping(value = "fcommentInsert", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
-	public String fcommentInsert(@RequestBody FcommentVO fcommentvo) {
-		log.info("fcommentInsert 호출 성공");
-		log.info("FcommentVO : " + fcommentvo);
+	@PostMapping(value = "afcommentInsert", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String afcommentInsert(@RequestBody AfcommentVO afcommentvo) {
+		log.info("afcommentInsert 호출 성공");
+		log.info("AfcommentVO : " + afcommentvo);
 		int result = 0;
 		
-		result = fcommentService.fcommentInsert(fcommentvo);
+		result = afcommentService.afcommentInsert(afcommentvo);
 		return(result==1) ? "SUCCESS":"FAILURE";
 	}
 	
-	@DeleteMapping(value = "/{fcommentId}", produces = MediaType.TEXT_PLAIN_VALUE)
-	public String fcommentDelete(@PathVariable("fcommentId") int fcommentId, FcommentVO fcommentvo) {
-		fcommentvo.setFcommentId(fcommentId);
-		int result = fcommentService.fcommentDelete(fcommentvo);
+	@DeleteMapping(value = "/{afcommentId}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String afcommentDelete(@PathVariable("afcommentId") int afcommentId, AfcommentVO afcommentvo) {
+		afcommentvo.setAfcommentId(afcommentId);
+		int result = afcommentService.afcommentDelete(afcommentvo);
 		return(result==1)?"SUCCESS":"FAILURE";
 	}
 	
-	@PutMapping(value = "/{fcommentId}",
+	@PutMapping(value = "/{afcommentId}",
 			consumes = "application/json",
 			produces = MediaType.TEXT_PLAIN_VALUE)
-	public String fcommentUpdate(@PathVariable("fcommentId") int fcommentId, @RequestBody FcommentVO fcommentvo) {
-		fcommentvo.setFcommentId(fcommentId);
-		int result = fcommentService.fcommentUpdate(fcommentvo);
+	public String afcommentUpdate(@PathVariable("afcommentId") int afcommentId, @RequestBody AfcommentVO afcommentvo) {
+		afcommentvo.setAfcommentId(afcommentId);
+		int result = afcommentService.afcommentUpdate(afcommentvo);
 		return(result==1)?"SUCCESS":"FAILURE";
 	}
 	

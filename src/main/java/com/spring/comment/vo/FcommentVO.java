@@ -6,18 +6,6 @@ import lombok.Data;
 
 @Data
 public class FcommentVO {
-	
-	/*
-	CREATE TABLE Fcomment (
-	fcomment_id	number		NOT NULL,
-	fcomment_content	varchar2(150)		NOT NULL,
-	fcomment_date	date	DEFAULT sysdate	NOT NULL,
-	fboard_id	number		NOT NULL,
-	user_id	varchar2(20)		NOT NULL
-		);
-	*/
-	
-	
 	private int fcommentId=0;			//댓글 고유ID
 	private String fcommentContent="";		//댓글 내용
 	private Date fcommentDate;			//댓글 작성일
