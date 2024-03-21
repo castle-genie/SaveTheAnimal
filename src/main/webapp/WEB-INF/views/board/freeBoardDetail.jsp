@@ -54,7 +54,7 @@
 						</c:if>
 						<c:if test="${not empty userLogin}">
 							<c:choose>
-								<c:when test="${freeBoard.reUserId eq sessionScope.userId}">
+								<c:when test="${freeBoard.reUserId eq userLogin.userId}">
 									<li><%@ include file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
 								</c:when>
 								<c:otherwise>
