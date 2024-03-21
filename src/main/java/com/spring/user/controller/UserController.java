@@ -46,6 +46,7 @@ public class UserController {
 				
 		if (userLogin != null) {
 			model.addAttribute("userLogin", userLogin); 
+			model.getAttribute(userLogin.getUserId());
 			session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
 			return "redirect:/";// 성공하면 메인페이지 이동
 		} else {
