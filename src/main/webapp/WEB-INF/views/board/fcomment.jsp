@@ -11,7 +11,7 @@
 							readonly value="${userLogin.userId}" />
 					</div>
 					<button type="button" id="replyInsertBtn"
-						class="btn btn-primary col-sm-1 sendBtn mx-2">저장</button>
+						class="btn btn-primary col-sm-1 sendBtn mx-2 text-start">저장</button>
 				</div>
 				<div class="row mb-3">
 					<label for="fcommentContent" class="col-sm-1 col-form-label">내용</label>
@@ -23,21 +23,34 @@
 			</form>
 		</div>
 		<!-- 댓글 목록 시작 -->
+		<input value="${detail.fcommentId}">
 		<div id="commentList">
 			<div class="card mb-2" id="item-template">
 				<div class="card-header">
 					<span class="name"></span> <span class="date"></span>
-
-					<button type="button" data-btn="upBtn"
-						class="btn btn-primary btn-sm">수정하기</button>
-					<button type="button" data-btn="delBtn"
-						class="btn btn-primary btn-sm">삭제하기</button>
+					<ul class="actions d-inline text-end">
+						<li><button type="button" data-btn="upBtn"
+							class="btn btn-primary btn-sm">수정하기</button></li>
+						<li><button type="button" data-btn="delBtn"
+							class="btn btn-primary btn-sm">삭제하기</button></li>
+						<c:if test="${not empty userLogin}">
+							<li class="fcUpBtn">
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary button special fcDetailBtn" data-bs-toggle="modal" data-bs-target="#fcUpdateModal">신고</button>
+							</li>
+							<li class="fcReportBtn">
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary button special fcDetailBtn" data-bs-toggle="modal" data-bs-target="#fcReportModal">신고</button>
+							</li>
+						</c:if>
+					</ul>
 				</div>
 				<div class="card-body">
 					<p class="card-text"></p>
 				</div>
 			</div>
 		</div>
+		<%@ include file="/WEB-INF/views/report/fcReportInsert.jsp"%>
 		<!-- 댓글 목록 종료 -->
 	</div>
 	<script>
@@ -171,7 +184,7 @@
 		$(document).on("click", "button[data-btn='delBtn']", function() {
 			let fboardId = '${freeBoard.fboardId}';
 			let fcommentId = $(this).parents("div.card").attr("data-num");
-			console.log(fboardId);
+			console.log(fboardId); 
 			deleteBtn(fboardId, fcommentId);
 		})
 

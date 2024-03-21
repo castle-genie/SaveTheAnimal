@@ -18,4 +18,7 @@ public interface FcommentService {
 	// 댓글 삭제
 	public int fcommentDelete(FcommentVO fcommentvo);
 
+	//댓글 상세
+	public FcommentVO fcommentDetail(FcommentVO fvo);
+
 }
