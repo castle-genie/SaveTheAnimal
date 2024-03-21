@@ -26,9 +26,9 @@ public class AnimalServiceImpl implements AnimalService{
 	}
 	
 	@Override//통과
-	public int animalListCnt(AnimalVO bvo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int animalListCnt(AnimalVO avo) {
+		return animalDAO.animalListCnt(avo);
+		
 	}
 
 	@Override
