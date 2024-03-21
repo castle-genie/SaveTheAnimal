@@ -18,26 +18,85 @@
 				
 				<form id="f_data">
 					<input type="hidden" name="fboardId" value="${freeBoard.fboardId}"/>
+					<input type="hidden" name="reportId" value="${freeBoard.reportId}"/>
 					<input type="hidden" name="boardUser" value="${freeBoard.userId}"/>
 					<input type="hidden" name="userId" id="userId" value="<%= session.getAttribute("userId") %>">
 					<fieldset>
 						<legend class="modal-title fs-6 my-3"><strong>신고 분류</strong></legend>
-						<div>
-							<input type="radio" id="priority-1" name="reportSort" value="1" checked>
-							<label for="priority-1" class="text-black">욕설<br/><small class="text-secondary">(남의 인격을 무시하는 모욕적인 말을 하는 행위)</small></label>
-						</div>
-						<div>
-							<input type="radio" id="priority-2" name="reportSort" value="2">
-							<label for="priority-2" class="text-black">도배<br/><small class="text-secondary">(같은 내용의 게시물을 지나치게 많이 올리는 행위)</small></label>
-						</div>
-						<div>
-							<input type="radio" id="priority-3" name="reportSort" value="3">
-							<label for="priority-3" class="text-black">광고<br/><small class="text-secondary">(금전적 이익 등을 위해 홍보성 글을 쓰는 행위)</small></label>
-						</div>
-						<div>
-							<input type="radio" id="priority-4" name="reportSort" value="4">
-							<label for="priority-4" class="text-black">기타</label>
-						</div>
+						<c:choose>
+							<c:when test="${freeBoard.reportSort == 1}">
+								<div>
+									<input type="radio" id="priority-1" name="reportSort" value="1" checked>
+									<label for="priority-1" class="text-black">욕설<br/><small class="text-secondary">(남의 인격을 무시하는 모욕적인 말을 하는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-2" name="reportSort" value="2">
+									<label for="priority-2" class="text-black">도배<br/><small class="text-secondary">(같은 내용의 게시물을 지나치게 많이 올리는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-3" name="reportSort" value="3">
+									<label for="priority-3" class="text-black">광고<br/><small class="text-secondary">(금전적 이익 등을 위해 홍보성 글을 쓰는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-4" name="reportSort" value="4">
+									<label for="priority-4" class="text-black">기타</label>
+								</div>
+							</c:when>
+							<c:when test="${freeBoard.reportSort == 2}">
+								<div>
+									<input type="radio" id="priority-1" name="reportSort" value="1" >
+									<label for="priority-1" class="text-black">욕설<br/><small class="text-secondary">(남의 인격을 무시하는 모욕적인 말을 하는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-2" name="reportSort" value="2" checked>
+									<label for="priority-2" class="text-black">도배<br/><small class="text-secondary">(같은 내용의 게시물을 지나치게 많이 올리는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-3" name="reportSort" value="3">
+									<label for="priority-3" class="text-black">광고<br/><small class="text-secondary">(금전적 이익 등을 위해 홍보성 글을 쓰는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-4" name="reportSort" value="4">
+									<label for="priority-4" class="text-black">기타</label>
+								</div>
+							</c:when>
+							<c:when test="${freeBoard.reportSort == 3}">
+								<div>
+									<input type="radio" id="priority-1" name="reportSort" value="1" >
+									<label for="priority-1" class="text-black">욕설<br/><small class="text-secondary">(남의 인격을 무시하는 모욕적인 말을 하는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-2" name="reportSort" value="2">
+									<label for="priority-2" class="text-black">도배<br/><small class="text-secondary">(같은 내용의 게시물을 지나치게 많이 올리는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-3" name="reportSort" value="3" checked>
+									<label for="priority-3" class="text-black">광고<br/><small class="text-secondary">(금전적 이익 등을 위해 홍보성 글을 쓰는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-4" name="reportSort" value="4">
+									<label for="priority-4" class="text-black">기타</label>
+								</div>
+							</c:when>
+							<c:when test="${freeBoard.reportSort == 4}">
+								<div>
+									<input type="radio" id="priority-1" name="reportSort" value="1" >
+									<label for="priority-1" class="text-black">욕설<br/><small class="text-secondary">(남의 인격을 무시하는 모욕적인 말을 하는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-2" name="reportSort" value="2">
+									<label for="priority-2" class="text-black">도배<br/><small class="text-secondary">(같은 내용의 게시물을 지나치게 많이 올리는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-3" name="reportSort" value="3">
+									<label for="priority-3" class="text-black">광고<br/><small class="text-secondary">(금전적 이익 등을 위해 홍보성 글을 쓰는 행위)</small></label>
+								</div>
+								<div>
+									<input type="radio" id="priority-4" name="reportSort" value="4" checked>
+									<label for="priority-4" class="text-black">기타</label>
+								</div>
+							</c:when>
+						</c:choose>
 					</fieldset>
 					<fieldset>
 						<legend class="modal-title fs-6 my-3"><strong>신고 내용</strong></legend>
@@ -46,7 +105,8 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="fbReportInsertBtn" class="btn btn-primary button special">수정하기</button>
+				<button type="button" id="fbReportUpdateBtn" class="btn btn-primary button special">수정하기</button>
+				<button type="button" id="fbReportCancelBtn" class="btn btn-primary button">신고취소</button>
 			</div>
 		</div>
 	</div>

@@ -17,4 +17,6 @@ public class FreeBoardVO {
 	
 	private String reUserId 		= "";	//신고한 회원의 ID
 	private String reportDetail		= "";	//신고 상세
+	private int reportId			= 0;	//신고 ID
+	private int reportSort			= 0;	//신고 구분
 }

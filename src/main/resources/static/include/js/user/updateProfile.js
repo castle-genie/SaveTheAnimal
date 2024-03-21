@@ -36,6 +36,17 @@ $(function() {
 	    isEmailChecked = false;
 	    isEmailChanged = true; 
 	});
+	
+	/* 이름은 한글만 입력받게 하기 */
+	$("#userName").on("input", function(){
+		this.value = this.value.replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g, '');	
+	});
+	
+	/* 핸드폰번호는 숫자만 입력받게 하기 */
+	$("#userPhone").on("input", function(){
+		this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
             
  	// 비밀번호 수정 토글
     $('#passwordToggle').change(function() {
@@ -147,7 +158,7 @@ $(function() {
         let userName = $("#userName").val();
         let userphone = $("#userphone").val();
         let userEmail = $("#userEmail").val();
-        console.log(userId);
+        //console.log(userId);
         
         if (!stateChanged) {
 			alert("변경된 항목이 없습니다.");
@@ -230,7 +241,7 @@ $(function() {
 	$("#updateCancelBtn").on("click", function() {
 		// 초기값으로 폼 리셋
 		$("#updateForm").each(function(){
-			console.log("취소버튼");			
+			//console.log("취소버튼");			
 			this.reset();
 		});
 		$('.new-password-area').hide(); // 새 비밀번호 입력란 숨기기

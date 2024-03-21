@@ -23,7 +23,7 @@
 				</c:if>
 				<c:if test="${not empty userLogin}">
 					<li><a href="/user/mypage">My page</a>
-					<!-- <li><a href="/user/logout">로그아웃</a></li> -->
+					<li><a href="/user/logout">로그아웃</a></li>
 				</c:if>
 			</ul>
 		</nav>

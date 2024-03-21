@@ -38,7 +38,7 @@
 							<tbody>
 								<c:forEach items="${freeBoardList}" var="list">
 									<tr>
-										<td><a href="freeBoardDetail?fboardId=${list.fboardId}">
+										<td><a href="freeBoardDetail?fboardId=${list.fboardId}&userId=<%= session.getAttribute("userId") %>">
 												${list.fboardTitle} </a></td>
 										<td>${list.userId }</td>
 										<td>${list.fboardLike }</td>
