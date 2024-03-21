@@ -105,9 +105,11 @@
 
 
 	
-	<delete id ="animalDelete" parameterType="animal">
-		DELETE FROM animal WHERE animal_id = #{animalId}
+	<delete id="animalDelete" parameterType="animal">
+	    DELETE FROM animal WHERE animal_id = #{animalId}
+	    CASCADE
 	</delete>
+
 		
 	<!-- 게시판 리스트 기본 조회 -->
 	<!-- <select id="boardList" parameterType="board" resultMap="boardMap">
