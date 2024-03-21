@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.adoption.possible.service.AdoptionPossibleService;
 import com.spring.adoption.possible.vo.AdoptionPossibleVO;
-
+import com.spring.common.vo.PageDTO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +31,7 @@ public class AdoptionPossibleController {
 		
 		List<AdoptionPossibleVO>apList = adoptionPossibleService.apList(apvo);
 		model.addAttribute("apList", apList);
+		
 		return "project/adoptionPossible/adoptionView";
 		
 	}

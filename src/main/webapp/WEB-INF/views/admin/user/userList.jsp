@@ -69,7 +69,7 @@
 					<tr class="text-center">
 					<!-- 12 -->
 						
-						<th class="col-md-1">번호</th>
+						<th class="col-md-1">No</th>
 						<th class="col-md-1">ID</th>
 						<th class="col-md-1">이름</th>
 						<th class="col-md-2">이메일</th>

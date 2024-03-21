@@ -297,7 +297,7 @@
 											<use xlink:href="#file-earmark-text" /></svg> 봉사공고
 								</a></li>
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="#"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="adoption/adoptionList"> <svg
 											class="bi">
 											<use xlink:href="#file-earmark-text" /></svg> 입양공고
 								</a></li>
@@ -312,9 +312,9 @@
 											<use xlink:href="#file-earmark-text" /></svg> 후원목록
 								</a></li>
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="#"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="animal/animalList"> <svg
 											class="bi">
-											<use xlink:href="#file-earmark-text" /></svg> 입양신청
+											<use xlink:href="#file-earmark-text" /></svg> 동물 등록
 								</a></li>
 								
 								<li class="nav-item">

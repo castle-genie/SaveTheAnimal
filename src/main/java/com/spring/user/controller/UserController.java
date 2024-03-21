@@ -39,12 +39,11 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras, HttpSession session) {
+	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras) {
 		UserVO userLogin = userService.userLoginProcess(login);
 				
 		if (userLogin != null) {
 			model.addAttribute("userLogin", userLogin); 
-			//session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
 			return "redirect:/";// 성공하면 메인페이지 이동
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
@@ -120,8 +119,7 @@ public class UserController {
 	@PostMapping("/findId")
 	public String findId(UserVO uvo, Model model, RedirectAttributes ras) {
 		log.info("아이디 찾기 호출");		
-		UserVO result = userService.findId(uvo); 
-		
+		UserVO result = userService.findId(uvo); 		
 		if (result != null) {
 			model.addAttribute("result", result);
 			return "user/findId";
@@ -151,8 +149,7 @@ public class UserController {
 		isUpdate = userService.resetPasswd(uvo);
 		
 		UserVO result = new UserVO(); // 임시 비밀번호 vo
-		result.setUserPasswd(tempPassword);
-	
+		result.setUserPasswd(tempPassword);	
 		
 		if (isUpdate == 1 && result != null) {		
 			log.info("업데이트 성공");
@@ -173,8 +170,7 @@ public class UserController {
 		result = userService.findUserByIdAndEmail(uvo);
 		return result;
 	}
-	
-	
+		
 	
 	@GetMapping("/mypage")
     public String mypage(@SessionAttribute("userLogin") UserVO userLogin, Model model, RedirectAttributes ras) {
@@ -184,13 +180,11 @@ public class UserController {
         log.info(userId);
         
         if (userId == null) {
-            // 세션에 사용자 ID가 없는 경우 메시지를 추가하고 로그인 페이지로 리다이렉트
             ras.addAttribute("errorMsg", "로그인이 필요합니다.");
-            return "user/myPage";
+            return "user/login";
         } else {   
 	        // 사용자 정보 가져오기
-	        UserVO userinfo = userService.userInfo(userId);
-	        
+	        UserVO userinfo = userService.userInfo(userId);	        
 	        if (userinfo == null) {
 	            // 사용자 정보가 없는 경우 메시지를 추가하여 마이페이지로 이동
 	        	ras.addAttribute("errorMsg", "사용자 정보를 가져오는데 문제가 발생했습니다.");
@@ -235,7 +229,7 @@ public class UserController {
 			UserVO userInfo = userService.userInfo(uvo.getUserId());
 			log.info("업데이트 성공");
 			model.addAttribute("userInfo", userInfo);
-			return "user/myPage";
+			return "/user/myPage";
 		} else {
 			ras.addFlashAttribute("errorMsg", "업데이트에 문제가 있어 다시 진행해 주세요.");
 			return "redirect:/user/updateProfile";
