@@ -1,4 +1,4 @@
-package com.spring.application.Service;
+package com.spring.application.service;
 
 import java.util.List;
 
@@ -11,5 +11,11 @@ public interface ApplicationService {
 	
 	public int applicationSubmit(ApplicationVO applicationVO);
 	
-	public List<ApplicationVO> applicationView(ApplicationVO applicationVO);
+	public List<ApplicationVO> applicationView(String userId);
+	
+	public int applicationDelete(ApplicationVO applicationVO);
+	
+	public int applicatoinCheck(ApplicationVO applicatinoVO);
+	
+	public int increaseUserVolCnt(String[] userIds);
 }

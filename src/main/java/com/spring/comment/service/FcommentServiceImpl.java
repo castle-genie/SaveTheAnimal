@@ -14,27 +14,11 @@ public class FcommentServiceImpl implements FcommentService{
 	@Autowired
 	private FcommentDAO fcommentDAO;
 	
-	// 댓글 목록
 	@Override
-	public List<FcommentVO> list(int fboardId) {
-		return fcommentDAO.list(fboardId);
+	public List<FcommentVO> fcommentList(FcommentVO fcommentvo){
+		List<FcommentVO> list = null;
+		list = fcommentDAO.fcommentList(fcommentvo);
+		return list;
 	}
 	
-	// 댓글 작성
-	@Override
-	public void create(FcommentVO vo) {
-		fcommentDAO.create(vo);
-	}
-	
-	// 댓글 수정
-	@Override
-	public void update(FcommentVO vo) {
-		//TODO Auto-generated method stub
-	}
-	
-	// 댓글 삭제
-	@Override
-	public void delete(int userId) {
-		//TODO Auto-generated method stub
-	}
 }

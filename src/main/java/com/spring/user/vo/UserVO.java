@@ -2,20 +2,24 @@ package com.spring.user.vo;
 
 import java.sql.Date;
 
+import com.spring.common.vo.CommonVO;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /** UserVO 클래스 **/
 @Data
-public class UserVO {
+@EqualsAndHashCode(callSuper = false)
+public class UserVO extends CommonVO {
 	private String userId 		= ""; 
 	private String userPasswd 	= "";
 	private String userName		= "";
 	private String userPhone	= "";
 	private String userEmail 	= "";
 	private Date userDate;
-	private int userAct; 		
-	private int userRepcnt; 		
-	private int userVolcnt; 		
-	private int userLevel; 		
-	private int userAdoptChk;	
+	private int userAct=0; 		
+	private int userRepcnt=0; 		
+	private int userVolcnt=0; 		
+	private int userLevel=0; 		
+	private int userAdoptChk=0;	
 }

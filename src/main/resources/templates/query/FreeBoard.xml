@@ -9,21 +9,27 @@
 		<result column="fboard_cnt" property="fboardCnt"/>
 		<result column="fboard_date" property="fboardDate"/>
 		<result column="user_id" property="userId"/>
+		
+		<result column="report_detail" property="reportDetail"/>
+		<result column="report_id" property="reportId"/>
+		<result column="report_sort" property="reportSort"/>
 	</resultMap>
 	
+	
 	<!-- 자유게시판 목록 -->
-	<select id="freeBoardList" parameterType="freeBoard" resultMap="freeBoardMap">
+	<select id="freeBoardList" parameterType="FreeBoard" resultMap="freeBoardMap">
 		SELECT 	fboard_id, fboard_title, fboard_like, user_id, fboard_cnt, fboard_date
 		FROM 	freeBoard
 		ORDER BY fboard_id DESC
 	</select>
 	
 	<!--  자유게시판 글 상세조회 -->
-	<select id="freeBoardDetail" parameterType="freeBoard" resultMap="freeBoardMap">
-		SELECT 	* 
-		FROM 	freeBoard
-		WHERE 	fboard_id = #{fboardId}
+	<select id="freeBoardDetail" parameterType="FreeBoard" resultMap="freeBoardMap">
+		select 	distinct f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_like, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+		from 	freeboard f left join report r on f.fboard_id = r.fboard_id
+		where 	f.fboard_id = #{fboardId} and (r.user_id = #{userId} or r.user_id is null)
 	</select>
+
 	<!-- 자유게시판 글 상세조회 -->
 	<!-- 
 	<select id="freeBoardDetail" parameterType="freeBoard" resultMap="freeBoardMap"
@@ -35,38 +41,33 @@
 	</select>
 	-->
 	
-	<!-- 게시판 insert -->
-	<insert id="freeBoardCreate" parameterType="freeBoard">
-		<!--  
-		<selectKey keyProperty="fboard_id" order="BEFORE" resultType="int">
-			SELECT freeBoard_seq.NEXTVAL FROM DUAL
+	<!-- 게시판 등록 -->
+	<insert id="insertFreeBoard" parameterType="FreeBoard">
+		<selectKey keyProperty="fboardId" order="BEFORE" resultType="int">
+			SELECT freeBoard_seq.nextval from DUAL
 		</selectKey>
-		-->
-		<!-- 
-		INSERT INTO freeBoard (fboard_id, fboard_title, fboard_content, user_id)
-		VALUES (${fboardId}, ${fboardTitle}, ${fboardContent}, ${userId})
-		-->
 		insert into freeBoard (fboard_id, fboard_title, fboard_content, user_id)
-		VALUES (freeBoard_seq.nextval, ${fboardTitle}, ${fboardContent}, ${userId})
+		VALUES (#{fboardId}, #{fboardTitle}, #{fboardContent}, #{userId})
 	</insert>
+	
+		
 	<!-- 조회수 +1 -->
-	<update id="plusCnt" parameterType="freeBoard">
+	<update id="plusCnt" parameterType="FreeBoard">
 		UPDATE 	freeBoard SET fboard_cnt = fboard_cnt +1 
-		WHERE 	fboard_id = ${fboardId}
+		WHERE 	fboard_id = #{fboardId}
 	</update>
 	
 	<!-- 게시글 수정 -->
-	<update id="update" parameterType="freeBoard">
-		UPDATE 	freeBoard
-		SET 	fboard_title 		= ${fboardTitle}
-				fboard_content	 	= ${fboardContent}
-		WHERE	fboard_id 			= ${fboardId}
+	<update id="updateFreeBoard" parameterType="FreeBoard">
+		UPDATE freeBoard
+		SET fboard_title = #{fboardTitle}, fboard_content = #{fboardContent}
+		WHERE	fboard_id = #{fboardId}
 	</update>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="freeBoardDelete" parameterType="freeBoard">
+	<delete id="deleteFreeBoard" parameterType="FreeBoard">
 		DELETE FROM freeBoard 
-		WHERE	fboard_id = ${fboardId}
+		WHERE	fboard_id = #{fboardId}
 	</delete>
 	
 </mapper>

@@ -97,7 +97,7 @@ public class VolunteerController {
 	
 	// 관리자 페이지 봉사 공고 수정
 	@PostMapping("/volunteerUpdate")
-	public String volunteerUpdate(VolunteerVO volunteerVO) {
+	public String volunteerUpdate(VolunteerVO volunteerVO) throws Exception {
 		int result = 0;
 		String url = "";
 		
@@ -111,7 +111,7 @@ public class VolunteerController {
 	
 	// 관리자 페이지 봉사 공고 삭제
 	@GetMapping("/volunteerDelete")
-	public String volunteerDelete(VolunteerVO volunteerVO) {
+	public String volunteerDelete(VolunteerVO volunteerVO) throws Exception {
 		int result = 0;
 		String url = "";
 		
@@ -122,10 +122,4 @@ public class VolunteerController {
 		return "redirect:"+url;
 	}
 	
-	// progress 1 로 바꾸기
-	@PostMapping("/updateVolunteerProgress1") 
-	public ResponseEntity<String> updateVolunteerProgress1(VolunteerVO volunteerVO) {
-		service.updateVolunteerProgress1(volunteerVO);
-        return ResponseEntity.ok("volunteer_progress가 업데이트되었습니다.");
-    }
 }

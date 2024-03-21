@@ -4,9 +4,12 @@
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
 	<script>
-	   var userId = "<%= session.getAttribute("userId") %>";
 	   function applicationView() {
-		   location.href="/application/applicationView?userId=" + userId;
+			$("#data").attr({
+			   method:"get",
+			   action:"/application/applicationView"
+		   });
+		   $("#data").submit(); 
 	   }
 	</script>
 </head>
@@ -96,7 +99,7 @@
 							    <h4 class="border-bottom pb-2 mb-0"><strong>My Activities</strong></h4>										    
 							    <br/>
 							    <p class="align-right">
-							    	봉사 레벨 : <strong>Lv. ${userInfo.userLevel}</strong><br>
+							    	봉사 레벨 : <strong>Lv. <fmt:formatNumber type="number" maxFractionDigits="0" value="${Math.floor(userInfo.userVolcnt/3+1)}" /></strong><br>
 							    	봉사 횟수 : <strong>${userInfo.userVolcnt}</strong> 회
 							    </p>
 							    <div class="d-flex text-body-secondary pt-3">
@@ -184,12 +187,12 @@
 										
 				</div>
 			</div>
-			<hr>
+			<!-- <hr>
 			<div>myPage.jsp 화면</div>
 			<div>하위 메뉴 배치 해서 회원정보 ajax로 불러오기</div>
 			<div>내 정보 수정 : updateProfile.jsp</div>
 			<div>나의 활동, 후원 정보 : 각각 해당 페이지로 이동하여 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
-			<hr>
+			<hr> -->
 		</div>
 	</section>
 	
@@ -201,9 +204,9 @@
 				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 				<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 				<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-				<c:if test="${not empty userLogin}">
+				<%-- <c:if test="${not empty userLogin}">
 				  	<li><a onmouseover="this.style.color='white'" onmouseout="this.style.color='grey'" style="text-decoration: none;" href="/user/logout"> LOGOUT </a></li>
-				</c:if>
+				</c:if> --%>
 			</ul>
 		</div>
 	</footer>

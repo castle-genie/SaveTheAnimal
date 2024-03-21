@@ -12,10 +12,12 @@
 		<association property="user">
 			<result column="user_id" property="userId" /> 
 			<result column="user_name" property="userName" /> 
+			<result column="user_volcnt" property="userVolcnt" />
 		</association> 
 		<association property="volunteer">
-			 <result column="volunteer_id" property="volunteerId" /> 
+			<result column="volunteer_id" property="volunteerId" /> 
 			<result column="volunteer_title" property="volunteerTitle" />
+			<result column="volunteer_time" property="volunteerTime" />
 		</association>
 	</resultMap>
 	
@@ -34,13 +36,36 @@
 	
 	<insert id="applicationSubmit" parameterType="application">
 		INSERT INTO application
-		VALUES(application_seq.nextval, sysdate, #{applicationComment}, #{userId}, #{volunteerId}, default)
+		VALUES(application_seq.nextval, sysdate, #{applicationComment}, #{user.userId}, #{volunteer.volunteerId}, default)
 	</insert>
 	
 	<select id="applicationView" resultMap="applicationMap" parameterType="application">
-		SELECT volunteer_id, volunteer_title, application_comment
+		SELECT application_id, volunteer_id, volunteer_title, application_comment, volunteer_time
 		FROM volunteer inner join application
 		using(volunteer_id)
 		WHERE user_id = #{user.userId}
+		ORDER BY application_id DESC
 	</select>
+	
+	<delete id="applicationDelete" parameterType="application">
+		DELETE FROM application
+		WHERE application_id = #{applicationId}
+	</delete>
+	
+	<select id="applicationCheck" resultType="int" parameterType="application">
+		SELECT count(*)
+		FROM application INNER JOIN users
+		USING (user_id)
+		WHERE user_id = #{user.userId} AND volunteer_id = #{volunteer.volunteerId}
+	</select>
+	
+	<update id="increaseUserVolCnt" parameterType="java.lang.String" >
+    UPDATE users
+    SET user_volcnt = user_volcnt + 1
+    WHERE user_id IN
+    <foreach collection="array" item="userId" open="(" separator="," close=")">
+        #{userId}
+    </foreach>
+</update>
+
 </mapper>

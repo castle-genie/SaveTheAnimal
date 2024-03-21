@@ -16,26 +16,26 @@ public interface FreeBoardDAO {
 	//public FreeBoardVO viewDetail(freeBoardDetail fboardId);
 	
 	//게시글 상세보기
-	public FreeBoardVO freeBoardDetail(int fboardId);
+	//public FreeBoardVO freeBoardDetail(int fboardId);
 	
 	
 	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
 	
 	
 	//조회수 증가 메서드
-	public boolean plusCnt(int fboardId);
+	public boolean plusCnt(FreeBoardVO freeBoardVO);
 	
 	//게시글 등록하는 메서드
-	public int freeBoardCreate(FreeBoardVO freeBoardVO);
+	public int insertFreeBoard(FreeBoardVO freeBoardVO);
 	
-	//public void freeBoardCreate(FreeBoardVO freeBoardVO);
 	
 	//게시글 수정
-	public void update(FreeBoardVO freeBoardVO) throws Exception;
+	//public FreeBoardVO updateFreeBoard(FreeBoardVO freeBoardVO);
+	public int updateFreeBoard(FreeBoardVO freeBoardVO);
 	
 	//게시글 삭제
 	//public void delete(int fboardId) throws Exception;
-	public boolean freeBoardDelete(int fboardId);
+	public int deleteFreeBoard(FreeBoardVO freeBoardVO);
 	
 	
 	

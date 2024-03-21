@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.common.file.FileUploadUtil;
 import com.spring.volunteer.dao.VolunteerDAO;
 import com.spring.volunteer.vo.VolunteerVO;
 
@@ -39,13 +40,20 @@ public class VolunteerServiceImpl implements VolunteerService {
 	}
 	
 	/* admin */
+	
+	// 봉사 공고 작성 구현
 	@Override
-	public int volunteerInsert(VolunteerVO volunteerVO) {
+	public int volunteerInsert(VolunteerVO volunteerVO)  throws Exception{
 		int volunteerInsert = 0;
+		if(volunteerVO.getFile().getSize() > 0) {
+			String fileName = FileUploadUtil.fileUpload(volunteerVO.getFile(), "volunteer");
+			volunteerVO.setVolunteerFile(fileName);
+		}
 		volunteerInsert = volunteerDAO.volunteerInsert(volunteerVO);
 		return volunteerInsert;
 	}
 	
+	// 봉사 공고 수정 폼 구현
 	@Override
 	public VolunteerVO volunteerUpdateForm(VolunteerVO volunteerVO) {
 		VolunteerVO volunteerUpdateForm = null;
@@ -56,15 +64,28 @@ public class VolunteerServiceImpl implements VolunteerService {
 		return volunteerUpdateForm;
 	}
 	
+	// 봉사 공고 수정 구현
 	@Override
-	public int volunteerUpdate(VolunteerVO volunteerVO) {
-		int volunteerUpdate = volunteerDAO.volunteerUpdate(volunteerVO);
+	public int volunteerUpdate(VolunteerVO volunteerVO) throws Exception {
+		int volunteerUpdate = 0;
+		if(!volunteerVO.getFile().isEmpty()) {
+			if(!volunteerVO.getVolunteerFile().isEmpty()) {
+				FileUploadUtil.fileDelete(volunteerVO.getVolunteerFile());
+			}
+			String fileName = FileUploadUtil.fileUpload(volunteerVO.getFile(), "volunteer");
+			volunteerVO.setVolunteerFile(fileName);
+		}
+		volunteerUpdate = volunteerDAO.volunteerUpdate(volunteerVO);
 		return volunteerUpdate;
 	}
 	
+	// 봉사 공고 삭제 구현
 	@Override
-	public int volunteerDelete(VolunteerVO volunteerVO) {
+	public int volunteerDelete(VolunteerVO volunteerVO) throws Exception {
 		int volunteerDelete = 0;
+		if(!volunteerVO.getVolunteerFile().isEmpty()) {
+			FileUploadUtil.fileDelete(volunteerVO.getVolunteerFile());
+		}
 		volunteerDelete = volunteerDAO.volunteerDelete(volunteerVO);
 		return volunteerDelete;
 	}

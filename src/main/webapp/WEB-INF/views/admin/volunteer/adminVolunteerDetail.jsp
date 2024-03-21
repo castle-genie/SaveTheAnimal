@@ -32,7 +32,11 @@
 			    	console.log(response);
 			        var list = '<ul>';
 			        $.each(response, function(index, item) {
-			            list += '<li>아이디: ' + item.user.userId + ', 성함: ' + item.user.userName + '</li>';
+			        	var userId = item.user.userId
+			            list += '<li data-id=' + userId + '>아이디: ' +userId + ', 성함: ' + item.user.userName + ', ';
+			            list += "참여<input type='radio' name='attendance" + index + "' value='참여' checked />"
+			            list += "불참<input type='radio' name='attendance" + index + "' value='불참' />"
+			            list += '</li>';
 			        });
 			        list += '</ul>';
 			        $('#appList').html(list);
@@ -103,6 +107,36 @@
 					location.href="/volunteer/volunteerDelete?volunteerId="+volunteerId;
 				}
 			})
+			/* 참여 확인 클릭 시 이벤트 */
+			$("#submitBtn").on("click", function() {
+				var dataToSend = [];
+				
+				// "참여" 라디오 버튼 값만 처리
+				$("input[type='radio']:checked").each(function() {
+					console.log($(this).val());
+					if($(this).val ()	== "참여") {
+						var userId = $(this).closest('li').data('id');
+						dataToSend.push( userId );
+						console.log(typeof(dataToSend)); 
+					}
+				})
+				
+				// 서버로 데이터 전송
+				$.ajax({
+					url : '/application/increaseUserVolCnt',
+					method : 'POST',
+					//data : JSON.stringify(dataToSend),
+					data:"userIds="+dataToSend,
+					success : function(response) {
+						console.log(response);
+						alert("참여 확인 되었습니다.");
+					},
+					error: function(xhr, status, error) {
+						console.error(error);
+						alert("오류가 발생했습니다. 다시 시도해 주세요.");
+					}
+				})
+			})
 		})	
 	</script>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -155,6 +189,7 @@
 					</div>
 					<div class="underline"></div>
 					<div id="appList"></div>
+					<button type="button"  id="submitBtn" >참여 확인</button>
 					<div class="underline"></div>
 					<div id="button">
 						<button type="button" id="updateBtn">수정</button>

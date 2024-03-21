@@ -117,7 +117,7 @@ public class ReportController {
 	public String reportDelete(ReportVO rvo){
 //		log.info("reportDelete call");
 		reportService.reportDelete(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/board/freeBoardList";
 	}
 	
 	//신고 수정 폼 데이터
@@ -132,7 +132,7 @@ public class ReportController {
 	public String reportModify(ReportVO rvo){
 //		log.info("reportModify call");
 		reportService.reportModify(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/board/freeBoardList";
 	}
 	
 	//신고 제재 횟수 증가 기능
