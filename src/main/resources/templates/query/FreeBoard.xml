@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.FreeBoard.dao.FreeBoardDAO">
+<mapper namespace="com.spring.board.dao.FreeBoardDAO">
 	<resultMap type="freeBoard" id="freeBoardMap">
 		<id column="fboard_id" property="fboardId"/>
 		<result column="fboard_title" property="fboardTitle"/>
@@ -59,6 +59,12 @@
 	
 	<!-- 게시글 수정 -->
 	<update id="updateFreeBoard" parameterType="FreeBoard">
+		<!--  
+		UPDATE 	freeBoard
+		SET 	fboard_title 		= #{fboardTitle}
+				fboard_content	 	= #{fboardContent}
+		WHERE	fboard_id 			= #{fboardId}
+		-->
 		UPDATE freeBoard
 		SET fboard_title = #{fboardTitle}, fboard_content = #{fboardContent}
 		WHERE	fboard_id = #{fboardId}

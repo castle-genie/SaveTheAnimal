@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.animal.service.AnimalService;
 import com.spring.animal.vo.AnimalVO;
-
+import com.spring.common.vo.PageDTO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +32,10 @@ public class AnimalController {
 		
 		List<AnimalVO> animalList = animalService.animalList(avo);
 		model.addAttribute("animalList", animalList);
+		
+		int total = animalService.animalListCnt(avo);
+		model.addAttribute("pageMaker", new PageDTO(avo, total));
+		
 		return "project/animal/animalList";
 	}
 	
