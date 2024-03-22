@@ -31,10 +31,12 @@
 					</header>
 					<form method="post" action="/volunteerFeedbackBoard/volunteerFeedbackBoardCreate">
 						<div class="row uniform">
-							<div class="12u$">제목
+							<div class="12u$">
+								<h3>제목</h3>
 								<input type="text" name="vfboardTitle" id="vfboardTitle" placeholder="제목을 입력해주세요.">
 							</div>
-							<div class="12u$">내용
+							<div class="12u$">
+								<h3>내용</h3>
 								<textarea cols="100" wrap="hard" name="vfboardContent" id="vfboardContent" placeholder="내용을 입력해주세요"
 									rows="6"></textarea>
 							</div>

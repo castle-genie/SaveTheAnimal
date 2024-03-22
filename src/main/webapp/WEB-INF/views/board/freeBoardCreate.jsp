@@ -36,19 +36,17 @@
 								<input type="text" name="fboardId" id="fboardId" placeholder="fboardId를 입력해주세요.">
 							</div>
 							-->
-							<div class="12u$">제목
-							
+							<div class="12u$">
+								<h3>제목</h3>
 								<input type="text" name="fboardTitle" id="fboardTitle" placeholder="제목을 입력해주세요.">
 							</div>
-							<div class="12u$">내용
-								<!--  
-								<textarea name="fboardContent" id="fboardContent" placeholder="내용을 입력해주세요."
-									rows="6"></textarea>
-								-->
+							<div class="12u$">
+								<h3>내용</h3>
 								<textarea cols="100" wrap="hard" name="fboardContent" id="fboardContent" placeholder="내용을 입력해주세요"
 									rows="6"></textarea>
 							</div>
-							<div class="12u$">작성자
+							<div class="12u$">
+								<h3>작성자</h3>
 								<input type="text" name="userId" id="userId" value="${sessionScope.userId}" readonly>
 							</div>
 							<div class="12u$">

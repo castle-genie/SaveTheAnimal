@@ -29,7 +29,9 @@
 						<h2>${freeBoard.fboardTitle}</h2>
 					</header>
 					<div>
-						<pre>${freeBoard.fboardContent}</pre>
+						<pre>
+							<code>${freeBoard.fboardContent}</code>
+						</pre>
 					</div>
 					<p>
 						작성자: ${freeBoard.userId} <span style="float: right;"><fmt:formatDate

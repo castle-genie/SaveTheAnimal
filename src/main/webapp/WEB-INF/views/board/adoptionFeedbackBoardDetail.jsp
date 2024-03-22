@@ -29,7 +29,9 @@
 						<h2>${adoptionFeedbackBoard.afboardTitle}</h2>
 					</header>
 					<div>
-						<pre>${adoptionFeedbackBoard.afboardContent}</pre>
+						<pre>
+							<code>${adoptionFeedbackBoard.afboardContent}</code>
+						</pre>
 					</div>
 					<p>
 						작성자: ${adoptionFeedbackBoard.userId} <span style="float: right;"><fmt:formatDate

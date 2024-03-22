@@ -31,10 +31,12 @@
 					</header>
 					<form method="post" action="/adoptionFeedbackBoard/adoptionFeedbackBoardCreate">
 						<div class="row uniform">
-							<div class="12u$">제목
+							<div class="12u$">
+								<h3>제목</h3>
 								<input type="text" name="afboardTitle" id="afboardTitle" placeholder="제목을 입력해주세요.">
 							</div>
-							<div class="12u$">내용
+							<div class="12u$">
+								<h3>내용</h3>
 								<textarea cols="100" wrap="hard" name="afboardContent" id="afboardContent" placeholder="내용을 입력해주세요"
 									rows="6"></textarea>
 							</div>
