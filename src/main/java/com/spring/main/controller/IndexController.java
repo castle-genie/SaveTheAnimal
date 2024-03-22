@@ -13,13 +13,13 @@ public class IndexController {
 	}		
 	
 	// 로그인 처리 후 첫화면 수정
-	@GetMapping("adminLogin")
+	@GetMapping("admin")
 	public String adminLogin() {
 		return "admin/login";
 	}
 	
 	/* 관리자 메인 페이지 */
-	@GetMapping("admin")
+	@GetMapping("adminMain")
 	public String adminMain() {
 		return "admin/adminMain";
 	}

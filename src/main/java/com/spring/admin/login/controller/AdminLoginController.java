@@ -79,7 +79,7 @@ public class AdminLoginController {
 		if (adminLogin != null) {
 			model.addAttribute("adminLogin", adminLogin); // 성공하면 관리자페이지 첫화면으로 이동하기
 			//url = "/admin/board/boardList";
-			url = "/admin"; 
+			url = "/adminMain"; 
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패");
 			url = "/admin/login";
