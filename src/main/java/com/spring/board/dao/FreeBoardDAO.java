@@ -1,28 +1,36 @@
-package com.spring.FreeBoard.service;
+package com.spring.board.dao;
 
 import java.util.List;
 
-import com.spring.FreeBoard.vo.FreeBoardVO;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface FreeBoardService {
+import com.spring.board.vo.FreeBoardVO;
+
+@Mapper
+public interface FreeBoardDAO {
 	
-	//자유게시판 목록
+	//자유게시판 글 목록
 	public List<FreeBoardVO> freeBoardList(FreeBoardVO freeBoardVO);
+	
+	//게시물 상세조회
+	//public FreeBoardVO viewDetail(freeBoardDetail fboardId);
 	
 	//게시글 상세보기
 	//public FreeBoardVO freeBoardDetail(int fboardId);
 	
+	
 	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
+	
 	
 	//조회수 증가 메서드
 	public boolean plusCnt(FreeBoardVO freeBoardVO);
 	
 	//게시글 등록하는 메서드
 	public int insertFreeBoard(FreeBoardVO freeBoardVO);
-	//public void freeBoardCreate(FreeBoardVO freeBoardVO);
+	
 	
 	//게시글 수정
-	//public void update(FreeBoardVO freeBoardVO) throws Exception;
+	//public FreeBoardVO updateFreeBoard(FreeBoardVO freeBoardVO);
 	public int updateFreeBoard(FreeBoardVO freeBoardVO);
 	
 	//게시글 삭제
@@ -31,6 +39,5 @@ public interface FreeBoardService {
 	
 	
 	
-	//public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
 
 }
