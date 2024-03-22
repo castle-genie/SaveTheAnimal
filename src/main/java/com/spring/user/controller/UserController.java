@@ -263,7 +263,7 @@ public class UserController {
 	public String userList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, @ModelAttribute UserVO uvo, Model model) {
 		log.info("userList 호출");		
 		if (adminLoginVO == null) {
-			return "/admin/login";
+			return "/admin/adminLogin";
 		} else {
 			List<UserVO> userList = userService.userList(uvo);
 			model.addAttribute("userList", userList);

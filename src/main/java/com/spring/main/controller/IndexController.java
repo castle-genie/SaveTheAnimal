@@ -8,22 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 	@GetMapping("/")
-	public String mainpage() {
-		
+	public String mainpage() {		
 		return "project/mainpage";
 	}		
 	
-	// 로그인 처리 후 첫화면 수정
 	@GetMapping("admin")
 	public String adminLogin() {
-		return "admin/login";
-	}
-	
-	/* 관리자 메인 페이지 */
-	@GetMapping("adminMain")
-	public String adminMain() {
-		return "admin/adminMain";
-	}
-
+		return "admin/adminLogin";
+	}	
 	
 }
