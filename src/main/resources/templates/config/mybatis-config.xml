@@ -20,5 +20,6 @@
 		<typeAlias type="com.spring.comment.vo.VfcommentVO" alias="vfcomment"/>
 		<typeAlias type="com.spring.comment.vo.AfcommentVO" alias="afcomment"/>
 		<typeAlias type="com.spring.application.vo.ApplicationVO" alias="application" />
+		<typeAlias type="com.spring.admin.login.vo.AdminLoginVO" alias="adminLogin" />
 	</typeAliases>
 </configuration>

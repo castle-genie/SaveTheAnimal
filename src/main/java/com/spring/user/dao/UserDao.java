@@ -28,6 +28,7 @@ public interface UserDao {
 	public int pwdConfirm(UserVO uvo);			// 비밀번호 일치 확인
 	
 	public int userWithdrawal(UserVO uvo); 		// 회원 탈퇴 : 활동상태 변경
+	public int userDelete(UserVO uvo);     		// 회원 데이터 삭제
 	// 삭제되어야하는 자식테이블 항목.. 게시판 다, 봉사 신청, 입양 상담, 후원 
 	// cascade 해야하는 항목?
 	
