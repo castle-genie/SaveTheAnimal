@@ -11,7 +11,7 @@
 							readonly value="${userLogin.userId}" />
 					</div>
 					<button type="button" id="replyInsertBtn"
-						class="btn btn-primary col-sm-1 sendBtn mx-2">저장</button>
+						class="btn btn-primary col-sm-1 sendBtn mx-2 button alt small">저장</button>
 				</div>
 				<div class="row mb-3">
 					<label for="afcommentContent" class="col-sm-1 col-form-label">내용</label>
@@ -29,9 +29,9 @@
 					<span class="name"></span> <span class="date"></span>
 
 					<button type="button" data-btn="upBtn"
-						class="btn btn-primary btn-sm">수정하기</button>
+						class="btn btn-primary btn-sm button alt small">수정하기</button>
 					<button type="button" data-btn="delBtn"
-						class="btn btn-primary btn-sm">삭제하기</button>
+						class="btn btn-primary btn-sm button alt small">삭제하기</button>
 				</div>
 				<div class="card-body">
 					<p class="card-text"></p>
@@ -70,8 +70,7 @@
 							dataType : "text",
 							data : value,
 							error : function(xhr, textStatus, errorThrown) {
-								alert(textStatus + " (HTTP-" + xhr.status
-										+ " / " + errorThrown + ")");
+								alert("댓글을 작성하려면 로그인이 필요합니다.");
 							},
 							beforeSend : function() {
 								if (!checkForm("#afcommentContent", "댓글내용을"))
@@ -236,6 +235,7 @@
 					if (result == "SUCCESS") {
 						alert("댓글 수정이 완료되었습니다.");
 						dataReset();
+						let afboardId = '${adoptionFeedbackBoard.afboardId}';
 						listAll(afboardId);
 					}
 				}

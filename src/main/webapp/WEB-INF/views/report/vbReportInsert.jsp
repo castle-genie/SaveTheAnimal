@@ -19,7 +19,7 @@
 				<form id="f_data">
 					<input type="hidden" name="fboardId" value="${vfboard.vfboardId}"/>
 					<input type="hidden" name="boardUser" value="${vfboard.userId}"/>
-					<input type="hidden" name="userId" id="userId" value="<%= session.getAttribute("userId") %>">
+					<input type="hidden" name="userId" id="userId" value="${userLogin.userId}">
 					<fieldset>
 						<legend class="modal-title fs-6 my-3"><strong>신고 분류</strong></legend>
 						<div>

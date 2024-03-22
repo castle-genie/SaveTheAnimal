@@ -29,7 +29,9 @@
 						<h2>${freeBoard.fboardTitle}</h2>
 					</header>
 					<div>
-						<pre>${freeBoard.fboardContent}</pre>
+						<pre>
+							<code>${freeBoard.fboardContent}</code>
+						</pre>
 					</div>
 					<p>
 						작성자: ${freeBoard.userId} <span style="float: right;"><fmt:formatDate
@@ -51,18 +53,9 @@
 							</a></li>
 						</c:if>
 						<c:if test="${not empty userLogin}">
-							<li><%@ include
-									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
-							<li><a href="/user/login"
-								onclick="alert('신고하려면 로그인이 필요합니다')">
-									<button type="button" class="btn btn-primary button special">신고</button>
-							</a></li>
-						</c:if>
-						<c:if test="${not empty userLogin}">
 							<c:choose>
-								<c:when test="${freeBoard.reUserId eq sessionScope.userId}">
-									<li><%@ include
-											file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
+								<c:when test="${freeBoard.reUserId eq userLogin.userId}">
+									<li><%@ include file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
 								</c:when>
 								<c:otherwise>
 									<li><%@ include

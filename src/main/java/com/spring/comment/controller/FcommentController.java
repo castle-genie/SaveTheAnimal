@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +39,6 @@ public class FcommentController {
 	@GetMapping(value = "all/{fboardId}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<FcommentVO> fcommentList(@PathVariable("fboardId") int fboardId, FcommentVO fcommentvo) {
 		log.info("fcommentList 호출");
-		
 		List<FcommentVO> fcommentlist = null;
 		fcommentvo.setFboardId(fboardId);
 		fcommentlist = fcommentService.fcommentList(fcommentvo);
@@ -84,5 +84,16 @@ public class FcommentController {
 		int result = fcommentService.fcommentUpdate(fcommentvo);
 		return(result==1)?"SUCCESS":"FAILURE";
 	}
+	
+	@GetMapping("fcommentDetail")
+	public FcommentVO fcommentDetail(Model model, FcommentVO fvo) {
+		System.out.println("test call");
+		FcommentVO detail = fcommentService.fcommentDetail(fvo);
+		System.out.println(detail);
+
+		model.addAttribute("detail", detail);
+		return detail;
+	}
+	
 	
 }
