@@ -11,11 +11,7 @@
 							readonly value="${userLogin.userId}" />
 					</div>
 					<button type="button" id="replyInsertBtn"
-<<<<<<< HEAD
-						class="btn btn-primary col-sm-1 sendBtn mx-2 text-start">저장</button>
-=======
 						class="btn btn-primary col-sm-1 sendBtn mx-2 button alt small">저장</button>
->>>>>>> 57f27be1461cfeb3e42a6677fd0497c4765e71a9
 				</div>
 				<div class="row mb-3">
 					<label for="fcommentContent" class="col-sm-1 col-form-label">내용</label>
