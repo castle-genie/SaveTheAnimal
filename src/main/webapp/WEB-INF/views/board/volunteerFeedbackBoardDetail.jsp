@@ -15,7 +15,7 @@
 		<div class="inner">
 			<header class="align-center">
 				<p>Save The Animal</p>
-				<h2>자유게시판</h2>
+				<h2>봉사후기게시판</h2>
 			</header>
 		</div>
 	</section>
@@ -26,23 +26,23 @@
 				<div class="content">
 					<header class="align-center">
 						<p>부제목</p>
-						<h2>${freeBoard.fboardTitle}</h2>
+						<h2>${volunteerFeedbackBoard.vfboardTitle}</h2>
 					</header>
 					<div>
-						<pre>${freeBoard.fboardContent}</pre>
+						<pre>${volunteerFeedbackBoard.vfboardContent}</pre>
 					</div>
 					<p>
-						작성자: ${freeBoard.userId} <span style="float: right;"><fmt:formatDate
-								value="${freeBoard.fboardDate }" pattern="yyyy.MM.dd" /></span>
+						작성자: ${volunteerFeedbackBoard.userId} <span style="float: right;"><fmt:formatDate
+								value="${volunteerFeedbackBoard.vfboardDate }" pattern="yyyy.MM.dd" /></span>
 					</p>
 					<br>
 					<ul class="actions text-end">
-						<li><a href="freeBoardList" class="button special">목록</a></li>
-						<c:if test="${sessionScope.userId eq freeBoard.userId}">
+						<li><a href="volunteerFeedbackBoardList" class="button special">목록</a></li>
+						<c:if test="${sessionScope.userId eq volunteerFeedbackBoard.userId}">
 							<li><input type="button" value="수정"
-								onclick="location.href='freeBoardModify?fboardId=${freeBoard.fboardId}'"></li>
+								onclick="location.href='volunteerFeedbackBoardModify?vfboardId=${volunteerFeedbackBoard.vfboardId}'"></li>
 							<li><input type="button" value="삭제"
-								onclick="del(${freeBoard.fboardId})"></li>
+								onclick="del(${volunteerFeedbackBoard.vfboardId})"></li>
 						</c:if>
 						<c:if test="${empty userLogin}">
 							<li><a href="/user/login"
@@ -51,9 +51,18 @@
 							</a></li>
 						</c:if>
 						<c:if test="${not empty userLogin}">
+							<li><%@ include
+									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
+							<li><a href="/user/login"
+								onclick="alert('신고하려면 로그인이 필요합니다')">
+									<button type="button" class="btn btn-primary button special">신고</button>
+							</a></li>
+						</c:if>
+						<c:if test="${not empty userLogin}">
 							<c:choose>
-								<c:when test="${freeBoard.reUserId eq userLogin.userId}">
-									<li><%@ include file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
+								<c:when test="${volunteerFeedbackBoard.reUserId eq sessionScope.userId}">
+									<li><%@ include
+											file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
 								</c:when>
 								<c:otherwise>
 									<li><%@ include
@@ -64,7 +73,7 @@
 						</c:if>
 					</ul>
 					<!-- 댓글 시작 -->
-					<%@ include file="/WEB-INF/views/board/fcomment.jsp"%>
+					<%@ include file="/WEB-INF/views/board/vfcomment.jsp"%>
 					<!-- 댓글 종료 -->
 				</div>
 			</div>
@@ -100,10 +109,10 @@
 
 </body>
 <script>
-	function del(fboardId) {
+	function del(vfboardId) {
 		var chk = confirm("정말 삭제하시겠습니까?");
 		if (chk) {
-			location.href='delete?fboardId='+fboardId;
+			location.href='delete?vfboardId='+vfboardId;
 		}
 	}
 </script>
