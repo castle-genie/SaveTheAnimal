@@ -35,7 +35,7 @@ public class AdminLoginController {
 		String url = "";
 		if (adminLogin != null) {
 			model.addAttribute("adminLogin", adminLogin); 
-			url = "/project/adminVolunteerList"; // 성공하면 관리자페이지 첫화면으로 이동하기
+			url = "/project/adminVolunteerList"; // 관리자페이지 첫화면으로 이동 : 봉사공고리스트
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패");
 			url = "/admin/adminLogin";
