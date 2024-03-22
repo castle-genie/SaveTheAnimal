@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +39,8 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras) {
-		UserVO userLogin = userService.userLoginProcess(login);
-				
+		
+		UserVO userLogin = userService.userLoginProcess(login);				
 		if (userLogin != null) {
 			model.addAttribute("userLogin", userLogin); 
 			return "redirect:/";// 성공하면 메인페이지 이동
@@ -259,7 +258,7 @@ public class UserController {
 	
 	
 	@GetMapping("/userList")
-	public String userList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, @ModelAttribute UserVO uvo, Model model) {
+	public String userList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, UserVO uvo, Model model) {
 		log.info("userList 호출");		
 		if (adminLoginVO == null) {
 			return "/admin/adminLogin";

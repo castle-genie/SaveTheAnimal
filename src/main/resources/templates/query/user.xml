@@ -115,12 +115,17 @@
 	</select>
 	
 	<!-- 회원 탈퇴 : 회원상태 변경 -->
-	<delete id="userWithdrawal" parameterType="user">
-        <!-- DELETE FROM users WHERE user_id = #{userId} -->
+	<delete id="userWithdrawal" parameterType="user">       
         update users
 		set user_act = 0 
 		where user_id = #{userId}
     </delete>
+    
+    <delete id="userDelete" parameterType="user">
+    	DELETE FROM users WHERE user_id = #{userId}
+    </delete>
+    
+    
 	
 	<!-- 회원 목록 기본 조회 
 	<select id="userList" parameterType="user" resultMap="userMap">
