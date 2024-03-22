@@ -11,7 +11,11 @@
 							readonly value="${userLogin.userId}" />
 					</div>
 					<button type="button" id="replyInsertBtn"
+<<<<<<< HEAD
 						class="btn btn-primary col-sm-1 sendBtn mx-2 text-start">저장</button>
+=======
+						class="btn btn-primary col-sm-1 sendBtn mx-2 button alt small">저장</button>
+>>>>>>> 57f27be1461cfeb3e42a6677fd0497c4765e71a9
 				</div>
 				<div class="row mb-3">
 					<label for="fcommentContent" class="col-sm-1 col-form-label">내용</label>
@@ -83,8 +87,7 @@
 							dataType : "text",
 							data : value,
 							error : function(xhr, textStatus, errorThrown) {
-								alert(textStatus + " (HTTP-" + xhr.status
-										+ " / " + errorThrown + ")");
+								alert("댓글을 작성하려면 로그인이 필요합니다.");
 							},
 							beforeSend : function() {
 								if (!checkForm("#fcommentContent", "댓글내용을"))
@@ -249,6 +252,7 @@
 					if (result == "SUCCESS") {
 						alert("댓글 수정이 완료되었습니다.");
 						dataReset();
+						let fboardId = '${freeBoard.fboardId}';
 						listAll(fboardId);
 					}
 				}
