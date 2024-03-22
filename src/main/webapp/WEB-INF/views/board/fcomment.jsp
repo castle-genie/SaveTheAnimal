@@ -16,14 +16,13 @@
 				<div class="row mb-3">
 					<label for="fcommentContent" class="col-sm-1 col-form-label">내용</label>
 					<div class="col-sm-11">
-						<textarea name="fcommentContent" id="fcommentContent"
+						<textarea name="fcommentContent" id="fcommentContent" style="resize: none;"
 							class="form-control" rows="3"></textarea>
 					</div>
 				</div>
 			</form>
 		</div>
 		<!-- 댓글 목록 시작 -->
-		<input value="${detail.fcommentId}">
 		<div id="commentList">
 			<div class="card mb-2" id="item-template">
 				<div class="card-header">
