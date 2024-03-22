@@ -73,7 +73,7 @@ public class AdoptionFeedbackBoardController {
 		log.info("수정");
 		adoptionFeedbackBoardService.updateAdoptionFeedbackBoard(afbvo);
 		log.info("수정2");
-		return "redirect:/adoptionFeedbackBoard/adoptionFeedbackBoardDetail?fboardId="+afbvo.getAfboardId();
+		return "redirect:/adoptionFeedbackBoard/adoptionFeedbackBoardDetail?afboardId="+afbvo.getAfboardId();
 	}
 	
 	//게시글 삭제

@@ -71,7 +71,7 @@ public class VolunteerFeedbackBoardController {
 		log.info("수정");
 		volunteerFeedbackBoardService.updateVolunteerFeedbackBoard(vfvo);
 		log.info("수정2");
-		return "redirect:/volunteerFeedbackBoard/volunteerFeedbackBoardDetail?fboardId="+vfvo.getVfboardId();
+		return "redirect:/volunteerFeedbackBoard/volunteerFeedbackBoardDetail?vfboardId="+vfvo.getVfboardId();
 	}
 	
 	//게시글 삭제
