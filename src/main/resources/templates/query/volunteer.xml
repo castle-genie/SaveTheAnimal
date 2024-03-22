@@ -14,7 +14,7 @@
 		<result column="volunteer_location" property="volunteerLocation"/>
 		<result column="volunteer_progress" property="volunteerProgress"/>
 		<result column="admin_id" property="adminId" />
-		<result column="volunteer_file" property="volunteerFIle" />
+		<result column="volunteer_file" property="volunteerFile" />
 	</resultMap>
 	
 	<!-- 봉사 공고 리스트 달력에 표현하기 -->
@@ -61,7 +61,7 @@
 		        <if test="volunteerCost == ''">
 		        	volunteer_cost = default,
 		        </if>
-		        volunteer_location = #{volunteerLocation}, volunteer_detail = #{volunteerDetail}, volunteer_file=#{volunteerFile}
+		        volunteer_location = #{volunteerLocation}, volunteer_detail = #{volunteerDetail}
 		        <if test="volunteerFile != ''">
 		    	, volunteer_file = #{volunteerFile}    
 		        </if>
