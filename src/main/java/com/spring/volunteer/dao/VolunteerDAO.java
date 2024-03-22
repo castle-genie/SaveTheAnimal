@@ -13,8 +13,6 @@ public interface VolunteerDAO {
 	
 	public VolunteerVO volunteerDetail(VolunteerVO volunteerVO);
 	
-	public int updateVolunteerProgress1(VolunteerVO volunteerVO);
-	
 	/* admin */
 	//public List<VolunteerVO> volunteerList(VolunteerVO volunteerVO); // user 쪽의 리스트와 동일ㄴ
 	public int volunteerInsert(VolunteerVO volunteerVO);

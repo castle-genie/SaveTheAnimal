@@ -32,6 +32,9 @@
         <label for="volunteerDetail">세부사항:</label><br>
         <textarea id="volunteerDetail" name="volunteerDetail" rows="4" cols="50" >${ updateList.volunteerDetail }</textarea><br><br>
         
+        <label for="volunteerThumbnail">공고 썸네일</label><br>
+		<input type="file" id="file" name="file" value="${ updateList.volunteerFile }"><br><br>
+        
         <input type="button" value="제출" id="updateBtn">
     </form>
 	
