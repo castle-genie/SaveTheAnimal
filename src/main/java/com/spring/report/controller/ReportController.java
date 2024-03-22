@@ -197,7 +197,7 @@ public class ReportController {
 	@PostMapping("userGoStop")
 	public String userGoStop(ReportVO rvo) {
 		log.info("userGoStop call");
-		reportService.userGoStop(rvo);
+		reportService.userStop(rvo);
 		return "redirect:/report/reportList";
 	}
 	

@@ -51,5 +51,11 @@ public class FcommentServiceImpl implements FcommentService{
 		return result;
 	}
 
+	@Override
+	public FcommentVO fcommentDetail(FcommentVO fvo) {
+		FcommentVO fcommentDetail = fcommentDAO.fcommentDetail(fvo);
+		return fcommentDetail;
+	}
+
 	
 }

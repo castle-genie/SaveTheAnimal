@@ -7,6 +7,10 @@
 		<result column="fcomment_date" property="fcommentDate"/>
 		<result column="fboard_id" property="fboardId"/>
 		<result column="user_id" property="userId"/>
+		
+		<result column="report_detail" property="reportDetail"/>
+		<result column="report_id" property="reportId"/>
+		<result column="report_sort" property="reportSort"/>
 	</resultMap>
 
 	<!-- 자유게시판 댓글 조회 -->
@@ -15,6 +19,12 @@
 		FROM 	Fcomment
 		WHERE 	fboard_id = #{fboardId}
 		ORDER BY fcomment_id DESC
+	</select>
+	
+	<select id="fcommentDetail" parameterType="fcomment">
+		select distinct f.fcomment_id, f.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+		from 	fcomment f left join report r on f.fcomment_id = r.fcomment_id
+		where 	f.fboard_id = #{fboardId} and (r.user_id = #{userId} or r.user_id is null)
 	</select>
 	
 	<!-- 자유게시판 댓글 작성 -->

@@ -1,26 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary button special" data-bs-toggle="modal"
-	data-bs-target="#reportModal">신고</button>
-
 <!-- Modal -->
-<div class="modal fade text-start" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+<div class="modal fade text-start" id="fcReportModal" tabindex="-1" aria-labelledby="fcReportModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered ">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="reportModalLabel"><strong>신고하기</strong></h1>
+				<h1 class="modal-title fs-5" id="fcReportModalLabel"><strong>신고하기</strong></h1>
        	 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				
 				<form id="f_data">
-					<input type="hidden" name="fboardId" value="${freeBoard.fboardId}"/>
-					<input type="hidden" name="boardUser" value="${freeBoard.userId}"/>
-					<input type="hidden" name="boardUser" value="${freeBoard.reUserId}"/>
-					<input type="hidden" name="userId" id="userId" value="<%= session.getAttribute("userId") %>">
+					<input type="" name="fboardId" value="${detail.fcommentId}"/>
+					<input type="" name="boardUser" value="${detail.userId}"/>
+					<input type="" name="boardUser" value="${detail.reUserId}"/>
+					<input type="" name="userId" id="userId" value="${userLogin.userId}">
 					<fieldset>
 						<legend class="modal-title fs-6 my-3"><strong>신고 분류</strong></legend>
 						<div>

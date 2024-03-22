@@ -1,6 +1,6 @@
 $(function(){
-	const userId = document.getElementById("userId").value;
-
+/*	const userId = document.getElementById("userId").value;
+*/
 	$("#fbReportInsertBtn").on("click", () => {	
 		$("#f_data").attr({
 			"method": "post",
@@ -26,7 +26,7 @@ $(function(){
 	});
 	
 	$("#fcReportInsertBtn").on("click", () => {
-		$("#f_data").attr({
+		$(this).parents("div.card").attr({
 			"method": "post",
 			"action": "/report/reportInsertFC"
 		});
@@ -34,7 +34,7 @@ $(function(){
 	});
 	
 	$("#vcReportInsertBtn").on("click", () => {
-		$("#f_data").attr({
+		$(this).parents("div.card").attr({
 			"method": "post",
 			"action": "/report/reportInsertVC"
 		});
@@ -48,7 +48,17 @@ $(function(){
 		});
 		$("#f_data").submit();
 	});
-	
-	
+
+	$(".fcDetailBtn").on("click", function(){
+		console.log("test call");
+/*		let reportId = $(this).parents("div .card").attr("data-num");
+		console.log(reportId);
+		$("#reportId").val(reportId);
+
+		$("#detailForm").attr({
+			"method":"get",
+			"action":"/fcomment/fcommentDetail"
+		});
+*/	});
 	
 });
