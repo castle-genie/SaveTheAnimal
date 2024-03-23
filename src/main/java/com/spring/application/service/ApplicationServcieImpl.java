@@ -59,4 +59,11 @@ public class ApplicationServcieImpl implements ApplicationService{
 		increaseUserVolCnt = applicationDAO.increaseUserVolCnt(userIds);
 		return increaseUserVolCnt;
 	}
+
+	@Override
+	public int chageResult(List<Integer> applicationIds) {
+		int changeResult = 0;
+		changeResult = applicationDAO.changeResult(applicationIds);
+		return changeResult;
+	}
 }

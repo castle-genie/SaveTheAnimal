@@ -7,6 +7,21 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94063d37acee8b8586233e93d841bf07&libraries=services"></script>
 	<script>
+	function ajaxRequest(url, data) {
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                type: "post",
+                url: url,
+                data: data,
+                success: function(response) {
+                    resolve(response);
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
+    }
 	 // 날짜 및 시간 형식 변환 함수
     function formatDateTime(elementId) {
         // elementId에 해당하는 요소를 가져옴
@@ -33,7 +48,9 @@
 			        var list = '<ul>';
 			        $.each(response, function(index, item) {
 			        	var userId = item.user.userId
-			            list += '<li data-id=' + userId + '>아이디: ' +userId + ', 성함: ' + item.user.userName + ', ';
+			        	var applicationId = item.applicationId
+			        	console.log(applicationId);
+			            list += '<li data-id=' + userId + ' data-app=' + applicationId + '>아이디: ' +userId + ', 성함: ' + item.user.userName + ', ';
 			            list += "참여<input type='radio' name='attendance" + index + "' value='참여' checked />"
 			            list += "불참<input type='radio' name='attendance" + index + "' value='불참' />"
 			            list += '</li>';
@@ -110,19 +127,28 @@
 			/* 참여 확인 클릭 시 이벤트 */
 			$("#submitBtn").on("click", function() {
 				var dataToSend = [];
+				var dataToApplicationId = [];
 				
 				// "참여" 라디오 버튼 값만 처리
 				$("input[type='radio']:checked").each(function() {
 					console.log($(this).val());
 					if($(this).val ()	== "참여") {
 						var userId = $(this).closest('li').data('id');
+						var appId = $(this).closest('li').data('app');
 						dataToSend.push( userId );
-						console.log(typeof(dataToSend)); 
+						dataToApplicationId.push( appId );
+						console.log(typeof(dataToSend));
+						console.log(dataToApplicationId);
 					}
 				})
+				ajaxRequest("/application/increaseUserVolCnt", "userIds="+dataToSend)
+				.then(() => {
+					return ajaxRequest("/application/changeResult", "applicationIds="+dataToApplicationId)
+				})
+				
 				
 				// 서버로 데이터 전송
-				$.ajax({
+				/* $.ajax({
 					url : '/application/increaseUserVolCnt',
 					method : 'POST',
 					//data : JSON.stringify(dataToSend),
@@ -135,7 +161,7 @@
 						console.error(error);
 						alert("오류가 발생했습니다. 다시 시도해 주세요.");
 					}
-				})
+				}) */
 			})
 		})	
 	</script>
@@ -155,6 +181,9 @@
 					  	<c:if test="${ not empty detail.volunteerFile }">
 					    	<img src="/resources/images/storage/volunteer/${ detail.volunteerFile }" alt="봉사활동 이미지">
 					    </c:if>
+					    <c:if test="${ empty detail.volunteerFile }">
+					    	<img src="/resources/images/walk.jpg" alt="봉사활동 이미지">
+				    	</c:if>
 					    <div class="info-text">
 					      <h2>${ detail.volunteerTitle }</h2>
 					      <table>

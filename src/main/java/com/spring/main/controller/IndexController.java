@@ -15,7 +15,7 @@ public class IndexController {
 	
 	@GetMapping("admin")
 	public String adminPage() {
-		return"admin/adminMain";
+		return"/admin/volunteer/adminVolunteerList";
 	}
 
 }

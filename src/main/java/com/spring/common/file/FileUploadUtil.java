@@ -2,9 +2,11 @@ package com.spring.common.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

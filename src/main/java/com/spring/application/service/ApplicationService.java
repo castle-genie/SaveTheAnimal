@@ -18,4 +18,6 @@ public interface ApplicationService {
 	public int applicatoinCheck(ApplicationVO applicatinoVO);
 	
 	public int increaseUserVolCnt(String[] userIds);
+	
+	public int chageResult(List<Integer> applicationIds);
 }

@@ -49,18 +49,25 @@
 							    					<th class="col-md-1">공고 번호</th>
 							    					<th class="col-md-6">공고 제목</th>
 							    					<th class="col-md-4">봉사 날짜</th>
-							    					<th class="col-md-2">취소</th>
+							    					<th class="col-md-2">취소 / 참석</th>
 						    					</tr>
 					    					</thead>
 					    					<tbody>
 					    						<c:choose>
 					    							<c:when test="${ not empty view }">
 					    								<c:forEach items="${ view }" var="list">
-					    									<tr class="text-center" data-id="${ list.applicationId }">
+					    									<tr class="text-center" data-id="${ list.applicationId }" data-num="${ list.applicationResult }"	>
 					    										<td>${ list.volunteer.volunteerId }</td>
 					    										<td>${ list.volunteer.volunteerTitle }</td>
 					    										<td>${ list.volunteer.volunteerTime }</td>
-					    										<td><button type="button" class="cancelBtn">취소</button></td>
+				    											<c:choose>
+				    												<c:when test="${1 eq list.applicationResult}">
+				    													<td>참여 완료</td>
+			    													</c:when>
+			    													<c:otherwise>
+			    														<td><button type="button" class="cancelBtn">취소</button></td>
+		    														</c:otherwise>
+	    														</c:choose>
 				    										</tr>
 			    										</c:forEach>
 		    										</c:when>

@@ -1,6 +1,7 @@
 package com.spring.application.controller;
 
 import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -115,4 +117,13 @@ public class ApplicationController {
 			return "redirect:" + url;*/
 		 	service.increaseUserVolCnt(userIds);
 	    }
+	
+	@ResponseBody
+	@PostMapping("/changeResult")
+	public void changeResult(String applicationId, @RequestParam(value="applicationIds") ArrayList<Integer> applicationIds) {
+		log.info("봉사 아이디 " + applicationId);
+		log.info("전체 봉사 아이디 " + applicationIds.toString());
+		service.chageResult(applicationIds);
+	}
+	
 }

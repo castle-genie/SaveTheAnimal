@@ -1,7 +1,4 @@
 @charset "UTF-8";
-#header a{
-	color : black !important;
-}
 
 #header span {
 	color :rgba(255, 255, 255, 0.65) !important;

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.user.vo.UserVO;
 import com.spring.volunteer.service.VolunteerService;
 import com.spring.volunteer.vo.VolunteerVO;
 
@@ -57,8 +59,13 @@ public class VolunteerController {
 	
 	// 봉사 입력 양식 이동
 	@GetMapping("/volunteerWriteForm")
-	public String volunteerWriteForm(VolunteerVO volunteerVO) {
-		return "/admin/volunteer/volunteerWriteForm";
+	public String volunteerWriteForm(@SessionAttribute(name = "adminLogin", required = false) UserVO userVO, VolunteerVO volunteerVO) {
+		if(adminLoginVO == null) {
+			return "/admin/adminLogin";
+		} else {
+			return "/admin/volunteer/volunteerWriteForm";
+
+		}
 	}
 	
 	// 봉사 공고 입력 구현

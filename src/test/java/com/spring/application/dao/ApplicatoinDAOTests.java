@@ -102,11 +102,17 @@ public class ApplicatoinDAOTests {
 		log.info("반환 결과 : " + applicatinoCheck);
 	} */
 	
-	/* */
+	/* 
 	@Test
 	public void testUpdateUserVolCnt() {
 		 // 테스트할 사용자 ID 목록
 		String[] userIds = {"member10", "member11"};
 		log.info("반환 갯수 : " + applicationDAO.increaseUserVolCnt(userIds));
+	} */
+	
+	@Test
+	public void changeResultTest() {
+	    List<Integer> applicationIds = Arrays.asList(80, 93);
+	    log.info("반환 행 갯수 : " + applicationDAO.changeResult(applicationIds));
 	}
 }
