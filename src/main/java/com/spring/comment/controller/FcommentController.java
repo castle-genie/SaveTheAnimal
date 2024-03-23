@@ -89,7 +89,7 @@ public class FcommentController {
 	public FcommentVO fcommentDetail(Model model, FcommentVO fvo) {
 		System.out.println("test call");
 		FcommentVO detail = fcommentService.fcommentDetail(fvo);
-		System.out.println(detail);
+		System.out.println("detail:" + detail);
 
 		model.addAttribute("detail", detail);
 		return detail;

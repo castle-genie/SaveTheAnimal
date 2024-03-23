@@ -22,6 +22,11 @@
 				</div>
 			</form>
 		</div>
+		<form id="detailForm">
+			<input type="hidden" id="reportId" name="reportId" value=""/>
+			<input type="hidden" name="userId" value="${userLogin.userId}"/>
+		</form>
+		
 		<!-- 댓글 목록 시작 -->
 		<div id="commentList">
 			<div class="card mb-2" id="item-template">
@@ -33,14 +38,10 @@
 						<li><button type="button" data-btn="delBtn"
 							class="btn btn-primary btn-sm">삭제하기</button></li>
 						<c:if test="${not empty userLogin}">
-							<li class="fcUpBtn">
-								<!-- Button trigger modal -->
-								<button type="button" class="btn btn-primary button special fcDetailBtn" data-bs-toggle="modal" data-bs-target="#fcUpdateModal">신고</button>
-							</li>
 							<li class="fcReportBtn">
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-primary button special fcDetailBtn" data-bs-toggle="modal" data-bs-target="#fcReportModal">신고</button>
-							</li>
+							</li>							
 						</c:if>
 					</ul>
 				</div>
