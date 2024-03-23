@@ -17,4 +17,7 @@ public interface VfcommentService {
 	// 댓글 삭제
 	public int vfcommentDelete(VfcommentVO vfcommentvo);
 
+	//댓글 상세
+	public VfcommentVO vfcommentDetail(VfcommentVO fvo);
+
 }

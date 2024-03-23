@@ -23,7 +23,7 @@
 			</form>
 		</div>
 		<form id="detailForm">
-			<input type="hidden" id="reportId" name="reportId" value=""/>
+			<input type="hidden" class="fcommentId" name="fcommentId" value=""/>
 			<input type="hidden" name="userId" value="${userLogin.userId}"/>
 		</form>
 		

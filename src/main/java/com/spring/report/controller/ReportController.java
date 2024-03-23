@@ -60,18 +60,19 @@ public class ReportController {
 	}
 	@PostMapping("reportInsertFC")
 	public String reportInsertFC(ReportVO rvo){
+		System.out.println(rvo);
 		reportService.reportInsertFC(rvo);
 		return "redirect:/board/freeBoardList";
 	}
 	@PostMapping("reportInsertVC")
 	public String reportInsertVC(ReportVO rvo){
 		reportService.reportInsertVC(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/volunteerFeedbackBoard/volunteerFeedbackBoardList";
 	}
 	@PostMapping("reportInsertAC")
 	public String reportInsertAC(ReportVO rvo){
 		reportService.reportInsertAC(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/adoptionFeedbackBoard/adoptionFeedbackBoardList";
 	}
 
 	//신고 처리 시 report_status 수정 기능

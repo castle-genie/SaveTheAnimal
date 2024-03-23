@@ -2,17 +2,17 @@
 	pageEncoding="UTF-8"%>
 
 <!-- Modal -->
-<div class="modal fade text-start" id="fcReportModal" tabindex="-1" aria-labelledby="fcReportModalLabel" aria-hidden="true">
+<div class="modal fade text-start" id="afcReportModal" tabindex="-1" aria-labelledby="afcReportModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered ">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="fcReportModalLabel"><strong>신고하기</strong></h1>
+				<h1 class="modal-title fs-5" id="afcReportModalLabel"><strong>신고하기</strong></h1>
        	 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				
 				<form id="fc_data">
-					<input type="hidden" name="fcommentId" value="${detail.fcommentId}"/>
+					<input type="hidden" name="afcommentId" value="${detail.afcommentId}"/>
 					<input type="hidden" name="boardUser" value="${detail.userId}"/>
 					<input type="hidden" name="boardUser" value="${detail.reUserId}"/>
 					<input type="hidden" name="userId" id="userId" value="${userLogin.userId}">
@@ -43,7 +43,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="fcReportInsertBtn" class="btn btn-primary button special">신고하기</button>
+				<button type="button" id="afcReportInsertBtn" class="btn btn-primary button special">신고하기</button>
 			</div>
 		</div>
 	</div>

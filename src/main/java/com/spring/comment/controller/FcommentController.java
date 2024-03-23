@@ -87,9 +87,9 @@ public class FcommentController {
 	
 	@GetMapping("fcommentDetail")
 	public FcommentVO fcommentDetail(Model model, FcommentVO fvo) {
-		System.out.println("test call");
+//		System.out.println("test call");
 		FcommentVO detail = fcommentService.fcommentDetail(fvo);
-		System.out.println("detail:" + detail);
+//		System.out.println("detai:" + detail);
 
 		model.addAttribute("detail", detail);
 		return detail;

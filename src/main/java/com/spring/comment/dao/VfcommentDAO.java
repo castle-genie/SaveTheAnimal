@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.spring.comment.vo.FcommentVO;
 import com.spring.comment.vo.VfcommentVO;
 @Mapper
 public interface VfcommentDAO {
@@ -19,5 +20,7 @@ public interface VfcommentDAO {
 		// 댓글 삭제
 		public int vfcommentDelete(VfcommentVO vfcommentvo);
 	
+		//댓글 상세
+		public VfcommentVO vfcommentDetail(VfcommentVO vvo);
 
 }

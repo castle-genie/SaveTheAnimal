@@ -46,4 +46,14 @@ public class VfcommentServiceImpl implements VfcommentService{
 		return result;
 	}
 
+	@Override
+	public VfcommentVO vfcommentDetail(VfcommentVO vvo) {
+		VfcommentVO detail = vfcommentDAO.vfcommentDetail(vvo);
+		if(detail != null) {
+			detail.setReportDetail(detail.getReportDetail().replaceAll("\n", "<br />"));
+		}
+
+		return detail;
+	}
+
 }

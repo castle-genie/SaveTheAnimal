@@ -17,4 +17,7 @@ public interface AfcommentService {
 		// 댓글 삭제
 		public int afcommentDelete(AfcommentVO afcommentvo);
 
+		//댓글 상세
+		public AfcommentVO afcommentDetail(AfcommentVO fvo);
+
 }

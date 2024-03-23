@@ -173,17 +173,17 @@
 	<update id="reportUpdateFC" parameterType="report">
 		update report
 		set report_status = 2
-		where fcomment_id = #{boardId)}
+		where fcomment_id = #{boardId}
 	</update>
 	<update id="reportUpdateVC" parameterType="report">
 		update report
 		set report_status = 2
-		where vfcomment_id = #{boardId)}
+		where vfcomment_id = #{boardId}
 	</update>
 	<update id="reportUpdateAC" parameterType="report">
 		update report
 		set report_status = 2
-		where afcomment_id = #{boardId)}
+		where afcomment_id = #{boardId}
 	</update>
 
 

@@ -24,7 +24,7 @@ public class SanctionController {
 		
 
 		sanctionService.sanctionInsert(svo);
-
+			
 		return "redirect:/report/reportList";
 	}
 	
