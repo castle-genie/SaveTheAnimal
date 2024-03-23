@@ -29,7 +29,9 @@
 						<h2>${adoptionFeedbackBoard.afboardTitle}</h2>
 					</header>
 					<div>
-						<pre>${adoptionFeedbackBoard.afboardContent}</pre>
+						<pre>
+							<code>${adoptionFeedbackBoard.afboardContent}</code>
+						</pre>
 					</div>
 					<p>
 						작성자: ${adoptionFeedbackBoard.userId} <span style="float: right;"><fmt:formatDate
@@ -51,22 +53,13 @@
 							</a></li>
 						</c:if>
 						<c:if test="${not empty userLogin}">
-							<li><%@ include
-									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
-							<li><a href="/user/login"
-								onclick="alert('신고하려면 로그인이 필요합니다')">
-									<button type="button" class="btn btn-primary button special">신고</button>
-							</a></li>
-						</c:if>
-						<c:if test="${not empty userLogin}">
 							<c:choose>
-								<c:when test="${adoptionFeedbackBoard.reUserId eq sessionScope.userId}">
-									<li><%@ include
-											file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
+								<c:when test="${adoptionFeedbackBoard.reUserId eq userLogin.userId}">
+									<li><%@ include file="/WEB-INF/views/report/abReportUpdate.jsp"%></li>
 								</c:when>
 								<c:otherwise>
 									<li><%@ include
-											file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
+											file="/WEB-INF/views/report/abReportInsert.jsp"%></li>
 								</c:otherwise>
 
 							</c:choose>

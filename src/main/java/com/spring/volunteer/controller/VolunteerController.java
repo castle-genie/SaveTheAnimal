@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.admin.login.vo.AdminLoginVO;
 import com.spring.user.vo.UserVO;
 import com.spring.volunteer.service.VolunteerService;
 import com.spring.volunteer.vo.VolunteerVO;
@@ -59,7 +60,7 @@ public class VolunteerController {
 	
 	// 봉사 입력 양식 이동
 	@GetMapping("/volunteerWriteForm")
-	public String volunteerWriteForm(@SessionAttribute(name = "adminLogin", required = false) UserVO userVO, VolunteerVO volunteerVO) {
+	public String volunteerWriteForm(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, UserVO userVO, VolunteerVO volunteerVO) {
 		if(adminLoginVO == null) {
 			return "/admin/adminLogin";
 		} else {
@@ -83,23 +84,31 @@ public class VolunteerController {
 		}
 		return "redirect:"+url;
 	}
-	
+
 	// 관리자 페이지 봉사 공고 상세 정보
 	@GetMapping("/adminVolunteerDetail")
-	public String adminVolunteerDetail(VolunteerVO volunteerVO, Model model) {
-		VolunteerVO adminVolunteerDetail = null;
-		adminVolunteerDetail = service.volunteerDetail(volunteerVO);
-		model.addAttribute("detail", adminVolunteerDetail);
-		return "/admin/volunteer/adminVolunteerDetail";
+	public String adminVolunteerDetail(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, VolunteerVO volunteerVO, Model model) {
+		if(adminLoginVO == null) {
+			return "/admin/adminLogin";
+		} else {
+			VolunteerVO adminVolunteerDetail = null;
+			adminVolunteerDetail = service.volunteerDetail(volunteerVO);
+			model.addAttribute("detail", adminVolunteerDetail);
+			return "/admin/volunteer/adminVolunteerDetail";
+		}
 	}
 	
 	// 관리자 페이지 봉사 공고 수정 폼 이동
 	@GetMapping("/volunteerUpdateForm")
-	public String volunteerUpdateForm(VolunteerVO volunteerVO, Model model) {
-		VolunteerVO volunteerUpdateForm = null;
-		volunteerUpdateForm = service.volunteerUpdateForm(volunteerVO);
-		model.addAttribute("updateList", volunteerUpdateForm);
-		return "/admin/volunteer/volunteerUpdateForm";
+	public String volunteerUpdateForm(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, VolunteerVO volunteerVO, Model model) {
+		if(adminLoginVO == null) {
+			return "/admin/adminLogin";
+		} else {
+			VolunteerVO volunteerUpdateForm = null;
+			volunteerUpdateForm = service.volunteerUpdateForm(volunteerVO);
+			model.addAttribute("updateList", volunteerUpdateForm);
+			return "/admin/volunteer/volunteerUpdateForm";
+		}
 	}
 	
 	// 관리자 페이지 봉사 공고 수정

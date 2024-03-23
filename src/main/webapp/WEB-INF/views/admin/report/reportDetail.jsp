@@ -12,6 +12,7 @@
 			<input type="hidden" name="boardUser" value="${detail.boardUser}"/>
 			<input type="hidden" name="boardId" value="${detail.boardId}"/>
 			<input type="hidden" name="repcnt" id="repcnt" value="${detail.repcnt}"/>
+			
 		</form>
 		
 		<div class="row text-center mb-2">

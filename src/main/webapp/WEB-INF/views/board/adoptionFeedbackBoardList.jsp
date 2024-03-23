@@ -27,10 +27,9 @@
 					<div class="table-wrapper">
 						<table class="alt">
 							<thead>
-								<tr>
-									<td class="text-center">제목</td>
+								<tr class="text-center">
+									<td>제목</td>
 									<td>작성자</td>
-									<td>좋아요</td>
 									<td>조회수</td>
 									<td>작성일</td>
 								</tr>
@@ -41,8 +40,7 @@
 										<td><a
 											href="adoptionFeedbackBoardDetail?afboardId=${list.afboardId}&userId=<%= session.getAttribute("userId") %>">
 												${list.afboardTitle} </a></td>
-										<td>${list.userId }</td>
-										<td>${list.afboardLike }</td>
+										<td class="text-right">${list.userId }</td>
 										<td>${list.afboardCnt }</td>
 										<td><fmt:formatDate value="${list.afboardDate }"
 												pattern="yyyy.MM.dd" /></td>

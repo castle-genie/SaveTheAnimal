@@ -47,4 +47,14 @@ public class AfcommentServiceImpl implements AfcommentService{
 		return result;
 	}
 
+	@Override
+	public AfcommentVO afcommentDetail(AfcommentVO avo) {
+		AfcommentVO detail = afcommentDAO.afcommentDetail(avo);
+		if(detail != null) {
+			detail.setReportDetail(detail.getReportDetail().replaceAll("\n", "<br />"));
+		}
+
+		return detail;
+	}
+
 }

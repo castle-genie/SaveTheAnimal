@@ -20,6 +20,6 @@ public class UserVO extends CommonVO {
 	private int userAct=0; 		
 	private int userRepcnt=0; 		
 	private int userVolcnt=0; 		
-	private int userLevel=0; 		
+	private int userLevel=0; // 3/21 컬럼 삭제 		
 	private int userAdoptChk=0;	
 }

@@ -24,9 +24,30 @@
 	
 	<!--  봉사후기게시판 글 상세조회 -->
 	<select id="volunteerFeedbackBoardDetail" parameterType="volunteerFeedbackBoard" resultMap="volunteerFeedbackBoardMap">
-		select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_like, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
-		from 	volunteerFeedbackBoard v left join report r on v.vfboard_id = r.vfboard_id
-		where 	v.vfboard_id = #{vfboardId} and (r.user_id = #{userId} or r.user_id is null)
+		WITH first_query AS (
+			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_like, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			from 	volunteerFeedbackBoard v left join report r on v.vfboard_id = r.vfboard_id
+		    WHERE 	v.vfboard_id = #{vfboardId}
+		),
+		second_query AS (
+			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_like, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			from 	volunteerFeedbackBoard v left join report r on v.vfboard_id = r.vfboard_id
+			where 	v.vfboard_id = #{vfboardId} and (r.user_id = #{userId} or r.user_id is null)
+		),
+		third_query AS (
+		    select 	distinct vfboard_id, vfboard_title, vfboard_content, vfboard_like, vfboard_cnt, vfboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id
+		    FROM 	volunteerFeedbackBoard
+		    WHERE 	vfboard_id = #{vfboardId}
+		)
+		SELECT *
+		FROM (
+		    SELECT * FROM first_query
+		    UNION ALL
+		    SELECT * FROM second_query
+		    UNION ALL
+		    SELECT * FROM third_query
+		) result
+		WHERE ROWNUM = 1
 	</select>
 
 	<!-- 게시판 등록 -->

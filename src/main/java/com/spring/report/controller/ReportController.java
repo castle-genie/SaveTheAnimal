@@ -51,27 +51,28 @@ public class ReportController {
 	@PostMapping("reportInsertVB")
 	public String reportInsertVB(ReportVO rvo){
 		reportService.reportInsertVB(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/volunteerFeedbackBoard/volunteerFeedbackBoardList";
 	}
 	@PostMapping("reportInsertAB")
 	public String reportInsertAB(ReportVO rvo){
 		reportService.reportInsertAB(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/adoptionFeedbackBoard/adoptionFeedbackBoardList";
 	}
 	@PostMapping("reportInsertFC")
 	public String reportInsertFC(ReportVO rvo){
+		System.out.println(rvo);
 		reportService.reportInsertFC(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/board/freeBoardList";
 	}
 	@PostMapping("reportInsertVC")
 	public String reportInsertVC(ReportVO rvo){
 		reportService.reportInsertVC(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/volunteerFeedbackBoard/volunteerFeedbackBoardList";
 	}
 	@PostMapping("reportInsertAC")
 	public String reportInsertAC(ReportVO rvo){
 		reportService.reportInsertAC(rvo);
-		return "redirect:/report/reportList";
+		return "redirect:/adoptionFeedbackBoard/adoptionFeedbackBoardList";
 	}
 
 	//신고 처리 시 report_status 수정 기능
@@ -115,7 +116,8 @@ public class ReportController {
 	//신고 취소 기능
 	@PostMapping("reportDelete")
 	public String reportDelete(ReportVO rvo){
-//		log.info("reportDelete call");
+		log.info("reportDelete call");
+		System.out.println(rvo);
 		reportService.reportDelete(rvo);
 		return "redirect:/board/freeBoardList";
 	}
@@ -197,7 +199,7 @@ public class ReportController {
 	@PostMapping("userGoStop")
 	public String userGoStop(ReportVO rvo) {
 		log.info("userGoStop call");
-		reportService.userGoStop(rvo);
+		reportService.userStop(rvo);
 		return "redirect:/report/reportList";
 	}
 	

@@ -1,6 +1,6 @@
 $(function(){
-	const userId = document.getElementById("userId").value;
-
+/*	const userId = document.getElementById("userId").value;
+*/
 	$("#fbReportInsertBtn").on("click", () => {	
 		$("#f_data").attr({
 			"method": "post",
@@ -20,35 +20,34 @@ $(function(){
 	$("#abReportInsertBtn").on("click", () => {
 		$("#f_data").attr({
 			"method": "post",
-			"action": "/report/reportInsertFA"
+			"action": "/report/reportInsertAB"
 		});
 		$("#f_data").submit();
 	});
 	
 	$("#fcReportInsertBtn").on("click", () => {
-		$("#f_data").attr({
+		$("#fc_data").attr({
 			"method": "post",
 			"action": "/report/reportInsertFC"
 		});
-		$("#f_data").submit();
+		$("#fc_data").submit();
 	});
 	
-	$("#vcReportInsertBtn").on("click", () => {
-		$("#f_data").attr({
+	$("#vfcReportInsertBtn").on("click", () => {
+		$("#fc_data").attr({
 			"method": "post",
 			"action": "/report/reportInsertVC"
 		});
-		$("#f_data").submit();
+		$("#fc_data").submit();
 	});
 	
-	$("#acReportInsertBtn").on("click", () => {
-		$("#f_data").attr({
+	$("#afcReportInsertBtn").on("click", () => {
+		$("#fc_data").attr({
 			"method": "post",
 			"action": "/report/reportInsertAC"
 		});
-		$("#f_data").submit();
+		$("#fc_data").submit();
 	});
-	
-	
+
 	
 });

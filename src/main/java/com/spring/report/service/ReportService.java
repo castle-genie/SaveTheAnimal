@@ -32,11 +32,11 @@ public interface ReportService {
 	public int contentDeleteFC(ReportVO rvo);
 	public int contentDeleteVC(ReportVO rvo);
 	public int contentDeleteAC(ReportVO rvo);
-//	public int userStop(ReportVO rvo);
+	public int userStop(ReportVO rvo);
 	public int userDelete(ReportVO rvo);
 	public ReportVO reportUpdateForm(ReportVO rvo);
-//	public int userGo(ReportVO rvo);
-	public void userGoStop(ReportVO rvo);
+	public int userGo(ReportVO rvo);
+//	public void userGoStop(ReportVO rvo);
 
 
 	

@@ -292,7 +292,7 @@
 											<use xlink:href="#file-earmark-text" /></svg> 봉사공고
 								</a></li>
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="adoption/adoptionList"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="/adoption/adoptionList"> <svg
 											class="bi">
 											<use xlink:href="#file-earmark-text" /></svg> 입양공고
 								</a></li>
@@ -329,8 +329,9 @@
 							<hr class="my-3">
 	
 							<ul class="nav flex-column mb-auto">
+								
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="#"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="/admin/logout"> <svg
 											class="bi">
 											<use xlink:href="#door-closed" /></svg> Sign out
 								</a></li>

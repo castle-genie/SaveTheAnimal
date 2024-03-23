@@ -11,7 +11,7 @@
 							readonly value="${userLogin.userId}" />
 					</div>
 					<button type="button" id="replyInsertBtn"
-						class="btn btn-primary col-sm-1 sendBtn mx-2">저장</button>
+						class="btn btn-primary col-sm-1 sendBtn mx-2 button alt small">저장</button>
 				</div>
 				<div class="row mb-3">
 					<label for="vfcommentContent" class="col-sm-1 col-form-label">내용</label>
@@ -22,22 +22,35 @@
 				</div>
 			</form>
 		</div>
+		<form id="detailForm">
+			<input type="hidden" class="vfcommentId" name="vfcommentId" value=""/>
+			<input type="hidden" name="userId" value="${userLogin.userId}"/>
+		</form>
+		
 		<!-- 댓글 목록 시작 -->
 		<div id="commentList">
 			<div class="card mb-2" id="item-template">
 				<div class="card-header">
 					<span class="name"></span> <span class="date"></span>
-
-					<button type="button" data-btn="upBtn"
-						class="btn btn-primary btn-sm">수정하기</button>
-					<button type="button" data-btn="delBtn"
-						class="btn btn-primary btn-sm">삭제하기</button>
+					<ul class="actions d-inline text-end">
+						<li><button type="button" data-btn="upBtn"
+							class="btn btn-primary btn-sm button alt small">수정하기</button></li>
+						<li><button type="button" data-btn="delBtn"
+							class="btn btn-primary btn-sm button alt small">삭제하기</button></li>
+						<c:if test="${not empty userLogin}">
+							<li class="vfcReportBtn">
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary button special vcDetailBtn" data-bs-toggle="modal" data-bs-target="#vfcReportModal">신고</button>
+							</li>							
+						</c:if>
+					</ul>
 				</div>
 				<div class="card-body">
 					<p class="card-text"></p>
 				</div>
 			</div>
 		</div>
+		<%@ include file="/WEB-INF/views/report/vfcReportInsert.jsp"%>
 		<!-- 댓글 목록 종료 -->
 	</div>
 	<script>
@@ -70,8 +83,7 @@
 							dataType : "text",
 							data : value,
 							error : function(xhr, textStatus, errorThrown) {
-								alert(textStatus + " (HTTP-" + xhr.status
-										+ " / " + errorThrown + ")");
+								alert("댓글을 작성하려면 로그인이 필요합니다.");
 							},
 							beforeSend : function() {
 								if (!checkForm("#vfcommentContent", "댓글내용을"))
@@ -180,6 +192,7 @@
 			let vfcommentId = card.attr("data-num");
 			console.log("rnum: " + vfcommentId);
 			updateForm(vfcommentId, card);
+			
 		})
 
 		function updateForm(vfcommentId, card) {
@@ -236,6 +249,7 @@
 					if (result == "SUCCESS") {
 						alert("댓글 수정이 완료되었습니다.");
 						dataReset();
+						let vfboardId = '${volunteerFeedbackBoard.vfboardId}';
 						listAll(vfboardId);
 					}
 				}

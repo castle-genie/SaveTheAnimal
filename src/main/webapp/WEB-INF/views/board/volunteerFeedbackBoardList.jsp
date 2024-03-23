@@ -27,10 +27,9 @@
 					<div class="table-wrapper">
 						<table class="alt">
 							<thead>
-								<tr>
-									<td class="text-center">제목</td>
+								<tr class="text-center">
+									<td >제목</td>
 									<td>작성자</td>
-									<td>좋아요</td>
 									<td>조회수</td>
 									<td>작성일</td>
 								</tr>
@@ -42,7 +41,6 @@
 											href="volunteerFeedbackBoardDetail?vfboardId=${list.vfboardId}&userId=<%= session.getAttribute("userId") %>">
 												${list.vfboardTitle} </a></td>
 										<td>${list.userId }</td>
-										<td>${list.vfboardLike }</td>
 										<td>${list.vfboardCnt }</td>
 										<td><fmt:formatDate value="${list.vfboardDate }"
 												pattern="yyyy.MM.dd" /></td>
