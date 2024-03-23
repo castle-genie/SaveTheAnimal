@@ -120,7 +120,7 @@
 		set user_act = 0 
 		where user_id = #{userId}
     </delete>
-    
+    <!-- 회원 탈퇴 : 회원 레코드 삭제 -->
     <delete id="userDelete" parameterType="user">
     	DELETE FROM users WHERE user_id = #{userId}
     </delete>
@@ -156,10 +156,6 @@
 	</select>
 	
 	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) : 3/21 user_level 컬럼 삭제 -->
-    <!-- 힌트(hint): 개발자가 데이터베이스에 어떤 방식으로 실행해 줘야 하는지를 명시하기 때문에 강제성을 부여한다. 
-               구문: /*+로 시작하고 */ 로 종료된다. 
-               /*+ INDEX_DESC(테이블명 인덱스명[기본키 설정시 제약조건명으로 인덱스 자동 생성])*/ -->
-    <!--rownum: SQL이 실행된 결과에 넘버링해준다. -->
     <select id="userList" parameterType="user" resultMap="userMap">
        <![CDATA[ 
          SELECT 
@@ -178,9 +174,7 @@
          WHERE rnum > (#{pageNum} - 1) * #{amount} 
       ]]>
      </select> 
-	
-	
-	
+
 		
 
 </mapper>

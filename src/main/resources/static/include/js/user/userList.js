@@ -54,8 +54,11 @@ $(function(){
 	});	*/
 	
 	/* 검색버튼 클릭시 처리 이벤트 */
-	$("#searchBtn").on("click", function(){
-		if($("#u_search").val()!="userDate") {
+	$("#searchBtn").on("click", function(e){
+		if ($("#u_search").val() =="") {
+			console.log("분류");
+			return;
+		} else if($("#u_search").val()!="userDate") {
 			console.log("userDate 아님");
 			$("#startDate").val("");
 			$("#endDate").val("");
@@ -83,8 +86,7 @@ $(function(){
 			}
 		}
 		
-		$("#pageNum").val(1);// 페이지 초기화
-		console.log()
+		$("#pageNum").val(1);// 페이지 초기화		
 		actionProcess("#searchForm", "get", "/user/userList");
 	});
 	
@@ -100,6 +102,7 @@ $(function(){
 		$("#searchForm").find("input[name='pageNum']").val($(this).attr("href"));
 		actionProcess("#searchForm", "get", "/user/userList");
 	});
+
 	
 }); // $ 함수 종료문
 
@@ -129,3 +132,4 @@ const actionProcess = function(form, method, action) {
 const locationProcess = function(url) {
 	location.href = url;
 }
+

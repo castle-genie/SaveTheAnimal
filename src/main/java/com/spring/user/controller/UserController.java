@@ -246,7 +246,8 @@ public class UserController {
 		int result = 0;
 		String url = "";
 		
-		result = userService.userWithdrawal(uvo);
+		//result = userService.userWithdrawal(uvo); // 상태값 변경 쿼리
+		result = userService.userDelete(uvo); // 회원 레코드 삭제 쿼리
 		if (result ==1) {
 			url="/user/logout"; // 로그아웃 처리
 		} else {
@@ -255,6 +256,21 @@ public class UserController {
 		}
 		return "redirect:"+url;
 	}
+	
+	/*@PostMapping("/userDelete")
+	public String userDelete(UserVO uvo, RedirectAttributes ras) {
+		log.info("회원레코드 삭제");
+		int result = 0;
+		String url = "";		
+		result = userService.userDelete(uvo);		
+		if (result == 1) {
+			url="/user/userList";
+		} else {
+			ras.addFlashAttribute("errorMsg", "삭제에 문제가 있어 다시 진행해 주세요.");
+			url="/user/userList";
+		}		
+		return "redirect:"+url;
+	}*/
 	
 	
 	@GetMapping("/userList")
