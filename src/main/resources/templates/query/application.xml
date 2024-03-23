@@ -40,11 +40,18 @@
 	</insert>
 	
 	<select id="applicationView" resultMap="applicationMap" parameterType="application">
+	<![CDATA[
 		SELECT application_id, volunteer_id, volunteer_title, application_comment, volunteer_time, application_result
-		FROM volunteer inner join application
-		using(volunteer_id)
-		WHERE user_id = #{user.userId}
-		ORDER BY application_id DESC
+		FROM (
+				SELECT /*+ INDEX_DESC(application pk_application) */
+						rownum as rnum, application_id, volunteer_id, volunteer_title, application_comment, volunteer_time, application_result
+				FROM application inner join volunteer
+				USING (user_id)
+				WHERE rownum <= #{pageNum} * #{amount} AND user_id = ${user.userId}
+				ORDER BY application_id DESC
+				) applicationView
+		WHERE rnum > (#{pageNum} - 1) * #{amount}
+	]]>
 	</select>
 	
 	<select id="applicatoinViewCnt" resultMap="applicationMap" parameterType="int">
