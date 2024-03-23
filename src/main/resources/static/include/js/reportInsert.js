@@ -20,7 +20,7 @@ $(function(){
 	$("#abReportInsertBtn").on("click", () => {
 		$("#f_data").attr({
 			"method": "post",
-			"action": "/report/reportInsertFA"
+			"action": "/report/reportInsertAB"
 		});
 		$("#f_data").submit();
 	});
@@ -49,16 +49,5 @@ $(function(){
 		$("#f_data").submit();
 	});
 
-	$(".fcDetailBtn").on("click", function(){
-		console.log("test call");
-/*		let reportId = $(this).parents("div .card").attr("data-num");
-		console.log(reportId);
-		$("#reportId").val(reportId);
-
-		$("#detailForm").attr({
-			"method":"get",
-			"action":"/fcomment/fcommentDetail"
-		});
-*/	});
 	
 });
