@@ -25,9 +25,30 @@
 	
 	<!--  자유게시판 글 상세조회 -->
 	<select id="freeBoardDetail" parameterType="FreeBoard" resultMap="freeBoardMap">
-		select 	distinct f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_like, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
-		from 	freeboard f left join report r on f.fboard_id = r.fboard_id
-		where 	f.fboard_id = #{fboardId} and (r.user_id = #{userId} or r.user_id is null)
+		WITH first_query AS (
+		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_like, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id
+		    FROM freeboard f LEFT JOIN report r ON f.fboard_id = r.fboard_id
+		    WHERE f.fboard_id = #{fboardId}
+		),
+		second_query AS (
+		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_like, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id
+		    FROM freeboard f LEFT JOIN report r ON f.fboard_id = r.fboard_id
+		    WHERE f.fboard_id = #{fboardId} AND (r.user_id = #{userId} OR r.user_id IS NULL)
+		),
+		third_query AS (
+		    SELECT fboard_id, fboard_title, fboard_content, fboard_like, fboard_cnt, fboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id
+		    FROM freeboard
+		    WHERE fboard_id = #{fboardId}
+		)
+		SELECT *
+		FROM (
+		    SELECT * FROM first_query
+		    UNION ALL
+		    SELECT * FROM second_query
+		    UNION ALL
+		    SELECT * FROM third_query
+		) result
+		WHERE ROWNUM = 1
 	</select>
 
 	<!-- 자유게시판 글 상세조회 -->

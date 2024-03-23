@@ -5,11 +5,17 @@ $(function(){
 
 		$("#reportId").val(reportId);
 
-		$("#detailForm").attr({
+		$.ajax({
+			type:"get",
+			url: "/report/reportDetail",
+			data: $("#detailForm").attr()
+		})
+		
+/*		$("#detailForm").attr({
 			"method":"get",
 			"action":"/report/reportDetail"
 		});
-
+*/
 		$("#detailForm").submit();
 	});
 });

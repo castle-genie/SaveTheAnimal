@@ -10,7 +10,7 @@
 		<form name="f_data" id="f_data">
 			<input type="hidden" name="reportId" value="${detail.reportId}"/>
 			<input type="hidden" name="boardUser" value="${detail.boardUser}"/>
-			<input type="" name="boardId" value="${detail.boardId}"/>
+			<input type="hidden" name="boardId" value="${detail.boardId}"/>
 			<input type="hidden" name="repcnt" id="repcnt" value="${detail.repcnt}"/>
 			
 		</form>
