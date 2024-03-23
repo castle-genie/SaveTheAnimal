@@ -22,11 +22,12 @@ public interface UserService {
 	public UserVO userInfo(String userId);		// 회원 정보 조회	
 	public int pwdConfirm(UserVO uvo);			// 비밀번호 확인
 	public int updateProfile(UserVO uvo); 		// 회원 정보 수정
-	public int userWithdrawal(UserVO uvo); 		// 회원 탈퇴
-	//public int userDelete(UserVO uvo); // 회원 탈퇴
+	public int userWithdrawal(UserVO uvo); 		// 회원 탈퇴 : 상태값 변경
+	public int userDelete(UserVO uvo); 			// 회원 탈퇴 : 회원 레코드 삭제
 	
 	public List<UserVO> userList(UserVO uvo);   // 회원 목록 조회 + 마스킹처리
 	public int userListCnt(UserVO uvo); 		// users 테이블의 전체 레코드 수 : 페이징처리시 필요
+
 
 
 }
