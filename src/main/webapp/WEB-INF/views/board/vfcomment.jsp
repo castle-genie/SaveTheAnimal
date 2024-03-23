@@ -22,22 +22,35 @@
 				</div>
 			</form>
 		</div>
+		<form id="detailForm">
+			<input type="hidden" class="vfcommentId" name="vfcommentId" value=""/>
+			<input type="hidden" name="userId" value="${userLogin.userId}"/>
+		</form>
+		
 		<!-- 댓글 목록 시작 -->
 		<div id="commentList">
 			<div class="card mb-2" id="item-template">
 				<div class="card-header">
 					<span class="name"></span> <span class="date"></span>
-
-					<button type="button" data-btn="upBtn"
-						class="btn btn-primary btn-sm button alt small">수정하기</button>
-					<button type="button" data-btn="delBtn"
-						class="btn btn-primary btn-sm button alt small">삭제하기</button>
+					<ul class="actions d-inline text-end">
+						<li><button type="button" data-btn="upBtn"
+							class="btn btn-primary btn-sm button alt small">수정하기</button></li>
+						<li><button type="button" data-btn="delBtn"
+							class="btn btn-primary btn-sm button alt small">삭제하기</button></li>
+						<c:if test="${not empty userLogin}">
+							<li class="vfcReportBtn">
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary button special vcDetailBtn" data-bs-toggle="modal" data-bs-target="#vfcReportModal">신고</button>
+							</li>							
+						</c:if>
+					</ul>
 				</div>
 				<div class="card-body">
 					<p class="card-text"></p>
 				</div>
 			</div>
 		</div>
+		<%@ include file="/WEB-INF/views/report/vfcReportInsert.jsp"%>
 		<!-- 댓글 목록 종료 -->
 	</div>
 	<script>

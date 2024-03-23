@@ -2,7 +2,6 @@ $(function(){
 	const userId = document.getElementById("userId").value;
 	
 	$("#fbReportUpdateBtn").on("click", () => {	
-		console.log("test call");
 		$("#f_data").attr({
 			"method": "post",
 			"action": "/report/reportModify"
@@ -18,25 +17,72 @@ $(function(){
 		$("#f_data").submit();
 	});
 	
-	$(document).on("click", ".fcDetailBtn", function() {
-		var reportId = $(this).parents("div .card").attr("data-num");
-/*		console.log(reportId);
-*/		
-		$("#reportId").val(reportId);
-
-		$("#detailForm").attr({
-			"method":"get",
-			"action":"/fcomment/fcommentDetail",
-		    success: function() {
-		        // 응답 처리
-		        console.log('처리된 데이터:');
+	$(document).on("click", ".fcDetailBtn", function(event) {
+        event.preventDefault(); // Prevent the default action of clicking the button
+		var fcommentId = $(this).parents("div .card").attr("data-num");
+		$(".fcommentId").val(fcommentId);
+    	
+		$.ajax({
+			method:"get",
+			url:"/fcomment/fcommentDetail",
+            data: $('#detailForm').serialize(),
+		    success: function(detail) {
+                $("input[name='fcommentId']").val(detail.fcommentId);
+                $("input[name='boardUser']").val(detail.userId);
+                $("input[name='reUserId']").val(detail.reUserId);
+                
 		    },
 		    error: function(error) {
 		        // 에러 처리
 		        console.error('에러:', error);
 		    }
 		});
-		$("#detailForm").submit();
+	});
+
+
+	$(document).on("click", ".vcDetailBtn", function(event) {
+        event.preventDefault(); // Prevent the default action of clicking the button
+		var vfcommentId = $(this).parents("div .card").attr("data-num");
+		$(".vfcommentId").val(vfcommentId);
+    	
+		$.ajax({
+			method:"get",
+			url:"/vfcomment/vfcommentDetail",
+            data: $('#detailForm').serialize(),
+		    success: function(detail) {
+                $("input[name='vfcommentId']").val(detail.vfcommentId);
+                $("input[name='boardUser']").val(detail.userId);
+                $("input[name='reUserId']").val(detail.reUserId);
+                
+		    },
+		    error: function(error) {
+		        // 에러 처리
+		        console.error('에러:', error);
+		    }
+		});
+	});
+
+
+	$(document).on("click", ".acDetailBtn", function(event) {
+        event.preventDefault(); // Prevent the default action of clicking the button
+		var afcommentId = $(this).parents("div .card").attr("data-num");
+		$(".afcommentId").val(afcommentId);
+    	
+		$.ajax({
+			method:"get",
+			url:"/afcomment/afcommentDetail",
+            data: $('#detailForm').serialize(),
+		    success: function(detail) {
+                $("input[name='afcommentId']").val(detail.afcommentId);
+                $("input[name='boardUser']").val(detail.userId);
+                $("input[name='reUserId']").val(detail.reUserId);
+                
+		    },
+		    error: function(error) {
+		        // 에러 처리
+		        console.error('에러:', error);
+		    }
+		});
 	});
 
 })
