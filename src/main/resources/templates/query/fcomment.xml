@@ -68,7 +68,7 @@
 	<!-- 자유게시판 댓글 삭제 -->
 	<delete id="fcommentDelete" parameterType="fcomment">
 		DELETE
-		FROM Fcomment
+		FROM fcomment
 		WHERE fcomment_id = #{fcommentId}
 	</delete>
 </mapper>

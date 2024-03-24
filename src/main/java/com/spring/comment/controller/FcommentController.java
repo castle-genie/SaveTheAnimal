@@ -69,7 +69,7 @@ public class FcommentController {
 		return(result==1) ? "SUCCESS":"FAILURE";
 	}
 	
-	@DeleteMapping(value = "/{fcommentId}", produces = MediaType.TEXT_PLAIN_VALUE)
+	@GetMapping(value = "/{fcommentId}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String fcommentDelete(@PathVariable("fcommentId") int fcommentId, FcommentVO fcommentvo) {
 		fcommentvo.setFcommentId(fcommentId);
 		int result = fcommentService.fcommentDelete(fcommentvo);

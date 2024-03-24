@@ -195,6 +195,9 @@
 						    <c:if test="${ not empty detail.volunteerFile }">
 						    	<img src="/resources/images/storage/volunteer/${ detail.volunteerFile }" alt="봉사활동 이미지">
 						    </c:if>
+						    <c:if test="${ empty detail.volunteerFile }">
+						    	<img src="/resources/images/walk.jpg" alt="봉사활동 이미지">
+					    	</c:if>
 						    <div class="info-text">
 						      <h2>${ detail.volunteerTitle }</h2>
 						      <table>
