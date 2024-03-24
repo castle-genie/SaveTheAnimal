@@ -5,7 +5,6 @@
 		<id column="afboard_id" property="afboardId"/>
 		<result column="afboard_title" property="afboardTitle"/>
 		<result column="afboard_content" property="afboardContent"/>
-		<result column="afboard_like" property="afboardLike"/>
 		<result column="afboard_cnt" property="afboardCnt"/>
 		<result column="afboard_date" property="afboardDate"/>
 		<result column="user_id" property="userId"/>
@@ -17,7 +16,7 @@
 	
 	<!-- 입양후기게시판 목록 -->
 	<select id="adoptionFeedbackBoardList" parameterType="adoptionFeedbackBoard" resultMap="adoptionFeedbackBoardMap">
-		SELECT 	afboard_id, afboard_title, afboard_like, user_id, afboard_cnt, afboard_date
+		SELECT 	afboard_id, afboard_title, user_id, afboard_cnt, afboard_date
 		FROM 	adoptionFeedbackBoard
 		ORDER BY afboard_id DESC
 	</select>
@@ -25,17 +24,17 @@
 	<!--  입양후기게시판 글 상세조회 -->
 	<select id="adoptionFeedbackBoardDetail" parameterType="adoptionFeedbackBoard" resultMap="adoptionFeedbackBoardMap">
 		WITH first_query AS (
-			select 	distinct a.afboard_id, a.afboard_title, a.afboard_content, a.afboard_like, a.afboard_cnt, a.afboard_date, a.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			select 	distinct a.afboard_id, a.afboard_title, a.afboard_content, a.afboard_cnt, a.afboard_date, a.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
 			from 	adoptionFeedbackBoard a left join report r on a.afboard_id = r.afboard_id
 		    WHERE 	a.afboard_id = #{afboardId}
 		),
 		second_query AS (
-			select 	distinct a.afboard_id, a.afboard_title, a.afboard_content, a.afboard_like, a.afboard_cnt, a.afboard_date, a.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			select 	distinct a.afboard_id, a.afboard_title, a.afboard_content, a.afboard_cnt, a.afboard_date, a.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
 			from 	adoptionFeedbackBoard a left join report r on a.afboard_id = r.afboard_id
 			where 	a.afboard_id = #{afboardId} and (r.user_id = #{userId} or r.user_id is null)
 		),
 		third_query AS (
-		    select 	distinct afboard_id, afboard_title, afboard_content, afboard_like, afboard_cnt, afboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, null as report_id
+		    select 	distinct afboard_id, afboard_title, afboard_content, afboard_cnt, afboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, null as report_id
 		    FROM 	adoptionFeedbackBoard
 		    WHERE 	afboard_id = #{afboardId}
 		)

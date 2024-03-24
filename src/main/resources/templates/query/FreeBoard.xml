@@ -5,7 +5,6 @@
 		<id column="fboard_id" property="fboardId"/>
 		<result column="fboard_title" property="fboardTitle"/>
 		<result column="fboard_content" property="fboardContent"/>
-		<result column="fboard_like" property="fboardLike"/>
 		<result column="fboard_cnt" property="fboardCnt"/>
 		<result column="fboard_date" property="fboardDate"/>
 		<result column="user_id" property="userId"/>
@@ -18,7 +17,7 @@
 	
 	<!-- 자유게시판 목록 -->
 	<select id="freeBoardList" parameterType="FreeBoard" resultMap="freeBoardMap">
-		SELECT 	fboard_id, fboard_title, fboard_like, user_id, fboard_cnt, fboard_date
+		SELECT 	fboard_id, fboard_title, user_id, fboard_cnt, fboard_date
 		FROM 	freeBoard
 		ORDER BY fboard_id DESC
 	</select>
@@ -26,17 +25,17 @@
 	<!--  자유게시판 글 상세조회 -->
 	<select id="freeBoardDetail" parameterType="FreeBoard" resultMap="freeBoardMap">
 		WITH first_query AS (
-		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_like, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id
+		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id
 		    FROM freeboard f LEFT JOIN report r ON f.fboard_id = r.fboard_id
 		    WHERE f.fboard_id = #{fboardId}
 		),
 		second_query AS (
-		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_like, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id
+		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id
 		    FROM freeboard f LEFT JOIN report r ON f.fboard_id = r.fboard_id
 		    WHERE f.fboard_id = #{fboardId} AND (r.user_id = #{userId} OR r.user_id IS NULL)
 		),
 		third_query AS (
-		    SELECT fboard_id, fboard_title, fboard_content, fboard_like, fboard_cnt, fboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id
+		    SELECT fboard_id, fboard_title, fboard_content, fboard_cnt, fboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id
 		    FROM freeboard
 		    WHERE fboard_id = #{fboardId}
 		)
