@@ -19,12 +19,12 @@ public class ReportVO {
 	private int vfcommentId			= 0;
 	private int afcommentId			= 0;
 	
-	private String boardTitle;
-	private String boardDate;
-	private String boardUser;
-	private String boardContent;
-	private int boardId;
-	private int repcnt;
+	private String boardTitle		= "";
+	private String boardDate		= "";
+	private String boardUser		= "";
+	private String boardContent		= "";
+	private int boardId				= 0;
+	private int repcnt				= 0;
 	
 	
 	

@@ -17,5 +17,5 @@ public class VolunteerFeedbackBoardVO {
 	private String reportDetail		= "";	//신고 상세
 	private int reportId			= 0;	//신고 ID
 	private int reportSort			= 0;	//신고 구분
-
+	private int reportStatus		= 1;	//신고 상태(1: 신고됨, 2: 처리됨)
 }
