@@ -156,6 +156,18 @@ $(function(){
 	    }
 	});
 	
+	/* 회원약관 팝업창 출력 */
+	$('.openPopup').click(function(e) {
+	    e.preventDefault();
+	    var url = $(this).attr('href');
+	    var width = 810;
+	    var height = 700;
+	    var top = 100;
+	    var left = 100;
+	    var options = 'width=' + width + 'px, height=' + height + 'px, top=' + top + 'px, left=' + left + 'px, toolbars=no, scrollbars=no, resizable=no';
+	    window.open(url, '_blank', options);
+	  });
+	
 	
 	/* 회원 가입 버튼 클릭 시 처리 이벤트 */
 	$("#joinBtn").on("click", function() {					
@@ -218,7 +230,7 @@ $(function(){
             return;
         }      		
         /* 동의 체크박스 선택여부 검사 */
-        if(!$("input[name='agree']").is(":checked")) {
+        if(!$("#check-all").is(":checked")) {
             alert("동의 항목 모두 체크 하셔야 가입 가능합니다.");
             return;
         }

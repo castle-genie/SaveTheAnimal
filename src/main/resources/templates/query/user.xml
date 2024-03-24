@@ -16,9 +16,9 @@
 	
 	<!-- 로그인 : 회원 상태 조건 추가 -->
 	<select id="userLoginProcess" parameterType="user" resultMap="userMap">
-		select user_id, user_name
+		select user_id, user_name, user_act
 		from users
-		where user_id = #{userId} and user_pwd = #{userPasswd} and user_act = 1
+		where user_id = #{userId} and user_pwd = #{userPasswd}
 	</select>
 	
 	<!-- 아이디 찾기 -->
