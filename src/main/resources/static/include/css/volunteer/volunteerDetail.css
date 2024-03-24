@@ -84,6 +84,10 @@
 	display : none;
 	}
 	
+	#mapLine{
+		border-bottom : none;
+	}
+	
 	/* 모달 팝업 숨기기 */
 	.modal {
 	  display: none;
