@@ -38,44 +38,10 @@
 					<br>
 					<ul class="actions text-end">
 						<li><a href="noticeBoardList" class="button special">목록</a></li>
-						<c:if test="${sessionScope.adminId eq noticeBoard.adminId}">
-							<li><input type="button" value="수정"
-								onclick="location.href='noticeBoardModify?nboardId=${noticeBoard.nboardId}'"></li>
-							<li><input type="button" value="삭제"
-								onclick="del(${noticeBoard.nboardId})"></li>
-						</c:if>
-						<c:if test="${empty userLogin}">
-							<li><a href="/user/login"
-								onclick="alert('신고하려면 로그인이 필요합니다')">
-									<button type="button" class="btn btn-primary button special">신고</button>
-							</a></li>
-						</c:if>
-						<c:if test="${not empty userLogin}">
-							<li><%@ include
-									file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
-							<li><a href="/user/login"
-								onclick="alert('신고하려면 로그인이 필요합니다')">
-									<button type="button" class="btn btn-primary button special">신고</button>
-							</a></li>
-						</c:if>
-						<c:if test="${not empty userLogin}">
-							<c:choose>
-								<c:when test="${noticeBoard.reUserId eq sessionScope.adminId}">
-									<li><%@ include
-											file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
-								</c:when>
-								<c:otherwise>
-									<li><%@ include
-											file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
-								</c:otherwise>
-
-							</c:choose>
-						</c:if>
 					</ul>
 				</div>
 			</div>
 		</div>
-		<!-- 댓글 종료 -->
 	</section>
 	<!-- Footer -->
 	<footer id="footer">
@@ -105,12 +71,5 @@
 	<script src="/resources/include/js/reportUpdate.js"></script>
 
 </body>
-<script>
-	function del(nboardId) {
-		var chk = confirm("정말 삭제하시겠습니까?");
-		if (chk) {
-			location.href='delete?nboardId='+nboardId;
-		}
-	}
-</script>
+
 </html>
