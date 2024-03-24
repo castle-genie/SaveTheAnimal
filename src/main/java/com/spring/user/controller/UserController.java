@@ -46,8 +46,8 @@ public class UserController {
 		if (userLogin != null && userAct == 1) {			// 활동 계정이면
 			model.addAttribute("userLogin", userLogin); 
 			return "redirect:/";// 성공하면 메인페이지 이동			
-		} else if (userLogin != null && userAct == 2) {		// 활동 정지 계정이면							
-			ras.addFlashAttribute("errorMsg", "로그인 실패 : 활동 정지 계정입니다.");
+		} else if (userLogin != null && userAct == 2) {		// 활동 중지 계정이면							
+			ras.addFlashAttribute("errorMsg", "로그인 실패 : 활동 중지된 계정입니다.");
 			return "redirect:/user/login";
 		}	else if (userLogin != null && userAct == 0) {	// 비활동(탈퇴) 계정이면							
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 탈퇴한 계정입니다.");
