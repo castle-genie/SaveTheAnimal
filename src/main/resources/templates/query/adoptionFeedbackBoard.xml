@@ -12,6 +12,8 @@
 		<result column="report_detail" property="reportDetail"/>
 		<result column="report_id" property="reportId"/>
 		<result column="report_sort" property="reportSort"/>
+		<result column="report_status" property="reportStatus"/>
+		
 	</resultMap>
 	
 	<!-- 입양후기게시판 목록 -->
@@ -24,17 +26,17 @@
 	<!--  입양후기게시판 글 상세조회 -->
 	<select id="adoptionFeedbackBoardDetail" parameterType="adoptionFeedbackBoard" resultMap="adoptionFeedbackBoardMap">
 		WITH first_query AS (
-			select 	distinct a.afboard_id, a.afboard_title, a.afboard_content, a.afboard_cnt, a.afboard_date, a.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			select 	distinct a.afboard_id, a.afboard_title, a.afboard_content, a.afboard_cnt, a.afboard_date, a.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort, r.report_status
 			from 	adoptionFeedbackBoard a left join report r on a.afboard_id = r.afboard_id
 		    WHERE 	a.afboard_id = #{afboardId}
 		),
 		second_query AS (
-			select 	distinct a.afboard_id, a.afboard_title, a.afboard_content, a.afboard_cnt, a.afboard_date, a.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			select 	distinct a.afboard_id, a.afboard_title, a.afboard_content, a.afboard_cnt, a.afboard_date, a.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort, r.report_status
 			from 	adoptionFeedbackBoard a left join report r on a.afboard_id = r.afboard_id
 			where 	a.afboard_id = #{afboardId} and (r.user_id = #{userId} or r.user_id is null)
 		),
 		third_query AS (
-		    select 	distinct afboard_id, afboard_title, afboard_content, afboard_cnt, afboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, null as report_id
+		    select 	distinct afboard_id, afboard_title, afboard_content, afboard_cnt, afboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, null as report_id, Null as report_status
 		    FROM 	adoptionFeedbackBoard
 		    WHERE 	afboard_id = #{afboardId}
 		)

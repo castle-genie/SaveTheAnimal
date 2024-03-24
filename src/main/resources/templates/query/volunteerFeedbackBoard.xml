@@ -12,6 +12,8 @@
 		<result column="report_detail" property="reportDetail"/>
 		<result column="report_id" property="reportId"/>
 		<result column="report_sort" property="reportSort"/>
+		<result column="report_status" property="reportStatus"/>
+		
 	</resultMap>
 	
 	<!-- 봉사후기게시판 목록 -->
@@ -24,17 +26,17 @@
 	<!--  봉사후기게시판 글 상세조회 -->
 	<select id="volunteerFeedbackBoardDetail" parameterType="volunteerFeedbackBoard" resultMap="volunteerFeedbackBoardMap">
 		WITH first_query AS (
-			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort, r.report_status
 			from 	volunteerFeedbackBoard v left join report r on v.vfboard_id = r.vfboard_id
 		    WHERE 	v.vfboard_id = #{vfboardId}
 		),
 		second_query AS (
-			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort, r.report_status
 			from 	volunteerFeedbackBoard v left join report r on v.vfboard_id = r.vfboard_id
 			where 	v.vfboard_id = #{vfboardId} and (r.user_id = #{userId} or r.user_id is null)
 		),
 		third_query AS (
-		    select 	distinct vfboard_id, vfboard_title, vfboard_content, vfboard_cnt, vfboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id
+		    select 	distinct vfboard_id, vfboard_title, vfboard_content, vfboard_cnt, vfboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id, Null as report_status
 		    FROM 	volunteerFeedbackBoard
 		    WHERE 	vfboard_id = #{vfboardId}
 		)

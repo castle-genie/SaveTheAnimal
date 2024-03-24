@@ -12,6 +12,7 @@
 		<result column="report_detail" property="reportDetail"/>
 		<result column="report_id" property="reportId"/>
 		<result column="report_sort" property="reportSort"/>
+		<result column="report_status" property="reportStatus"/>
 	</resultMap>
 	
 	
@@ -25,17 +26,17 @@
 	<!--  자유게시판 글 상세조회 -->
 	<select id="freeBoardDetail" parameterType="FreeBoard" resultMap="freeBoardMap">
 		WITH first_query AS (
-		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id
+		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id, r.report_status
 		    FROM freeboard f LEFT JOIN report r ON f.fboard_id = r.fboard_id
 		    WHERE f.fboard_id = #{fboardId}
 		),
 		second_query AS (
-		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id
+		    SELECT f.fboard_id, f.fboard_title, f.fboard_content, f.fboard_cnt, f.fboard_date, f.user_id, r.user_id AS reuserId, r.report_detail, r.report_sort, r.report_id, r.report_status
 		    FROM freeboard f LEFT JOIN report r ON f.fboard_id = r.fboard_id
 		    WHERE f.fboard_id = #{fboardId} AND (r.user_id = #{userId} OR r.user_id IS NULL)
 		),
 		third_query AS (
-		    SELECT fboard_id, fboard_title, fboard_content, fboard_cnt, fboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id
+		    SELECT fboard_id, fboard_title, fboard_content, fboard_cnt, fboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id, Null as report_status
 		    FROM freeboard
 		    WHERE fboard_id = #{fboardId}
 		)
