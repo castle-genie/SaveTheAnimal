@@ -24,7 +24,7 @@
 	
 	<!-- 봉사 공고 상세정보 -->
 	<select id="volunteerDetail" parameterType="volunteer" resultMap="volunteerMap">
-		SELECT volunteer_id, volunteer_detail, volunteer_date, volunteer_title, volunteer_cnt,
+		SELECT volunteer_id, volunteer_detail, volunteer_date, volunteer_title, 
 			   volunteer_time, 
 			   volunteer_due, 
 			   volunteer_limit, volunteer_cost, volunteer_location, volunteer_file
@@ -35,7 +35,7 @@
 	<!-- 관리자 페이지에서 봉사 공고 입력하기 -->
 	<insert id="volunteerInsert" parameterType="volunteer">
 		INSERT INTO volunteer
-		VALUES(volunteer_seq.nextval, #{volunteerDetail}, sysdate, #{volunteerTitle}, default, #{volunteerTime}, 
+		VALUES(volunteer_seq.nextval, #{volunteerDetail}, sysdate, #{volunteerTitle}, #{volunteerTime}, 
 			   #{volunteerDue}, #{volunteerLimit}, 
 			   <choose>
 	               <when test="volunteerCost != null and volunteerCost != ''">
@@ -45,7 +45,7 @@
 	                   default
 	               </otherwise>
 	           </choose>
-			   , #{volunteerLocation}, default, 'admin', #{volunteerFile})
+			   , #{volunteerLocation}, 'admin', #{volunteerFile})
 	</insert>
 	
 	<!-- 관리자 페이지에서 봉사 공고 수정하기 -->

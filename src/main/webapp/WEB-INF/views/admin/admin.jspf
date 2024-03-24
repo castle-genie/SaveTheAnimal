@@ -307,7 +307,7 @@
 											<use xlink:href="#file-earmark-text" /></svg> 입양상담신청
 								</a></li>
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="animal/animalList"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="/animal/animalList"> <svg
 											class="bi">
 											<use xlink:href="#file-earmark-text" /></svg> 동물 등록
 								</a></li>
