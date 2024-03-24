@@ -6,13 +6,11 @@
 		<result column="volunteer_detail" property="volunteerDetail"/>
 		<result column="volunteer_date" property="volunteerDate"/>
 		<result column="volunteer_title" property="volunteerTitle"/>
-		<result column="volunteer_cnt" property="volunteerCnt"/>
 		<result column="volunteer_time" property="volunteerTime"/>
 		<result column="volunteer_due" property="volunteerDue"/>
 		<result column="volunteer_limit" property="volunteerLimit"/>
 		<result column="volunteer_cost" property="volunteerCost"/>
 		<result column="volunteer_location" property="volunteerLocation"/>
-		<result column="volunteer_progress" property="volunteerProgress"/>
 		<result column="admin_id" property="adminId" />
 		<result column="volunteer_file" property="volunteerFile" />
 	</resultMap>
