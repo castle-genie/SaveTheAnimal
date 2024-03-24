@@ -13,7 +13,6 @@
 				<li><a href="/">Home</a></li>
 				<li><a href="/project/volunteer">봉사모집</a></li>
 				<li><a href="/ap/apList">입양</a></li>
-				<li><a href="/donate/donatepay">후원</a>
 				<li><a href="/board/freeBoardList">자유게시판</a>
 				<li><a href="/volunteerFeedbackBoard/volunteerFeedbackBoardList">봉사후기게시판</a>
 				<li><a href="/adoptionFeedbackBoard/adoptionFeedbackBoardList">입양후기게시판</a>
