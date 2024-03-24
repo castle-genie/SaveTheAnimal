@@ -46,19 +46,18 @@
 				SELECT /*+ INDEX_DESC(application pk_application) */
 						rownum as rnum, application_id, volunteer_id, volunteer_title, application_comment, volunteer_time, application_result
 				FROM application inner join volunteer
-				USING (user_id)
-				WHERE rownum <= #{pageNum} * #{amount} AND user_id = ${user.userId}
+				USING (volunteer_id)
+				WHERE rownum <= #{pageNum} * #{amount} AND user_id = #{user.userId}
 				ORDER BY application_id DESC
 				) applicationView
 		WHERE rnum > (#{pageNum} - 1) * #{amount}
 	]]>
 	</select>
 	
-	<select id="applicatoinViewCnt" resultMap="applicationMap" parameterType="int">
+	<select id="applicationViewCnt" parameterType="application" resultType="int">
 		SELECT count(*)
-		FROM application inner join users
-		USING(user_id)
-		WHERE user_id = #{ user.user_id }
+		FROM application
+		WHERE user_id = #{ user.userId }
 	</select>
 	
 	<delete id="applicationDelete" parameterType="application">

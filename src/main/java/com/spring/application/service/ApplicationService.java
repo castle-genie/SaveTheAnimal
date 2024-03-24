@@ -11,7 +11,8 @@ public interface ApplicationService {
 	
 	public int applicationSubmit(ApplicationVO applicationVO);
 	
-	public List<ApplicationVO> applicationView(String userId);
+	public List<ApplicationVO> applicationView(ApplicationVO applicationVO);
+	public int applicationViewCnt(String userId);
 	
 	public int applicationDelete(ApplicationVO applicationVO);
 	

@@ -1,5 +1,6 @@
 package com.spring.application.vo;
 
+import com.spring.common.vo.CommonVO;
 import com.spring.user.vo.UserVO;
 import com.spring.volunteer.vo.VolunteerVO;
 
@@ -11,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@EqualsAndHashCode(callSuper=false)
-public class ApplicationVO /* extends UserVO */{
+@EqualsAndHashCode(callSuper=false)
+public class ApplicationVO  extends CommonVO {
 	public ApplicationVO(int applicationId, String attendance) {
         this.applicationId = applicationId;
         this.attendance = attendance;

@@ -35,9 +35,13 @@ public class ApplicationServcieImpl implements ApplicationService{
 	}
 
 	@Override
-	public List<ApplicationVO> applicationView(String userId) {
-		List<ApplicationVO> applicationView = applicationDAO.applicationView(userId);
+	public List<ApplicationVO> applicationView(ApplicationVO applicationVO) {
+		List<ApplicationVO> applicationView = applicationDAO.applicationView(applicationVO);
 		return applicationView;
+	}
+	public int applicationViewCnt(String userId) {
+		int applicationViewCnt = applicationDAO.applicationViewCnt(userId);
+		return applicationViewCnt;
 	}
 	
 	@Override

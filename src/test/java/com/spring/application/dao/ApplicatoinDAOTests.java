@@ -65,11 +65,13 @@ public class ApplicatoinDAOTests {
 		log.info("총 갯수 : " + applicationDAO.applicationSubmit(applicationVO));
 	}*/
 	
-	/*  
+	/* */ 
 	@Test
 	public void applicationViewTest() {
 		ApplicationVO applicationVO = new ApplicationVO();
-		applicationVO.getUser().setUserId("member11");
+		applicationVO.getUser().setUserId("member10");
+		applicationVO.setPageNum(1);
+		applicationVO.setAmount(10);
 		List<ApplicationVO> applicationView = applicationDAO.applicationView(applicationVO); // volunteerId가 설정된 applicationVO로 쿼리 실행
 	    
 	    if (applicationView != null) {
@@ -82,7 +84,7 @@ public class ApplicatoinDAOTests {
 	    } else {
 	        log.info("조회된 결과가 없습니다.");
 	    }
-	}*/
+	}
 	
 	/*
 	@Test
@@ -110,9 +112,17 @@ public class ApplicatoinDAOTests {
 		log.info("반환 갯수 : " + applicationDAO.increaseUserVolCnt(userIds));
 	} */
 	
+	/*
 	@Test
 	public void changeResultTest() {
 	    List<Integer> applicationIds = Arrays.asList(80, 93);
 	    log.info("반환 행 갯수 : " + applicationDAO.changeResult(applicationIds));
-	}
+	}*/
+	
+	/*
+	@Test 
+	public void applicationViewCnt() {
+		String userId = "member10";
+		log.info("총 행수 " + applicationDAO.applicationViewCnt(userId));
+	}*/
 }

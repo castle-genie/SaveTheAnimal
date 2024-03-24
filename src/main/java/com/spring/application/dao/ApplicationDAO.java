@@ -19,7 +19,8 @@ public interface ApplicationDAO {
 	public int applicationSubmit(ApplicationVO applicationVO);
 	
 	// 마이페이지에서 유저가 볼수있는 신청 정보
-	public List<ApplicationVO> applicationView(String userId);
+	public List<ApplicationVO> applicationView(ApplicationVO applicationVO);
+	public int applicationViewCnt(String userId);
 	
 	// 마이페이지에서 신청 정보 삭제
 	public int applicationDelete(ApplicationVO applicationVO);

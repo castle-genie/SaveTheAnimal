@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.application.service.ApplicationService;
 import com.spring.application.vo.ApplicationVO;
+import com.spring.common.vo.PageDTO;
 import com.spring.user.vo.UserVO;
 import com.spring.volunteer.vo.VolunteerVO;
 
@@ -65,9 +66,13 @@ public class ApplicationController {
 	}
 	
 	@GetMapping("/applicationView")
-	public String applicationView(String userId, Model model) {
+	public String applicationView(String userId, ApplicationVO applicationVO, Model model, UserVO user) {
+		applicationVO.getUser().setUserId(user.getUserId());
+		int applicationViewCnt = 0;
+		applicationViewCnt = service.applicationViewCnt(userId);
+		model.addAttribute("pageMaker", new PageDTO(applicationVO, applicationViewCnt));
 		List<ApplicationVO> applicationView = null;
-		applicationView = service.applicationView(userId);
+		applicationView = service.applicationView(applicationVO);
 		model.addAttribute("view", applicationView);
 		return "application/applicationView";
 	}
