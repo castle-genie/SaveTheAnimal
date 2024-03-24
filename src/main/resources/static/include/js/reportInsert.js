@@ -26,27 +26,27 @@ $(function(){
 	});
 	
 	$("#fcReportInsertBtn").on("click", () => {
-		$(this).parents("div.card").attr({
+		$("#fc_data").attr({
 			"method": "post",
 			"action": "/report/reportInsertFC"
 		});
-		$("#f_data").submit();
+		$("#fc_data").submit();
 	});
 	
-	$("#vcReportInsertBtn").on("click", () => {
-		$(this).parents("div.card").attr({
+	$("#vfcReportInsertBtn").on("click", () => {
+		$("#fc_data").attr({
 			"method": "post",
 			"action": "/report/reportInsertVC"
 		});
-		$("#f_data").submit();
+		$("#fc_data").submit();
 	});
 	
-	$("#acReportInsertBtn").on("click", () => {
-		$("#f_data").attr({
+	$("#afcReportInsertBtn").on("click", () => {
+		$("#fc_data").attr({
 			"method": "post",
 			"action": "/report/reportInsertAC"
 		});
-		$("#f_data").submit();
+		$("#fc_data").submit();
 	});
 
 	

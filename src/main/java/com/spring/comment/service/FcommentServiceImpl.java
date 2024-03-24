@@ -53,8 +53,12 @@ public class FcommentServiceImpl implements FcommentService{
 
 	@Override
 	public FcommentVO fcommentDetail(FcommentVO fvo) {
-		FcommentVO fcommentDetail = fcommentDAO.fcommentDetail(fvo);
-		return fcommentDetail;
+		FcommentVO detail = fcommentDAO.fcommentDetail(fvo);
+		if(detail != null) {
+			detail.setReportDetail(detail.getReportDetail().replaceAll("\n", "<br />"));
+		}
+
+		return detail;
 	}
 
 	
