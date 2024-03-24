@@ -7,7 +7,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94063d37acee8b8586233e93d841bf07&libraries=services"></script>
 	<script>
-	function ajaxRequest(url, data) {
+	function ajaxRequest(url, data, type) {
         return new Promise(function(resolve, reject) {
             $.ajax({
                 type: "post",
@@ -15,6 +15,7 @@
                 data: data,
                 success: function(response) {
                     resolve(response);
+                    alert(type+"정보 변경되었습니다.")
                 },
                 error: function(error) {
                     reject(error);
@@ -141,11 +142,14 @@
 						console.log(dataToApplicationId);
 					}
 				})
-				ajaxRequest("/application/increaseUserVolCnt", "userIds="+dataToSend)
-				.then(() => {
-					return ajaxRequest("/application/changeResult", "applicationIds="+dataToApplicationId)
-				})
-				
+				if(dataToSend.length === 0 && dataToApplicationId.length === 0) {
+					alert("참석인원이 1명 이상이어야 합니다");
+				} else {
+					ajaxRequest("/application/increaseUserVolCnt", "userIds="+dataToSend, "참여")
+					.then(() => {
+						return ajaxRequest("/application/changeResult", "applicationIds="+dataToApplicationId, "봉사 활동 횟수")
+					})
+				}
 				
 				// 서버로 데이터 전송
 				/* $.ajax({

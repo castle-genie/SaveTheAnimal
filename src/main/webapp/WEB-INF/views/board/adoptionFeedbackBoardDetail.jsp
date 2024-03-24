@@ -55,7 +55,12 @@
 						<c:if test="${not empty userLogin}">
 							<c:choose>
 								<c:when test="${adoptionFeedbackBoard.reUserId eq userLogin.userId}">
-									<li><%@ include file="/WEB-INF/views/report/abReportUpdate.jsp"%></li>
+									<c:if test="${freeBoard.reportStatus eq 1}">
+										<li><%@ include file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
+									</c:if>
+									<c:if test="${freeBoard.reportStatus eq 2}">
+										<li><button type="button" class="btn btn-primary button">신고처리됨</button></li>
+									</c:if>
 								</c:when>
 								<c:otherwise>
 									<li><%@ include
