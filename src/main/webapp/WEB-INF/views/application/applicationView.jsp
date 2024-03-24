@@ -16,7 +16,7 @@
 		<div class="inner">
 			<header class="align-center">
 				<p>Save The Animal</p>
-				<h2>페이지 이름</h2>
+				<h2>봉사 신청 확인</h2>
 			</header>
 		</div>
 	</section>
