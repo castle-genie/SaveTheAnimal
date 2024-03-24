@@ -19,7 +19,6 @@ public class UserVO extends CommonVO {
 	private Date userDate;
 	private int userAct=0; 		
 	private int userRepcnt=0; 		
-	private int userVolcnt=0; 		
-	private int userLevel=0; // 3/21 컬럼 삭제 		
+	private int userVolcnt=0; 			
 	private int userAdoptChk=0;	
 }
