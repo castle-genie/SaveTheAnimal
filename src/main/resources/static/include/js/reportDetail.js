@@ -93,7 +93,7 @@ $(function(){
 			let sanctionUrl;
 			switch(repcnt){
 				case '1':	//repcnt = 1일때, 게시글 삭제 + 계정 정지
-                    sanctionUrl = "/report/userGoStop";
+                    sanctionUrl = "/report/userStop";
 					break;
 				case '2':	//repcnt = 2일 때, 게시글 삭제 + 계정 정지
                     sanctionUrl = "/report/userDelete";
