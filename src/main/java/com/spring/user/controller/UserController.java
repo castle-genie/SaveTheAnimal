@@ -40,10 +40,18 @@ public class UserController {
 	@PostMapping("/login")
 	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras) {
 		
-		UserVO userLogin = userService.userLoginProcess(login);				
-		if (userLogin != null) {
+		UserVO userLogin = userService.userLoginProcess(login);
+		int userAct = userLogin.getUserAct();
+		
+		if (userLogin != null && userAct == 1) {			// 활동 계정이면
 			model.addAttribute("userLogin", userLogin); 
-			return "redirect:/";// 성공하면 메인페이지 이동
+			return "redirect:/";// 성공하면 메인페이지 이동			
+		} else if (userLogin != null && userAct == 2) {		// 활동 중지 계정이면							
+			ras.addFlashAttribute("errorMsg", "로그인 실패 : 활동 중지된 계정입니다.");
+			return "redirect:/user/login";
+		}	else if (userLogin != null && userAct == 0) {	// 비활동(탈퇴) 계정이면							
+			ras.addFlashAttribute("errorMsg", "로그인 실패 : 탈퇴한 계정입니다.");
+			return "redirect:/user/login";			
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
 			return "redirect:/user/login";
@@ -56,6 +64,7 @@ public class UserController {
 		sessionStatus.setComplete();
 		return "redirect:/"; // 메인페이지 이동
 	}
+	
 	
 	@GetMapping("/join")
 	public String join() {
@@ -241,19 +250,20 @@ public class UserController {
 	
 	@PostMapping("/userWithdrawal")
 	public String userWithdrawal(UserVO uvo, RedirectAttributes ras) {
-		log.info("회원탈퇴 처리");
-		
+		log.info("회원탈퇴 처리");		
 		int result = 0;
 		String url = "";
 		
-		//result = userService.userWithdrawal(uvo); // 상태값 변경 쿼리
-		result = userService.userDelete(uvo); // 회원 레코드 삭제 쿼리
-		if (result ==1) {
+		result = userService.userDelete(uvo); // 회원 레코드 삭제 쿼리		
+		//result = userService.userWithdrawal(uvo); // 상태값 변경 쿼리 
+		
+		if (result == 1) {
 			url="/user/logout"; // 로그아웃 처리
 		} else {
 			ras.addFlashAttribute("errorMsg", "탈퇴처리에 문제가 있어 다시 진행해 주세요.");
 			url="/user/mypage"; // 마이페이지
 		}
+		
 		return "redirect:"+url;
 	}
 	
@@ -289,15 +299,18 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("joinTerms")
+	public String joinTerms() {
+		return "/user/join-terms";
+	}
+	
 	/* 자바단에서 세션에서 꺼내온 값 사용하는 방법 
 	@GetMapping("/board")
 	public String process(@SessionAttribute("adminLogin") AdminLoginVO adminLoginVO) {
 		adminLoginVO.getAdminId(); // 세션에서 얻은 값.
 		return "";
-	}*/
-	
-	/* jsp : ${adminLogin.adminId} */
-	
-	/* javascript : let adminId = "${adminLogin.adminId}"; */
+	}	
+	 jsp : ${adminLogin.adminId} 	
+	 javascript : let adminId = "${adminLogin.adminId}"; */
 
 }
