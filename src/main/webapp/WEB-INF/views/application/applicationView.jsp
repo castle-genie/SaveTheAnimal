@@ -86,6 +86,7 @@
 							    <%--============ 페이징 출력 시작 ============--%>	
 							<nav aria-label="Page navigation example">
 							<form id="page" name="page">
+								<input type="hidden" name="userId" id="userId" value="${ userLogin.userId }" />
 								<input type="hidden" name="pageNum" id="pageNum" value="${ pageMaker.cvo.pageNum }" />
 								<input type="hidden" name="amount" id="amount" value="${ pageMaker.cvo.amount }" />
 							</form>
