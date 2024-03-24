@@ -32,7 +32,7 @@ public class ReportController {
 		} else {
 			List<ReportVO> reportList = reportService.reportList(rvo);
 			model.addAttribute("reportList", reportList);
-//			System.out.println(reportList);
+			System.out.println(reportList);
 			return "admin/report/reportList";	
 		}
 	}
