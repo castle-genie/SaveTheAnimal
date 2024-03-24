@@ -41,7 +41,10 @@ public class VolunteerController {
 	
 	// 봉사 일정 상세 정보 구현
 	@GetMapping("/volunteerDetail")
-	public String volunteerDetail(VolunteerVO volunteerVO, Model model) {
+	public String volunteerDetail(@SessionAttribute(name = "userLogin", required = false) UserVO userLogin, UserVO userVO, VolunteerVO volunteerVO, Model model) {
+		if (userLogin != null) {
+	        userLogin.getUserId();
+	    }
 		VolunteerVO volunteerDetail = null;
 		volunteerDetail = service.volunteerDetail(volunteerVO);
 		model.addAttribute("detail", volunteerDetail);

@@ -65,7 +65,7 @@ public class ApplicatoinDAOTests {
 		log.info("총 갯수 : " + applicationDAO.applicationSubmit(applicationVO));
 	}*/
 	
-	/* */ 
+	/* 
 	@Test
 	public void applicationViewTest() {
 		ApplicationVO applicationVO = new ApplicationVO();
@@ -84,7 +84,7 @@ public class ApplicatoinDAOTests {
 	    } else {
 	        log.info("조회된 결과가 없습니다.");
 	    }
-	}
+	}*/ 
 	
 	/*
 	@Test
@@ -94,15 +94,15 @@ public class ApplicatoinDAOTests {
 		log.info("삭제된 행 : " + applicationDAO.applicationDelete(applicationVO));
 	}*/
 	
-	/*
+	/* */
 	@Test
 	public void applicationCheckTest() {
 		ApplicationVO applicationVO = new ApplicationVO();
-		applicationVO.getUser().setUserId("member10");
-		applicationVO.getVolunteer().setVolunteerId(3);
+		applicationVO.getUser().setUserId("member11");
+		applicationVO.getVolunteer().setVolunteerId(1);
 		int applicatinoCheck = applicationDAO.applicationCheck(applicationVO);
 		log.info("반환 결과 : " + applicatinoCheck);
-	} */
+	} 
 	
 	/* 
 	@Test
