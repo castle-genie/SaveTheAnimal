@@ -34,9 +34,9 @@
 					<span class="name"></span> <span class="date"></span>
 					<ul class="actions d-inline text-end">
 						<li><button type="button" data-btn="upBtn"
-							class="btn btn-primary btn-sm">수정하기</button></li>
+							class="btn btn-primary btn-sm button alt small">수정하기</button></li>
 						<li><button type="button" data-btn="delBtn"
-							class="btn btn-primary btn-sm">삭제하기</button></li>
+							class="btn btn-primary btn-sm button alt small">삭제하기</button></li>
 						<c:if test="${not empty userLogin}">
 							<li class="afcReportBtn">
 								<!-- Button trigger modal -->

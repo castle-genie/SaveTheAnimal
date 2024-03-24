@@ -29,9 +29,7 @@
 						<h2>${volunteerFeedbackBoard.vfboardTitle}</h2>
 					</header>
 					<div>
-						<pre>
-							<code>${volunteerFeedbackBoard.vfboardContent}</code>
-						</pre>
+						<pre>${volunteerFeedbackBoard.vfboardContent}</pre>
 					</div>
 					<p>
 						작성자: ${volunteerFeedbackBoard.userId} <span style="float: right;"><fmt:formatDate

@@ -44,7 +44,6 @@
 										<td>${list.fboardCnt }</td>
 										<td><fmt:formatDate value="${list.fboardDate }"
 												pattern="yyyy.MM.dd" /></td>
-										<!-- <td>${list.fboardDate }</td> -->
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -62,6 +61,7 @@
 							<li><a href="/board/freeBoardCreate" class="button special">글쓰기</a></li>
 						</ul>
 					</c:if>
+
 				</div>
 			</div>
 		</div>
@@ -92,5 +92,11 @@
 	<script src="/resources/include/assets2/js/main.js"></script>
 </body>
 <script>
+function checkVolunteerTimes(){
+	if(!(document.volunteerCreate.volunteer.value.length == 0 && )){
+		alert('ㅎㅇ');
+	}
+	
+}
 </script>
 </html>
