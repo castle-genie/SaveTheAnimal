@@ -9,4 +9,18 @@ $(function() {
 		});
 		$("#f_data").submit();
 	})
+	
+	$(".page-item a").on("click", function(e){
+		e.preventDefault();
+		$("#page").find("input[name='pageNum']").val($(this).attr("href"));
+		actionProcess("#page", "get", "/application/applicationView");
+	});
 })
+
+const actionProcess = function(form, method, action) {
+	$(form).attr({
+		"method":method,
+		"action":action
+	});
+	$(form).submit();
+}

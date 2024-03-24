@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.spring.admin.login.vo.AdminLoginVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,8 +25,12 @@ public class ModifyController {
     }
 	
 	@GetMapping("/adminVolunteerList")
-	public String adminVolunteerList() {
-		return "/admin/volunteer/adminVolunteerList";
+	public String adminVolunteerList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO) {
+		if(adminLoginVO == null) {
+			return "/admin/adminLogin";
+		} else {
+			return "/admin/volunteer/adminVolunteerList";
+		}
 	}
 }
 	

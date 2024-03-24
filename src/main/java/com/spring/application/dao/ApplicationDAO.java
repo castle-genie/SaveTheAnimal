@@ -1,5 +1,6 @@
 package com.spring.application.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,7 +19,8 @@ public interface ApplicationDAO {
 	public int applicationSubmit(ApplicationVO applicationVO);
 	
 	// 마이페이지에서 유저가 볼수있는 신청 정보
-	public List<ApplicationVO> applicationView(String userId);
+	public List<ApplicationVO> applicationView(ApplicationVO applicationVO);
+	public int applicationViewCnt(String userId);
 	
 	// 마이페이지에서 신청 정보 삭제
 	public int applicationDelete(ApplicationVO applicationVO);
@@ -28,4 +30,8 @@ public interface ApplicationDAO {
 	
 	// 봉사 실행 여부에 따라 봉사 활동 증가
 	public int increaseUserVolCnt(String[] userIds);
+	
+	// 봉사 실행 여부에 따라 applicationResult 값 변경
+	public int changeResult(List<Integer> applicationIds);
+
 }

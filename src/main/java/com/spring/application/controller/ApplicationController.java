@@ -1,6 +1,7 @@
 package com.spring.application.controller;
 
 import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.application.service.ApplicationService;
 import com.spring.application.vo.ApplicationVO;
+import com.spring.common.vo.PageDTO;
 import com.spring.user.vo.UserVO;
 import com.spring.volunteer.vo.VolunteerVO;
 
@@ -63,9 +66,13 @@ public class ApplicationController {
 	}
 	
 	@GetMapping("/applicationView")
-	public String applicationView(String userId, Model model) {
+	public String applicationView(String userId, ApplicationVO applicationVO, Model model, UserVO user) {
+		applicationVO.getUser().setUserId(user.getUserId());
+		int applicationViewCnt = 0;
+		applicationViewCnt = service.applicationViewCnt(userId);
+		model.addAttribute("pageMaker", new PageDTO(applicationVO, applicationViewCnt));
 		List<ApplicationVO> applicationView = null;
-		applicationView = service.applicationView(userId);
+		applicationView = service.applicationView(applicationVO);
 		model.addAttribute("view", applicationView);
 		return "application/applicationView";
 	}
@@ -115,4 +122,13 @@ public class ApplicationController {
 			return "redirect:" + url;*/
 		 	service.increaseUserVolCnt(userIds);
 	    }
+	
+	@ResponseBody
+	@PostMapping("/changeResult")
+	public void changeResult(String applicationId, @RequestParam(value="applicationIds") ArrayList<Integer> applicationIds) {
+		log.info("봉사 아이디 " + applicationId);
+		log.info("전체 봉사 아이디 " + applicationIds.toString());
+		service.chageResult(applicationIds);
+	}
+	
 }
