@@ -53,7 +53,7 @@
     <div id="banner-content">
     	</br>
     	</br>
-        <button class="button" type="button">현재 날씨는?</button>
+        <button class="button" type="button">현재 날씨는?</button><br /><br />
         <img src="/resources/images/walk.jpg">
 		<dl>
 			<dt>기온</dt>
