@@ -21,6 +21,7 @@
 ////	public void testReportList() {
 ////		ReportVO rvo = new ReportVO();
 ////		List<ReportVO> list = rDao.reportList(rvo);
+////		System.out.println(list);
 ////		for(ReportVO vo : list) {
 ////			log.info(vo.toString());
 ////		}
