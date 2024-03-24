@@ -5,7 +5,6 @@
 		<id column="vfboard_id" property="vfboardId"/>
 		<result column="vfboard_title" property="vfboardTitle"/>
 		<result column="vfboard_content" property="vfboardContent"/>
-		<result column="vfboard_like" property="vfboardLike"/>
 		<result column="vfboard_cnt" property="vfboardCnt"/>
 		<result column="vfboard_date" property="vfboardDate"/>
 		<result column="user_id" property="userId"/>
@@ -17,7 +16,7 @@
 	
 	<!-- 봉사후기게시판 목록 -->
 	<select id="volunteerFeedbackBoardList" parameterType="volunteerFeedbackBoard" resultMap="volunteerFeedbackBoardMap">
-		SELECT 	vfboard_id, vfboard_title, vfboard_like, user_id, vfboard_cnt, vfboard_date
+		SELECT 	vfboard_id, vfboard_title, user_id, vfboard_cnt, vfboard_date
 		FROM 	volunteerFeedbackBoard
 		ORDER BY vfboard_id DESC
 	</select>
@@ -25,17 +24,17 @@
 	<!--  봉사후기게시판 글 상세조회 -->
 	<select id="volunteerFeedbackBoardDetail" parameterType="volunteerFeedbackBoard" resultMap="volunteerFeedbackBoardMap">
 		WITH first_query AS (
-			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_like, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
 			from 	volunteerFeedbackBoard v left join report r on v.vfboard_id = r.vfboard_id
 		    WHERE 	v.vfboard_id = #{vfboardId}
 		),
 		second_query AS (
-			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_like, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
+			select 	distinct v.vfboard_id, v.vfboard_title, v.vfboard_content, v.vfboard_cnt, v.vfboard_date, v.user_id, r.user_id as reUserId, r.report_detail, r.report_id, r.report_sort
 			from 	volunteerFeedbackBoard v left join report r on v.vfboard_id = r.vfboard_id
 			where 	v.vfboard_id = #{vfboardId} and (r.user_id = #{userId} or r.user_id is null)
 		),
 		third_query AS (
-		    select 	distinct vfboard_id, vfboard_title, vfboard_content, vfboard_like, vfboard_cnt, vfboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id
+		    select 	distinct vfboard_id, vfboard_title, vfboard_content, vfboard_cnt, vfboard_date, user_id, NULL as reuserId, NULL as report_detail, Null as report_sort, Null as report_id
 		    FROM 	volunteerFeedbackBoard
 		    WHERE 	vfboard_id = #{vfboardId}
 		)
