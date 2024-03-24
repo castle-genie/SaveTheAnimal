@@ -297,7 +297,7 @@
 											<use xlink:href="#file-earmark-text" /></svg> 입양공고
 								</a></li>
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="/noticeBoard/noticeBoardList"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="/admin/noticeBoardList"> <svg
 											class="bi">
 											<use xlink:href="#file-earmark-text" /></svg> 공지게시판
 								</a></li>

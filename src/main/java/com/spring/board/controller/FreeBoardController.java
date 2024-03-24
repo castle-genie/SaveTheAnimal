@@ -37,51 +37,15 @@ public class FreeBoardController {
 		return "board/freeBoardList";
 		
 	}
-	/*
-	// 게시글 조회
-	@GetMapping(value = "freeBoardDetail")
-	public String freeBoardDetail(Model model, @RequestParam("fboardId")int fboardId) {
-		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(fboardId));
-		
-		
-		//조회수 +1
-		freeBoardService.plusCnt(fboardId);
-		
-		return "board/freeBoardDetail";
-		
-		//댓글 조회
-		List<FcommentVO> fcomment;
-		fcomment = fcommenetService.list(fboardId);
-		model.addAttribute("fcomment", fcomment);
-		
-		return "/comment/fcomment";
-	}
-	*/
 	// 게시글 조회
 	@GetMapping(value = "freeBoardDetail")
 	public String freeBoardDetail(Model model, FreeBoardVO freeBoardVO){
 		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(freeBoardVO));
 		
-		//조회수 +1
 		freeBoardService.plusCnt(freeBoardVO);
 		
 		return "board/freeBoardDetail";
 		
-		/*
-		//댓글 조회
-		List<FcommentVO> fcommentList = fcommentService.list(fboardId);
-		model.addAttribute("fcommentList", fcommentList);
-		
-		return "fcommentList";
-		*/
-		/*
-		//댓글 조회
-		List<FcommentVO> fcomment;
-		fcomment = fcommentService.list(fboardId);
-		model.addAttribute("fcomment", fcomment);
-		
-		return "/comment/fcomment";
-		*/
 	}
 	
 	//게시글 등록하는 페이지 접속
@@ -117,7 +81,6 @@ public class FreeBoardController {
 	
 	//게시글 삭제
 	@GetMapping(value = "delete")
-	//@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public String delete(FreeBoardVO freeBoardVO){
 		
 		log.info("삭제" + freeBoardVO);
