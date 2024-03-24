@@ -17,7 +17,7 @@
     </resultMap>
 
     <!-- 상담 신청 목록 -->
-    <select id="getAllCounselings" parameterType="counseling" resultMap="counselingMap">
+    <select id="counselingList" parameterType="counseling" resultMap="counselingMap">
         SELECT counseling_id, counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
                counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt
         FROM counseling
@@ -32,11 +32,11 @@
         WHERE counseling_id = #{counselingId}
     </select>
 
-    <insert id="createCounseling" parameterType="counseling">
-        insert into counselings(counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
-                                counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt)
+    <!-- 상담 신청 입력 -->
+    <insert id="counselingInsert" parameterType="counseling">
+        insert into counseling(counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
+                               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt)
         VALUES (
-                   #{counseling_id},
                    #{counseling_schedule},
                    #{user_id},
                    #{adoption_id},
@@ -50,4 +50,20 @@
                    #{counseling_adopt}
                )
     </insert>
+
+    <!-- 상담 신청 수정 -->
+    <update id="counselingUpdate" parameterType="counseling">
+        UPDATE counseling
+        SET counseling_schedule = #{counseling_schedule}, user_id = #{user_id}, adoption_id = #{adoption_id},
+            animal_id = #{animal_id}, counseling_date = #{counseling_date}, counseling_judgment = #{counseling_judgment},
+            counseling_detail = #{counseling_detail}, counseling_age = #{counseling_age}, counseling_address = #{counseling_address},
+            counseling_job = #{counseling_job}, counseling_adopt = #{counseling_adopt}
+        WHERE counseling_id = #{counseling_id}
+    </update>
+
+    <!-- 상담 신청 삭제 -->
+    <delete id="counselingDelete" parameterType="counseling">
+        DELETE FROM counseling
+        WHERE counseling_id = #{counselingId}
+    </delete>
 </mapper>

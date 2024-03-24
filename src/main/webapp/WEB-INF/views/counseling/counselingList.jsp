@@ -38,7 +38,7 @@
                         <th>동물ID</th>
                         <th>상담일자</th>
                         <th>적격판정</th>
-                        <!-- 필요에 따라 추가적인 컬럼들을 표시할 수 있습니다. -->
+                        <th>자세히 보기</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,10 @@
                             <td>${counseling.animalId}</td>
                             <td>${counseling.counselingDate}</td>
                             <td>${counseling.counselingJudgment}</td>
-                            <!-- 필요에 따라 추가적인 정보를 표시할 수 있습니다. -->
+                            <td>
+                                <!-- "자세히 보기" 링크 추가 -->
+                                <a href="/counseling/counselingDetail?counselingId=${counseling.counselingId}">자세히 보기</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -59,11 +62,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
 
 <!-- Footer -->
 <footer id="footer">

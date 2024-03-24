@@ -10,7 +10,6 @@ public class FreeBoardVO {
 	private String fboardTitle;		//자유글 제목
 	private String fboardContent;		//자유글 내용
 	private Date fboardDate;			//자유글 작성일
-	private int fboardLike;			//자유글 좋아요수
 	private int fboardCnt;			//자유글 조회수
 	
 	public String userId			="";	//자유글 작성자 회원ID 	
