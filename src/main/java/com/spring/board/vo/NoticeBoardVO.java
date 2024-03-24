@@ -20,6 +20,5 @@ public class NoticeBoardVO {
 	private Date nboardDate;			//공지글 작성일
 	private int nboardCnt;			//공지글 조회수
 	public String adminId;			//관리자ID
-	
 
 }

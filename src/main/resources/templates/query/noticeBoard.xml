@@ -9,22 +9,37 @@
 		<result column="nboard_date" property="nboardDate"/>
 		<result column="admin_id" property="adminId"/>
 	</resultMap>
-	
-	<!-- 공지게시판 목록 -->
+	<!-- *********************유저페이지********************* -->
+	<!-- 공지게시판 목록 (유저페이지)-->
 	<select id="noticeBoardList" parameterType="noticeBoard" resultMap="noticeBoardMap">
 		SELECT 	nboard_id, nboard_title, admin_id, nboard_cnt, nboard_date
 		FROM 	noticeBoard
 		ORDER BY nboard_id DESC
 	</select>
 	
-	<!--  공지게시판 글 상세조회 -->
+		<!--  공지게시판 글 상세조회(유저페이지) -->
 	<select id="noticeBoardDetail" parameterType="noticeBoard" resultMap="noticeBoardMap">
 		select 	n.nboard_id, n.nboard_title, n.nboard_content, n.nboard_cnt, n.nboard_date, n.admin_id
-		from 	noticeboard n
+		from 	noticeBoard n
 		where 	n.nboard_id = #{nboardId}
 	</select>
 	
-	<!-- 게시판 등록 -->
+	<!-- *********************관리자페이지********************* -->
+	<!-- 공지게시판 목록 (관리자 페이지)-->
+	<select id="adminNoticeBoardList" parameterType="noticeBoard" resultMap="noticeBoardMap">
+		SELECT 	nboard_id, nboard_title, admin_id, nboard_cnt, nboard_date
+		FROM 	noticeBoard
+		ORDER BY nboard_id DESC
+	</select>
+	
+	<!--  공지게시판 글 상세조회(관리자 페이지) -->
+	<select id="adminNoticeBoardDetail" parameterType="noticeBoard" resultMap="noticeBoardMap">
+		select 	nboard_id, nboard_title, nboard_content, nboard_cnt, nboard_date
+		from 	noticeBoard 
+		where 	nboard_id = #{nboardId}
+	</select>
+	
+	<!-- 게시판 등록 (관리자 페이지) -->
 	<insert id="insertNoticeBoard" parameterType="noticeBoard">
 		<selectKey keyProperty="nboardId" order="BEFORE" resultType="int">
 			SELECT noticeBoard_seq.nextval from DUAL
