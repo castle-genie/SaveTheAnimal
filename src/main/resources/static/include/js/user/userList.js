@@ -70,12 +70,18 @@ $(function(){
 	});
 
 	
-	/* 페이징 처리 이벤트 : (24/03/18) actionProcess(); 대체*/
+	$(".page-item a").on("click", function(e){
+		e.preventDefault();		
+		//$("#searchForm").find("input[name='pageNum']").val($(this).attr("href")); // 현재 페이지 가져오기
+		handlePaginationClick($(this).attr("href")); // 
+	});
+	/* 페이징 처리 이벤트 : (24/03/18) actionProcess(); 대체
 	$(".page-item a").on("click", function(e){
 		e.preventDefault();
 		$("#searchForm").find("input[name='pageNum']").val($(this).attr("href"));
 		actionProcess("#searchForm", "get", "/user/userList");
-	}); 
+	}); */
+
 	
 	/*
 	$(".page-item a").on("click", function(e){
@@ -158,7 +164,6 @@ const locationProcess = function(url) {
 }
 
 
-
 // 검색 상태를 URL 매개 변수에 저장하는 함수
 function updateSearchState() {
     let selectedOption = $("#u_search").val();
@@ -178,3 +183,28 @@ function updateSearchState() {
     // 현재 페이지 URL을 변경하여 검색 상태를 유지
     window.history.replaceState(null, null, url);
 }
+
+function handlePaginationClick(pageNum) {
+    // 현재 URL을 가져옴
+    let currentUrl = new URL(window.location.href);
+
+    // 쿼리 파라미터 값 가져오기
+    //let amount = currentUrl.searchParams.get("amount");
+    let search = currentUrl.searchParams.get("search");
+    let keyword = currentUrl.searchParams.get("keyword");
+    let startDate = currentUrl.searchParams.get("startDate");
+    let endDate = currentUrl.searchParams.get("endDate");
+
+    // 가져온 쿼리 파라미터 값들로 새로운 URL 생성
+    let newUrl = "/user/userList?" + 
+        "pageNum=" + pageNum +
+        "&amount=10" +
+        "&search=" + search +
+        "&keyword=" + keyword +
+        "&startDate=" + startDate +
+        "&endDate=" + endDate;
+
+    // 새로운 URL로 페이지 이동
+    window.location.href = newUrl;
+}
+
