@@ -82,4 +82,10 @@ public class VolunteerServiceImpl implements VolunteerService {
 		volunteerDelete = volunteerDAO.volunteerDelete(volunteerVO);
 		return volunteerDelete;
 	}
+
+	@Override
+	public List<VolunteerVO> mainVol(VolunteerVO vvo) {
+		List<VolunteerVO> mainVol = volunteerDAO.mainVol(vvo);
+		return mainVol;
+	}
 }

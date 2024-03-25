@@ -17,15 +17,15 @@ public class VolunteerDAOTests {
 	private VolunteerDAO volunteerDAO;
 	
 	/*  */
-	@Test
-	public void testVolunteerList() {
-		VolunteerVO volunteerVO = new VolunteerVO();
-		List<VolunteerVO> volunteerList = volunteerDAO.volunteerList(volunteerVO);
-		for(VolunteerVO list : volunteerList) {
-			log.info(list.toString());
-		}
-		log.info("전체 행 갯수 : " + volunteerDAO.volunteerList(volunteerVO));
-	} 
+//	@Test
+//	public void testVolunteerList() {
+//		VolunteerVO volunteerVO = new VolunteerVO();
+//		List<VolunteerVO> volunteerList = volunteerDAO.volunteerList(volunteerVO);
+//		for(VolunteerVO list : volunteerList) {
+//			log.info(list.toString());
+//		}
+//		log.info("전체 행 갯수 : " + volunteerDAO.volunteerList(volunteerVO));
+//	} 
 	
 	/* 
 	@Test
@@ -72,4 +72,13 @@ public class VolunteerDAOTests {
 		volunteerVO.setVolunteerId(7);
 		log.info("적용된 행 갯수 : " + volunteerDAO.volunteerDelete(volunteerVO));
 	}*/
+	
+//	@Test
+//	public void testMainVol(){
+//		VolunteerVO volunteerVO = new VolunteerVO();
+//		List<VolunteerVO> volunteerList = volunteerDAO.mainVol(volunteerVO);
+//		System.out.println(volunteerList);
+//		
+//	};
+
 }
