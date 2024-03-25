@@ -15,7 +15,7 @@
     <div class="inner">
         <header class="align-center">
             <p>Save The Animal</p>
-            <h2>입양 상담 디테일</h2>
+            <h2>입양 상담 신청서</h2>
         </header>
     </div>
 </section>
