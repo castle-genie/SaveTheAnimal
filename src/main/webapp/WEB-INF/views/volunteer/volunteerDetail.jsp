@@ -216,8 +216,13 @@
 					      			</tr>
 					      			<tr>
 						      			<th>주 소</th>
-						      			<td id="showMap">${ detail.volunteerLocation }</td>
+						      			<td id="showMap">${ detail.volunteerLocation }<span>[지도보기]</span></td>
 					      			</tr>
+					      			<tr>
+					      				<td colspan="2">
+					      					<div id="map"></div>
+				      					</td>
+		      						</tr>
 						      	</tbody>
 						      </table>
 						    </div>
@@ -231,6 +236,7 @@
 						  <div class="details" style="text-align: left;">
 						    <h2>세부사항</h2>
 						    <p>${ detail.volunteerDetail }</p>
+						    <button type="button" id="deleteBtn">삭제</button>
 						  </div>
 						</div>
 					</header>

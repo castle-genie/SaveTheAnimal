@@ -206,8 +206,13 @@
 				      			</tr>
 				      			<tr>
 					      			<th>주 소</th>
-					      			<td id="showMap">${ detail.volunteerLocation }</td>
+					      			<td id="showMap">${ detail.volunteerLocation }<span>[지도보기]</span></td>
 				      			</tr>
+				      			<tr>
+				      				<td colspan="2" id="mapLine">
+				      					<div id="map"></div>
+			      					</td>
+	      						</tr>
 					      	</tbody>
 					      </table>
 					    </div>
