@@ -1,5 +1,6 @@
 package com.spring.counseling.controller;
 
+import com.spring.admin.login.vo.AdminLoginVO;
 import com.spring.counseling.service.CounselingService;
 import com.spring.counseling.vo.CounselingVO;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ import java.util.List;
 public class CounselingController {
 
     private static final String REDIRECT_ADMIN_COUNSELING_LIST = "redirect:/counseling/adminCounselingList";
-    private static final String COUNSELING_WRITE_FORM = "/admin/counseling/counselingWriteForm";
+
     private static final String ADMIN_COUNSELING_DETAIL = "/admin/counseling/adminCounselingDetail";
     private static final String COUNSELING_UPDATE_FORM = "/admin/counseling/counselingUpdateForm";
     private static final String COUNSELING_DETAIL = "/counseling/counselingDetail";
@@ -45,15 +46,22 @@ public class CounselingController {
 
     /* admin */
 
-    @ResponseBody
+
     @GetMapping("/adminCounselingList")
-    public List<CounselingVO> adminCounselingList(CounselingVO counselingVO) {
-        return service.counselingList(counselingVO);
+    public String adminCounselingList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, CounselingVO counselingVO, Model model) {
+        // log.info("adminCounselingList 호출");
+        if(adminLoginVO == null) {
+            return "/admin/adminLogin";
+        } else {
+            List<CounselingVO> counselingList = service.counselingList(counselingVO);
+            model.addAttribute("counselingList", counselingList);
+            return "admin/counseling/adminCounselingList";
+        }
     }
 
     @GetMapping("/counselingWriteForm")
     public String counselingWriteForm() {
-        return COUNSELING_WRITE_FORM;
+        return "/counseling/counselingWriteForm";
     }
 
     @PostMapping("/counselingInsert")
@@ -71,12 +79,28 @@ public class CounselingController {
         return "redirect:/counseling/counselingWriteForm";
     }
 
+
     @GetMapping("/adminCounselingDetail")
-    public String adminCounselingDetail(@RequestParam("counselingId") CounselingVO counselingId, Model model) {
-        CounselingVO adminCounselingDetail = service.counselingDetail(counselingId);
-        model.addAttribute("detail", adminCounselingDetail);
-        return ADMIN_COUNSELING_DETAIL;
+    public String adminCounselingDetail(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO,
+                                        @RequestParam(name = "counselingId") int counselingId,
+                                        Model model) {
+        // log.info("adminCounselingList 호출");
+        if(adminLoginVO == null) {
+            return "/admin/adminLogin";
+        } else {
+            CounselingVO counselingVO = new CounselingVO();
+            counselingVO.setCounselingId(counselingId);
+            CounselingVO counselingDetail = service.counselingDetail(counselingVO);
+            model.addAttribute("CounselingDetail", counselingDetail);
+            return "admin/counseling/adminCounselingDetail";
+        }
     }
+
+
+
+
+
+
 
     @GetMapping("/counselingUpdateForm")
     public String counselingUpdateForm(@RequestParam("counselingId") CounselingVO counselingId, Model model) {
