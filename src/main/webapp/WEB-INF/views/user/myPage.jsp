@@ -122,7 +122,7 @@
 							 		<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
 							        <div class="d-flex justify-content-between">
 							          <strong class="text-gray-dark">입양 · 임시보호 신청내역</strong>
-							          <a href="#">확인하기</a>
+							          <a href="/counseling/counselingList?userId=${userLogin.userId}">확인하기</a>
 							        </div>
 							        <span class="d-block">입양 및 임시보호 신청 내역 및 결과 확인</span>
 							      </div>

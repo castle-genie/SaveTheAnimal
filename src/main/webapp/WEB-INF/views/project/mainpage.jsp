@@ -46,46 +46,47 @@
 		<!-- Banner -->
 		<section class="banner full">
 			<article>
-				<img src="/resources/images/slide01.jpg" alt="" width="1440" height="961">
+				<img src="/resources/images/slide06.jpg" alt="" width="1440" height="960">
 				<div class="inner">
 					<header>
-						<p>A free responsive web site template by <a href="https://templated.co">TEMPLATED</a></p>
-						<h2>Hielo</h2>
+						<p>For Abandoned Animal</p>
+						<h2>Save The Animal</h2>
 					</header>
 				</div>
 			</article>
 			<article>
-				<img src="/resources/images/slide02.jpg" alt="" width="1440" height="961">
+				<img src="/resources/images/slide07.jpg" alt="" width="1440" height="960">
 				<div class="inner">
-					<header><p>Lorem ipsum dolor sit amet nullam feugiat</p>
-						<h2>Magna</h2>
+					<header>
+						<p>유기동물을 도와주세요</p>
+						<h2>유기동물</h2>
 					</header>
 				</div>
 			</article>
 			<article>
-				<img src="/resources/images/slide03.jpg" alt="" width="1440" height="962">
+				<img src="/resources/images/slide08.jpg" alt="" width="1440" height="960">
 				<div class="inner">
 					<header>
-						<p>Sed cursus aliuam veroeros lorem ipsum nullam</p>
-						<h2>Tempus</h2>
+						<p>유기동물 자원봉사에 참여하세요</p>
+						<h2>자원봉사</h2>
 					</header>
 				</div>
 			</article>
 			<article>
-				<img src="/resources/images/slide04.jpg" alt="" width="1440" height="961">
+				<img src="/resources/images/slide09.jpg" alt="" width="1440" height="960">
 				<div class="inner">
 					<header>
-						<p>Adipiscing lorem ipsum feugiat sed phasellus consequat</p>
-						<h2>Etiam</h2>
+						<p>유기동물 입양으로 새로운 가족을 만나보세요</p>
+						<h2>입양</h2>
 					</header>
 				</div>
 			</article>
 			<article>
-				<img src="/resources/images/slide05.jpg" alt="" width="1440" height="962">
+				<img src="/resources/images/slide10.jpg" alt="" width="1440" height="960">
 				<div class="inner">
 					<header>
-						<p>Ipsum dolor sed magna veroeros lorem ipsum</p>
-						<h2>Adipiscing</h2>
+						<p>유기동물 보호를 위한 다양한 아이디어를 추천받습니다</p>
+						<h2>아이디어</h2>
 					</header>
 				</div>
 			</article>
@@ -94,34 +95,60 @@
 		<section id="one" class="wrapper style2">
 			<div class="inner">
 				<div class="grid-style">
+					<c:choose>
+						<c:when test="${not empty mainVol}">
+							<c:forEach var="mainVol" items="${mainVol}" varStatus="status">
+								<div>
+									<div class="box">
+										<div class="image fit">
+											<img src="/resources/images/pic02.jpg" alt="" width="600" height="300">
+										</div>
+										<div class="content">
+											<header class="align-center">
+												<p>${mainVol.volunteerTime}</p>
+												<h2>${mainVol.volunteerTitle}</h2>
+											</header>
+											<p>일 자 : ${mainVol.volunteerTime}</p>
+											<p>인 원 : ${mainVol.volunteerLimit}</p>
+											<p>비 용 : ${mainVol.volunteerCost}</p>
+											<p>위 치 : ${mainVol.volunteerLocation}</p>
+											<footer class="align-center"><a href="/volunteer/volunteerDetail?volunteerId=${mainVol.volunteerId}" class="button alt">Learn More</a></footer>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<div>
+								<div class="box">
+									<div class="image fit"><img src="/resources/images/pic02.jpg" alt="" width="600" height="300"></div>
+									<div class="content">
+										<header class="align-center">
+											<p>maecenas sapien feugiat ex purus</p>
+											<h2>Lorem ipsum dolor</h2>
+										</header>
+										<p> Cras aliquet urna ut sapien tincidunt, quis malesuada elit facilisis. Vestibulum sit amet tortor velit. Nam elementum nibh a libero pharetra elementum. Maecenas feugiat ex purus, quis volutpat lacus placerat malesuada.</p>
+										<footer class="align-center"><a href="#" class="button alt">Learn More</a></footer>
+									</div>
+								</div>
+							</div>
+							
+							<div>
+								<div class="box">
+									<div class="image fit"><img src="/resources/images/pic03.jpg" alt="" width="600" height="300"></div>
+									<div class="content">
+										<header class="align-center">
+											<p>mattis elementum sapien pretium tellus</p>
+											<h2>Vestibulum sit amet</h2>
+										</header>
+										<p> Cras aliquet urna ut sapien tincidunt, quis malesuada elit facilisis. Vestibulum sit amet tortor velit. Nam elementum nibh a libero pharetra elementum. Maecenas feugiat ex purus, quis volutpat lacus placerat malesuada.</p>
+										<footer class="align-center"><a href="#" class="button alt">Learn More</a></footer>
+									</div>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>				
 				
-					<div>
-						<div class="box">
-							<div class="image fit"><img src="/resources/images/pic02.jpg" alt="" width="600" height="300"></div>
-							<div class="content">
-								<header class="align-center">
-									<p>maecenas sapien feugiat ex purus</p>
-									<h2>Lorem ipsum dolor</h2>
-								</header>
-								<p> Cras aliquet urna ut sapien tincidunt, quis malesuada elit facilisis. Vestibulum sit amet tortor velit. Nam elementum nibh a libero pharetra elementum. Maecenas feugiat ex purus, quis volutpat lacus placerat malesuada.</p>
-								<footer class="align-center"><a href="#" class="button alt">Learn More</a></footer>
-							</div>
-						</div>
-					</div>
-					
-					<div>
-						<div class="box">
-							<div class="image fit"><img src="/resources/images/pic03.jpg" alt="" width="600" height="300"></div>
-							<div class="content">
-								<header class="align-center">
-									<p>mattis elementum sapien pretium tellus</p>
-									<h2>Vestibulum sit amet</h2>
-								</header>
-								<p> Cras aliquet urna ut sapien tincidunt, quis malesuada elit facilisis. Vestibulum sit amet tortor velit. Nam elementum nibh a libero pharetra elementum. Maecenas feugiat ex purus, quis volutpat lacus placerat malesuada.</p>
-								<footer class="align-center"><a href="#" class="button alt">Learn More</a></footer>
-							</div>
-						</div>
-					</div>
 
 				</div>
 			</div>
@@ -130,8 +157,8 @@
 		<section id="two" class="wrapper style3">
 			<div class="inner">
 				<header class="align-center">
-					<p>Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
-					<h2>Morbi maximus justo</h2>
+					<p>Abandoned animal volunteering</p>
+					<h2>STA : Save The Aniaml</h2>
 				</header>
 			</div>
 		</section>
@@ -139,8 +166,8 @@
 		<section id="three" class="wrapper style2">
 			<div class="inner">
 				<header class="align-center">
-					<p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
-					<h2>Morbi maximus justo</h2>
+					<p class="special">an abandoned animal list</p>
+					<h2>STA:SaveTheAniaml</h2>
 				</header>
 				<div class="gallery">
 					<div>
