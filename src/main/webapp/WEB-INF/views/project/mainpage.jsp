@@ -29,46 +29,47 @@
 		<!-- Banner -->
 		<section class="banner full">
 			<article>
-				<img src="/resources/images/slide01.jpg" alt="" width="1440" height="961">
+				<img src="/resources/images/slide06.jpg" alt="" width="1440" height="960">
 				<div class="inner">
 					<header>
-						<p>A free responsive web site template by <a href="https://templated.co">TEMPLATED</a></p>
-						<h2>Hielo</h2>
+						<p>For Abandoned Animal</p>
+						<h2>SaveTheAnimal</h2>
 					</header>
 				</div>
 			</article>
 			<article>
-				<img src="/resources/images/slide02.jpg" alt="" width="1440" height="961">
+				<img src="/resources/images/slide07.jpg" alt="" width="1440" height="960">
 				<div class="inner">
-					<header><p>Lorem ipsum dolor sit amet nullam feugiat</p>
-						<h2>Magna</h2>
+					<header>
+						<p>유기동물을 도와주세요</p>
+						<h2>유기동물</h2>
 					</header>
 				</div>
 			</article>
 			<article>
-				<img src="/resources/images/slide03.jpg" alt="" width="1440" height="962">
+				<img src="/resources/images/slide08.jpg" alt="" width="1440" height="960">
 				<div class="inner">
 					<header>
-						<p>Sed cursus aliuam veroeros lorem ipsum nullam</p>
-						<h2>Tempus</h2>
+						<p>유기동물 자원봉사에 참여하세요</p>
+						<h2>자원봉사</h2>
 					</header>
 				</div>
 			</article>
 			<article>
-				<img src="/resources/images/slide04.jpg" alt="" width="1440" height="961">
+				<img src="/resources/images/slide09.jpg" alt="" width="1440" height="960">
 				<div class="inner">
 					<header>
-						<p>Adipiscing lorem ipsum feugiat sed phasellus consequat</p>
-						<h2>Etiam</h2>
+						<p>유기동물 입양으로 새로운 가족을 만나보세요</p>
+						<h2>입양</h2>
 					</header>
 				</div>
 			</article>
 			<article>
-				<img src="/resources/images/slide05.jpg" alt="" width="1440" height="962">
+				<img src="/resources/images/slide10.jpg" alt="" width="1440" height="960">
 				<div class="inner">
 					<header>
-						<p>Ipsum dolor sed magna veroeros lorem ipsum</p>
-						<h2>Adipiscing</h2>
+						<p>유기동물 보호를 위한 다양한 아이디어를 추천받습니다</p>
+						<h2>아이디어</h2>
 					</header>
 				</div>
 			</article>
