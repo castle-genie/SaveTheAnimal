@@ -2,9 +2,13 @@ package com.spring.board.vo;
 
 import java.sql.Date;
 
+import com.spring.common.vo.CommonVO;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 @Data
-public class VolunteerFeedbackBoardVO {
+@EqualsAndHashCode(callSuper = false)
+public class VolunteerFeedbackBoardVO extends CommonVO{
 	private int vfboardId;		//봉사후기글ID
 	private String vfboardTitle;		//봉사후기글 제목
 	private String vfboardContent;		//봉사후기글 내용

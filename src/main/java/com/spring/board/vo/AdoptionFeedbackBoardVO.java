@@ -2,10 +2,14 @@ package com.spring.board.vo;
 
 import java.sql.Date;
 
+import com.spring.common.vo.CommonVO;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class AdoptionFeedbackBoardVO {
+@EqualsAndHashCode(callSuper = false)
+public class AdoptionFeedbackBoardVO  extends CommonVO{
 	
 	private int afboardId;		//입양후기글ID
 	private String afboardTitle;		//입양후기글 제목

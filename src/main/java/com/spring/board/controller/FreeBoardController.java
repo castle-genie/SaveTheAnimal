@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.board.service.FreeBoardService;
 import com.spring.board.vo.FreeBoardVO;
+import com.spring.common.vo.PageDTO;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -22,16 +25,19 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class FreeBoardController {
 	
-	@Autowired
+	@Setter(onMethod_=@Autowired)
 	private FreeBoardService freeBoardService;
 	
 	
 
 	@GetMapping(value = "freeBoardList")
-	public String freeBoardList(FreeBoardVO freeBoardVO, Model model) {
+	public String freeBoardList(@ModelAttribute FreeBoardVO freeBoardVO, Model model) {
 		log.info("게시글불러오기");
 		List<FreeBoardVO> freeBoardList = freeBoardService.freeBoardList(freeBoardVO);
 		model.addAttribute("freeBoardList", freeBoardList);
+		
+		int total = freeBoardService.freeBoardListCnt(freeBoardVO);
+		model.addAttribute("pageMaker", new PageDTO(freeBoardVO, total)); 
 		log.info("게시글불러오기완료");
 		
 		return "board/freeBoardList";
@@ -88,5 +94,7 @@ public class FreeBoardController {
 		log.info("삭제완료");
 		return "redirect:/board/freeBoardList";
 	}
+	
+	
 	
 }

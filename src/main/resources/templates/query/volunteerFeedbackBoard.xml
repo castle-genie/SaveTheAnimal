@@ -20,9 +20,22 @@
 	
 	<!-- 봉사후기게시판 목록 -->
 	<select id="volunteerFeedbackBoardList" parameterType="volunteerFeedbackBoard" resultMap="volunteerFeedbackBoardMap">
+		<![CDATA[
 		SELECT 	vfboard_id, vfboard_title, user_id, vfboard_cnt, vfboard_date
-		FROM 	volunteerFeedbackBoard
+		FROM 	(
+				SELECT /*+ INDEX_DESC(volunteerFeedbackBoard pk_volunteerFeedbackBoard)*/
+					rownum as rnum, vfboard_id, vfboard_title, user_id, vfboard_cnt, vfboard_date
+				FROM volunteerFeedbackBoard
+				WHERE	rownum <= #{pageNum} * #{amount}
+				) volunteerFeedbackBoardList
+		WHERE	rnum > (#{pageNum} -1) * #{amount}
 		ORDER BY vfboard_id DESC
+		]]>
+	</select>
+	
+	<!-- 자유게시판 게시글 갯수 카운트 -->
+	<select id="volunteerFeedbackBoardListCnt" parameterType="volunteerFeedbackBoard" resultType="int">
+		select count(*) from volunteerFeedbackBoard
 	</select>
 	
 	<!--  봉사후기게시판 글 상세조회 -->

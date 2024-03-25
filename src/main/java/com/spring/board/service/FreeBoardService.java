@@ -28,9 +28,9 @@ public interface FreeBoardService {
 	//게시글 삭제
 	//public void delete(int fboardId) throws Exception;
 	public int deleteFreeBoard(FreeBoardVO freeBoardVO);
+
+	//게시글 갯수 카운트
+	public int freeBoardListCnt(FreeBoardVO freeBoardVO);
 	
-	
-	
-	//public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO);
 
 }

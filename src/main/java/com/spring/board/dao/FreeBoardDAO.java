@@ -37,6 +37,9 @@ public interface FreeBoardDAO {
 	//public void delete(int fboardId) throws Exception;
 	public int deleteFreeBoard(FreeBoardVO freeBoardVO);
 	
+	//게시글 갯수 카운트
+	public int freeBoardListCnt(FreeBoardVO freeBoardVO);
+	
 	
 	
 

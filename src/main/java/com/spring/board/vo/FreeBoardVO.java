@@ -1,16 +1,21 @@
 package com.spring.board.vo;
 
 import java.sql.Date;
+
+import com.spring.common.vo.CommonVO;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class FreeBoardVO {
+@EqualsAndHashCode(callSuper = false)
+public class FreeBoardVO extends CommonVO {
 	
-	private int fboardId;		//자유글ID
-	private String fboardTitle;		//자유글 제목
-	private String fboardContent;		//자유글 내용
+	private int fboardId			=0;		//자유글ID
+	private String fboardTitle		="";		//자유글 제목
+	private String fboardContent	="";		//자유글 내용
 	private Date fboardDate;			//자유글 작성일
-	private int fboardCnt;			//자유글 조회수
+	private int fboardCnt			=0;			//자유글 조회수
 	
 	public String userId			="";	//자유글 작성자 회원ID 	
 	

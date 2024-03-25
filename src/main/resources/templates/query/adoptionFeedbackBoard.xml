@@ -20,9 +20,22 @@
 	
 	<!-- 입양후기게시판 목록 -->
 	<select id="adoptionFeedbackBoardList" parameterType="adoptionFeedbackBoard" resultMap="adoptionFeedbackBoardMap">
+		<![CDATA[
 		SELECT 	afboard_id, afboard_title, user_id, afboard_cnt, afboard_date
-		FROM 	adoptionFeedbackBoard
+		FROM 	(
+				SELECT /*+ INDEX_DESC(adoptionFeedbackBoard pk_adoptionFeedbackBoard)*/		
+					rownum as rnum, afboard_id, afboard_title, user_id, afboard_cnt, afboard_date
+				FROM adoptionFeedbackBoard
+				WHERE	rownum <= #{pageNum} * #{amount}
+				)	adoptionFeedbackBoardList
+		WHERE	rnum > (#{pageNum} -1) * #{amount}
 		ORDER BY afboard_id DESC
+		]]>
+	</select>
+	
+	<!-- 입양후기게시판 게시글 갯수 카운트 -->
+	<select id="adoptionFeedbackBoardListCnt" parameterType="adoptionFeedbackBoard" resultType="int">
+		select count(*) from adoptionFeedbackBoard
 	</select>
 	
 	<!--  입양후기게시판 글 상세조회 -->

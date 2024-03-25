@@ -26,6 +26,9 @@ public interface AdoptionFeedbackBoardDAO {
 	//게시글 삭제
 	public int deleteAdoptionFeedbackBoard(AdoptionFeedbackBoardVO afbvo);
 	
+	//게시글 갯수 카운트
+	public int adoptionFeedbackBoardListCnt(AdoptionFeedbackBoardVO afbvo);
+	
 	
 	
 
