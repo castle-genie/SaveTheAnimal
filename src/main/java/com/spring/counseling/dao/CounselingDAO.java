@@ -1,10 +1,9 @@
 package com.spring.counseling.dao;
 
-import java.util.List;
-
+import com.spring.counseling.vo.CounselingVO;
 import org.apache.ibatis.annotations.Mapper;
 
-import com.spring.counseling.vo.CounselingVO;
+import java.util.List;
 
 @Mapper
 public interface CounselingDAO {
@@ -20,5 +19,11 @@ public interface CounselingDAO {
     public int counselingUpdate(CounselingVO counselingVO);
 
     public int counselingDelete(CounselingVO counselingVO);
+
+    CounselingVO counselingDetail(int counselingVO);
+
+    int counselingDelete(int counselingVO);
+
+    CounselingVO getCounselingDetail(int counselingId);
 }
 
