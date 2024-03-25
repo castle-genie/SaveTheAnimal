@@ -34,9 +34,10 @@
 
     <!-- 상담 신청 입력 -->
     <insert id="counselingInsert" parameterType="counseling">
-        insert into counseling(counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
+        insert into counseling(counseling_id, counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
                                counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt)
         VALUES (
+        		   counseling_seq.nextval,
                    #{counseling_schedule},
                    #{user_id},
                    #{adoption_id},

@@ -116,6 +116,10 @@ $(function(){
 	$("#adoptionListBtn").click(function(){
 		location.href="/adoption/adoptionList";
 	});
+	
+	$("#couselingBtn").on("click", function() {
+		actionProcess("GET", "/counseling/counselingWriteForm");
+	})
 })
 
 function actionProcess(method, goUrl) {
