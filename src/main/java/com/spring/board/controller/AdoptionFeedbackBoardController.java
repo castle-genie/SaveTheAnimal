@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.spring.board.service.AdoptionFeedbackBoardService;
 import com.spring.board.vo.AdoptionFeedbackBoardVO;
+import com.spring.user.vo.UserVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,7 +49,8 @@ public class AdoptionFeedbackBoardController {
 	
 	//게시글 등록하는 페이지 접속
 	@GetMapping(value = "adoptionFeedbackBoardCreate")
-	public String getCreate() throws Exception{
+	public String getCreate(@SessionAttribute("userLogin") UserVO userLogin, Model model) throws Exception{
+		model.addAttribute("userLogin", userLogin);
 		return "board/adoptionFeedbackBoardCreate";
 	}
 	

@@ -71,6 +71,7 @@ public class NoticeBoardController {
 	// 게시글 등록하는 페이지 접속(관리자 페이지)
 	@GetMapping("/admin/noticeBoardCreate")
 	public String getCreate() throws Exception {
+		log.info("관리자페이지 게시글등록테스트");
 		return "admin/board/noticeBoardCreate";
 	}
 
@@ -86,6 +87,7 @@ public class NoticeBoardController {
 	// 게시글 수정(관리자 페이지)
 	@GetMapping("/admin/board/noticeBoardModify")
 	public String modify(NoticeBoardVO nvo, Model model) {
+		log.info("관리자페이지 게시글수정테스트");
 		model.addAttribute("noticeBoard", noticeBoardService.noticeBoardDetail(nvo));
 		return "admin/board/noticeBoardModify";
 	}
@@ -95,7 +97,7 @@ public class NoticeBoardController {
 		log.info("수정");
 		noticeBoardService.updateNoticeBoard(nvo);
 		log.info("수정2");
-		return "redirect:/admin/noticeBoardDetail?fboardId=" + nvo.getNboardId();
+		return "redirect:/admin/noticeBoardDetail?nboardId=" + nvo.getNboardId();
 	}
 
 	// 게시글 삭제

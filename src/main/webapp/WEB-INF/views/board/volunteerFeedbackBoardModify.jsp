@@ -43,7 +43,7 @@
 									rows="6">${volunteerFeedbackBoard.vfboardContent}</textarea>
 							</div>
 							<div class="12u$">
-								<input type="text" name="userId" id="userId" value="${sessionScope.userId}" readonly>
+								<input type="hidden" name="userId" id="userId" value="${userLogin.userId}" readonly>
 							</div>
 							<div class="12u$">
 								<ul class="actions">

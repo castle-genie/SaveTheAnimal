@@ -32,21 +32,18 @@
 										id="nboardContent" placeholder="내용을 입력해주세요" rows="6">${noticeBoard.nboardContent }</textarea>
 								</div>
 								<div class="12u$">
-									<input type="hidden" name="adminId" id="adminId" value="${noticeBoard.adminId }">
-								</div>
-								<div class="12u$">
-									<ul class="actions">
-										<li><input type="submit" value="등록"></li>
-										<li><a href="/board/noticeBoardList" class="button">취소</a>
-										</li>
-									</ul>
+									<input type="hidden" name="adminId" id="adminId"
+										value="${noticeBoard.adminId }">
 								</div>
 							</div>
+							<button type="submit" class="btn btn-success btn-sm">등록</button>
+							<button type="button" class="btn btn-success btn-sm"
+								onClick="location.href='/admin/noticeBoardList'">취소</button>
 						</form>
 					</div>
 				</div>
 			</div>
-	</section>
+		</section>
 	</div>
 </main>
 <script src="/resources/include/assets/dist/js/bootstrap.bundle.min.js"></script>
