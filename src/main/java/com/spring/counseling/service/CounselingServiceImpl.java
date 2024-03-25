@@ -1,15 +1,20 @@
+// CounselingServiceImpl.java
+
 package com.spring.counseling.service;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.spring.counseling.dao.CounselingDAO;
 import com.spring.counseling.vo.CounselingVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CounselingServiceImpl implements CounselingService {
+    @Override
+    public int counselingDelete(CounselingVO counselingVO) {
+        return 0;
+    }
 
     @Autowired
     private CounselingDAO counselingDAO;
@@ -20,8 +25,8 @@ public class CounselingServiceImpl implements CounselingService {
     }
 
     @Override
-    public CounselingVO counselingDetail(CounselingVO counselingVO) {
-        return counselingDAO.counselingDetail(counselingVO);
+    public CounselingVO counselingDetail(int counselingId) {
+        return counselingDAO.counselingDetail(counselingId);
     }
 
     @Override
@@ -31,16 +36,31 @@ public class CounselingServiceImpl implements CounselingService {
 
     @Override
     public CounselingVO counselingUpdateForm(CounselingVO counselingVO) {
-        return counselingDAO.counselingDetail(counselingVO);
+        return counselingDAO.counselingDetail(counselingVO.getCounselingId());
     }
 
     @Override
-    public int counselingUpdate(CounselingVO counselingVO) throws Exception {
+    public int counselingUpdate(CounselingVO counselingVO) {
         return counselingDAO.counselingUpdate(counselingVO);
     }
 
     @Override
-    public int counselingDelete(CounselingVO counselingVO) throws Exception {
-        return counselingDAO.counselingDelete(counselingVO);
+    public int counselingDelete(int counselingId) {
+        return counselingDAO.counselingDelete(counselingId);
+    }
+
+    @Override
+    public int admincounselingDelete(int counselingId) {
+        return 0;
+    }
+
+    @Override
+    public CounselingVO getCounselingDetail(int counselingId) {
+        return counselingDAO.counselingDetail(counselingId);
+    }
+
+    @Override
+    public int counselingDeleteById(int counselingId) {
+        return counselingDAO.counselingDelete(counselingId);
     }
 }

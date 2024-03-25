@@ -27,7 +27,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${counselingList}" var="counseling">
+                <c:forEach items="${admincounselingList}" var="counseling">
                     <tr>
                         <td>${counseling.counselingId}</td>
                         <td>${counseling.counselingSchedule}</td>
@@ -40,6 +40,7 @@
                         <td>${counseling.counselingAdopt}</td>
                     </tr>
                 </c:forEach>
+
                 </tbody>
             </table>
         </div>
@@ -48,7 +49,7 @@
 </div>
 </div>
 <script src="/resources/include/assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/resources/include/js/counseling/counselingList.js"></script>
+<script src="/resources/include/js/counseling/admincounselingList.js"></script>
 
 <script
         src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
