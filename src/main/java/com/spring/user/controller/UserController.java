@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -288,17 +289,19 @@ public class UserController {
 	
 	
 	@GetMapping("/userList")
-	public String userList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, UserVO uvo, Model model) {
+	public String userList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, @ModelAttribute UserVO uvo, Model model) {
 		log.info("userList 호출");		
+
 		if (adminLoginVO == null) {
 			return "/admin/adminLogin";
-		} else {
+		} else {			
 			List<UserVO> userList = userService.userList(uvo);
 			model.addAttribute("userList", userList);
 			
 			int total = userService.userListCnt(uvo);
 			
-			model.addAttribute("pageMaker", new PageDTO(uvo, total));				
+			model.addAttribute("pageMaker", new PageDTO(uvo, total));		
+					
 			return "admin/user/userList";
 		}
 	}

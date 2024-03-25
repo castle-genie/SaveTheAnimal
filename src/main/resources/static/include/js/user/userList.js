@@ -11,47 +11,28 @@ $(function(){
 		let end = getDateFormat(new Date());
 		$("#startDate").val(start);
 		$("#endDate").val(end);		
-	}	else {
+	} else {
 		$(".selectArea").hide();
 	}
 
 	
 	/* 검색 대상이 변경될 때마다 처리 이벤트 */	
-	// 모든 영역 숨기기
-	$("#userSearch .selectActArea, #userSearch .selectVolcntArea, #userSearch .dateArea").hide();
-
+	$(".selectArea, .dateArea").hide();
 	$("#u_search").on("change", function() {
-	    let selectedOption = $(this).val();
-	    console.log(selectedOption);
 	    // 선택된 옵션에 따라 해당하는 영역 보이기
-	    if (selectedOption === "userAct") {
-	        $("#userSearch .selectActArea").show();
-	        $("#userSearch .selectVolcntArea, #userSearch .dateArea").hide();
-	    } /*else if (selectedOption === "user_volcnt") {
-	        $("#userSearch .selectVolcntArea").show();
-	        $("#userSearch .selectActArea, #userSearch .dateArea").hide();
-	    }*/ else if (selectedOption === "userDate") {
-	        $("#userSearch .dateArea").show();
-	        $("#userSearch .selectActArea, #userSearch .selectVolcntArea").hide();
+	    if ($("#u_search").val() == "userAct") {
+	        $(".selectArea").show();
+	        $(".dateArea").hide();
+	    } else if ($("#u_search").val() == "userDate") {
+	        $("#keyword").val("");
+	        $(".dateArea").show();
+	        $(".selectArea").hide();
 	    } else {
-			$("#userSearch .selectActArea, #userSearch .selectVolcntArea, #userSearch .dateArea").hide();
-
-		}
+			$("#keyword").val("");
+			$(".selectArea, .dateArea").hide();
+		}		
 	});
 	
-	/*$("#user_act").on("change", function() {
-		console.log("변경 이벤트");
-		console.log($(this).val());		
-	});		
-	$("#user_volcnt").on("change", function() {
-		console.log("변경 이벤트");
-		console.log($(this).val());		
-	});
-	$(".dateArea").on("change", function() {
-		console.log("변경 이벤트");
-		console.log($("#startDate").val());	
-		console.log($("#endDate").val());		
-	});	*/
 	
 	/* 검색버튼 클릭시 처리 이벤트 */
 	$("#searchBtn").on("click", function(e){
@@ -59,21 +40,14 @@ $(function(){
 			console.log("분류");
 			return;
 		} else if($("#u_search").val()!="userDate") {
-			console.log("userDate 아님");
 			$("#startDate").val("");
-			$("#endDate").val("");
-			
+			$("#endDate").val("");	
+			if(!chkData("#keyword","상태값을")) return; 		
 		} else {				
 			if ($("#u_search").val()=="userAct") {
-				console.log("userAct2");
 				let keyword = $("#user_act").val();
 				console.log("user_act : "+keyword);
-			} /*else if ($("#u_search").val()=="user_volcnt") {
-				console.log("조건3");
-				let keyword = $("#user_volcnt").val();
-				console.log("user_volcnt : "+keyword);
-			}*/ else if ($("#u_search").val()=="userDate") {
-				console.log("조건4");
+			} else if ($("#u_search").val()=="userDate") {
 				if(!chkData("#startDate","시작날짜를")) return; 	
 				else if(!chkData("#endDate","종료날짜를")) return; 	
 				else if($("#startDate").val()>$("#endDate").val()) {
@@ -84,8 +58,8 @@ $(function(){
 				console.log("조건에 맞는게 없음");
 				return;
 			}
-		}
-		
+		} 				
+    	
 		$("#pageNum").val(1);// 페이지 초기화		
 		actionProcess("#searchForm", "get", "/user/userList");
 	});
@@ -96,12 +70,49 @@ $(function(){
 	});
 
 	
-	/* 페이징 처리 이벤트 : (24/03/18) actionProcess(); 대체 */
+	/* 페이징 처리 이벤트 : (24/03/18) actionProcess(); 대체*/
 	$(".page-item a").on("click", function(e){
 		e.preventDefault();
 		$("#searchForm").find("input[name='pageNum']").val($(this).attr("href"));
 		actionProcess("#searchForm", "get", "/user/userList");
+	}); 
+	
+	/*
+	$(".page-item a").on("click", function(e){
+		e.preventDefault();        
+    
+    // URL에서 페이지 번호를 가져옴
+    let pageNum = new URL($(this).attr("href"), window.location.href).searchParams.get("pageNum");
+
+    // 검색 폼의 페이지 번호 업데이트
+    $("#searchForm").find("input[name='pageNum']").val(pageNum);
+    
+    // 검색 폼의 모든 데이터를 가져와서 URL 파라미터 형식으로 전달
+    let formData = $("#searchForm").serialize();
+    
+    // 페이지 이동
+    window.location.href = "/user/userList?" + formData;
 	});
+	
+	// 현재 URL을 가져옴
+	let currentUrl = new URL(window.location.href);
+
+	// 쿼리 파라미터와 값 가져오기
+	let pageNum = currentUrl.searchParams.get("pageNum");
+	let amount = currentUrl.searchParams.get("amount");
+	let search = currentUrl.searchParams.get("search");
+	let keyword = currentUrl.searchParams.get("keyword");
+	let startDate = currentUrl.searchParams.get("startDate");
+	let endDate = currentUrl.searchParams.get("endDate");
+	
+	// 가져온 값들을 콘솔에 출력하거나 다른 곳에 활용할 수 있음
+	console.log("pageNum:", pageNum);
+	console.log("amount:", amount);
+	console.log("search:", search);
+	console.log("keyword:", keyword);
+	console.log("startDate:", startDate);
+	console.log("endDate:", endDate); */
+		
 
 	
 }); // $ 함수 종료문
@@ -133,3 +144,24 @@ const locationProcess = function(url) {
 	location.href = url;
 }
 
+
+
+// 검색 상태를 URL 매개 변수에 저장하는 함수
+function updateSearchState() {
+    let selectedOption = $("#u_search").val();
+    let startDate = $("#startDate").val();
+    let endDate = $("#endDate").val();
+
+    // URL 매개 변수로 검색 상태 설정
+    let url = "/user/userList?";
+    url += "u_search=" + encodeURIComponent(selectedOption);
+    if (selectedOption === "userAct") {
+        url += "&user_act=" + encodeURIComponent($("#user_act").val());
+    } else if (selectedOption === "userDate") {
+        url += "&startDate=" + encodeURIComponent(startDate);
+        url += "&endDate=" + encodeURIComponent(endDate);
+    }
+
+    // 현재 페이지 URL을 변경하여 검색 상태를 유지
+    window.history.replaceState(null, null, url);
+}

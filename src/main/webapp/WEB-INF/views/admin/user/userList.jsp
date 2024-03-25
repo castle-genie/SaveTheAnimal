@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/admin/admin.jspf"%>
@@ -22,27 +23,20 @@
 		                <select name="search" id="u_search" class="form-select form-select-sm">
 		                    <option value="">분류</option>
 		                    <option value="userAct">활동상태</option>
-		                    <!-- <option value="userVolcnt">봉사횟수</option> -->
 		                    <option value="userDate">가입일자</option>
 		                </select>
 		            </div>
-		            <div class="searchArea col-auto">
-		                <div class="selectActArea">
-		                    <select name="keyword" id="keyword" class="form-select form-select-sm">
-		                        <option value="1">활동</option>
-		                        <option value="2">활동중지</option>
-		                        <option value="0">비활동(탈퇴)</option>
-		                    </select>
-		                </div>
-		                <!-- <div class="selectVolcntArea">
-		                    <select name="keyword" id="user_volcnt" class="form-select form-select-sm">               
-		                        <option value="">봉사횟수</option>
-		                        <option value="5">5 이상</option>
-		                        <option value="10">10 이상</option>
-		                        <option value="20">20 이상</option>
-		                    </select>
-		                </div> -->
-		            </div>
+
+	                <div class="col-auto selectArea">
+	                    <select name="keyword" id="keyword" class="form-select form-select-sm">
+	                        <option value="">선택하세요</option>
+	                        <option value="1">활동</option>
+	                        <option value="2">활동중지</option>
+	                        <option value="0">비활동(탈퇴)</option>
+	                    </select>
+	                </div>
+
+
 		            <div class="col-auto dateArea">
 		                <div class="row g-2 align-items-center">
 		                    <div class="col-auto">
