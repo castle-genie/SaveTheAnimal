@@ -18,5 +18,7 @@ public interface VolunteerService {
 	
 	public int volunteerUpdate(VolunteerVO volunteerVO) throws Exception;
 	
-	public int volunteerDelete(VolunteerVO volunteerVO) throws Exception;;
+	public int volunteerDelete(VolunteerVO volunteerVO) throws Exception;
+	
+	public List<VolunteerVO> mainVol(VolunteerVO volunteerVO);
 }
