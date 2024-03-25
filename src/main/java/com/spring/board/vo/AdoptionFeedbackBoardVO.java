@@ -11,11 +11,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class AdoptionFeedbackBoardVO  extends CommonVO{
 	
-	private int afboardId;		//입양후기글ID
-	private String afboardTitle;		//입양후기글 제목
-	private String afboardContent;		//입양후기글 내용
+	private int afboardId			=0;		//입양후기글ID
+	private String afboardTitle		="";		//입양후기글 제목
+	private String afboardContent	="";		//입양후기글 내용
 	private Date afboardDate;			//입양후기글 작성일
-	private int afboardCnt;			//입양후기글 조회수
+	private int afboardCnt			=0;			//입양후기글 조회수
 	
 	public String userId			="";	//입양후기글 작성자 회원ID 	
 	

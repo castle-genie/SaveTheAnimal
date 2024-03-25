@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.spring.board.service.AdoptionFeedbackBoardService;
-import com.spring.board.service.FreeBoardService;
 import com.spring.board.vo.AdoptionFeedbackBoardVO;
 import com.spring.common.vo.PageDTO;
 import com.spring.user.vo.UserVO;

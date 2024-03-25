@@ -8,7 +8,6 @@ import com.spring.board.vo.AdoptionFeedbackBoardVO;
 
 @Mapper
 public interface AdoptionFeedbackBoardDAO {
-	
 	//입양후기게시판 글 목록
 	public List<AdoptionFeedbackBoardVO> adoptionFeedbackBoardList(AdoptionFeedbackBoardVO afbvo);
 	
@@ -28,8 +27,4 @@ public interface AdoptionFeedbackBoardDAO {
 	
 	//게시글 갯수 카운트
 	public int adoptionFeedbackBoardListCnt(AdoptionFeedbackBoardVO afbvo);
-	
-	
-	
-
 }

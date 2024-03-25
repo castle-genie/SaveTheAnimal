@@ -33,7 +33,7 @@
 		]]>
 	</select>
 	
-	<!-- 자유게시판 게시글 갯수 카운트 -->
+	<!-- 봉사후기게시판 게시글 갯수 카운트 -->
 	<select id="volunteerFeedbackBoardListCnt" parameterType="volunteerFeedbackBoard" resultType="int">
 		select count(*) from volunteerFeedbackBoard
 	</select>

@@ -87,7 +87,7 @@ $(function(){
 		}
 		
 		$("#pageNum").val(1);// 페이지 초기화		
-		actionProcess("#searchForm", "get", "/board/freeBoardList");
+		actionProcess("#searchForm", "get", "/user/userList");
 		goPage();
 	});
 	

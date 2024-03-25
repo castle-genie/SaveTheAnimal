@@ -24,9 +24,8 @@
 	<div style="display: none;" id="userSearch">
 		<form id="searchForm" name="searchForm">
 			<!-- 페이징 처리를 위한 파라미터 -->
-			<input type="hidden" name="pageNum" id="pageNum"
-				value="${pageMaker.cvo.pageNum}" /> <input type="hidden"
-				name="amount" id="amount" value="${pageMaker.cvo.amount}" />
+			<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cvo.pageNum}" />
+			<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount}" />
 			<div class="row g-2 align-items-center">
 				<div class="col-auto">
 					<label for="search">검색분류</label>
@@ -40,23 +39,25 @@
 						<option value="boardWriter">작성자</option>
 					</select>
 				</div>
-				<!--  <div class="searchArea col-auto">
-		                <div class="selectActArea">
-		                    <select name="keyword" id="keyword" class="form-select form-select-sm">
-		                        <option value="1">활동</option>
-		                        <option value="2">활동중지</option>
-		                        <option value="0">비활동(탈퇴)</option>
-		                    </select>
-		                </div>
-		                <div class="selectVolcntArea">
-		                    <select name="keyword" id="user_volcnt" class="form-select form-select-sm">               
-		                        <option value="">봉사횟수</option>
-		                        <option value="5">5 이상</option>
-		                        <option value="10">10 이상</option>
-		                        <option value="20">20 이상</option>
-		                    </select>
-		                </div>
-		            </div> -->
+				<div class="searchArea col-auto">
+					<div class="selectActArea">
+						<select name="keyword" id="keyword"
+							class="form-select form-select-sm">
+							<option value="1">활동</option>
+							<option value="2">활동중지</option>
+							<option value="0">비활동(탈퇴)</option>
+						</select>
+					</div>
+					<div class="selectVolcntArea">
+						<select name="keyword" id="user_volcnt"
+							class="form-select form-select-sm">
+							<option value="">봉사횟수</option>
+							<option value="5">5 이상</option>
+							<option value="10">10 이상</option>
+							<option value="20">20 이상</option>
+						</select>
+					</div>
+				</div>
 				<div class="col-auto dateArea">
 					<div class="row g-2 align-items-center">
 						<div class="col-auto">
@@ -79,8 +80,6 @@
 		</form>
 	</div>
 
-
-
 	<section id="two" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
@@ -99,12 +98,11 @@
 								<c:forEach items="${adoptionFeedbackBoardList}" var="list">
 									<tr>
 										<td><a
-											href="adoptionFeedbackBoardDetail?afboardId=${list.afboardId}&userId=<%= session.getAttribute("userId") %>">
+											href="adoptionFeedbackBoardDetail?afboardId=${list.afboardId}&userId=${userLogin.userId}">
 												${list.afboardTitle} </a></td>
 										<td class="text-right">${list.userId }</td>
 										<td>${list.afboardCnt }</td>
-										<td><fmt:formatDate value="${list.afboardDate }"
-												pattern="yyyy.MM.dd" /></td>
+										<td><fmt:formatDate value="${list.afboardDate }" pattern="yyyy.MM.dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -128,17 +126,12 @@
 						<c:when
 							test="${not empty userLogin and userLogin.userAdoptChk!=0}">
 							<ul class="actions">
-								<li><a href="/board/freeBoardCreate" class="button special">글쓰기</a></li>
+								<li><a href="/adoptionFeedbackBoard/adoptionFeedbackBoardCreate" class="button special">글쓰기</a></li>
 							</ul>
 
 						</c:when>
 					</c:choose>
 					<%--============ 페이징 출력 시작 ============--%>
-					<%-- 페이징 처리를 위한 파라미터 --%>
-					<%-- <input type="hidden" name="pageNum" id="pageNum"
-		value="${pageMaker.cvo.pageNum}" />
-	<input type="hidden" name="amount" id="amount"
-		value="${pageMaker.cvo.amount}" /> --%>
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
 							<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
@@ -168,9 +161,6 @@
 			</div>
 		</div>
 	</section>
-
-
-
 
 	<!-- Footer -->
 	<footer id="footer">

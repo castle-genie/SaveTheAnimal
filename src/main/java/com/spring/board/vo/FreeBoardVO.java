@@ -17,7 +17,12 @@ public class FreeBoardVO extends CommonVO {
 	private Date fboardDate;			//자유글 작성일
 	private int fboardCnt			=0;			//자유글 조회수
 	
-	public String userId			="";	//자유글 작성자 회원ID 	
+	public String userId			="";	//자유글 작성자 회원ID
+	
+	private String vfboardTitle		="";
+	private String afboardTitle		="";
+	private Date vfboardDate;
+	private Date afboardDate;
 	
 	private String reUserId 		= "";	//신고한 회원의 ID
 	private String reportDetail		= "";	//신고 상세

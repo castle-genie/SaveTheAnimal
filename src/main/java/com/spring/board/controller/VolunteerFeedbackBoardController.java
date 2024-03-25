@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.spring.board.service.FreeBoardService;
 import com.spring.board.service.VolunteerFeedbackBoardService;
 import com.spring.board.vo.VolunteerFeedbackBoardVO;
 import com.spring.common.vo.PageDTO;
@@ -23,11 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/volunteerFeedbackBoard/*")
 @Controller
 public class VolunteerFeedbackBoardController {
-	
-	
 	@Setter(onMethod_=@Autowired)
 	private VolunteerFeedbackBoardService volunteerFeedbackBoardService;
-	
 
 	@GetMapping(value = "volunteerFeedbackBoardList")
 	public String volunteerFeedbackBoardList(@ModelAttribute VolunteerFeedbackBoardVO vfvo, Model model) {
@@ -40,7 +36,6 @@ public class VolunteerFeedbackBoardController {
 		model.addAttribute("pageMaker", new PageDTO(vfvo, total));
 		
 		return "board/volunteerFeedbackBoardList";
-		
 	}
 	
 	// 게시글 조회

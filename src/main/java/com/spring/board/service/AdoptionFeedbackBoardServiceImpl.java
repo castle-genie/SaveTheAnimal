@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import com.spring.board.dao.AdoptionFeedbackBoardDAO;
 import com.spring.board.vo.AdoptionFeedbackBoardVO;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 public class AdoptionFeedbackBoardServiceImpl implements AdoptionFeedbackBoardService {
-	@Autowired
+	@Setter(onMethod_=@Autowired)
 	private AdoptionFeedbackBoardDAO adoptionFeedbackBoardDAO;
 
 	@Override

@@ -9,12 +9,12 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class VolunteerFeedbackBoardVO extends CommonVO{
-	private int vfboardId;		//봉사후기글ID
-	private String vfboardTitle;		//봉사후기글 제목
-	private String vfboardContent;		//봉사후기글 내용
+	private int vfboardId			=0;		//봉사후기글ID
+	private String vfboardTitle		="";		//봉사후기글 제목
+	private String vfboardContent	="";		//봉사후기글 내용
 	private Date vfboardDate;			//봉사후기글 작성일
-	private int vfboardCnt;			//봉사후기글 조회수
-	private int userVolcnt=0;
+	private int vfboardCnt			=0;			//봉사후기글 조회수
+	private int userVolcnt			=0;
 	
 	public String userId			="";	//봉사후기글 작성자 회원ID 	
 	

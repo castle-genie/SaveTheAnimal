@@ -27,5 +27,4 @@ public interface VolunteerFeedbackBoardDAO {
 	
 	//게시글 갯수 카운트
 	public int volunteerFeedbackBoardListCnt(VolunteerFeedbackBoardVO vfvo);
-
 }

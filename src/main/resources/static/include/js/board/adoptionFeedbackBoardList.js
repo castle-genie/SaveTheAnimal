@@ -87,7 +87,7 @@ $(function(){
 		}
 		
 		$("#pageNum").val(1);// 페이지 초기화		
-		actionProcess("#searchForm", "get", "/adoptionFeedbackBoard/adoptionFeedbackBoardList");
+		actionProcess("#searchForm", "get", "/user/userList");
 		goPage();
 	});
 	
@@ -101,7 +101,7 @@ $(function(){
 	$(".page-item a").on("click", function(e){
 		e.preventDefault();
 		$("#searchForm").find("input[name='pageNum']").val($(this).attr("href"));
-		actionProcess("#searchForm", "get", "/board/freeBoardList");
+		actionProcess("#searchForm", "get", "/adoptionFeedbackBoard/adoptionFeedbackBoardList");
 		$("#pageNum").find("input[name='pageNum']").val($(this).attr("href"));
 		actionProcess("#pageNum", "get", "/adoptionFeedbackBoard/adoptionFeedbackBoardList");
 	});

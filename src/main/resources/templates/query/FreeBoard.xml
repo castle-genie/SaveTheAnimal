@@ -9,6 +9,11 @@
 		<result column="fboard_date" property="fboardDate"/>
 		<result column="user_id" property="userId"/>
 		
+		<result column="vfboard_title" property="vfboardTitle"/>
+		<result column="afboard_title" property="afboardTitle"/>
+		<result column="vfboard_date" property="vfboardDate"/>
+		<result column="afboard_date" property="afboardDate"/>
+		
 		<result column="report_detail" property="reportDetail"/>
 		<result column="report_id" property="reportId"/>
 		<result column="report_sort" property="reportSort"/>
@@ -93,7 +98,25 @@
 		WHERE	fboard_id = #{fboardId}
 	</delete>
 	
-	<!-- 게시글 페이징 처리 -->
+	<!-- 내가 작성한 게시글 히스토리 -->
+	<select id="boardCreateHistory" parameterType="FreeBoard" resultMap="freeBoardMap">
+	SELECT fboard_title, fboard_date
+	FROM freeBoard
+	WHERE user_id = #{userId}
+
+	UNION
+
+	SELECT vfboard_title, vfboard_date
+	FROM volunteerFeedbackBoard
+	WHERE user_id = #{userId}
+
+	UNION
+
+	SELECT afboard_title, afboard_date
+	FROM adoptionFeedbackBoard
+	WHERE user_id = #{userId}
+	</select>
+	
 	
 	
 </mapper>

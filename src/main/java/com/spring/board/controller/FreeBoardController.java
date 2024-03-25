@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.board.service.AdoptionFeedbackBoardService;
 import com.spring.board.service.FreeBoardService;
+import com.spring.board.service.VolunteerFeedbackBoardService;
+import com.spring.board.vo.AdoptionFeedbackBoardVO;
 import com.spring.board.vo.FreeBoardVO;
+import com.spring.board.vo.VolunteerFeedbackBoardVO;
 import com.spring.common.vo.PageDTO;
 
 import lombok.Setter;
@@ -24,11 +28,14 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board/*")
 @Controller
 public class FreeBoardController {
-	
 	@Setter(onMethod_=@Autowired)
 	private FreeBoardService freeBoardService;
 	
+	@Setter(onMethod_=@Autowired)
+	private VolunteerFeedbackBoardService volunterFeedbackBoardService;
 	
+	@Setter(onMethod_=@Autowired)
+	private AdoptionFeedbackBoardService adoptionFeedbackBoardService;
 
 	@GetMapping(value = "freeBoardList")
 	public String freeBoardList(@ModelAttribute FreeBoardVO freeBoardVO, Model model) {
@@ -43,6 +50,8 @@ public class FreeBoardController {
 		return "board/freeBoardList";
 		
 	}
+	
+	
 	// 게시글 조회
 	@GetMapping(value = "freeBoardDetail")
 	public String freeBoardDetail(Model model, FreeBoardVO freeBoardVO){
@@ -95,6 +104,21 @@ public class FreeBoardController {
 		return "redirect:/board/freeBoardList";
 	}
 	
-	
-	
+	// 내가 작성한 게시글 히스토리
+	@GetMapping(value = "history")
+	public String boardCreateHistory(FreeBoardVO fvo, VolunteerFeedbackBoardVO vfvo, AdoptionFeedbackBoardVO afvo,
+			Model model) {
+		List<FreeBoardVO> freeBoardList = freeBoardService.freeBoardList(fvo);
+		model.addAttribute("freeBoardList", freeBoardList);
+
+		List<VolunteerFeedbackBoardVO> volunteerFeedbackBoardList = volunterFeedbackBoardService
+				.volunteerFeedbackBoardList(vfvo);
+		model.addAttribute("volunteerFeedbackBoardList", volunteerFeedbackBoardList);
+
+		List<AdoptionFeedbackBoardVO> adoptionFeedbackBoardList = adoptionFeedbackBoardService
+				.adoptionFeedbackBoardList(afvo);
+		model.addAttribute("adoptionFeedbackBoardList", adoptionFeedbackBoardList);
+		return "board/boardCreateHistory";
+
+	}
 }

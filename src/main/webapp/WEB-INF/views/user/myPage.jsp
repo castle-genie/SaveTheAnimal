@@ -134,7 +134,7 @@
 									<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
 							        <div class="d-flex justify-content-between">
 							          <strong class="text-gray-dark">작성 글 히스토리</strong>
-							          <a href="#">확인하기</a>
+							          <a href="/board/history"> 확인하기</a>
 							        </div>
 							        <span class="d-block">게시판 작성 글 확인</span>
 							      	</div>
