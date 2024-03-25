@@ -16,7 +16,7 @@
         <input type="date" id="volunteerTime" name="volunteerTime"><br><br>
         
         <label for="volunteerDue">봉사활동 신청 마감일:</label><br>
-        <input type="datetime-local" id="volunteerDue" name="volunteerDue"><br><br>
+        <input type="datetime-local" id="volunteerDue" name="volunteerDue" value="yyyy-MM-ddT18:00"><br><br>
         
         <label for="volunteerLimit">봉사활동 제한인원:</label><br>
         <input type="text" id="volunteerLimit" name="volunteerLimit"><br><br>
@@ -28,7 +28,7 @@
         <input type="text" id="volunteerLocation" name="volunteerLocation"><br><br>
         
         <label for="volunteerDetail">세부사항:</label><br>
-        <textarea id="volunteerDetail" name="volunteerDetail" rows="4" cols="50"></textarea><br><br>
+        <textarea id="volunteerDetail" name="volunteerDetail" rows="20" cols="100" style="resize: none;"></textarea><br><br>
         
         <label for="volunteerThumbnail">공고 썸네일</label><br>
 		<input type="file" id="file" name="file"><br><br>

@@ -236,6 +236,7 @@
 						  <div class="details" style="text-align: left;">
 						    <h2>세부사항</h2>
 						    <p>${ detail.volunteerDetail }</p>
+						    <button type="button" id="deleteBtn">삭제</button>
 						  </div>
 						</div>
 					</header>
