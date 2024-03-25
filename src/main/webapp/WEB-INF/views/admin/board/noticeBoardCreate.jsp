@@ -29,8 +29,8 @@
 										id="nboardContent" placeholder="내용을 입력해주세요" rows="6"></textarea>
 								</div>
 								<div class="12u$">
-									<input type="text" name="adminId" id="adminId"
-										value="${noticeBoard.adminId}">
+									<input type="hidden" name="adminId" id="adminId"
+										value="admin">
 								</div>
 							</div>
 							<button type="submit" class="btn btn-success btn-sm">등록</button>

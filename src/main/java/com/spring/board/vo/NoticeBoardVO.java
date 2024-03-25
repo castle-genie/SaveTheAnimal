@@ -14,11 +14,11 @@ public class NoticeBoardVO {
 	admin_id	varchar2(20)		NOT NULL
 	 */
 	
-	private int nboardId;		//공지글ID
-	private String nboardTitle;		//공지글 제목
-	private String nboardContent;		//공지글 내용
+	private int nboardId				=0;		//공지글ID
+	private String nboardTitle			="";		//공지글 제목
+	private String nboardContent		="";		//공지글 내용
 	private Date nboardDate;			//공지글 작성일
-	private int nboardCnt;			//공지글 조회수
-	public String adminId;			//관리자ID
+	private int nboardCnt				=0;			//공지글 조회수
+	public String adminId				="";			//관리자ID
 
 }

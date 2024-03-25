@@ -44,8 +44,8 @@
 									id="fboardContent" placeholder="내용을 입력해주세요" rows="6">${freeBoard.fboardContent}</textarea>
 							</div>
 							<div class="12u$">
-								<input type="text" name="userId" id="userId"
-									value="${sessionScope.userId}" readonly>
+								<input type="hidden" name="userId" id="userId"
+									value="${userLogin.userId}" readonly>
 							</div>
 							<div class="12u$">
 								<ul class="actions">

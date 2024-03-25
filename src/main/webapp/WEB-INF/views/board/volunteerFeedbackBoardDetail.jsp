@@ -29,7 +29,7 @@
 						<h2>${volunteerFeedbackBoard.vfboardTitle}</h2>
 					</header>
 					<div>
-						<pre>${volunteerFeedbackBoard.vfboardContent}</pre>
+						<textarea style="resize:none;" rows="20" readonly>${volunteerFeedbackBoard.vfboardContent}</textarea>
 					</div>
 					<p>
 						작성자: ${volunteerFeedbackBoard.userId} <span style="float: right;"><fmt:formatDate
@@ -38,7 +38,7 @@
 					<br>
 					<ul class="actions text-end">
 						<li><a href="volunteerFeedbackBoardList" class="button special">목록</a></li>
-						<c:if test="${sessionScope.userId eq volunteerFeedbackBoard.userId}">
+						<c:if test="${userLogin.userId eq volunteerFeedbackBoard.userId}">
 							<li><input type="button" value="수정"
 								onclick="location.href='volunteerFeedbackBoardModify?vfboardId=${volunteerFeedbackBoard.vfboardId}'"></li>
 							<li><input type="button" value="삭제"

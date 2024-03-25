@@ -42,9 +42,8 @@
 									id="fboardContent" placeholder="내용을 입력해주세요" rows="6"></textarea>
 							</div>
 							<div class="12u$">
-								<h3>작성자</h3>
-								<input type="text" name="userId" id="userId"
-									value="${sessionScope.userId}">
+								<input type="hidden" name="userId" id="userId"
+									value="${userLogin.userId}">
 							</div>
 							<div class="12u$">
 								<ul class="actions">

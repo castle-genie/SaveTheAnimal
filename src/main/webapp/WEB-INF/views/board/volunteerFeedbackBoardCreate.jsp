@@ -40,8 +40,8 @@
 								<textarea cols="100" wrap="hard" name="vfboardContent" id="vfboardContent" placeholder="내용을 입력해주세요"
 									rows="6"></textarea>
 							</div>
-							<div class="12u$">작성자
-								<input type="text" name="userId" id="userId" value="${sessionScope.userId}" readonly>
+							<div class="12u$">
+								<input type="hidden" name="userId" id="userId" value="${userLogin.userId}">
 							</div>
 							<div class="12u$">
 								<ul class="actions">

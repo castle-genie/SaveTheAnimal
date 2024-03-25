@@ -29,7 +29,7 @@
 						<h2>${noticeBoard.nboardTitle}</h2>
 					</header>
 					<div>
-						<pre>${noticeBoard.nboardContent}</pre>
+						<textarea style="resize:none;" rows="20" readonly>${noticeBoard.nboardContent}</textarea>
 					</div>
 					<p>
 						작성자: ${noticeBoard.adminId} <span style="float: right;"><fmt:formatDate

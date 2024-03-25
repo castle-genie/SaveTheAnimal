@@ -9,6 +9,8 @@
 		<result column="afboard_date" property="afboardDate"/>
 		<result column="user_id" property="userId"/>
 		
+		<result column="user_adoptChk" property="userAdoptChk"/>
+		
 		<result column="report_detail" property="reportDetail"/>
 		<result column="report_id" property="reportId"/>
 		<result column="report_sort" property="reportSort"/>
