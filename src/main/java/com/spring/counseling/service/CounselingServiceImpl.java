@@ -56,7 +56,7 @@ public class CounselingServiceImpl implements CounselingService {
 
     @Override
     public CounselingVO getCounselingDetail(int counselingId) {
-        return counselingDAO.getCounselingDetail(counselingId);
+        return counselingDAO.counselingDetail(counselingId);
     }
 
     @Override

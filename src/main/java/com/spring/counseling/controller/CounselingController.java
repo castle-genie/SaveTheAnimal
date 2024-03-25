@@ -90,9 +90,9 @@ public class CounselingController {
             return "/admin/adminLogin";
         } else {
             CounselingVO counselingDetail = counselingService.getCounselingDetail(counselingId);
-            List<CounselingVO> adminCounselingList = counselingService.counselingList(new CounselingVO()); // 해당 코드로 admincounselingList를 가져옵니다.
+            //List<CounselingVO> adminCounselingList = counselingService.counselingList(new CounselingVO()); // 해당 코드로 admincounselingList를 가져옵니다.
             model.addAttribute("adminCounselingDetail", counselingDetail);
-            model.addAttribute("admincounselingList", adminCounselingList); // admincounselingList를 모델에 추가합니다.
+            //model.addAttribute("admincounselingList", adminCounselingList); // admincounselingList를 모델에 추가합니다.
             return "/admin/counseling/adminCounselingDetail";
         }
     }
