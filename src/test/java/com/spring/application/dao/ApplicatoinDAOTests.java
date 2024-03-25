@@ -86,15 +86,15 @@ public class ApplicatoinDAOTests {
 	    }
 	}*/ 
 	
-	/*
+	/* */
 	@Test
 	public void applicationDeleteTest() {
 		ApplicationVO applicationVO = new ApplicationVO();
-		applicationVO.setApplicationId(20);
+		applicationVO.setApplicationId(1);
 		log.info("삭제된 행 : " + applicationDAO.applicationDelete(applicationVO));
-	}*/
+	}
 	
-	/* */
+	/* 
 	@Test
 	public void applicationCheckTest() {
 		ApplicationVO applicationVO = new ApplicationVO();
@@ -102,7 +102,7 @@ public class ApplicatoinDAOTests {
 		applicationVO.getVolunteer().setVolunteerId(1);
 		int applicatinoCheck = applicationDAO.applicationCheck(applicationVO);
 		log.info("반환 결과 : " + applicatinoCheck);
-	} 
+	} */
 	
 	/* 
 	@Test

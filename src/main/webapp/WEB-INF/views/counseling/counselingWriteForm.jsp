@@ -27,7 +27,7 @@
             <div class="content">
                 <header class="align-center">
                     <p>신상 정보</p>
-
+					<input type="text" id="animalId" name="animalId" value="" readonly />
                     <input type="text" id="name" name="name" placeholder="성명">
                     <input type="text" id="age" name="age" placeholder="연령">
                     <input type="text" id="address" name="address" placeholder="주소">
