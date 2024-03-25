@@ -71,66 +71,10 @@ $(function(){
 
 	
 	$(".page-item a").on("click", function(e){
-		e.preventDefault();		
-		//$("#searchForm").find("input[name='pageNum']").val($(this).attr("href")); // 현재 페이지 가져오기
+		e.preventDefault();				
 		handlePaginationClick($(this).attr("href")); // 
 	});
-	/* 페이징 처리 이벤트 : (24/03/18) actionProcess(); 대체
-	$(".page-item a").on("click", function(e){
-		e.preventDefault();
-		$("#searchForm").find("input[name='pageNum']").val($(this).attr("href"));
-		actionProcess("#searchForm", "get", "/user/userList");
-	}); */
-
 	
-	/*
-	$(".page-item a").on("click", function(e){
-		e.preventDefault();        
-    
-    // URL에서 페이지 번호를 가져옴
-    let pageNum = new URL($(this).attr("href"), window.location.href).searchParams.get("pageNum");
-
-    // 검색 폼의 페이지 번호 업데이트
-    $("#searchForm").find("input[name='pageNum']").val(pageNum);
-    
-    // 검색 폼의 모든 데이터를 가져와서 URL 파라미터 형식으로 전달
-    let formData = $("#searchForm").serialize();
-    
-    // 페이지 이동
-    window.location.href = "/user/userList?" + formData;
-	});
-	
-	// 현재 URL을 가져옴
-	let currentUrl = new URL(window.location.href);
-
-	// 쿼리 파라미터와 값 가져오기
-	let pageNum = currentUrl.searchParams.get("pageNum");
-	let amount = currentUrl.searchParams.get("amount");
-	let search = currentUrl.searchParams.get("search");
-	let keyword = currentUrl.searchParams.get("keyword");
-	let startDate = currentUrl.searchParams.get("startDate");
-	let endDate = currentUrl.searchParams.get("endDate");
-	
-	// 가져온 값들을 콘솔에 출력하거나 다른 곳에 활용할 수 있음
-	console.log("pageNum:", pageNum);
-	console.log("amount:", amount);
-	console.log("search:", search);
-	console.log("keyword:", keyword);
-	console.log("startDate:", startDate);
-	console.log("endDate:", endDate); 
-	
-	// 가져온 쿼리 파라미터의 값들을 사용하여 새로운 URL 생성
-	let newUrl = "/user/userList?" + 
-	    "pageNum=" + pageNum +
-	    "&amount=" + amount +
-	    "&search=" + search +
-	    "&keyword=" + keyword +
-	    "&startDate=" + startDate +
-	    "&endDate=" + endDate;
-
-// 새로운 URL로 페이지 이동
-window.location.href = newUrl;
-	*/
 		
 
 	
@@ -163,38 +107,15 @@ const locationProcess = function(url) {
 	location.href = url;
 }
 
-
-// 검색 상태를 URL 매개 변수에 저장하는 함수
-function updateSearchState() {
-    let selectedOption = $("#u_search").val();
-    let startDate = $("#startDate").val();
-    let endDate = $("#endDate").val();
-
-    // URL 매개 변수로 검색 상태 설정
-    let url = "/user/userList?";
-    url += "u_search=" + encodeURIComponent(selectedOption);
-    if (selectedOption === "userAct") {
-        url += "&user_act=" + encodeURIComponent($("#user_act").val());
-    } else if (selectedOption === "userDate") {
-        url += "&startDate=" + encodeURIComponent(startDate);
-        url += "&endDate=" + encodeURIComponent(endDate);
-    }
-
-    // 현재 페이지 URL을 변경하여 검색 상태를 유지
-    window.history.replaceState(null, null, url);
-}
-
+// 페이징 처리 함수
 function handlePaginationClick(pageNum) {
     // 현재 URL을 가져옴
     let currentUrl = new URL(window.location.href);
-
     // 쿼리 파라미터 값 가져오기
-    //let amount = currentUrl.searchParams.get("amount");
     let search = currentUrl.searchParams.get("search");
     let keyword = currentUrl.searchParams.get("keyword");
     let startDate = currentUrl.searchParams.get("startDate");
     let endDate = currentUrl.searchParams.get("endDate");
-
     // 가져온 쿼리 파라미터 값들로 새로운 URL 생성
     let newUrl = "/user/userList?" + 
         "pageNum=" + pageNum +
@@ -203,7 +124,6 @@ function handlePaginationClick(pageNum) {
         "&keyword=" + keyword +
         "&startDate=" + startDate +
         "&endDate=" + endDate;
-
     // 새로운 URL로 페이지 이동
     window.location.href = newUrl;
 }

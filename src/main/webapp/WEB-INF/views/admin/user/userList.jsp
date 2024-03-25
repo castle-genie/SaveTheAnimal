@@ -26,7 +26,6 @@
 		                    <option value="userDate">가입일자</option>
 		                </select>
 		            </div>
-
 	                <div class="col-auto selectArea">
 	                    <select name="keyword" id="keyword" class="form-select form-select-sm">
 	                        <option value="">선택하세요</option>
@@ -35,8 +34,6 @@
 	                        <option value="0">비활동(탈퇴)</option>
 	                    </select>
 	                </div>
-
-
 		            <div class="col-auto dateArea">
 		                <div class="row g-2 align-items-center">
 		                    <div class="col-auto">
@@ -61,8 +58,7 @@
 			<table class="table table-striped">
 				<thead>
 					<tr class="text-center">
-					<!-- 12 -->
-						
+					<!-- 12 -->					
 						<th class="col-md-1">No</th>
 						<th class="col-md-1">ID</th>
 						<th class="col-md-1">이름</th>
@@ -84,8 +80,7 @@
 									<td class="text-center">${user.userId}</td>
 									<td class="text-center">${user.userName}</td>
 									<td class="text-center">${user.userEmail}</td>
-									<td class="text-center">${user.userPhone}</td>	
-									
+									<td class="text-center">${user.userPhone}</td>										
 									<td class="text-center">${user.userVolcnt}</td>
 									<td class="text-center">
 										<c:choose>
@@ -122,8 +117,7 @@
 						</c:otherwise>
 					</c:choose>
 				</tbody>
-			</table>
-		
+			</table>		
 		</div>
 		
 		
@@ -153,16 +147,8 @@
 			</c:if>
 		  </ul>
 		</nav>	
-		
-		
-		
-		
-		
-		
-		
-	</div>
-
-	
+		 
+	</div>	
 </main>
 </div>
 </div>
