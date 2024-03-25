@@ -2,8 +2,25 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp" %>
 	<link rel="stylesheet" href="/resources/include/assets/css/main.css">
+	<script>
+		 function getRandomImages() {
+	         // AJAX를 사용하여 서버로부터 랜덤 이미지 경로들을 요청
+	         var xhr = new XMLHttpRequest();
+	         xhr.onreadystatechange = function() {
+	             if (xhr.readyState == 4 && xhr.status == 200) {
+	                 // 서버로부터 받은 이미지 경로들을 사용하여 이미지들을 표시
+	                 var imagePaths = JSON.parse(xhr.responseText);
+	                 for (var i = 0; i < imagePaths.length; i++) {
+	                     document.getElementById("image" + (i+1)).src = imagePaths[i];
+	                 }
+	             }
+	         };
+	         xhr.open("GET", "/randomImages", true);
+	         xhr.send();
+	     }
+	</script>
 	</head>
-	<body>
+	<body onload="getRandomImages()">
 		<header id="header" class="alt"><div class="logo"><a href="/">SaveTheAnimal <span>by team3</span></a></div>
 				<a href="#menu">Menu</a>
 		</header>
@@ -128,22 +145,22 @@
 				<div class="gallery">
 					<div>
 						<div class="image fit">
-							<a href="#"><img src="/resources/images/pic01.jpg" alt="" width="600" height="300"></a>
+							<a href="#"><img id="image1" src="" alt="" width="600" height="300"></a>
 						</div>
 					</div>
 					<div>
 						<div class="image fit">
-							<a href="#"><img src="/resources/images/pic02.jpg" alt="" width="600" height="300"></a>
+							<a href="#"><img id="image2" src="" alt="" width="600" height="300"></a>
 						</div>
 					</div>
 					<div>
 						<div class="image fit">
-							<a href="#"><img src="/resources/images/pic03.jpg" alt="" width="600" height="300"></a>
+							<a href="#"><img id="image3" src="" alt="" width="600" height="300"></a>
 						</div>
 					</div>
 					<div>
 						<div class="image fit">
-							<a href="#"><img src="/resources/images/pic04.jpg" alt="" width="600" height="300"></a>
+							<a href="#"><img id="image4" src="" alt="" width="600" height="300"></a>
 						</div>
 					</div>
 				</div>
