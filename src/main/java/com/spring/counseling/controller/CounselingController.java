@@ -17,46 +17,23 @@ import java.util.List;
 @Controller
 public class CounselingController {
 
-    private static final String REDIRECT_ADMIN_COUNSELING_LIST = "redirect:/counseling/adminCounselingList";
-
-    private static final String ADMIN_COUNSELING_DETAIL = "/admin/counseling/adminCounselingDetail";
-    private static final String COUNSELING_UPDATE_FORM = "/admin/counseling/counselingUpdateForm";
-    private static final String COUNSELING_DETAIL = "/counseling/counselingDetail";
-
     @Autowired
-    private CounselingService service;
+    private CounselingService counselingService;
 
     /* users */
 
     @GetMapping("/counselingList")
     public String counselingList(CounselingVO counselingVO, Model model) {
-        List<CounselingVO> counselingList = service.counselingList(counselingVO);
+        List<CounselingVO> counselingList = counselingService.counselingList(counselingVO);
         model.addAttribute("counselingList", counselingList);
         return "/counseling/counselingList";
     }
 
     @GetMapping("/counselingDetail")
     public String counselingDetail(@RequestParam("counselingId") int counselingId, Model model) {
-        CounselingVO counselingVO = new CounselingVO();
-        counselingVO.setCounselingId(counselingId);
-        CounselingVO counselingDetail = service.counselingDetail(counselingVO);
+        CounselingVO counselingDetail = counselingService.counselingDetail(counselingId);
         model.addAttribute("counselingDetail", counselingDetail);
-        return "/counseling/counselingDetail"; // 상담 상세 페이지로 이동
-    }
-
-    /* admin */
-
-
-    @GetMapping("/adminCounselingList")
-    public String adminCounselingList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, CounselingVO counselingVO, Model model) {
-        // log.info("adminCounselingList 호출");
-        if(adminLoginVO == null) {
-            return "/admin/adminLogin";
-        } else {
-            List<CounselingVO> counselingList = service.counselingList(counselingVO);
-            model.addAttribute("counselingList", counselingList);
-            return "admin/counseling/adminCounselingList";
-        }
+        return "/counseling/counselingDetail";
     }
 
     @GetMapping("/counselingWriteForm")
@@ -67,71 +44,85 @@ public class CounselingController {
     @PostMapping("/counselingInsert")
     public String counselingInsert(CounselingVO counselingVO, RedirectAttributes ras) {
         try {
-            int result = service.counselingInsert(counselingVO);
+            int result = counselingService.counselingInsert(counselingVO);
             if (result == 1) {
-                return REDIRECT_ADMIN_COUNSELING_LIST;
+                return "redirect:/counseling/counselingList";
             }
             ras.addFlashAttribute("errorMsg", "입력에 문제가 있어 다시 진행해 주세요.");
         } catch (Exception e) {
             log.error("Error occurred while inserting counseling: {}", e.getMessage());
-            ras.addFlashAttribute("errorMsg", "상담 공고 입력 중 오류가 발생했습니다.");
+            ras.addFlashAttribute("errorMsg", "상담 입력 중 오류가 발생했습니다.");
         }
         return "redirect:/counseling/counselingWriteForm";
     }
 
+    @PostMapping("/counselingDelete")
+    public String counselingDelete(@RequestParam("counselingId") int counselingId) {
+        try {
+            int result = counselingService.counselingDelete(counselingId);
+            if (result == 1) {
+                return "redirect:/counseling/counselingList";
+            }
+        } catch (Exception e) {
+            log.error("Error occurred while deleting counseling: {}", e.getMessage());
+        }
+        return "redirect:/counseling/counselingList";
+    }
+
+    /* admin */
+
+    @GetMapping("/adminCounselingList")
+    public String adminCounselingList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, CounselingVO counselingVO, Model model) {
+        if (adminLoginVO == null) {
+            return "/admin/adminLogin";
+        } else {
+            List<CounselingVO> counselingList = counselingService.counselingList(counselingVO);
+            model.addAttribute("admincounselingList", counselingList);
+            return "/admin/counseling/adminCounselingList"; // 여기 경로 수정 (/counseling/adminCounselingList)
+        }
+    }
 
     @GetMapping("/adminCounselingDetail")
     public String adminCounselingDetail(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO,
                                         @RequestParam(name = "counselingId") int counselingId,
                                         Model model) {
-        // log.info("adminCounselingList 호출");
-        if(adminLoginVO == null) {
+        if (adminLoginVO == null) {
             return "/admin/adminLogin";
         } else {
-            CounselingVO counselingVO = new CounselingVO();
-            counselingVO.setCounselingId(counselingId);
-            CounselingVO counselingDetail = service.counselingDetail(counselingVO);
-            model.addAttribute("CounselingDetail", counselingDetail);
-            return "admin/counseling/adminCounselingDetail";
+            CounselingVO counselingDetail = counselingService.getCounselingDetail(counselingId);
+            List<CounselingVO> adminCounselingList = counselingService.counselingList(new CounselingVO()); // 해당 코드로 admincounselingList를 가져옵니다.
+            model.addAttribute("adminCounselingDetail", counselingDetail);
+            model.addAttribute("admincounselingList", adminCounselingList); // admincounselingList를 모델에 추가합니다.
+            return "/admin/counseling/adminCounselingDetail";
         }
     }
 
 
 
-
-
-
-
-    @GetMapping("/counselingUpdateForm")
-    public String counselingUpdateForm(@RequestParam("counselingId") CounselingVO counselingId, Model model) {
-        CounselingVO counselingUpdateForm = service.counselingUpdateForm(counselingId);
-        model.addAttribute("updateList", counselingUpdateForm);
-        return COUNSELING_UPDATE_FORM;
-    }
-
-    @PostMapping("/counselingUpdate")
+    @PostMapping("/admincounselingUpdate")
     public String counselingUpdate(CounselingVO counselingVO) {
         try {
-            int result = service.counselingUpdate(counselingVO);
+            int result = counselingService.counselingUpdate(counselingVO);
             if (result == 1) {
-                return REDIRECT_ADMIN_COUNSELING_LIST;
+                return "redirect:/counseling/adminCounselingList";
             }
         } catch (Exception e) {
             log.error("Error occurred while updating counseling: {}", e.getMessage());
         }
-        return "redirect:/counseling/counselingUpdateForm?counselingId=" + counselingVO.getCounselingId();
+        return "redirect:/counseling/admincounselingUpdateForm?counselingId=" + counselingVO.getCounselingId();
     }
 
-    @GetMapping("/counselingDelete")
-    public String counselingDelete(@RequestParam("counselingId") CounselingVO counselingId) {
+    @PostMapping("/admincounselingDelete")
+    public String admincounselingDelete(@RequestParam("counselingId") int counselingId) {
         try {
-            int result = service.counselingDelete(counselingId);
+            int result = counselingService.admincounselingDelete(counselingId);
             if (result == 1) {
-                return REDIRECT_ADMIN_COUNSELING_LIST;
+                return "redirect:/counseling/adminCounselingList";
             }
         } catch (Exception e) {
             log.error("Error occurred while deleting counseling: {}", e.getMessage());
         }
-        return REDIRECT_ADMIN_COUNSELING_LIST;
+        return "redirect:/counseling/adminCounselingList";
     }
+
 }
