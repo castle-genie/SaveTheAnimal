@@ -16,7 +16,7 @@ public class VolunteerDAOTests {
 	@Autowired
 	private VolunteerDAO volunteerDAO;
 	
-	/*
+	/*  */
 	@Test
 	public void testVolunteerList() {
 		VolunteerVO volunteerVO = new VolunteerVO();
@@ -25,7 +25,7 @@ public class VolunteerDAOTests {
 			log.info(list.toString());
 		}
 		log.info("전체 행 갯수 : " + volunteerDAO.volunteerList(volunteerVO));
-	} */
+	} 
 	
 	/* 
 	@Test
@@ -35,7 +35,7 @@ public class VolunteerDAOTests {
 		log.info("적용된 행 갯수: " + volunteerDAO.volunteerDetail(volunteerVO));
 	}*/
 	
-	/* */
+	/* 
 	@Test
 	public void testVolunteerInsert() {
 		VolunteerVO volunteerVO = new VolunteerVO();
@@ -48,7 +48,7 @@ public class VolunteerDAOTests {
 		volunteerVO.setVolunteerCost("");
 		volunteerVO.setVolunteerFile("스크린샷 2024-03-13 105951.png");
 		log.info("적용된 행 갯수 : " + volunteerDAO.volunteerInsert(volunteerVO));
-	}
+	} */
 	
 	/* 
 	@Test
