@@ -111,7 +111,20 @@ $(function(){
 	console.log("search:", search);
 	console.log("keyword:", keyword);
 	console.log("startDate:", startDate);
-	console.log("endDate:", endDate); */
+	console.log("endDate:", endDate); 
+	
+	// 가져온 쿼리 파라미터의 값들을 사용하여 새로운 URL 생성
+	let newUrl = "/user/userList?" + 
+	    "pageNum=" + pageNum +
+	    "&amount=" + amount +
+	    "&search=" + search +
+	    "&keyword=" + keyword +
+	    "&startDate=" + startDate +
+	    "&endDate=" + endDate;
+
+// 새로운 URL로 페이지 이동
+window.location.href = newUrl;
+	*/
 		
 
 	
