@@ -19,6 +19,28 @@ $(function() {
 			$("#insertForm").submit();
 		}
 	})
+	
+	$("#volunteerDue").on("change", function(){
+		// 사용자가 날짜를 선택했을 때 호출되는 함수
+	    var selectedDate = new Date(this.value); // 사용자가 선택한 날짜
+	
+	    // 시간대 고려
+	    var offset = selectedDate.getTimezoneOffset(); // 사용자의 지역에서 UTC와의 시차 (분 단위)
+	    selectedDate.setMinutes(selectedDate.getMinutes() + offset); // UTC 시간으로 변환
+	
+	    // 오후 6시로 설정
+	    selectedDate.setUTCHours(18);
+	    selectedDate.setUTCMinutes(0);
+	
+	    // 변경된 시간을 datetime-local input에 설정
+	    var year = selectedDate.getUTCFullYear();
+	    var month = ("0" + (selectedDate.getUTCMonth() + 1)).slice(-2);
+	    var day = ("0" + selectedDate.getUTCDate()).slice(-2);
+	    var hour = ("0" + selectedDate.getUTCHours()).slice(-2);
+	    var minute = ("0" + selectedDate.getUTCMinutes()).slice(-2);
+	    var formattedDate = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
+	    this.value = formattedDate;
+	})
 })
 
 
