@@ -29,9 +29,7 @@
 						<h2>${adoptionFeedbackBoard.afboardTitle}</h2>
 					</header>
 					<div>
-						<pre>
-							<code>${adoptionFeedbackBoard.afboardContent}</code>
-						</pre>
+						<textarea style="resize:none;" rows="20" readonly>${adoptionFeedbackBoard.afboardContent}</textarea>
 					</div>
 					<p>
 						작성자: ${adoptionFeedbackBoard.userId} <span style="float: right;"><fmt:formatDate
@@ -40,7 +38,7 @@
 					<br>
 					<ul class="actions text-end">
 						<li><a href="adoptionFeedbackBoardList" class="button special">목록</a></li>
-						<c:if test="${sessionScope.userId eq adoptionFeedbackBoard.userId}">
+						<c:if test="${userLogin.userId eq adoptionFeedbackBoard.userId}">
 							<li><input type="button" value="수정"
 								onclick="location.href='adoptionFeedbackBoardModify?afboardId=${adoptionFeedbackBoard.afboardId}'"></li>
 							<li><input type="button" value="삭제"

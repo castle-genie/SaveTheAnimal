@@ -10,6 +10,7 @@ public class VolunteerFeedbackBoardVO {
 	private String vfboardContent;		//봉사후기글 내용
 	private Date vfboardDate;			//봉사후기글 작성일
 	private int vfboardCnt;			//봉사후기글 조회수
+	private int userVolcnt=0;
 	
 	public String userId			="";	//봉사후기글 작성자 회원ID 	
 	

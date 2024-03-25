@@ -17,7 +17,7 @@
 					<label for="vfcommentContent" class="col-sm-1 col-form-label">내용</label>
 					<div class="col-sm-11">
 						<textarea name="vfcommentContent" id="vfcommentContent"
-							class="form-control" rows="3"></textarea>
+							class="form-control" rows="3" style="resize:none;"></textarea>
 					</div>
 				</div>
 			</form>

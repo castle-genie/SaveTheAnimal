@@ -50,17 +50,6 @@
 		) result
 		WHERE ROWNUM = 1
 	</select>
-
-	<!-- 자유게시판 글 상세조회 -->
-	<!-- 
-	<select id="freeBoardDetail" parameterType="freeBoard" resultMap="freeBoardMap"
-	resultType="com.spring.freeBoard.vo.FreeBoardVO">
-		SELECT 	fboard_id, fboard_title, fboard_content, fboard_like
-				fboard_date, user_id
-		FROM 	freeBoard
-		WHERE	fboard_id = #{fboardId}
-	</select>
-	-->
 	
 	<!-- 게시판 등록 -->
 	<insert id="insertFreeBoard" parameterType="FreeBoard">
@@ -80,12 +69,6 @@
 	
 	<!-- 게시글 수정 -->
 	<update id="updateFreeBoard" parameterType="FreeBoard">
-		<!--  
-		UPDATE 	freeBoard
-		SET 	fboard_title 		= #{fboardTitle}
-				fboard_content	 	= #{fboardContent}
-		WHERE	fboard_id 			= #{fboardId}
-		-->
 		UPDATE freeBoard
 		SET fboard_title = #{fboardTitle}, fboard_content = #{fboardContent}
 		WHERE	fboard_id = #{fboardId}

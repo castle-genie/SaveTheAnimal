@@ -29,9 +29,7 @@
 						<h2>${freeBoard.fboardTitle}</h2>
 					</header>
 					<div>
-						<pre>
-							<code>${freeBoard.fboardContent}</code>
-						</pre>
+						<textarea style="resize:none;" rows="20" readonly>${freeBoard.fboardContent}"</textarea>
 					</div>
 					<p>
 						작성자: ${freeBoard.userId} <span style="float: right;"><fmt:formatDate
@@ -40,7 +38,7 @@
 					<br>
 					<ul class="actions text-end">
 						<li><a href="freeBoardList" class="button special">목록</a></li>
-						<c:if test="${sessionScope.userId eq freeBoard.userId}">
+						<c:if test="${userLogin.userId eq freeBoard.userId}">
 							<li><input type="button" value="수정"
 								onclick="location.href='freeBoardModify?fboardId=${freeBoard.fboardId}'"></li>
 							<li><input type="button" value="삭제"

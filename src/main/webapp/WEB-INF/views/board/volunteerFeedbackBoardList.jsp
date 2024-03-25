@@ -50,17 +50,26 @@
 						</table>
 					</div>
 					<br>
-					<c:if test="${empty userLogin}">
-						<ul class="actions">
-							<li><a href="/user/login" class="button special"
-								onclick="alert('글을 작성하려면 로그인이 필요합니다')">글쓰기</a></li>
-						</ul>
-					</c:if>
-					<c:if test="${not empty userLogin}">
-						<ul class="actions">
-							<li><a href="/volunteerFeedbackBoard/volunteerFeedbackBoardCreate" class="button special">글쓰기</a></li>
-						</ul>
-					</c:if>
+					<c:choose>
+						<c:when test="${empty userLogin}">
+							<ul class="actions">
+								<li><a href="/user/login" class="button special"
+									onclick="alert('글을 작성하려면 로그인이 필요합니다')">글쓰기</a></li>
+							</ul>
+						</c:when>
+						<c:when
+							test="${not empty userLogin and userLogin.userVolcnt==0}">
+							<ul class="actions">
+							<li><a class="button special" onClick="alert('봉사에 1회 이상 참여한 유저만 글을 작성할 수 있습니다')">글쓰기</a></li>
+							</ul>
+						</c:when>
+						<c:when
+							test="${not empty userLogin and userLogin.userVolcnt!=0}">
+							<ul class="actions">
+								<li><a href="/board/freeBoardCreate" class="button special">글쓰기</a></li>
+							</ul>
+						</c:when>
+					</c:choose>
 				</div>
 			</div>
 		</div>
