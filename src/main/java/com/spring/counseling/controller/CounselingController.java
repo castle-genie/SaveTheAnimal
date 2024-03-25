@@ -37,7 +37,8 @@ public class CounselingController {
     }
 
     @GetMapping("/counselingWriteForm")
-    public String counselingWriteForm() {
+    public String counselingWriteForm(@RequestParam("animalId") int animalId, Model model) {
+    	model.addAttribute("animalId", animalId);
         return "/counseling/counselingWriteForm";
     }
 
