@@ -1,9 +1,6 @@
 package com.spring.counseling.vo;
 
-import java.util.Date;
-
 import com.spring.user.vo.UserVO;
-
 import lombok.Data;
 
 @Data
