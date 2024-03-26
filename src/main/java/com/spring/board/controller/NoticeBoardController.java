@@ -56,7 +56,7 @@ public class NoticeBoardController {
 	//////////////////관리자 페이지
 
 	// 공지게시판 글 목록(관리자 페이지)
-	@ResponseBody
+	/* @ResponseBody */
 	@GetMapping(value="/admin/noticeBoardList", produces=MediaType.APPLICATION_JSON_VALUE)
 	public String adminNoticeBoardList(@ModelAttribute NoticeBoardVO nvo, Model model) {
 		log.info("공지게시글불러오기");
