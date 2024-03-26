@@ -19,7 +19,7 @@
     <!-- 상담 신청 목록 -->
     <select id="counselingList" parameterType="counseling" resultMap="counselingMap">
         SELECT counseling_id, counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
-               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt
+               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt, user_name, user_phone
         FROM counseling
         ORDER BY counseling_id DESC
     </select>
@@ -27,7 +27,7 @@
     <!-- 상담 신청 상세정보 -->
     <select id="counselingDetail" parameterType="int" resultMap="counselingMap">
         SELECT counseling_id, counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
-               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt
+               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt, user_name, user_phone
         FROM counseling
         WHERE counseling_id = #{counselingId}
     </select>
@@ -35,7 +35,7 @@
     <!-- 상담 신청 입력 -->
     <insert id="counselingInsert" parameterType="counseling">
         insert into counseling(counseling_id, counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
-                               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt)
+                               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt, user_name, user_phone)
         VALUES (
         		   counseling_seq.nextval,
                    #{counseling_schedule},
@@ -48,7 +48,10 @@
                    #{counseling_age},
                    #{counseling_address},
                    #{counseling_job},
-                   #{counseling_adopt}
+                   #{counseling_adopt},
+                #{user_name},
+                #{user_phone}
+
                )
     </insert>
 
@@ -58,8 +61,27 @@
         SET counseling_schedule = #{counseling_schedule}, user_id = #{user_id}, adoption_id = #{adoption_id},
             animal_id = #{animal_id}, counseling_date = #{counseling_date}, counseling_judgment = #{counseling_judgment},
             counseling_detail = #{counseling_detail}, counseling_age = #{counseling_age}, counseling_address = #{counseling_address},
-            counseling_job = #{counseling_job}, counseling_adopt = #{counseling_adopt}
+            counseling_job = #{counseling_job}, counseling_adopt = #{counseling_adopt}, , user_name = #{user_name}, user_phone = #{user_phone}
         WHERE counseling_id = #{counseling_id}
+    </update>
+    
+    <!-- admin 단 상담 신청 수정 -->
+    <update id="adminCounselingUpdate" parameterType="counseling">
+        UPDATE counseling
+        SET counseling_judgment = #{counselingJudgment}, counseling_detail = #{counselingDetail}
+        WHERE counseling_id = #{counselingId}
+    </update>
+    
+    <update id="userCounselingUpdate" parameterType="counseling">
+    	UPDATE users
+    	SET 
+    	<if test="counselingJudgment == '적격'">
+    		user_adoptchk = 1
+    	</if>
+    	<if test="counselingJudgment == '비적격'">
+    		user_adoptchk = 0
+    	</if>
+    	WHERE user_id = #{userId}
     </update>
 
     <!-- 상담 신청 삭제 -->

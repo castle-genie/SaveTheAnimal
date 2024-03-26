@@ -25,5 +25,9 @@ public interface CounselingDAO {
     int counselingDelete(int counselingVO);
 
     CounselingVO getCounselingDetail(int counselingId);
+    
+    int adminCounselingUpdate(CounselingVO counselingVO);
+    
+    int userCounselingUpdate(CounselingVO counselingVO);
 }
 
