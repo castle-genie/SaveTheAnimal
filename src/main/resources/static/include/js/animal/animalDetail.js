@@ -8,29 +8,29 @@ $(function(){
 		$("#message").text("작성시 입력한 비밀번호를 입력해 주세요");
 	}
 	$("#updateFormBtn").on("click", ()=>{
-		/*$("#f_data").attr({
+		$("#f_data").attr({
 			"method":"get",
-			"action":"/board/updateForm"
+			"action":"/animal/updateForm"
 		});
-		$("#f_data").submit();*/
-		$("#pwdChk").css("visibility", "visible");
-		btnInit();
-		buttonCheck ="updateButton";
+		$("#f_data").submit();
+		/*$("#pwdChk").css("visibility", "visible");
+		btnInit();*/
+		/*buttonCheck ="updateButton";*/
 	});
 	
 	
 	//삭제 버튼 클릭시 처리 이벤트
 	$("#DeleteBtn").on("click", () => {
-    // 사용자에게 확인 메시지 보여주기
+   
         $("#f_data").attr({
             "method": "post",
             "action": "/animal/animalDelete"
         });
         $("#f_data").submit();
-
-        $("#pwdChk").css("visibility", "visible");
+		
+       /* $("#pwdChk").css("visibility", "visible");
         btnInit();
-        buttonCheck = "deleteButton";
+        buttonCheck = "deleteButton";*/
     
 });
 

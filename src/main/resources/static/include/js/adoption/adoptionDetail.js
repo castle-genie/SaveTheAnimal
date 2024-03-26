@@ -8,14 +8,14 @@ $(function(){
 		$("#message").text("작성시 입력한 비밀번호를 입력해 주세요");
 	}
 	$("#updateFormBtn").on("click", ()=>{
-		/*$("#f_data").attr({
+		$("#f_data").attr({
 			"method":"get",
-			"action":"/board/updateForm"
+			"action":"/adoption/updateForm"
 		});
-		$("#f_data").submit();*/
-		$("#pwdChk").css("visibility", "visible");
+		$("#f_data").submit();
+		/*$("#pwdChk").css("visibility", "visible");
 		btnInit();
-		buttonCheck ="updateButton";
+		buttonCheck ="updateButton";*/
 	});
 	
 	

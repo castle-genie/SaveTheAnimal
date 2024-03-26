@@ -21,6 +21,11 @@ $(function(){
 	});
 	
 	
+	$("#animalListBtn").click(function(){
+		location.href="/animal/animalList";
+	});
+	
+	
 	$("#insertFormBtn").on("click", ()=>{
 		location.href = "/animal/writeForm";
 	});

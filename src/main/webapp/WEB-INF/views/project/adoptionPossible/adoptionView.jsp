@@ -55,7 +55,7 @@
 		<div class="inner">
 			<header class="align-center">
 				<p>Save The Animal</p>
-				<h2>adoptionView</h2>
+				<h2>Adoption List</h2>
 			</header>
 		</div>
 	</section>
@@ -66,7 +66,7 @@
 			<div class="box">
 				<div class="content">
 					<header class="align-center">
-						<p>입양 가능 동물 리스트</p>
+						<p>입양 가능 동물 목록</p>
 						<h2>입양 공고</h2>
 					</header>
 					<div>
@@ -83,7 +83,7 @@
                         <c:forEach var="animal" items="${apList}" varStatus="status">
                             <div class="col-md-4 mb-4 ">
                                 <div class="card">
-                                    <img src="<c:if test='${not empty animal.animalFile}'>/uploadStorage/animal/${animal.animalFile}</c:if>
+                                    <img src="<c:if test='${not empty animal.animalFile}'>/resources/images/storage/animal/${animal.animalFile}</c:if>
                                          <c:if test='${empty animal.animalFile}'>/resources/images/common/noanimal.jpg</c:if>"
                                        class="card-img-top l"  alt="Animal Image">
                                     <div class="card-body">
@@ -128,4 +128,38 @@
 			</div>
 		</div>
 	</section>
+	</div>
+	</div>
+	</div>
+	</div>
+	</section>
 	
+	
+	
+	
+	
+	
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="container">
+			<ul class="icons">
+				<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+			</ul>
+		</div>
+	</footer>
+	<div class="copyright">
+		Made with <a href="https://templated.co/">Templated</a>.
+	</div>
+
+	<!-- Scripts -->
+	<script src="/resources/include/assets2/js/jquery.min.js"></script>
+	<script src="/resources/include/assets2/js/jquery.scrollex.min.js"></script>
+	<script src="/resources/include/assets2/js/skel.min.js"></script>
+	<script src="/resources/include/assets2/js/util.js"></script>
+	<script src="/resources/include/assets2/js/main.js"></script>
+</body>
+
+</html> 

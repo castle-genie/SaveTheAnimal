@@ -18,7 +18,7 @@
 		</form>
 		
 		
-		<div class="row text-center mb_2">
+		<%-- <div class="row text-center mb_2">
 			<div id="pwdChk" class="col-md-9 text-start">	
 				<form name="f_passwdCheck" id="f_passwdCheck" class="row g-3">
 					<input type="hidden" name="animalId" value="${detail.animalId }"/>
@@ -34,7 +34,7 @@
 						<span id="message" class="align-middle"></span>
 					</div>
 				</form>				
-			</div>
+			</div> --%>
 			
 
 			<div class="col-md-10 text-end">

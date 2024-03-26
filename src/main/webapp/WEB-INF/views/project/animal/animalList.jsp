@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-auto">
                     <select id="search" name="search" class="form-select form-select-sm">
-                        <option value="all">전체 목록 조회</option>
+                        
                         <option value="animal_id">동물 ID</option>
                         <option value="animal_name">이름</option>
                         <option value="animal_species">분류</option>
@@ -33,6 +33,7 @@
                 </div>
                 <div class="col-auto">
                     <button type="button" id="searchData" class="btn btn-success btn-sm">검색</button>
+                    <button type="button" id="animalListBtn" class="btn btn-success btn-sm">전체 목록</button>
                 </div>
             </form>
         </div>
