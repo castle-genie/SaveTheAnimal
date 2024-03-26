@@ -147,7 +147,11 @@
 								<tr>
 									<td>공고 상태</td>
 									<td class="text-start">${detail.adoptionStatus }</td>
-									<td><button class="btn btn-primary" id="couselingBtn">입양 신청하기</button></td>
+									<c:choose>
+										<c:when test="${not empty userLogin.userId}">
+											<td><button class="btn btn-primary" id="couselingBtn">입양 신청하기</button></td>
+										</c:when>
+									</c:choose>
 								</tr>
 							</table>
 						</td>
