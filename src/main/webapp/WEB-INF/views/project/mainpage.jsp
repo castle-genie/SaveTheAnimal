@@ -101,7 +101,7 @@
 								<div>
 									<div class="box">
 										<div class="image fit">
-											<img src="/resources/images/pic02.jpg" alt="" width="600" height="300">
+											<img src="/resources/images/storage/volunteer/${mainVol.volunteerFile}" alt="" width="600" height="300">
 										</div>
 										<div class="content">
 											<header class="align-center">
