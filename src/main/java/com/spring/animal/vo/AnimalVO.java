@@ -21,7 +21,7 @@ public class AnimalVO extends CommonVO {
 	private String animalTemp;
 	private String animalRegist;
 	private String animalName="";
-	private String animalPasswd="";
+	
 	private int readcnt=0;
 	
 	private String adminId="";

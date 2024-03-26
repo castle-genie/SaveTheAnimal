@@ -7,7 +7,7 @@ $(function(){
 		else if(!chkData("#animalStatus","중성화 유무를")) return;
 		else if(!chkData("#animalMemo","특이사항을")) return;
 		else if(!chkData("#animalTemp","임시보호 유무를")) return;
-		else if(!chkData("#animalPasswd","비밀번호를")) return;
+		else if(!chkData("#animalFile","파일을")) return;
 		else {
 			if($("#file").val()!=""){
 				if(!chkFile($("#file"))) return;

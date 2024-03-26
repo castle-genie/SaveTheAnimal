@@ -18,7 +18,7 @@ public class AdoptionVO extends CommonVO{
 	private int adoptionCnt=0;
 	private String adoptionStatus="";
 	private String adoptionLevel="";
-	private String adoptionPasswd="";
+	
 	private String adminId;
 	
 	private int animalId =0;
