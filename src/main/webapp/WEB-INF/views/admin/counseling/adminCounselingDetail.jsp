@@ -11,9 +11,9 @@
                 <div class="card">
                     <div class="card-body">
                     	<form id="counselingForm">
-	                        <h5 class="card-title">예약 고유 ID: <input type="text" id="counselingId" name="counselingId" value="${adminCounselingDetail.counselingId}" /></h5>
-	                        <p class="card-text">예약일정: <input type="date" id="counselingSchedule" value="${adminCounselingDetail.counselingSchedule}"></p>
-	                        <p class="card-text">회원ID: <input type="text" id="userId" name="userId" value="${adminCounselingDetail.userId}"></p>
+	                        <h5 class="card-title">예약 고유 ID: <input type="text" id="counselingId" name="counselingId" value="${adminCounselingDetail.counselingId}"readonly /></h5>
+	                        <p class="card-text">예약일정: <input type="date" id="counselingSchedule" value="${adminCounselingDetail.counselingSchedule}"readonly></p>
+	                        <p class="card-text">회원ID: <input type="text" id="userId" name="userId" value="${adminCounselingDetail.userId }" readonly></p>
 	                        <p class="card-text">입양공고ID: ${adminCounselingDetail.adoptionId}</p>
 	                        <p class="card-text">동물ID: ${adminCounselingDetail.animalId}</p>
 	                        <p class="card-text">예약신청일자: ${adminCounselingDetail.counselingDate}</p>

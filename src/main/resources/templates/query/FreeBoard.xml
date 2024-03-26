@@ -18,9 +18,22 @@
 	
 	<!-- 자유게시판 목록 -->
 	<select id="freeBoardList" parameterType="FreeBoard" resultMap="freeBoardMap">
+		<![CDATA[
 		SELECT 	fboard_id, fboard_title, user_id, fboard_cnt, fboard_date
-		FROM 	freeBoard
+		FROM 	(
+				SELECT /*+ INDEX_DESC(freeBoard pk_freeBoard)*/
+					rownum as rnum, fboard_id, fboard_title, user_id, fboard_cnt, fboard_date
+				FROM freeBoard
+				WHERE	rownum <= #{pageNum} * #{amount}
+				) freeBoardList
+		WHERE	rnum > (#{pageNum} -1) * #{amount}
 		ORDER BY fboard_id DESC
+		]]>
+	</select>
+	
+	<!-- 자유게시판 게시글 갯수 카운트 -->
+	<select id="freeBoardListCnt" parameterType="FreeBoard" resultType="int">
+		select count(*) from freeBoard
 	</select>
 	
 	<!--  자유게시판 글 상세조회 -->
@@ -79,5 +92,15 @@
 		DELETE FROM freeBoard 
 		WHERE	fboard_id = #{fboardId}
 	</delete>
+	
+	<!-- 내가 작성한 게시글 히스토리 -->
+	<select id="boardCreateHistory" parameterType="FreeBoard" resultMap="freeBoardMap">
+		SELECT fboard_id, fboard_title, fboard_date, fboard_cnt, user_id
+		FROM freeBoard
+		WHERE user_id = #{userId}
+		ORDER BY fboard_id DESC
+	</select>
+	
+	
 	
 </mapper>

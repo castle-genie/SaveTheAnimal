@@ -6,34 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.spring.board.service.VolunteerFeedbackBoardService;
 import com.spring.board.vo.VolunteerFeedbackBoardVO;
+import com.spring.common.vo.PageDTO;
 import com.spring.user.vo.UserVO;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/volunteerFeedbackBoard/*")
 @Controller
 public class VolunteerFeedbackBoardController {
-	@Autowired
+	@Setter(onMethod_=@Autowired)
 	private VolunteerFeedbackBoardService volunteerFeedbackBoardService;
-	
-	
-	
 
 	@GetMapping(value = "volunteerFeedbackBoardList")
-	public String volunteerFeedbackBoardList(VolunteerFeedbackBoardVO vfvo, Model model) {
+	public String volunteerFeedbackBoardList(@ModelAttribute VolunteerFeedbackBoardVO vfvo, Model model) {
 		log.info("봉사후기게시글불러오기");
 		List<VolunteerFeedbackBoardVO> volunteerFeedbackBoardList = volunteerFeedbackBoardService.volunteerFeedbackBoardList(vfvo);
 		model.addAttribute("volunteerFeedbackBoardList", volunteerFeedbackBoardList);
 		log.info("봉사후기게시글불러오기완료");
 		
-		return "board/volunteerFeedbackBoardList";
+		int total = volunteerFeedbackBoardService.volunteerFeedbackBoardListCnt(vfvo);
+		model.addAttribute("pageMaker", new PageDTO(vfvo, total));
 		
+		return "board/volunteerFeedbackBoardList";
 	}
 	
 	// 게시글 조회
@@ -85,5 +87,17 @@ public class VolunteerFeedbackBoardController {
 		log.info("삭제완료");
 		return "redirect:/volunteerFeedbackBoard/volunteerFeedbackBoardList";
 	}
+	
+	// 내가 작성한 게시글 히스토리
+	@GetMapping(value = "volunteerFeedbackBoardHistory")
+	public String boardCreateHistory(VolunteerFeedbackBoardVO vfvo, Model model) {
+		
+		List<VolunteerFeedbackBoardVO> volunteerFeedbackBoardList = volunteerFeedbackBoardService.volunteerFeedbackBoardList(vfvo);
+		model.addAttribute("volunteerFeedbackBoardList", volunteerFeedbackBoardList);
+		
+		return "board/volunteerFeedbackBoardList";
+	}
+	
+	
 
 }

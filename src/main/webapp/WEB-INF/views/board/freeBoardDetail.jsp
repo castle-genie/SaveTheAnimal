@@ -29,7 +29,7 @@
 						<h2>${freeBoard.fboardTitle}</h2>
 					</header>
 					<div>
-						<textarea style="resize:none;" rows="20" readonly>${freeBoard.fboardContent}"</textarea>
+						<textarea style="resize:none;" rows="20" readonly>${freeBoard.fboardContent}</textarea>
 					</div>
 					<p>
 						작성자: ${freeBoard.userId} <span style="float: right;"><fmt:formatDate

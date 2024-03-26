@@ -14,9 +14,22 @@
 	<!-- *********************유저페이지********************* -->
 	<!-- 공지게시판 목록 (유저페이지)-->
 	<select id="noticeBoardList" parameterType="noticeBoard" resultMap="noticeBoardMap">
+		<![CDATA[
 		SELECT 	nboard_id, nboard_title, admin_id, nboard_cnt, nboard_date
-		FROM 	noticeBoard
+		FROM 	(
+				SELECT /*+ INDEX_DESC(noticeBoard pk_noticeBoard)*/
+					rownum as rnum, nboard_id, nboard_title, admin_id, nboard_cnt, nboard_date
+				FROM noticeBoard
+				WHERE	rownum <= #{pageNum} * #{amount}
+				) noticeBoardList
+		WHERE	rnum > (#{pageNum} -1) * #{amount}	
 		ORDER BY nboard_id DESC
+		]]>
+	</select>
+	
+	<!-- 공지게시판 게시글 갯수 카운트(유저페이지) -->
+	<select id="noticeBoardListCnt" parameterType="noticeBoard" resultType="int">
+		select count(*) from noticeBoard
 	</select>
 	
 		<!--  공지게시판 글 상세조회(유저페이지) -->
@@ -26,14 +39,31 @@
 		where 	n.nboard_id = #{nboardId}
 	</select>
 	
-	
-	
 	<!-- *********************관리자페이지********************* -->
 	<!-- 공지게시판 목록 (관리자 페이지)-->
 	<select id="adminNoticeBoardList" parameterType="noticeBoard" resultMap="noticeBoardMap">
+		<![CDATA[
+		SELECT 	nboard_id, nboard_title, admin_id, nboard_cnt, nboard_date
+		FROM 	(
+				SELECT /*+ INDEX_DESC(noticeBoard pk_noticeBoard)*/
+					rownum as rnum, nboard_id, nboard_title, admin_id, nboard_cnt, nboard_date
+				FROM noticeBoard
+				WHERE	rownum <= #{pageNum} * #{amount}
+				) adminNoticeBoardList
+		WHERE	rnum > (#{pageNum} -1) * #{amount}	
+		ORDER BY nboard_id DESC
+		]]>
+	</select>
+	
+	<!-- <select id="adminNoticeBoardList" parameterType="noticeBoard" resultMap="noticeBoardMap">
 		SELECT 	nboard_id, nboard_title, nboard_cnt, nboard_date, admin_id
 		FROM 	noticeBoard
 		ORDER BY nboard_id DESC
+	</select> -->
+	
+	<!-- 공지게시판 게시글 갯수 카운트(관리자페이지) -->
+	<select id="adminNoticeBoardListCnt" parameterType="noticeBoard" resultType="int">
+		select count(*) from noticeBoard
 	</select>
 	
 	<!--  공지게시판 글 상세조회(관리자 페이지) -->

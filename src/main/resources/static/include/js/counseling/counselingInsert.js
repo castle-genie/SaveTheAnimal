@@ -18,15 +18,12 @@ $(function() {
         else if (!chkData("#survey8", "입양 질문8번을")) return;
 
         else {
-            if ($("#file").val() != "") {
-                if (!chkFile($("#file"))) return;
-            }
-            $("#insertForm").attr({
+            $("#write_form").attr({
                 method: "post",
                 enctype: "multipart/form-data",
                 action: "/counseling/counselingInsert"
             });
-            $("#insertForm").submit();
+            $("#write_form").submit();
         }
     })
 })

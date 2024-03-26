@@ -37,8 +37,11 @@ public class CounselingController {
     }
 
     @GetMapping("/counselingWriteForm")
-    public String counselingWriteForm(@RequestParam("animalId") int animalId, Model model) {
+    public String counselingWriteForm(CounselingVO counselinVO, @RequestParam("animalId") int animalId, @RequestParam("adoptionId") int adoptionId, Model model) {
+    	CounselingVO counselingWriteForm = counselingService.writeForm(counselinVO);
+    	model.addAttribute("writeForm", counselingWriteForm);
     	model.addAttribute("animalId", animalId);
+    	model.addAttribute("adoptionId", adoptionId);
         return "/counseling/counselingWriteForm";
     }
 
@@ -47,7 +50,7 @@ public class CounselingController {
         try {
             int result = counselingService.counselingInsert(counselingVO);
             if (result == 1) {
-                return "redirect:/counseling/counselingList";
+                return "redirect:/ap/apList";
             }
             ras.addFlashAttribute("errorMsg", "입력에 문제가 있어 다시 진행해 주세요.");
         } catch (Exception e) {
@@ -77,7 +80,7 @@ public class CounselingController {
         if (adminLoginVO == null) {
             return "/admin/adminLogin";
         } else {
-            List<CounselingVO> counselingList = counselingService.counselingList(counselingVO);
+            List<CounselingVO> counselingList = counselingService.adminCounselingList(counselingVO);
             model.addAttribute("admincounselingList", counselingList);
             return "/admin/counseling/adminCounselingList"; // 여기 경로 수정 (/counseling/adminCounselingList)
         }
@@ -137,10 +140,18 @@ public class CounselingController {
     	return "redirect:"+url;
     }
     
-    @ResponseBody
-    @PostMapping("/userCounselingUpdate")
-    public void userCounselingUpdate(CounselingVO counselingVO) {
-    	counselingService.userCounselingUpdate(counselingVO);
-    }
 
+    @PostMapping("/userCounselingUpdate")
+    public String userCounselingUpdate(CounselingVO counselingVO) throws Exception {
+        int result = 0;
+        String url = "";
+
+        result = counselingService.counselingUpdate(counselingVO);
+        int num = counselingVO.getCounselingId();
+        if(result == 1) {
+            url = "/counseling/counselingDetail?counselingId="+num;
+        }
+        return "redirect:"+url;
+    }
+    
 }

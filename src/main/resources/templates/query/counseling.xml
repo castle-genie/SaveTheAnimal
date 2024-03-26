@@ -14,12 +14,27 @@
         <result column="counseling_address" property="counselingAddress"/>
         <result column="counseling_job" property="counselingJob"/>
         <result column="counseling_adopt" property="counselingAdopt"/>
+        <result column="user_name" property="userName" />
+        <result column="user_phone" property="userPhone" />
+        <association property="user">
+			<result column="user_name" property="userName" /> 
+			<result column="user_phone" property="userPhone" />
+		</association> 
     </resultMap>
 
     <!-- 상담 신청 목록 -->
     <select id="counselingList" parameterType="counseling" resultMap="counselingMap">
         SELECT counseling_id, counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
-               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt, user_name, user_phone
+               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt
+        FROM counseling
+        WHERE user_id = #{userId}
+        ORDER BY counseling_id DESC
+    </select>
+    
+    <!-- 상담 신청 목록(관리자) -->
+    <select id="adminCounselingList" parameterType="counseling" resultMap="counselingMap">
+        SELECT counseling_id, counseling_schedule, user_id, adoption_id, animal_id, counseling_date,
+               counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt
         FROM counseling
         ORDER BY counseling_id DESC
     </select>
@@ -31,6 +46,13 @@
         FROM counseling
         WHERE counseling_id = #{counselingId}
     </select>
+    
+    <!-- writeForm 에 정보 출력 -->
+    <select id="writeForm" parameterType="counseling" resultMap="counselingMap">
+    	SELECT user_name, user_phone
+    	FROM users
+    	WHERE user_id = #{userId}
+    </select>
 
     <!-- 상담 신청 입력 -->
     <insert id="counselingInsert" parameterType="counseling">
@@ -38,20 +60,19 @@
                                counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt, user_name, user_phone)
         VALUES (
         		   counseling_seq.nextval,
-                   #{counseling_schedule},
-                   #{user_id},
-                   #{adoption_id},
-                   #{animal_id},
-                   #{counseling_date},
-                   #{counseling_judgment},
-                   #{counseling_detail},
-                   #{counseling_age},
-                   #{counseling_address},
-                   #{counseling_job},
-                   #{counseling_adopt},
-                #{user_name},
-                #{user_phone}
-
+        		   #{counselingSchedule},
+        		   #{userId},
+        		   #{adoptionId},
+        		   #{animalId},
+        		   sysdate,
+        		   default,
+        		   '상담 전',
+        		   #{counselingAge},
+        		   #{counselingAddress},
+        		   #{counselingJob},
+        		   default,
+        		   #{userName},
+        		   #{userPhone}
                )
     </insert>
 
