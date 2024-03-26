@@ -34,7 +34,7 @@
 					<input type="text" id="animalId" name="animalId" value="${ animalId }" readonly />
 
                     <label for="userName"></label><br>
-                    <input type="text" id="userName" name="userName" placeholder="성명">
+                    <input type="text" id="userName" name="userName" value="${ writeForm.user.userName }" placeholder="성명">
 
                     <label for="counselingAge"></label><br>
                     <input type="text" id="counselingAge" name="counselingAge" placeholder="연령">
@@ -43,7 +43,7 @@
                     <input type="text" id="counselingAddress" name="counselingAddress" placeholder="주소">
 
                     <label for="userPhone"></label><br>
-                    <input type="text" id="userPhone" name="userPhone" value="${ userLogin.userPhone }" placeholder="전화번호">
+                    <input type="text" id="userPhone" name="userPhone" value="${ writeForm.user.userPhone }" placeholder="전화번호">
 
                     <label for="counselingJob"></label><br>
                     <input type="text" id="counselingJob" name="counselingJob" placeholder="직업">
