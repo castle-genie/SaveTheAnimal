@@ -14,6 +14,8 @@
         <result column="counseling_address" property="counselingAddress"/>
         <result column="counseling_job" property="counselingJob"/>
         <result column="counseling_adopt" property="counselingAdopt"/>
+        <result column="user_name" property="userName" />
+        <result column="user_phone" property="userPhone" />
         <association property="user">
 			<result column="user_name" property="userName" /> 
 			<result column="user_phone" property="userPhone" />
@@ -49,17 +51,19 @@
                                counseling_judgment, counseling_detail, counseling_age, counseling_address, counseling_job, counseling_adopt, user_name, user_phone)
         VALUES (
         		   counseling_seq.nextval,
+        		   #{counselingSchedule},
+        		   #{userId},
+        		   #{adoptionId},
         		   #{animalId},
+        		   sysdate,
+        		   default,
+        		   '상담 전',
         		   #{counselingAge},
         		   #{counselingAddress},
         		   #{counselingJob},
-                   #{counselingSchedule},
-                   #{userName},
-                   #{userId},
-                   #{adoptionId},
-                   #{counselingDate},
-                   #{userPhone}
-
+        		   default,
+        		   #{userName},
+        		   #{userPhone}
                )
     </insert>
 
