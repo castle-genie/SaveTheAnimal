@@ -95,4 +95,10 @@ public class AnimalServiceImpl implements AnimalService{
 			return result;
 		}
 
+		@Override
+		public List<AnimalVO> mainAni(AnimalVO avo) {
+			List<AnimalVO> mainAni = animalDAO.mainAni(avo);
+			return mainAni;
+		}
+
 }
