@@ -157,8 +157,8 @@
 						<c:when test="${not empty mainAni}">
 							<c:forEach var="mainAni" items="${mainAni}" varStatus="status">
 								<div>
-									<div class="image fit" stylewidth="620px" height="320px">
-										<img src="/resources/images/storage/animal/${mainAni.animalFile}" alt="${mainAni.animalName}" width="600px" height="300px">
+									<div class="image fit" style="width:600px; height:300px;">
+										<img src="/resources/images/storage/animal/${mainAni.animalFile}" alt="${mainAni.animalName}" width="600" height="300" style="width:570px; height:270px;">
 									</div>
 								</div>
 							</c:forEach>
@@ -166,7 +166,7 @@
 						<c:otherwise>
 							<div>
 								<div class="image fit">
-									<a href="#"><img id="/resources/images/pic01.jsp" src="" alt="" width="600" height="300"></a>
+									<a href="#"><img id="/resources/images/pic01.jsp" src="" alt="" width="600" height="300" ></a>
 								</div>
 							</div>
 							<div>
