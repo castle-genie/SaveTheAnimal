@@ -2,12 +2,14 @@ package com.spring.counseling.vo;
 
 import java.util.Date;
 
+import com.spring.user.vo.UserVO;
+
 import lombok.Data;
 
 @Data
 public class CounselingVO {
     private int counselingId; // 예약 고유 ID
-    private Date counselingSchedule; // 예약 일정
+    private String counselingSchedule; // 예약 일정
     private String userId; // 회원 ID
     private int adoptionId; // 입양 공고 ID
     private int animalId; // 동물 ID
@@ -18,4 +20,6 @@ public class CounselingVO {
     private String counselingAddress; // 주소
     private String counselingJob; // 직업
     private int counselingAdopt; // 입양/임시보호 구분
+    
+    private UserVO user = new UserVO();
 }
