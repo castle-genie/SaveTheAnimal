@@ -24,34 +24,43 @@
 			where 조건문에서도 or 연산자를 통해 각 콘텐츠 테이블의 아이디 유무를 확인한다.
 			또한 where절에서 report_id를 1로 규정해 이미 제재 처리된 신고 콘텐츠는 표시하지 않는다.	-->
 	<select id="reportList" parameterType="report" resultMap="reportMap">
-		select distinct r.report_id, r.report_sort, to_char(r.report_date, 'YYYY-MM-DD') as report_date, r.report_status,
-		    r.user_id, r.fboard_id, r.vfboard_id, r.afboard_id, r.fcomment_id, r.vfcomment_id, r.afcomment_id ,
-		    case
-		        when r.fboard_id is not null then f.fboard_title
-		        when r.vfboard_id is not null then v.vfboard_title
-		        when r.afboard_id is not null then a.afboard_title
-		        when r.fcomment_id is not null then fc.fcomment_content
-		        when r.vfcomment_id is not null then vc.vfcomment_content
-		        when r.afcomment_id is not null then ac.afcomment_content
-		    end as boardTitle,
-		    case
-		        when r.fboard_id is not null then to_char(f.fboard_date, 'YYYY-MM-DD')
-		        when r.vfboard_id is not null then to_char(v.vfboard_date, 'YYYY-MM-DD')
-		        when r.afboard_id is not null then to_char(a.afboard_date, 'YYYY-MM-DD')
-		        when r.fcomment_id is not null then to_char(fc.fcomment_date, 'YYYY-MM-DD')
-		        when r.vfcomment_id is not null then to_char(vc.vfcomment_date, 'YYYY-MM-DD')
-		        when r.afcomment_id is not null then to_char(ac.afcomment_date, 'YYYY-MM-DD')
-		    end as boardDate,
-		    case
-		        when r.fboard_id is not null then f.user_id
-		        when r.vfboard_id is not null then v.user_id
-		        when r.afboard_id is not null then a.user_id
-		        when r.fcomment_id is not null then fc.user_id
-		        when r.vfcomment_id is not null then vc.user_id
-		        when r.afcomment_id is not null then ac.user_id
-		    end as boardUser
-		from report r, freeBoard f, volunteerFeedbackBoard v, adoptionFeedbackBoard a, fcomment fc, vfcomment vc, afcomment ac
-		where (r.report_status = 1) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
+		SELECT
+		    r.report_id, 
+		    r.report_sort, 
+		    TO_CHAR(r.report_date, 'YYYY-MM-DD') AS report_date, 
+		    r.report_status,
+		    r.user_id, 
+		    r.fboard_id, 
+		    r.vfboard_id, 
+		    r.afboard_id, 
+		    r.fcomment_id, 
+		    r.vfcomment_id, 
+		    r.afcomment_id ,
+		    COALESCE(f.fboard_title, v.vfboard_title, a.afboard_title, fc.fcomment_content, vc.vfcomment_content, ac.afcomment_content) AS boardTitle,
+		    COALESCE(TO_CHAR(f.fboard_date, 'YYYY-MM-DD'), TO_CHAR(v.vfboard_date, 'YYYY-MM-DD'), TO_CHAR(a.afboard_date, 'YYYY-MM-DD'), TO_CHAR(fc.fcomment_date, 'YYYY-MM-DD'), TO_CHAR(vc.vfcomment_date, 'YYYY-MM-DD'), TO_CHAR(ac.afcomment_date, 'YYYY-MM-DD')) AS boardDate,
+		    COALESCE(f.user_id, v.user_id, a.user_id, fc.user_id, vc.user_id, ac.user_id) AS boardUser
+		FROM 
+		    report r
+		LEFT OUTER JOIN (
+		    SELECT fboard_id, fboard_title, fboard_date, user_id FROM freeBoard
+		) f ON r.fboard_id = f.fboard_id
+		LEFT OUTER JOIN (
+		    SELECT vfboard_id, vfboard_title, vfboard_date, user_id FROM volunteerFeedbackBoard
+		) v ON r.vfboard_id = v.vfboard_id
+		LEFT OUTER JOIN (
+		    SELECT afboard_id, afboard_title, afboard_date, user_id FROM adoptionFeedbackBoard
+		) a ON r.afboard_id = a.afboard_id
+		LEFT OUTER JOIN (
+		    SELECT fcomment_id, fcomment_content, fcomment_date, user_id FROM fcomment
+		) fc ON r.fcomment_id = fc.fcomment_id
+		LEFT OUTER JOIN (
+		    SELECT vfcomment_id, vfcomment_content, vfcomment_date, user_id FROM vfcomment
+		) vc ON r.vfcomment_id = vc.vfcomment_id
+		LEFT OUTER JOIN (
+		    SELECT afcomment_id, afcomment_content, afcomment_date, user_id FROM afcomment
+		) ac ON r.afcomment_id = ac.afcomment_id
+		WHERE 
+		    r.report_status = 1
 	</select>
 	
 	<!-- 	reportDetail.jsp 출력을 위한 select 문
@@ -60,51 +69,43 @@
 			where 조건문에서도 or 연산자를 통해 각 콘텐츠 테이블의 아이디 유무를 확인한다.
 			또한 user_repcnt를 users 테이블에서 가져오기 위해 user_id를 users table과 report table에서 비교한다.	-->
 	<select id="reportDetail" parameterType="report" resultMap="reportMap">
-		select distinct r.report_id, r.report_sort, to_char(r.report_date, 'YYYY-MM-DD') as report_date, r.report_status, r.report_detail,
-		    r.user_id, r.fboard_id, r.vfboard_id, r.afboard_id, r.fcomment_id, r.vfcomment_id, r.afcomment_id, u.user_repcnt,
-		    case
-		        when r.fboard_id is not null then f.fboard_id
-		        when r.vfboard_id is not null then v.vfboard_id
-		        when r.afboard_id is not null then a.afboard_id
-		        when r.fcomment_id is not null then fc.fcomment_id
-		        when r.vfcomment_id is not null then vc.vfcomment_id
-		        when r.afcomment_id is not null then ac.afcomment_id
-		    end as boardId,
-		    case
-		        when r.fboard_id is not null then f.fboard_title
-		        when r.vfboard_id is not null then v.vfboard_title
-		        when r.afboard_id is not null then a.afboard_title
-		        when r.fcomment_id is not null then fc.fcomment_content
-		        when r.vfcomment_id is not null then vc.vfcomment_content
-		        when r.afcomment_id is not null then ac.afcomment_content
-		    end as boardTitle,
-		    case
-		        when r.fboard_id is not null then to_char(f.fboard_date, 'YYYY-MM-DD')
-		        when r.vfboard_id is not null then to_char(v.vfboard_date, 'YYYY-MM-DD')
-		        when r.afboard_id is not null then to_char(a.afboard_date, 'YYYY-MM-DD')
-		        when r.fcomment_id is not null then to_char(fc.fcomment_date, 'YYYY-MM-DD')
-		        when r.vfcomment_id is not null then to_char(vc.vfcomment_date, 'YYYY-MM-DD')
-		        when r.afcomment_id is not null then to_char(ac.afcomment_date, 'YYYY-MM-DD')
-		    end as boardDate,
-		    case
-		        when r.fboard_id is not null then f.user_id
-		        when r.vfboard_id is not null then v.user_id
-		        when r.afboard_id is not null then a.user_id
-		        when r.fcomment_id is not null then fc.user_id
-		        when r.vfcomment_id is not null then vc.user_id	
-		        when r.afcomment_id is not null then ac.user_id
-		    end as boardUser,
-		    case
-		        when r.fboard_id is not null then f.fboard_content
-		        when r.vfboard_id is not null then v.vfboard_content
-		        when r.afboard_id is not null then a.afboard_content
-		        when r.fcomment_id is not null then fc.fcomment_content
-		        when r.vfcomment_id is not null then vc.vfcomment_content
-		        when r.afcomment_id is not null then ac.afcomment_content
-		    end as boardContent
-		from report r, freeBoard f, volunteerFeedbackBoard v, adoptionFeedbackBoard a, fcomment fc, vfcomment vc, afcomment ac, users u
-		where (u.user_id = (select user_id from freeboard where fboard_id = (select fboard_id from report where report_id = #{reportId}))) and (r.report_id = #{reportId}) and ((r.fboard_id = f.fboard_id) or (r.vfboard_id = v.vfboard_id) or (r.afboard_id = a.afboard_id) or (r.fcomment_id = fc.fcomment_id) or (r.vfcomment_id = vc.vfcomment_id) or (r.afcomment_id = ac.afcomment_id))
-	
+		SELECT DISTINCT
+		    r.report_id, 
+		    r.report_sort, 
+		    TO_CHAR(r.report_date, 'YYYY-MM-DD') AS report_date, 
+		    r.report_status,
+		    r.report_detail,
+		    r.user_id, 
+		    r.fboard_id, 
+		    r.vfboard_id, 
+		    r.afboard_id, 
+		    r.fcomment_id, 
+		    r.vfcomment_id, 
+		    r.afcomment_id, 
+		    u.user_repcnt,
+		    COALESCE(f.fboard_id, v.vfboard_id, a.afboard_id, fc.fcomment_id, vc.vfcomment_id, ac.afcomment_id) AS boardId,
+		    COALESCE(f.fboard_title, v.vfboard_title, a.afboard_title, fc.fcomment_content, vc.vfcomment_content, ac.afcomment_content) AS boardTitle,
+		    COALESCE(TO_CHAR(f.fboard_date, 'YYYY-MM-DD'), TO_CHAR(v.vfboard_date, 'YYYY-MM-DD'), TO_CHAR(a.afboard_date, 'YYYY-MM-DD'), TO_CHAR(fc.fcomment_date, 'YYYY-MM-DD'), TO_CHAR(vc.vfcomment_date, 'YYYY-MM-DD'), TO_CHAR(ac.afcomment_date, 'YYYY-MM-DD')) AS boardDate,
+		    COALESCE(f.user_id, v.user_id, a.user_id, fc.user_id, vc.user_id, ac.user_id) AS boardUser,
+		    COALESCE(f.fboard_content, v.vfboard_content, a.afboard_content, fc.fcomment_content, vc.vfcomment_content, ac.afcomment_content) AS boardContent
+		FROM 
+		    report r
+		LEFT OUTER JOIN 
+		    freeBoard f ON r.fboard_id = f.fboard_id
+		LEFT OUTER JOIN 
+		    volunteerFeedbackBoard v ON r.vfboard_id = v.vfboard_id
+		LEFT OUTER JOIN 
+		    adoptionFeedbackBoard a ON r.afboard_id = a.afboard_id
+		LEFT OUTER JOIN 
+		    fcomment fc ON r.fcomment_id = fc.fcomment_id
+		LEFT OUTER JOIN 
+		    vfcomment vc ON r.vfcomment_id = vc.vfcomment_id
+		LEFT OUTER JOIN 
+		    afcomment ac ON r.afcomment_id = ac.afcomment_id
+		LEFT OUTER JOIN 
+		    users u ON (u.user_id = COALESCE(f.user_id, v.user_id, a.user_id, fc.user_id, vc.user_id, ac.user_id))
+		WHERE 
+		    r.report_id = #{reportId}
 	</select>
 
 
@@ -166,17 +167,17 @@
 	<update id="reportUpdateFC" parameterType="report">
 		update report
 		set report_status = 2
-		where fcomment_id = #{boardId)}
+		where fcomment_id = #{boardId}
 	</update>
 	<update id="reportUpdateVC" parameterType="report">
 		update report
 		set report_status = 2
-		where vfcomment_id = #{boardId)}
+		where vfcomment_id = #{boardId}
 	</update>
 	<update id="reportUpdateAC" parameterType="report">
 		update report
 		set report_status = 2
-		where afcomment_id = #{boardId)}
+		where afcomment_id = #{boardId}
 	</update>
 
 

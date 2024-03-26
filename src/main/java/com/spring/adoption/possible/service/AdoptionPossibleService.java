@@ -16,4 +16,6 @@ public interface AdoptionPossibleService {
 	public int apInsert(AdoptionPossibleVO apvo) throws Exception;
 	public int apUpdate(AdoptionPossibleVO apvo) throws Exception;
 	public int apDelete(AdoptionPossibleVO apvo) throws Exception;
+	
+	
 }

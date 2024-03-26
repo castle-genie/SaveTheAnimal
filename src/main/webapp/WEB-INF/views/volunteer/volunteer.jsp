@@ -79,10 +79,6 @@
         });
 
         calendar.render();
-
-        calendarEl.querySelector('.fc-customButton-button').addEventListener('click', function() {
-            location.href = "/volunteer/volunteerWriteForm";
-        });
     });
 	</script>
 	
@@ -96,7 +92,7 @@
 		<div class="inner">
 			<header class="align-center">
 				<p>Save The Animal</p>
-				<h2>STA 봉사 신청</h2>
+				<h2>봉사 신청</h2>
 			</header>
 		</div>
 	</section>

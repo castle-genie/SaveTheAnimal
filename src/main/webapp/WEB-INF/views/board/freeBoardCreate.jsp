@@ -31,34 +31,24 @@
 					</header>
 					<form method="post" action="/board/freeBoardCreate">
 						<div class="row uniform">
-							<!--  
 							<div class="12u$">
-								<input type="text" name="fboardId" id="fboardId" placeholder="fboardId를 입력해주세요.">
+								<h3>제목</h3>
+								<input type="text" name="fboardTitle" id="fboardTitle"
+									placeholder="제목을 입력해주세요.">
 							</div>
-							-->
-							<div class="12u$">제목
-							
-								<input type="text" name="fboardTitle" id="fboardTitle" placeholder="제목을 입력해주세요.">
+							<div class="12u$">
+								<h3>내용</h3>
+								<textarea cols="100" wrap="hard" name="fboardContent"
+									id="fboardContent" placeholder="내용을 입력해주세요" rows="6"></textarea>
 							</div>
-							<div class="12u$">내용
-								<!--  
-								<textarea name="fboardContent" id="fboardContent" placeholder="내용을 입력해주세요."
-									rows="6"></textarea>
-								-->
-								<textarea cols="100" wrap="hard" name="fboardContent" id="fboardContent" placeholder="내용을 입력해주세요"
-									rows="6"></textarea>
-							</div>
-							<div class="12u$">작성자
-								<input type="text" name="userId" id="userId" value="${sessionScope.userId}" readonly>
+							<div class="12u$">
+								<input type="hidden" name="userId" id="userId"
+									value="${userLogin.userId}">
 							</div>
 							<div class="12u$">
 								<ul class="actions">
-									<li>
-										<input type="submit" value="등록">
-									</li>
-									<li>
-										<a href="/board/freeBoardList" class="button">취소</a>
-									</li>
+									<li><input type="submit" value="등록"></li>
+									<li><a href="/board/freeBoardList" class="button">취소</a></li>
 								</ul>
 							</div>
 						</div>

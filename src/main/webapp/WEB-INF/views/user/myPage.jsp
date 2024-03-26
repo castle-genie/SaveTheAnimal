@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ include file="/WEB-INF/views/common/common.jsp" %>
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<link rel="stylesheet" href="/resources/include/assets2/css/main.css">
@@ -121,7 +122,7 @@
 							 		<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
 							        <div class="d-flex justify-content-between">
 							          <strong class="text-gray-dark">입양 · 임시보호 신청내역</strong>
-							          <a href="#">확인하기</a>
+							          <a href="/counseling/counselingList?userId=${userLogin.userId}">확인하기</a>
 							        </div>
 							        <span class="d-block">입양 및 임시보호 신청 내역 및 결과 확인</span>
 							      </div>
@@ -133,7 +134,7 @@
 									<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
 							        <div class="d-flex justify-content-between">
 							          <strong class="text-gray-dark">작성 글 히스토리</strong>
-							          <a href="/profile">확인하기</a>
+							          <a href="#">확인하기</a>
 							        </div>
 							        <span class="d-block">게시판 작성 글 확인</span>
 							      	</div>
@@ -144,39 +145,6 @@
 							  </div>					
 						</div>
 
-						<!-- 기부 후원 내역 -->
-					 	<div class="image fit">			
-							<div class="my-3 p-4 bg-body rounded shadow-sm">
-							    <h4 class="border-bottom pb-2 mb-0"><strong>My Donations</strong></h4>
-							    <div class="d-flex text-body-secondary pt-3">
-							      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
-								      <rect width="100%" height="100%" fill="#fff"/>
-							      </svg>
-							      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-							        <div class="d-flex justify-content-between">
-							          <strong class="text-gray-dark">후원 내역</strong>
-							          <a href="#"></a>
-							        </div>
-							        <span class="d-block">후원 시작일, 후원 금액, 후원 누적 금액 확인</span>
-							      </div>
-							    </div>
-							    <div class="d-flex text-body-secondary pt-3">
-							      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
-								      <rect width="100%" height="100%" fill="#fff"/>
-							      </svg>     
-							 		<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-							        <div class="d-flex justify-content-between">
-							          <strong class="text-gray-dark">결제 정보</strong>
-							          <a href="#"></a>
-							        </div>
-							        <span class="d-block">결제 예정일, 결제 정보 내역 확인</span>
-							      </div>
-							    </div>							 
-							    <small class="d-block text-end mt-3">
-							      <a href="#">확인하기</a>
-							    </small>
-							  </div>					
-						</div>
 						<hr>
 						<small class="d-block text-end mt-3">
 							<button type="button" id="logoutBtn" class="btn btn-small">로그아웃</button>
@@ -191,7 +159,7 @@
 			<div>myPage.jsp 화면</div>
 			<div>하위 메뉴 배치 해서 회원정보 ajax로 불러오기</div>
 			<div>내 정보 수정 : updateProfile.jsp</div>
-			<div>나의 활동, 후원 정보 : 각각 해당 페이지로 이동하여 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
+			<div>나의 활동 : 각각 해당 페이지로 이동하여 확인하게 할지? 아니면 현재 화면에서 불러오기로 할지?</div>
 			<hr> -->
 		</div>
 	</section>
@@ -204,9 +172,6 @@
 				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 				<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 				<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-				<%-- <c:if test="${not empty userLogin}">
-				  	<li><a onmouseover="this.style.color='white'" onmouseout="this.style.color='grey'" style="text-decoration: none;" href="/user/logout"> LOGOUT </a></li>
-				</c:if> --%>
 			</ul>
 		</div>
 	</footer>

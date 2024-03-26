@@ -16,7 +16,7 @@
 		<div class="inner">
 			<header class="align-center">
 				<p>Save The Animal</p>
-				<h2>페이지 이름</h2>
+				<h2>봉사 신청 확인</h2>
 			</header>
 		</div>
 	</section>
@@ -49,18 +49,25 @@
 							    					<th class="col-md-1">공고 번호</th>
 							    					<th class="col-md-6">공고 제목</th>
 							    					<th class="col-md-4">봉사 날짜</th>
-							    					<th class="col-md-2">취소</th>
+							    					<th class="col-md-2">취소 / 참석</th>
 						    					</tr>
 					    					</thead>
 					    					<tbody>
 					    						<c:choose>
 					    							<c:when test="${ not empty view }">
 					    								<c:forEach items="${ view }" var="list">
-					    									<tr class="text-center" data-id="${ list.applicationId }">
+					    									<tr class="text-center" data-id="${ list.applicationId }" data-num="${ list.applicationResult }"	>
 					    										<td>${ list.volunteer.volunteerId }</td>
 					    										<td>${ list.volunteer.volunteerTitle }</td>
 					    										<td>${ list.volunteer.volunteerTime }</td>
-					    										<td><button type="button" class="cancelBtn">취소</button></td>
+				    											<c:choose>
+				    												<c:when test="${1 eq list.applicationResult}">
+				    													<td>참여 완료</td>
+			    													</c:when>
+			    													<c:otherwise>
+			    														<td><button type="button" class="cancelBtn">취소</button></td>
+		    														</c:otherwise>
+	    														</c:choose>
 				    										</tr>
 			    										</c:forEach>
 		    										</c:when>
@@ -76,7 +83,38 @@
 							    <small class="d-block text-end mt-3">
 							      <a href="#"></a>
 							    </small>
-							  </div>					
+							    <%--============ 페이징 출력 시작 ============--%>	
+							<nav aria-label="Page navigation example">
+							<form id="page" name="page">
+								<input type="hidden" name="userId" id="userId" value="${ userLogin.userId }" />
+								<input type="hidden" name="pageNum" id="pageNum" value="${ pageMaker.cvo.pageNum }" />
+								<input type="hidden" name="amount" id="amount" value="${ pageMaker.cvo.amount }" />
+							</form>
+							  <ul class="pagination justify-content-center">
+							  	<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
+							  	<c:if test="${pageMaker.prev}">
+								    <li class="page-item">
+								      <a href="${pageMaker.startPage - 1}" class="page-link">Previous</a>
+								      <%-- <a href="${pageMaker.startPage - 10}" class="page-link">Previous</a> --%>
+								    </li>		  	
+							 	</c:if>
+							 	
+							 	<!-- 바로가기 번호 출력 -->
+							 	<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+								    <li class="page-item ${pageMaker.cvo.pageNum == num ? 'active':''}">
+								    	<a href="${num}" class="page-link">${num}</a>
+								    </li>	
+							 	</c:forEach>
+							 	
+							 	<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->
+								<c:if test="${pageMaker.next}">
+								    <li class="page-item">
+								      <a href="${pageMaker.endPage + 1}" class="page-link">Next</a>
+								    </li>
+								</c:if>
+							  </ul>
+							</nav>			
+							  </div>
 						</div>
 					</div>
 					</c:if>

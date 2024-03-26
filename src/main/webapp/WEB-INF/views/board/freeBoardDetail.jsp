@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
@@ -30,7 +29,7 @@
 						<h2>${freeBoard.fboardTitle}</h2>
 					</header>
 					<div>
-						<pre>${freeBoard.fboardContent}</pre>
+						<textarea style="resize:none;" rows="20" readonly>${freeBoard.fboardContent}"</textarea>
 					</div>
 					<p>
 						작성자: ${freeBoard.userId} <span style="float: right;"><fmt:formatDate
@@ -39,47 +38,40 @@
 					<br>
 					<ul class="actions text-end">
 						<li><a href="freeBoardList" class="button special">목록</a></li>
-						<c:if test="${sessionScope.userId eq freeBoard.userId}">
+						<c:if test="${userLogin.userId eq freeBoard.userId}">
 							<li><input type="button" value="수정"
 								onclick="location.href='freeBoardModify?fboardId=${freeBoard.fboardId}'"></li>
 							<li><input type="button" value="삭제"
 								onclick="del(${freeBoard.fboardId})"></li>
 						</c:if>
 						<c:if test="${empty userLogin}">
-							<li>
-								<a href="/user/login" onclick="alert('신고하려면 로그인이 필요합니다')">
+							<li><a href="/user/login"
+								onclick="alert('신고하려면 로그인이 필요합니다')">
 									<button type="button" class="btn btn-primary button special">신고</button>
-								</a>
-							</li>
+							</a></li>
 						</c:if>
 						<c:if test="${not empty userLogin}">
 							<c:choose>
-								<c:when test="${freeBoard.reUserId eq sessionScope.userId}">
-									<li><%@ include file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
+								<c:when test="${freeBoard.reUserId eq userLogin.userId}">
+									<c:if test="${freeBoard.reportStatus eq 1}">
+										<li><%@ include file="/WEB-INF/views/report/fbReportUpdate.jsp"%></li>
+									</c:if>
+									<c:if test="${freeBoard.reportStatus eq 2}">
+										<li><button type="button" class="btn btn-primary button">신고처리됨</button></li>
+									</c:if>
 								</c:when>
 								<c:otherwise>
-									<li><%@ include file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
+									<li><%@ include
+											file="/WEB-INF/views/report/fbReportInsert.jsp"%></li>
 								</c:otherwise>
-								
+
 							</c:choose>
 						</c:if>
 					</ul>
+					<!-- 댓글 시작 -->
+					<%@ include file="/WEB-INF/views/board/fcomment.jsp"%>
+					<!-- 댓글 종료 -->
 				</div>
-				<!-- 댓글 시작 -->
-				<hr />
-				<form method="post" action="/reply/write">
-
-					<p>
-						<label>댓글 작성자</label> <input type="text" name="writer">
-					</p>
-					<p>
-						<textarea rows="5" cols="50" name="content"></textarea>
-					</p>
-					<p>
-						<input type="hidden" name="fboardId" value="${freeBoard.fboardId}">
-						<button type="submit">댓글 작성</button>
-					</p>
-				</form>
 			</div>
 		</div>
 		<!-- 댓글 종료 -->

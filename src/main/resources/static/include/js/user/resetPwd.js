@@ -12,7 +12,7 @@ $(function(){
         if (!chkData("#userId", "아이디를") || !chkData("#userEmail", "이메일을")) return;	
 
 		// 비밀번호 리셋 후 비밀번호 리턴하는 함수 로직			
-		//alert("임시 비밀번호 리턴 로직 실행");
+		// alert("임시 비밀번호 리턴 로직 실행");
 		// 10자리 랜덤 비밀번호 생성 -> 보안성을 위해 자바단에서 메서드 구현
 		//let tempPassword = generateRandomPassword(10);
 		//console.log(tempPassword);

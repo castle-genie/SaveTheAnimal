@@ -18,7 +18,7 @@ public interface AnimalDAO {
 	public int animalDelete(AnimalVO avo);
 	public int animalListCnt(AnimalVO avo);
 	
-	  
+	public List<AnimalVO> mainAni(AnimalVO avo);
 	
 	 
 	 

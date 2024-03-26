@@ -12,10 +12,10 @@
 	 	<input type="hidden" id="volunteerId" name="volunteerId" value="${ updateList.volunteerId }" />
 	 
         <label for="volunteerTitle">봉사활동 제목:</label><br>
-        <input type="text" id="volunteerTitle" name="volunteerTitle" value="${ updateList.volunteerTitle }"><br><br>
+        <input type="text" id="volunteerTitle" name="volunteerTitle" value="${ updateList.volunteerTitle }" readonly><br><br>
         
         <label for="volunteerTime">봉사활동 기간:</label><br>
-        <input type="date" id="volunteerTime" name="volunteerTime" value="${ updateList.volunteerTime }"><br><br>
+        <input type="date" id="volunteerTime" name="volunteerTime" value="${ updateList.volunteerTime }" readonly><br><br>
         
         <label for="volunteerDue">봉사활동 신청 마감일:</label><br>
         <input type="datetime-local" id="volunteerDue" name="volunteerDue" value="${ updateList.volunteerDue }"><br><br>
@@ -30,7 +30,10 @@
         <input type="text" id="volunteerLocation" name="volunteerLocation" value="${ updateList.volunteerLocation }"><br><br>
         
         <label for="volunteerDetail">세부사항:</label><br>
-        <textarea id="volunteerDetail" name="volunteerDetail" rows="4" cols="50" >${ updateList.volunteerDetail }</textarea><br><br>
+        <textarea id="volunteerDetail" name="volunteerDetail" rows="20" cols="100" style="resize: none;" >${ updateList.volunteerDetail }</textarea><br><br>
+        
+        <label for="volunteerThumbnail">공고 썸네일</label><br>
+		<input type="file" id="file" name="file" value="${ updateList.volunteerFile }"><br><br>
         
         <input type="button" value="제출" id="updateBtn">
     </form>

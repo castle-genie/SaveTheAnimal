@@ -287,32 +287,27 @@
 							class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
 							<ul class="nav flex-column">
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2 active"
-									aria-current="page" href="/admin"> <svg class="bi">
-											<use xlink:href="#house-fill" /></svg> Dashboard
-								</a></li>
-								<li class="nav-item"><a
 									class="nav-link d-flex align-items-center gap-2" href="/project/adminVolunteerList"> <svg
 											class="bi">
 											<use xlink:href="#file-earmark-text" /></svg> 봉사공고
 								</a></li>
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="adoption/adoptionList"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="/adoption/adoptionList"> <svg
 											class="bi">
 											<use xlink:href="#file-earmark-text" /></svg> 입양공고
 								</a></li>
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="#"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="/admin/noticeBoardList"> <svg
 											class="bi">
 											<use xlink:href="#file-earmark-text" /></svg> 공지게시판
 								</a></li>
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="#"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="/counseling/adminCounselingList"> <svg
 											class="bi">
-											<use xlink:href="#file-earmark-text" /></svg> 후원목록
+											<use xlink:href="#file-earmark-text" /></svg> 입양상담신청
 								</a></li>
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="animal/animalList"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="/animal/animalList"> <svg
 											class="bi">
 											<use xlink:href="#file-earmark-text" /></svg> 동물 등록
 								</a></li>
@@ -334,13 +329,9 @@
 							<hr class="my-3">
 	
 							<ul class="nav flex-column mb-auto">
+								
 								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="#"> <svg
-											class="bi">
-											<use xlink:href="#gear-wide-connected" /></svg> Settings
-								</a></li>
-								<li class="nav-item"><a
-									class="nav-link d-flex align-items-center gap-2" href="#"> <svg
+									class="nav-link d-flex align-items-center gap-2" href="/admin/logout"> <svg
 											class="bi">
 											<use xlink:href="#door-closed" /></svg> Sign out
 								</a></li>

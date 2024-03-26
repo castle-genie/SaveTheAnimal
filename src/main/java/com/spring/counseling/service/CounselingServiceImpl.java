@@ -1,40 +1,80 @@
+// CounselingServiceImpl.java
+
 package com.spring.counseling.service;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.spring.counseling.dao.CounselingDAO;
 import com.spring.counseling.vo.CounselingVO;
-import com.spring.counseling.vo.SurveyRequestVO; // SurveyRequestVO를 import
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CounselingServiceImpl implements CounselingService {
+    @Override
+    public int counselingDelete(CounselingVO counselingVO) {
+        return 0;
+    }
 
     @Autowired
     private CounselingDAO counselingDAO;
 
     @Override
-    public List<CounselingVO> getAllCounselings() {
-        return counselingDAO.getAllCounselings();
+    public List<CounselingVO> counselingList(CounselingVO counselingVO) {
+        return counselingDAO.counselingList(counselingVO);
     }
 
     @Override
-    public CounselingVO getCounselingDetail(CounselingVO counselingVO) {
-        return counselingDAO.getCounselingDetail(counselingVO);
+    public CounselingVO counselingDetail(int counselingId) {
+        return counselingDAO.counselingDetail(counselingId);
     }
 
     @Override
-    public int createCounseling(CounselingVO counselingVO) {
-        return counselingDAO.createCounseling(counselingVO);
+    public int counselingInsert(CounselingVO counselingVO) throws Exception {
+        return counselingDAO.counselingInsert(counselingVO);
     }
 
-    // SurveyRequestVO를 받아와서 처리하는 submitSurvey 메서드 구현
     @Override
-    public int submitSurvey(SurveyRequestVO surveyRequestVO) {
-        // Survey 저장 로직 구현
-        // 예: return counselingDAO.saveSurvey(surveyRequestVO);
-        return 0; // 임시로 0을 반환하도록 구현
+    public CounselingVO counselingUpdateForm(CounselingVO counselingVO) {
+        return counselingDAO.counselingDetail(counselingVO.getCounselingId());
     }
+
+    @Override
+    public int counselingUpdate(CounselingVO counselingVO) {
+        return counselingDAO.counselingUpdate(counselingVO);
+    }
+
+    @Override
+    public int counselingDelete(int counselingId) {
+        return counselingDAO.counselingDelete(counselingId);
+    }
+
+    @Override
+    public int admincounselingDelete(int counselingId) {
+        return 0;
+    }
+
+    @Override
+    public CounselingVO getCounselingDetail(int counselingId) {
+        return counselingDAO.counselingDetail(counselingId);
+    }
+
+    @Override
+    public int counselingDeleteById(int counselingId) {
+        return counselingDAO.counselingDelete(counselingId);
+    }
+
+	@Override
+	public int adminCounselingUpdate(CounselingVO counselingVO) {
+		int adminCounselingUpdate = 0;
+		adminCounselingUpdate = counselingDAO.adminCounselingUpdate(counselingVO);
+		return adminCounselingUpdate;
+	}
+
+	@Override
+	public int userCounselingUpdate(CounselingVO counselingVO) {
+		int userCounselingUpdate = 0;
+		userCounselingUpdate = counselingDAO.userCounselingUpdate(counselingVO);
+		return userCounselingUpdate;
+	}
 }

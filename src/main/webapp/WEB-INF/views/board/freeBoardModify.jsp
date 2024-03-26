@@ -32,34 +32,25 @@
 					<form method="post" action="/board/freeBoardModify">
 						<div class="row uniform">
 							<div class="12u$">
-								<input type="hidden" name="fboardId" id="fboardId" value="${freeBoard.fboardId}">
+								<input type="hidden" name="fboardId" id="fboardId"
+									value="${freeBoard.fboardId}">
 							</div>
 							<div class="12u$">
-								<input type="text" name="fboardTitle" id="fboardTitle" placeholder="제목" 
-								value="${freeBoard.fboardTitle}">
+								<input type="text" name="fboardTitle" id="fboardTitle"
+									placeholder="제목" value="${freeBoard.fboardTitle}">
 							</div>
 							<div class="12u$">
-								<textarea cols="100" wrap="hard" name="fboardContent" id="fboardContent" placeholder="내용을 입력해주세요"
-									rows="6">${freeBoard.fboardContent}</textarea>
-								<!--  
-								<input type="text" name="fboardContent" id="fboardContent" placeholder="내용"
-									value = "${freeBoard.fboardContent}">
-								-->
+								<textarea cols="100" wrap="hard" name="fboardContent"
+									id="fboardContent" placeholder="내용을 입력해주세요" rows="6">${freeBoard.fboardContent}</textarea>
 							</div>
 							<div class="12u$">
-								<!--  
-								<input type="text" name="userId" id="userId" placeholder="작성자" value="${freeBoard.userId}">
-								-->
-								<input type="text" name="userId" id="userId" value="${sessionScope.userId}" readonly>
+								<input type="hidden" name="userId" id="userId"
+									value="${userLogin.userId}" readonly>
 							</div>
 							<div class="12u$">
 								<ul class="actions">
-									<li>
-										<input type="submit" value="등록">
-									</li>
-									<li>
-										<a href="/board/freeBoardList" class="button">취소</a>
-									</li>
+									<li><input type="submit" value="등록"></li>
+									<li><a href="/board/freeBoardList" class="button">취소</a></li>
 								</ul>
 							</div>
 						</div>

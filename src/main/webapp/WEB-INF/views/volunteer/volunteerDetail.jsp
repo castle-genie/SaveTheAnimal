@@ -72,7 +72,7 @@
 			
 		$(function() {
 			formatDateTime('volunteerDue');
-			var userId = "<%= session.getAttribute("userId") %>";
+			var userId = "${userLogin.userId}";
 			var volunteerId = ${ detail.volunteerId };
 			/* 지도 api 추가 스크립트 */
 			var mapVisible = false;
@@ -126,7 +126,7 @@
          			 	if ('${detail.volunteerLimit}' == applicationCount) {
          		            	alert('이미 신청자가 다 찼습니다.');
          		            	closeModal();
-         		        } else if(userId == "null") {
+         		        } else if(userId == "null" || userId == "") {
      		            	if(confirm("로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?")) {
      		            		location.href="/user/login";
      		            	} 
@@ -142,7 +142,7 @@
          		        	        console.log("result : " + response);
 
          		        	        // 응답이 1인 경우 이미 신청한 공고임을 알림
-         		        	        if (response == 1) {
+         		        	        if (response != 0) {
          		        	            if (confirm("이미 신청한 공고 입니다.")) {
          		        	                location.href = "/project/volunteer";
          		        	            }
@@ -192,7 +192,12 @@
 					<header class="align-center">
 						<div class="container">
 						  <div class="activity-info">
-						    <img src="https://www.example.com/image.jpg" alt="봉사활동 이미지">
+						    <c:if test="${ not empty detail.volunteerFile }">
+						    	<img src="/resources/images/storage/volunteer/${ detail.volunteerFile }" alt="봉사활동 이미지">
+						    </c:if>
+						    <c:if test="${ empty detail.volunteerFile }">
+						    	<img src="/resources/images/walk.jpg" alt="봉사활동 이미지">
+					    	</c:if>
 						    <div class="info-text">
 						      <h2>${ detail.volunteerTitle }</h2>
 						      <table>
@@ -211,8 +216,13 @@
 					      			</tr>
 					      			<tr>
 						      			<th>주 소</th>
-						      			<td id="showMap">${ detail.volunteerLocation }</td>
+						      			<td id="showMap">${ detail.volunteerLocation }<span>[지도보기]</span></td>
 					      			</tr>
+					      			<tr>
+					      				<td colspan="2">
+					      					<div id="map"></div>
+				      					</td>
+		      						</tr>
 						      	</tbody>
 						      </table>
 						    </div>
@@ -226,6 +236,7 @@
 						  <div class="details" style="text-align: left;">
 						    <h2>세부사항</h2>
 						    <p>${ detail.volunteerDetail }</p>
+						    <button type="button" id="deleteBtn">삭제</button>
 						  </div>
 						</div>
 					</header>
@@ -243,7 +254,7 @@
 		      <!-- 봉사공고 아이디(팝업 뜨게한 버튼 누른 페이지의 volunteerId) -->
 		      <input type="hidden" id="volunteerId" name="volunteerId" value="${ detail.volunteerId }">
 		      <!-- 로그인 정보로 얻어온 회원 아이디(백엔드에서 처리) -->
-		      <input type="hidden" id="userId" name="userId" value="<%= session.getAttribute("userId") %>">
+		      <input type="hidden" id="userId" name="userId" value="${ userLogin.userId }">
 		      <div class="form-group">
 		        <!-- 봉사 다짐 입력란 -->	
 		        <label for="applicationComment">봉사 다짐</label>

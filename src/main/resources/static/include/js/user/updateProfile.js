@@ -37,10 +37,10 @@ $(function() {
 	    isEmailChanged = true; 
 	});
 	
-	/* 이름은 한글만 입력받게 하기 */
+	/* 이름은 한글만 입력받게 하기 
 	$("#userName").on("input", function(){
 		this.value = this.value.replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g, '');	
-	});
+	});*/
 	
 	/* 핸드폰번호는 숫자만 입력받게 하기 */
 	$("#userPhone").on("input", function(){

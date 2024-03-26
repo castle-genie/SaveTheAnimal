@@ -2,9 +2,11 @@ package com.spring.common.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -38,7 +40,9 @@ public class FileUploadUtil {
 		if(org_name != null && (!org_name.equals(""))) { 
 			real_name = fileName + "_" + System.currentTimeMillis() + "_" +org_name; //저장할 파일 이름
 			
-			String docRoot = "classpath:/static/images/storage/"+fileName; 
+			File filedata = new File("src/main/resources/static/images/storage/");
+			log.info("경로 " + filedata.getAbsolutePath());
+			String docRoot = filedata.getAbsolutePath() + "/" + fileName; 
 			makeDir(docRoot);
 			
 			File fileAdd = new File(docRoot+"/" +real_name);
@@ -53,7 +57,7 @@ public class FileUploadUtil {
 		log.info("fileDelete 호출 성공 " );
 		boolean result = false;
 		String dirName = fileName.substring(0, fileName.indexOf("_"));
-		String docRoot = "classpath:/static/images/storage/" + dirName;
+		String docRoot = "src/main/resources/static/images/storage/" + dirName;
 		File fileDelete = new File(docRoot+ "/" + fileName);
 		
 		if(fileDelete.exists() && fileDelete.isFile()) {
@@ -71,7 +75,7 @@ public class FileUploadUtil {
 		log.info("fileUpdate 호출 성공");
 		boolean result = false;
 		String dirName = fileName.substring(0, fileName.indexOf("_"));
-		String docRoot = "classpath:/static/images/storage/"+dirName;
+		String docRoot = "src/main/resources/static/images/storage/"+dirName;
 		File fileUpdate = new File(docRoot+"/"+fileName);
 		
 		if(fileUpdate.exists() && fileUpdate.isFile()) {

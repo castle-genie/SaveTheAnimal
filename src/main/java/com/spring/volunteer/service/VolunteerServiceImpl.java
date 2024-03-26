@@ -32,13 +32,6 @@ public class VolunteerServiceImpl implements VolunteerService {
 		return volunteerDetail;
 	}
 	
-	@Override
-	public int updateVolunteerProgress1(VolunteerVO volunteerVO) {
-		int updateVolunteerProgress1 = 0;
-		updateVolunteerProgress1 = volunteerDAO.updateVolunteerProgress1(volunteerVO);
-		return updateVolunteerProgress1;
-	}
-	
 	/* admin */
 	
 	// 봉사 공고 작성 구현
@@ -88,5 +81,11 @@ public class VolunteerServiceImpl implements VolunteerService {
 		}
 		volunteerDelete = volunteerDAO.volunteerDelete(volunteerVO);
 		return volunteerDelete;
+	}
+
+	@Override
+	public List<VolunteerVO> mainVol(VolunteerVO vvo) {
+		List<VolunteerVO> mainVol = volunteerDAO.mainVol(vvo);
+		return mainVol;
 	}
 }

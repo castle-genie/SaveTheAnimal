@@ -12,17 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.admin.login.vo.AdminLoginVO;
 import com.spring.common.vo.PageDTO;
 import com.spring.user.service.UserService;
 import com.spring.user.vo.UserVO;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,13 +39,20 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras, HttpSession session) {
+	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras) {
+		
 		UserVO userLogin = userService.userLoginProcess(login);
-				
-		if (userLogin != null) {
+		int userAct = userLogin.getUserAct();
+		
+		if (userLogin != null && userAct == 1) {			// 활동 계정이면
 			model.addAttribute("userLogin", userLogin); 
-			session.setAttribute("userId", userLogin.getUserId());// 로그인 성공 시 세션에 사용자 아이디 저장
-			return "redirect:/";// 성공하면 메인페이지 이동
+			return "redirect:/";// 성공하면 메인페이지 이동			
+		} else if (userLogin != null && userAct == 2) {		// 활동 중지 계정이면							
+			ras.addFlashAttribute("errorMsg", "로그인 실패 : 활동 중지된 계정입니다.");
+			return "redirect:/user/login";
+		}	else if (userLogin != null && userAct == 0) {	// 비활동(탈퇴) 계정이면							
+			ras.addFlashAttribute("errorMsg", "로그인 실패 : 탈퇴한 계정입니다.");
+			return "redirect:/user/login";			
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
 			return "redirect:/user/login";
@@ -55,12 +60,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/logout")
-	public String logout(SessionStatus sessionStatus, HttpSession session) {
+	public String logout(SessionStatus sessionStatus) {
 		log.info("user 로그아웃 처리");
 		sessionStatus.setComplete();
-		session.removeAttribute("userId");
 		return "redirect:/"; // 메인페이지 이동
 	}
+	
 	
 	@GetMapping("/join")
 	public String join() {
@@ -122,8 +127,7 @@ public class UserController {
 	@PostMapping("/findId")
 	public String findId(UserVO uvo, Model model, RedirectAttributes ras) {
 		log.info("아이디 찾기 호출");		
-		UserVO result = userService.findId(uvo); 
-		
+		UserVO result = userService.findId(uvo); 		
 		if (result != null) {
 			model.addAttribute("result", result);
 			return "user/findId";
@@ -153,8 +157,7 @@ public class UserController {
 		isUpdate = userService.resetPasswd(uvo);
 		
 		UserVO result = new UserVO(); // 임시 비밀번호 vo
-		result.setUserPasswd(tempPassword);
-	
+		result.setUserPasswd(tempPassword);	
 		
 		if (isUpdate == 1 && result != null) {		
 			log.info("업데이트 성공");
@@ -175,47 +178,45 @@ public class UserController {
 		result = userService.findUserByIdAndEmail(uvo);
 		return result;
 	}
-	
-	
+		
 	
 	@GetMapping("/mypage")
-    public String mypage(HttpServletRequest request, Model model, RedirectAttributes ras) {
-		// 세션 가져오기
-		HttpSession session = request.getSession();
-		// 세션에서 사용자 ID 가져오기
-        String userId = (String) session.getAttribute("userId");
+    public String mypage(@SessionAttribute(name = "userLogin", required = false) UserVO userLogin, Model model, RedirectAttributes ras) {
+		log.info("mypage 호출");
         
-        if (userId == null) {
-            // 세션에 사용자 ID가 없는 경우 메시지를 추가하고 로그인 페이지로 리다이렉트
+        if (userLogin == null) {
             ras.addAttribute("errorMsg", "로그인이 필요합니다.");
-            return "user/myPage";
-        }       
-        // 사용자 정보 가져오기
-        UserVO userinfo = userService.userInfo(userId);
-        
-        if (userinfo == null) {
-            // 사용자 정보가 없는 경우 메시지를 추가하여 마이페이지로 이동
-        	ras.addAttribute("errorMsg", "사용자 정보를 가져오는데 문제가 발생했습니다.");
-        } else {
-            // 사용자 정보가 있는 경우 모델에 추가
-            model.addAttribute("userInfo", userinfo);
-            //log.info(userinfo.toString());
+            return "user/login";
+        } else {   
+	        // 사용자 정보 가져오기
+	        UserVO userInfo = userService.userInfo(userLogin.getUserId());	        
+	        if (userInfo == null) {
+	        	ras.addAttribute("errorMsg", "사용자 정보를 가져오는데 문제가 발생했습니다.");
+	        	return "redirect:/user/mypage"; // 다시 마이페이지로 리다이렉트
+	        } else {
+	            // 사용자 정보가 있는 경우 모델에 추가
+	            model.addAttribute("userInfo", userInfo);
+	            //log.info(userinfo.toString());
+	        }	        
+	        return "user/myPage";
         }
-        
-        return "user/myPage";
     }
 	
 	@GetMapping("/updateProfile")
-	public String updateProfile(HttpServletRequest request, Model model) {
-		// 세션 가져오기
-		HttpSession session = request.getSession();
-		// 세션에서 사용자 ID 가져오기
-		String userId = (String) session.getAttribute("userId");
-		
-		// 사용자 정보 가져오기
-        UserVO userInfo = userService.userInfo(userId);
-		model.addAttribute("userInfo", userInfo);
-		return "user/updateProfile";
+	public String updateProfile(@SessionAttribute(name = "userLogin", required = false) UserVO userLogin, Model model) {
+		log.info("updateProfile 호출");
+		if (userLogin == null) {
+			return "user/login";
+		}else {
+			// 사용자 정보 가져오기
+	        UserVO userInfo = userService.userInfo(userLogin.getUserId());	        
+	        if (userInfo == null) {
+	        	return "redirect:/user/mypage";
+	        } else {
+				model.addAttribute("userInfo", userInfo);
+				return "user/updateProfile";
+			}
+		}
 	}
 	
 	
@@ -239,7 +240,7 @@ public class UserController {
 			UserVO userInfo = userService.userInfo(uvo.getUserId());
 			log.info("업데이트 성공");
 			model.addAttribute("userInfo", userInfo);
-			return "user/myPage";
+			return "/user/myPage";
 		} else {
 			ras.addFlashAttribute("errorMsg", "업데이트에 문제가 있어 다시 진행해 주세요.");
 			return "redirect:/user/updateProfile";
@@ -250,33 +251,73 @@ public class UserController {
 	
 	@PostMapping("/userWithdrawal")
 	public String userWithdrawal(UserVO uvo, RedirectAttributes ras) {
-		log.info("회원탈퇴 처리");
-		
+		log.info("회원탈퇴 처리");		
 		int result = 0;
 		String url = "";
 		
-		result = userService.userWithdrawal(uvo);
-		if (result ==1) {
+		result = userService.userDelete(uvo); // 회원 레코드 삭제 쿼리
+		
+		if (result == 0) {
+			log.info("탈퇴 회원으로 상태 변경");
+			result = userService.userWithdrawal(uvo); // 레코드 삭제가 안될 경우 상태값 변경 쿼리 대체 			
+		}
+		
+		if (result == 1) {
 			url="/user/logout"; // 로그아웃 처리
 		} else {
 			ras.addFlashAttribute("errorMsg", "탈퇴처리에 문제가 있어 다시 진행해 주세요.");
 			url="/user/mypage"; // 마이페이지
 		}
+		
 		return "redirect:"+url;
 	}
 	
+	/*@PostMapping("/userDelete")
+	public String userDelete(UserVO uvo, RedirectAttributes ras) {
+		log.info("회원레코드 삭제");
+		int result = 0;
+		String url = "";		
+		result = userService.userDelete(uvo);		
+		if (result == 1) {
+			url="/user/userList";
+		} else {
+			ras.addFlashAttribute("errorMsg", "삭제에 문제가 있어 다시 진행해 주세요.");
+			url="/user/userList";
+		}		
+		return "redirect:"+url;
+	}*/
+	
 	
 	@GetMapping("/userList")
-	public String userList(@ModelAttribute UserVO uvo, Model model) {
-		List<UserVO> userList = userService.userList(uvo);
-		model.addAttribute("userList", userList);
-		
-		int total = userService.userListCnt(uvo);
-		
-		model.addAttribute("pageMaker", new PageDTO(uvo, total));				
-		return "admin/user/userList";
+	public String userList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, @ModelAttribute UserVO uvo, Model model) {
+		log.info("userList 호출");		
+
+		if (adminLoginVO == null) {
+			return "/admin/adminLogin";
+		} else {			
+			List<UserVO> userList = userService.userList(uvo);
+			model.addAttribute("userList", userList);
+			
+			int total = userService.userListCnt(uvo);
+			
+			model.addAttribute("pageMaker", new PageDTO(uvo, total));		
+					
+			return "admin/user/userList";
+		}
 	}
 	
-
+	@GetMapping("joinTerms")
+	public String joinTerms() {
+		return "/user/join-terms";
+	}
+	
+	/* 자바단에서 세션에서 꺼내온 값 사용하는 방법 
+	@GetMapping("/board")
+	public String process(@SessionAttribute("adminLogin") AdminLoginVO adminLoginVO) {
+		adminLoginVO.getAdminId(); // 세션에서 얻은 값.
+		return "";
+	}	
+	 jsp : ${adminLogin.adminId} 	
+	 javascript : let adminId = "${adminLogin.adminId}"; */
 
 }

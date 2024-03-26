@@ -110,6 +110,12 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 	
+	@Override
+	public int userDelete(UserVO uvo) {
+		int result = userDao.userDelete(uvo);
+		return result;
+	}
+	
 	// 회원 목록 조회 + 마스킹 처리
 	@Override
 	public List<UserVO> userList(UserVO uvo) {
@@ -205,6 +211,5 @@ public class UserServiceImpl implements UserService {
 	    }
 	}
 
-
-
+	
 }

@@ -1,5 +1,6 @@
 package com.spring.report.service;
 
+//import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,22 +166,32 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	//신고 제재 시 유저 계정 정지
+//	private volatile LocalDateTime stopTime;
+	@Override
 	public int userStop(ReportVO rvo) {
+//		stopTime = LocalDateTime.now();
 		int result = rDao.userStop(rvo);
 		return result;
 	}
-	public int userGo(ReportVO rvo) {
-		int result = rDao.userGo(rvo);
+	@Override
+	@Scheduled(fixedDelay = 1 * 60 * 1000)
+	public synchronized int userGo(ReportVO rvo) {
+		int result = 0;
+//		if(stopTime != null && stopTime.plusMinutes(3).isBefore(LocalDateTime.now())) {
+//			result = rDao.userGo(rvo);
+//		}
 		return result;
 	}
-    @Override
-    @Scheduled(fixedRate = 604800000) // 1주일은 604,800,000밀리초
-    public void userGoStop(ReportVO rvo) {
-        // userStop 메소드 호출
-        userStop(rvo);
-
-        // userGo 메소드 호출 (일주일 후에 실행됨)
-        userGo(rvo);
-    }
+//    @Override
+//    @Scheduled(fixedRate = 604800000) // 1주일은 604,800,000밀리초
+//    public void userGoStop(ReportVO rvo) {
+//        // userStop 메소드 호출
+//        userStop(rvo);
+//
+//        // userGo 메소드 호출 (일주일 후에 실행됨)
+//        userGo(rvo);
+//    }
+    
+    
 	
 }

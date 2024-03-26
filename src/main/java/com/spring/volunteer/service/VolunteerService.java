@@ -10,7 +10,6 @@ public interface VolunteerService {
 	
 	public VolunteerVO volunteerDetail(VolunteerVO volunteerVO);
 	
-	public int updateVolunteerProgress1(VolunteerVO volunteerVO);
 	
 	/* admin */
 	public int volunteerInsert(VolunteerVO volunteerVO) throws Exception;
@@ -19,5 +18,7 @@ public interface VolunteerService {
 	
 	public int volunteerUpdate(VolunteerVO volunteerVO) throws Exception;
 	
-	public int volunteerDelete(VolunteerVO volunteerVO) throws Exception;;
+	public int volunteerDelete(VolunteerVO volunteerVO) throws Exception;
+	
+	public List<VolunteerVO> mainVol(VolunteerVO volunteerVO);
 }

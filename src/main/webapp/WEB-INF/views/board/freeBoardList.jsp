@@ -27,10 +27,9 @@
 					<div class="table-wrapper">
 						<table class="alt">
 							<thead>
-								<tr>
-									<td class="text-center">제목</td>
+								<tr class="text-center">
+									<td>제목</td>
 									<td>작성자</td>
-									<td>좋아요</td>
 									<td>조회수</td>
 									<td>작성일</td>
 								</tr>
@@ -38,30 +37,31 @@
 							<tbody>
 								<c:forEach items="${freeBoardList}" var="list">
 									<tr>
-										<td><a href="freeBoardDetail?fboardId=${list.fboardId}&userId=<%= session.getAttribute("userId") %>">
+										<td><a
+											href="freeBoardDetail?fboardId=${list.fboardId}&userId=${userLogin.userId}">
 												${list.fboardTitle} </a></td>
 										<td>${list.userId }</td>
-										<td>${list.fboardLike }</td>
 										<td>${list.fboardCnt }</td>
 										<td><fmt:formatDate value="${list.fboardDate }"
 												pattern="yyyy.MM.dd" /></td>
-										<!-- <td>${list.fboardDate }</td> -->
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 					<br>
-						<c:if test="${empty userLogin}">
+					<c:if test="${empty userLogin}">
 						<ul class="actions">
-							<li><a href="/user/login"  class="button special" onclick="alert('글을 작성하려면 로그인이 필요합니다')">글쓰기</a></li>
+							<li><a href="/user/login" class="button special"
+								onclick="alert('글을 작성하려면 로그인이 필요합니다')">글쓰기</a></li>
 						</ul>
-						</c:if>
-						<c:if test="${not empty userLogin}">
+					</c:if>
+					<c:if test="${not empty userLogin}">
 						<ul class="actions">
-							<li><a href="/board/freeBoardCreate"  class="button special">글쓰기</a></li>
+							<li><a href="/board/freeBoardCreate" class="button special">글쓰기</a></li>
 						</ul>
-						</c:if>
+					</c:if>
+
 				</div>
 			</div>
 		</div>
@@ -91,5 +91,12 @@
 	<script src="/resources/include/assets2/js/util.js"></script>
 	<script src="/resources/include/assets2/js/main.js"></script>
 </body>
-
+<script>
+function checkVolunteerTimes(){
+	if(!(document.volunteerCreate.volunteer.value.length == 0 && )){
+		alert('ㅎㅇ');
+	}
+	
+}
+</script>
 </html>

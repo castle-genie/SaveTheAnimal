@@ -17,9 +17,10 @@
 			<div class="modal-body">
 				
 				<form id="f_data">
-					<input type="hidden" name="fboardId" value="${afboard.afboardId}"/>
-					<input type="hidden" name="boardUser" value="${afboard.userId}"/>
-					<input type="hidden" name="userId" id="userId" value="<%= session.getAttribute("userId") %>">
+					<input type="hidden" name="afboardId" value="${adoptionFeedbackBoard.afboardId}"/>
+					<input type="hidden" name="boardUser" value="${adoptionFeedbackBoard.userId}"/>
+					<input type="hidden" name="boardUser" value="${adoptionFeedbackBoard.reUserId}"/>
+					<input type="hidden" name="userId" id="userId" value="${userLogin.userId}">
 					<fieldset>
 						<legend class="modal-title fs-6 my-3"><strong>신고 분류</strong></legend>
 						<div>
@@ -46,7 +47,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="fbReportInsertBtn" class="btn btn-primary button special">신고하기</button>
+				<button type="button" id="abReportInsertBtn" class="btn btn-primary button special">신고하기</button>
 			</div>
 		</div>
 	</div>

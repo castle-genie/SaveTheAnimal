@@ -113,9 +113,10 @@
 											<tr>
 												<td colspan="3"> 
 													<input type="checkbox" class="single-checkbox" name="agree" id="agreePrivInfo" />
-													<label for="agreePrivInfo">개인정보 수집 및 이용 동의</label>
+													<label for="agreePrivInfo">(필수)개인정보 수집 및 이용 동의</label>
 													<input type="checkbox" class="single-checkbox" name="agree" id="agreeTerms" />
-													<label for="agreeTerms">회원 약관 동의</label>
+													<label for="agreeTerms">(필수)회원 약관 동의</label>
+													<label><a href="/user/joinTerms" class="openPopup">이용약관 / 개인정보 수집 및 이용 동의 전문 보기</a></label>
 												</td>
 											</tr>										
 										</tfoot>

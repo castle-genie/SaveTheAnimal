@@ -63,7 +63,7 @@
                                     
                                     <td class="id">${animal.animalId}</td>
                                     <td>
-                                        <img src="<c:if test='${not empty animal.animalFile}'>/uploadStorage/animal/${animal.animalFile}</c:if>
+                                        <img src="<c:if test='${not empty animal.animalFile}'>/resources/images/storage/animal/${animal.animalFile}</c:if>
                                          <c:if test='${empty animal.animalFile}'>/resources/images/common/noanimal.jpg</c:if>"
                                        class="card-img-top l"  alt="Animal Image">
                                     </td>
@@ -82,7 +82,7 @@
                         </c:when>
                         <c:otherwise>
                             <tr>
-                                <td colspan="5" class="text-center">등록된 게시물이 존재하지 않습니다</td>
+                                <td colspan="10" class="text-center">등록된 게시물이 존재하지 않습니다</td>
                             </tr>
                         </c:otherwise>
                     </c:choose>
