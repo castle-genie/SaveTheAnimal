@@ -34,7 +34,7 @@
 					<input type="text" id="animalId" name="animalId" value="${ animalId }" readonly />
 
                     <label for="userName"></label><br>
-                    <input type="text" id="userName" name="userName" value="${ writeForm.user.userName }" placeholder="성명">
+                    <input type="text" id="userName" name="userName" value="${writeForm.user.userName}" placeholder="성명">
 
                     <label for="counselingAge"></label><br>
                     <input type="text" id="counselingAge" name="counselingAge" placeholder="연령">
