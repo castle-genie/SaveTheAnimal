@@ -88,16 +88,10 @@ public class ApplicationController {
             ras.addAttribute("errorMsg", "로그인이 필요합니다.");
             return "user/myPage";
         } 
-        log.info("로그인 테스트 2");
 		result = service.applicationDelete(applicationVO);
 		if(result == 1) {
-			System.out.println(applicationVO);
 			url = "/application/applicationView?userId="+userId;
-		} else {
-			ras.addFlashAttribute("errorMsg", "취소에 실패했습니다. 잠시후에 다시시도해 주세요.");
-			url = "/application/applicationView";
 		}
-		log.info("로그인 테스트 3");
 		return "redirect:"+url;
 	}
 	

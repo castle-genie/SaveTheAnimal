@@ -60,19 +60,6 @@
             },
             eventClick: function(info) {
                 var volunteerId = info.event.extendedProps.volunteerId;
-                /*$.ajax({
-                    url: '/volunteer/volunteerDetail',
-                    method: 'POST',
-                    data: {
-                        volunteerId: volunteerId
-                    },
-                    success: function(response) {
-                        console.log('Event detail:', response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error: ', error)
-                    }
-                });*/
                 location.href = "/volunteer/volunteerDetail?volunteerId="+volunteerId;
                 info.jsEvent.preventDefault();
             }
