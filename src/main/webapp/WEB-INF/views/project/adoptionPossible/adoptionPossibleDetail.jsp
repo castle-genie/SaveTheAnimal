@@ -55,8 +55,10 @@
 		</div>
 		
 		<form name="f_data" id="f_data">
+			<input type="hidden" name="userId" id="userId" value="${ userLogin.userId }" />
 			<input type="hidden" name="animalId" value="${detail.animalId }"/>
 			<input type="hidden" name="animalFile" id="animalFile" value="${detail.animalFile}"/>
+			<input type="hidden" name="adoptionId" id="adoptionId" value="${ detail.adoptionId }" />
 		</form>
 		
 		
