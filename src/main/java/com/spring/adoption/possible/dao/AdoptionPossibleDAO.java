@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.spring.adoption.possible.vo.AdoptionPossibleVO;
-import com.spring.adoption.vo.AdoptionVO;
 
 @Mapper
 public interface AdoptionPossibleDAO {
@@ -17,6 +16,5 @@ public interface AdoptionPossibleDAO {
 	public int apUpdate(AdoptionPossibleVO apvo);
 	public int apDelete(AdoptionPossibleVO apvo);
 	public int apListCnt(AdoptionPossibleVO apvo);
-	
 	
 }

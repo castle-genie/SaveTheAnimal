@@ -22,10 +22,6 @@ $(function(){
 	//삭제 버튼 클릭시 처리 이벤트
 	$("#DeleteBtn").on("click", () => {
     // 사용자에게 확인 메시지 보여주기
-    const confirmDelete = confirm("등록된 동물을 삭제하면 공고도 함께 삭제됩니다. 정말로 삭제하시겠습니까?");
-
-    // 확인이 true인 경우에만 삭제 진행
-    if (confirmDelete) {
         $("#f_data").attr({
             "method": "post",
             "action": "/animal/animalDelete"
@@ -35,7 +31,7 @@ $(function(){
         $("#pwdChk").css("visibility", "visible");
         btnInit();
         buttonCheck = "deleteButton";
-    }
+    
 });
 
 	

@@ -19,4 +19,7 @@ public interface AnimalService {
 	public int animalUpdate(AnimalVO avo) throws Exception; 
 	public int animalDelete(AnimalVO avo) throws Exception; 
 	//board테이블의 전체 레코드 수
+	
+	public List<AnimalVO> mainAni(AnimalVO avo);
+
 }

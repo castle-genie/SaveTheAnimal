@@ -12,6 +12,12 @@
 	<div class="container">
 		<div class="text-center"><h3>입양 공고 상세 목록</h3></div>
 		
+		<form name="f_data" id="f_data">
+			<input type="hidden" name="adoptionId" value="${detail.adoptionId }"/>
+			<input type="hidden" name="adoptionFile" id="adoptionFile" value="${detail.adoptionFile}"/>
+		</form>
+		
+		
 		<div class="row text-center mb_2">
 			<div id="pwdChk" class="col-md-9 text-start">	
 				<form name="f_passwdCheck" id="f_passwdCheck" class="row g-3">
@@ -39,11 +45,6 @@
 			</div>
 		</div>
 		
-		<form name="f_data" id="f_data">
-			<input type="hidden" name="animalId" value="${detail.animalId }"/>
-			<input type="hidden" name="animalFile" id="animalFile" value="${detail.animalFile}"/>
-		</form>
-		
 		
 		<div class="text-center">
 			<table class="table table-striped-columns">
@@ -62,7 +63,7 @@
 								<tr>
 									<td colspan="4">
 										<c:if test="${not empty detail.animalFile}">
-										    <img src="/uploadStorage/animal/${detail.animalFile}" class="rounded img-fluid" />
+										    <img src="/resources/images/storage/animal/${detail.animalFile}" class="rounded img-fluid" />
 										</c:if>
 										<c:if test="${empty detail.animalFile}">
 										    <img src="/resources/images/common/noanimal.jpg" class="rounded img-fluid" />
@@ -106,10 +107,6 @@
 				</tbody>
 			</table>
 			
-		<form name="f_data" id="f_data">
-			<input type="hidden" name="adoptionId" value="${detail.adoptionId }"/>
-			<input type="hidden" name="adoptionFile" id="adoptionFile" value="${detail.adoptionFile}"/>
-		</form>
 		
 		<div class="text-center">
 			<table class="table table-bordered">			
