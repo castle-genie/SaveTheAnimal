@@ -261,10 +261,10 @@ public class UserController {
 		
 		result = userService.userDelete(uvo); // 회원 레코드 삭제 쿼리
 		
-		if (result == 0) {
+		/*if (result == 0) {
 			log.info("탈퇴 회원으로 상태 변경");
 			result = userService.userWithdrawal(uvo); // 레코드 삭제가 안될 경우 상태값 변경 쿼리 대체 			
-		}
+		}*/
 		
 		if (result == 1) {
 			url="/user/logout"; // 로그아웃 처리
