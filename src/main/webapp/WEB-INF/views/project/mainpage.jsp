@@ -83,8 +83,15 @@
 							<c:forEach var="mainVol" items="${mainVol}" varStatus="status">
 								<div>
 									<div class="box">
-										<div class="image fit">
-											<img src="/resources/images/storage/volunteer/${mainVol.volunteerFile}" alt="" width="600" height="300">
+										<div class="image fit" style="width:100%; height:358.28px; aspect-ratio: 557.33/358.28">
+											<c:choose>
+												<c:when test="${not empty mainVol.volunteerFile}">
+													<img src="/resources/images/storage/volunteer/${mainVol.volunteerFile}" alt="no image" width="600" height="300" style="width:100; height: 100%">
+												</c:when>
+												<c:otherwise>
+													<img src="/resources/images/walk.jpg" title="no image" width="600" height="300" style="width:100; height: 100%">
+												</c:otherwise>
+											</c:choose>
 										</div>
 										<div class="content">
 											<header class="align-center">
@@ -157,8 +164,15 @@
 						<c:when test="${not empty mainAni}">
 							<c:forEach var="mainAni" items="${mainAni}" varStatus="status">
 								<div>
-									<div class="image fit" style="width:600px; height:300px;">
-										<img src="/resources/images/storage/animal/${mainAni.animalFile}" alt="${mainAni.animalName}" width="600" height="300" style="width:570px; height:270px;">
+									<div class="image fit" style="width:600px; height:371px;">
+										<c:choose>
+											<c:when test="${not empty mainAni.animalFile}">
+												<img src="/resources/images/storage/animal/${mainAni.animalFile}" alt="${mainAni.animalName}" alt="no image" width="600" height="300" style="width:100%; height:100%;">
+											</c:when>
+											<c:otherwise>
+										    	<img src="/resources/images/common/noanimal.jpg" title="no image" width="600" height="300" style="width:100%; height:100%;" />
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</c:forEach>
