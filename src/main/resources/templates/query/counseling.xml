@@ -64,6 +64,25 @@
             counseling_job = #{counseling_job}, counseling_adopt = #{counseling_adopt}, , user_name = #{user_name}, user_phone = #{user_phone}
         WHERE counseling_id = #{counseling_id}
     </update>
+    
+    <!-- admin 단 상담 신청 수정 -->
+    <update id="adminCounselingUpdate" parameterType="counseling">
+        UPDATE counseling
+        SET counseling_judgment = #{counselingJudgment}, counseling_detail = #{counselingDetail}
+        WHERE counseling_id = #{counselingId}
+    </update>
+    
+    <update id="userCounselingUpdate" parameterType="counseling">
+    	UPDATE users
+    	SET 
+    	<if test="counselingJudgment == '적격'">
+    		user_adoptchk = 1
+    	</if>
+    	<if test="counselingJudgment == '비적격'">
+    		user_adoptchk = 0
+    	</if>
+    	WHERE user_id = #{userId}
+    </update>
 
     <!-- 상담 신청 삭제 -->
     <delete id="counselingDelete" parameterType="counseling">

@@ -98,8 +98,6 @@ public class CounselingController {
         }
     }
 
-
-
     @PostMapping("/admincounselingUpdate")
     public String counselingUpdate(CounselingVO counselingVO) {
         try {
@@ -124,6 +122,25 @@ public class CounselingController {
             log.error("Error occurred while deleting counseling: {}", e.getMessage());
         }
         return "redirect:/counseling/adminCounselingList";
+    }
+    
+    @PostMapping("/adminCounselingUpdate")
+    public String adminCounselingUpdate(CounselingVO counselingVO) {
+    	int result = 0;
+    	String url = "";
+    	
+    	result = counselingService.adminCounselingUpdate(counselingVO);
+    	int num = counselingVO.getCounselingId();
+    	if(result == 1) {
+    		url = "/counseling/adminCounselingDetail?counselingId="+num;
+    	}
+    	return "redirect:"+url;
+    }
+    
+    @ResponseBody
+    @PostMapping("/userCounselingUpdate")
+    public void userCounselingUpdate(CounselingVO counselingVO) {
+    	counselingService.userCounselingUpdate(counselingVO);
     }
 
 }
