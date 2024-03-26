@@ -70,5 +70,16 @@
 		DELETE FROM volunteer
 		WHERE volunteer_id = #{volunteerId}
 	</delete>
+	
+	<!-- 메인페이지에 표시할 최근 두 개의 봉사공고 -->
+	<select id="mainVol" parameterType="volunteer" resultMap="volunteerMap">
+		select volunteer_id, volunteer_title, volunteer_time, volunteer_limit, volunteer_cost, volunteer_location, volunteer_file
+		from (
+			select volunteer_id, volunteer_title, volunteer_time, volunteer_limit, volunteer_cost, volunteer_location, volunteer_file
+			from volunteer
+			order by volunteer_id desc
+		)
+		where rownum &lt;=2
+	</select>
 </mapper>
 
