@@ -7,29 +7,36 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.board.service.NoticeBoardService;
 import com.spring.board.vo.NoticeBoardVO;
+import com.spring.common.vo.PageDTO;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequestMapping("/")
 @Controller
 public class NoticeBoardController {
-	@Autowired
+	@Setter(onMethod_=@Autowired)
 	private NoticeBoardService noticeBoardService;
 
 	//////////////////// 유저 페이지
 	// 공지게시판 글 목록(유저 페이지)
 	@GetMapping("/noticeBoard/noticeBoardList")
-	public String noticeBoardList(NoticeBoardVO nvo, Model model) {
+	public String noticeBoardList(@ModelAttribute NoticeBoardVO nvo, Model model) {
 		log.info("공지게시글불러오기");
 		List<NoticeBoardVO> noticeBoardList = noticeBoardService.noticeBoardList(nvo);
 		model.addAttribute("noticeBoardList", noticeBoardList);
 		log.info("공지게시글불러오기완료");
+		
+		int total = noticeBoardService.noticeBoardListCnt(nvo);
+		model.addAttribute("pageMaker", new PageDTO(nvo, total));
 
 		return "board/noticeBoardList";
 
@@ -49,12 +56,16 @@ public class NoticeBoardController {
 	//////////////////관리자 페이지
 
 	// 공지게시판 글 목록(관리자 페이지)
+	@ResponseBody
 	@GetMapping(value="/admin/noticeBoardList", produces=MediaType.APPLICATION_JSON_VALUE)
-	public String adminNoticeBoardList(NoticeBoardVO nvo, Model model) {
+	public String adminNoticeBoardList(@ModelAttribute NoticeBoardVO nvo, Model model) {
 		log.info("공지게시글불러오기");
 		List<NoticeBoardVO> adminNoticeBoardList = noticeBoardService.noticeBoardList(nvo);
 		model.addAttribute("noticeBoardList", adminNoticeBoardList);
 		log.info("공지게시글불러오기완료");
+		
+		int total = noticeBoardService.adminNoticeBoardListCnt(nvo);
+		model.addAttribute("pageMaker", new PageDTO(nvo, total));
 
 		return "admin/board/noticeBoardList";
 

@@ -28,15 +28,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board/*")
 @Controller
 public class FreeBoardController {
-	@Setter(onMethod_=@Autowired)
+	@Setter(onMethod_=@Autowired) 
 	private FreeBoardService freeBoardService;
 	
-	@Setter(onMethod_=@Autowired)
-	private VolunteerFeedbackBoardService volunterFeedbackBoardService;
+	@Autowired
+	private VolunteerFeedbackBoardService volunteerFeedbackBoardService;
 	
-	@Setter(onMethod_=@Autowired)
+	@Autowired
 	private AdoptionFeedbackBoardService adoptionFeedbackBoardService;
-
+	
 	@GetMapping(value = "freeBoardList")
 	public String freeBoardList(@ModelAttribute FreeBoardVO freeBoardVO, Model model) {
 		log.info("게시글불러오기");
@@ -104,21 +104,35 @@ public class FreeBoardController {
 		return "redirect:/board/freeBoardList";
 	}
 	
-	// 내가 작성한 게시글 히스토리
-	@GetMapping(value = "history")
-	public String boardCreateHistory(FreeBoardVO fvo, VolunteerFeedbackBoardVO vfvo, AdoptionFeedbackBoardVO afvo,
-			Model model) {
-		List<FreeBoardVO> freeBoardList = freeBoardService.freeBoardList(fvo);
-		model.addAttribute("freeBoardList", freeBoardList);
+	
+	/*
+	 * // 내가 작성한 게시글 히스토리
+	 * 
+	 * @GetMapping(value = "freeBoardHistory") public String boardCreateHistory
+	 * (FreeBoardVO freeBoardVO, Model model) {
+	 * 
+	 * log.info("게시글불러오기"); List<FreeBoardVO> freeBoardList =
+	 * freeBoardService.freeBoardList(freeBoardVO);
+	 * model.addAttribute("freeBoardList", freeBoardList);
+	 * 
+	 * return "board/freeBoardList";
+	 * 
+	 * }
+	 */
+	
+	@GetMapping(value = "getBoardCreateHistory")
+	public String getBoardCreateHistory (@ModelAttribute FreeBoardVO fvo, VolunteerFeedbackBoardVO vfvo, AdoptionFeedbackBoardVO afvo, Model model){
+		
+		List<FreeBoardVO> freeBoardList = freeBoardService.boardCreateHistory(fvo);
+		model.addAttribute("fboard", freeBoardList);
 
-		List<VolunteerFeedbackBoardVO> volunteerFeedbackBoardList = volunterFeedbackBoardService
-				.volunteerFeedbackBoardList(vfvo);
-		model.addAttribute("volunteerFeedbackBoardList", volunteerFeedbackBoardList);
+		List<VolunteerFeedbackBoardVO> volunteerFeedbackBoardList = volunteerFeedbackBoardService.boardCreateHistory(vfvo);
+		model.addAttribute("vfboard", volunteerFeedbackBoardList);
 
-		List<AdoptionFeedbackBoardVO> adoptionFeedbackBoardList = adoptionFeedbackBoardService
-				.adoptionFeedbackBoardList(afvo);
-		model.addAttribute("adoptionFeedbackBoardList", adoptionFeedbackBoardList);
+		List<AdoptionFeedbackBoardVO> adoptionFeedbackBoardList = adoptionFeedbackBoardService.boardCreateHistory(afvo);
+		model.addAttribute("afboard", adoptionFeedbackBoardList);
+		
 		return "board/boardCreateHistory";
-
 	}
+	 
 }

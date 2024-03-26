@@ -93,5 +93,17 @@ public class AdoptionFeedbackBoardController {
 		log.info("삭제완료");
 		return "redirect:/adoptionFeedbackBoard/adoptionFeedbackBoardList";
 	}
+	
+	// 내가 작성한 게시글 히스토리
+	@GetMapping(value = "adoptionFeedbackBoardHistory")
+	public String boardCreateHistory (AdoptionFeedbackBoardVO afbvo, Model model) {
+		
+		List<AdoptionFeedbackBoardVO> adoptionFeedbackBoardList = adoptionFeedbackBoardService.adoptionFeedbackBoardList(afbvo);
+		model.addAttribute("adoptionFeedbackBoardList", adoptionFeedbackBoardList);
+		
+		
+		return "board/adoptionFeedbackBoardList";
+		
+	}
 
 }

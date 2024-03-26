@@ -7,7 +7,7 @@
 <link rel="stylesheet"
 	href="/resources/include/css/application/applicationView.css">
 
-<script src="/resources/include/js/application/applicationView.js"></script>
+<!-- <script src="/resources/include/js/application/applicationView.js"></script> -->
 </head>
 <body class="subpage">
 
@@ -25,11 +25,6 @@
 
 	<!-- Two -->
 	<section id="two" class="wrapper style2">
-		<%-- post방식으로 전송 시 반드시 form 태그 추가해주어야 합니다. --%>
-		<%-- <form name="f_data" id="f_data" method="get">
-			<input type="hidden" name="applicationId" id="applicationId">
-			<input type="hidden" name="userId" id="userId" value="${ userLogin.userId }" />
-		</form> --%>
 		<div class="inner">
 			<div class="box">
 				<div class="content">
@@ -45,26 +40,33 @@
 										<strong>My History</strong>
 									</h4>
 									<br />
-									<h5>
+									<br>
+									<h2 class="text-center">
 										<strong>자유게시판</strong>
-									</h5>
-									<div id="appView">
-										<table id="appliTable">
+									</h2>
+									<div class="table-wrapper">
+										<table class="alt">
 											<thead>
 												<tr class="text-center">
-													<th class="col-md-1">작성일${freeBoardList.fboardTitle}</th>
+													<th class="col-md-1">글번호</th>
 													<th class="col-md-6">제목</th>
+													<th class="col-md-1">조회수</th>
+													<th class="col-md-2">작성일</th>
 												</tr>
 											</thead>
 											<tbody>
 												<c:choose>
-													<c:when test="${ not empty view }">
-														<tr class="text-center" data-id="${ list.applicationId }"
-															data-num="${ list.applicationResult }">
-															<td>${ freeBoard.fboard_date }</td>
-															<td>${ list.volunteer.volunteerTitle }</td>
-															<td>${ list.volunteer.volunteerTime }</td>
-														</tr>
+													<c:when test="${not empty userLogin.userId}">
+														<c:forEach items="${fboard}" var="flist">
+															<tr>
+																<td class="text-center">${flist.fboardId}</td>
+																<td><a 
+																	href="freeBoardDetail?fboardId=${flist.fboardId}&userId=${userLogin.userId}">
+																		${flist.fboardTitle} </a></td>
+																<td class="text-center">${flist.fboardCnt}</td>
+																<td class="text-center">${flist.fboardDate}</td>
+															</tr>
+														</c:forEach>
 													</c:when>
 													<c:otherwise>
 														<tr>
@@ -75,26 +77,34 @@
 											</tbody>
 										</table>
 									</div>
-									<h5>
+									<br>
+									<br>
+									<h2 class="text-center">
 										<strong>봉사후기 게시판</strong>
-									</h5>
-									<div id="appView">
-										<table id="appliTable">
+									</h2>
+									<div class="table-wrapper">
+										<table class="alt">
 											<thead>
 												<tr class="text-center">
-													<th class="col-md-1">작성일</th>
+													<th class="col-md-1">글번호</th>
 													<th class="col-md-6">제목</th>
+													<th class="col-md-1">조회수</th>
+													<th class="col-md-2">작성일</th>
 												</tr>
 											</thead>
 											<tbody>
 												<c:choose>
-													<c:when test="${ not empty view }">
-														<tr class="text-center" data-id="${ list.applicationId }"
-															data-num="${ list.applicationResult }">
-															<td>${ freeBoard.fboard_date }</td>
-															<td>${ list.volunteer.volunteerTitle }</td>
-															<td>${ list.volunteer.volunteerTime }</td>
-														</tr>
+													<c:when test="${not empty userLogin.userId}">
+														<c:forEach items="${vfboard}" var="vflist">
+															<tr>
+																<td class="text-center">${vflist.vfboardId}</td>
+																<td><a 
+																	href="/volunteerFeedbackBoard/volunteerFeedbackBoardDetail?vfboardId=${vflist.vfboardId}&userId=${userLogin.userId}">
+																		${vflist.vfboardTitle} </a></td>
+																<td class="text-center">${vflist.vfboardCnt}</td>
+																<td class="text-center">${vflist.vfboardDate}</td>
+															</tr>
+														</c:forEach>
 													</c:when>
 													<c:otherwise>
 														<tr>
@@ -105,26 +115,33 @@
 											</tbody>
 										</table>
 									</div>
-									<h5>
+									<br>
+									<br>
+									<h2 class="text-center">
 										<strong>입양후기 게시판</strong>
-									</h5>
-									<div id="appView">
-										<table id="appliTable">
+									</h2>
+									<div class="table-wrapper">
+										<table class="alt">
 											<thead>
 												<tr class="text-center">
-													<th class="col-md-1">작성일</th>
+													<th class="col-md-1">글번호</th>
 													<th class="col-md-6">제목</th>
+													<th class="col-md-1">조회수</th>
+													<th class="col-md-2">작성일</th>
 												</tr>
 											</thead>
 											<tbody>
 												<c:choose>
-													<c:when test="${ not empty view }">
-														<tr class="text-center" data-id="${ list.applicationId }"
-															data-num="${ list.applicationResult }">
-															<td>${ freeBoard.fboard_date }</td>
-															<td>${ list.volunteer.volunteerTitle }</td>
-															<td>${ list.volunteer.volunteerTime }</td>
-														</tr>
+													<c:when test="${not empty userLogin.userId}">
+														<c:forEach items="${afboard}" var="aflist">
+															<tr>
+																<td class="text-center">${aflist.afboardId}</td>
+																<td><a href="/adoptionFeedbackBoard/adoptionFeedbackBoardDetail?afboardId=${aflist.afboardId}&userId=${userLogin.userId}">
+																	${aflist.afboardTitle} </a></td>
+																<td class="text-center">${aflist.afboardCnt}</td>
+																<td class="text-center">${aflist.afboardDate}</td>
+															</tr>
+														</c:forEach>
 													</c:when>
 													<c:otherwise>
 														<tr>
@@ -138,7 +155,7 @@
 									<small class="d-block text-end mt-3"> <a href="#"></a>
 									</small>
 									<%--============ 페이징 출력 시작 ============--%>
-									<nav aria-label="Page navigation example">
+									<%-- <nav aria-label="Page navigation example">
 										<form id="page" name="page">
 											<input type="hidden" name="userId" id="userId"
 												value="${ userLogin.userId }" /> <input type="hidden"
@@ -151,7 +168,7 @@
 											<c:if test="${pageMaker.prev}">
 												<li class="page-item"><a
 													href="${pageMaker.startPage - 1}" class="page-link">Previous</a>
-													<%-- <a href="${pageMaker.startPage - 10}" class="page-link">Previous</a> --%>
+													<a href="${pageMaker.startPage - 10}" class="page-link">Previous</a>
 												</li>
 											</c:if>
 
@@ -171,7 +188,7 @@
 												</li>
 											</c:if>
 										</ul>
-									</nav>
+									</nav> --%>
 								</div>
 							</div>
 						</div>

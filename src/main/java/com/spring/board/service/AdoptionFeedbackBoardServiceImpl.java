@@ -70,6 +70,14 @@ public class AdoptionFeedbackBoardServiceImpl implements AdoptionFeedbackBoardSe
 		return adoptionFeedbackBoardDAO.adoptionFeedbackBoardListCnt(afbvo);
 	
 	}
+	
+	//게시글 히스토리
+	@Override
+	public List<AdoptionFeedbackBoardVO> boardCreateHistory (AdoptionFeedbackBoardVO afbvo) {
+		List<AdoptionFeedbackBoardVO> adoptionFeedbackBoardList = adoptionFeedbackBoardDAO.boardCreateHistory(afbvo);
+
+		return adoptionFeedbackBoardList;
+	}
 	 
 	
 }

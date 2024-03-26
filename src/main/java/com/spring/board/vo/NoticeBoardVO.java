@@ -2,9 +2,13 @@ package com.spring.board.vo;
 
 import java.sql.Date;
 
+import com.spring.common.vo.CommonVO;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 @Data
-public class NoticeBoardVO {
+@EqualsAndHashCode(callSuper = false)
+public class NoticeBoardVO extends CommonVO{
 	/*
 	 * nboard_id	number		NOT NULL,
 	nboard_title	varchar2(80)		NOT NULL,

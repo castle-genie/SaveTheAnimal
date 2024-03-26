@@ -68,5 +68,13 @@ public class VolunteerFeedbackBoardServiceImpl implements VolunteerFeedbackBoard
 
 		return volunteerFeedbackBoardDAO.volunteerFeedbackBoardListCnt(vfvo);
 	}
+	
+	//게시글 히스토리
+	@Override
+	public List<VolunteerFeedbackBoardVO> boardCreateHistory (VolunteerFeedbackBoardVO vfvo) {
+		List<VolunteerFeedbackBoardVO> volunteerFeedbackBoardList = volunteerFeedbackBoardDAO.boardCreateHistory(vfvo);
+
+		return volunteerFeedbackBoardList;
+	}
 
 }

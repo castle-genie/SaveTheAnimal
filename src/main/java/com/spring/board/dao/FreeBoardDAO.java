@@ -27,4 +27,7 @@ public interface FreeBoardDAO {
 	
 	//게시글 갯수 카운트
 	public int freeBoardListCnt(FreeBoardVO freeBoardVO);
+	
+	//게시글 히스토리
+	public List<FreeBoardVO> boardCreateHistory (FreeBoardVO freeBoardVO);
 }

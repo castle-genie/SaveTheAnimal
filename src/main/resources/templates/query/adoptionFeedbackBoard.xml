@@ -93,4 +93,13 @@
 		DELETE FROM adoptionFeedbackBoard 
 		WHERE	afboard_id = #{afboardId}
 	</delete>
+	
+	<!-- 내가 작성한 게시글 히스토리 -->
+	<select id="boardCreateHistory" parameterType="adoptionFeedbackBoard" resultMap="adoptionFeedbackBoardMap">
+		SELECT afboard_id, afboard_title, afboard_date, afboard_cnt, user_id
+		FROM adoptionFeedbackBoard
+		WHERE user_id = #{userId}
+		ORDER BY afboard_id DESC
+	</select>
+	
 </mapper>

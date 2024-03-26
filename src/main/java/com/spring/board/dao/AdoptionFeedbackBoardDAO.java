@@ -27,4 +27,10 @@ public interface AdoptionFeedbackBoardDAO {
 	
 	//게시글 갯수 카운트
 	public int adoptionFeedbackBoardListCnt(AdoptionFeedbackBoardVO afbvo);
+	
+	//게시글 히스토리
+	public List<AdoptionFeedbackBoardVO> boardCreateHistory (AdoptionFeedbackBoardVO afbvo);
+	
+	
+	
 }

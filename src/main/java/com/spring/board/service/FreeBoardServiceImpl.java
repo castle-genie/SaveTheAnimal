@@ -66,4 +66,13 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		
 		 return freeBoardDAO.freeBoardListCnt(freeBoardVO); 
 	}
+	
+	//게시글 히스토리
+	@Override
+	public List<FreeBoardVO> boardCreateHistory (FreeBoardVO freeBoardVO){
+		List<FreeBoardVO> freeBoardList = freeBoardDAO.boardCreateHistory(freeBoardVO);
+		
+		return freeBoardList;
+	}
+	
 }

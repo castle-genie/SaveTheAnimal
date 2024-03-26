@@ -87,5 +87,17 @@ public class VolunteerFeedbackBoardController {
 		log.info("삭제완료");
 		return "redirect:/volunteerFeedbackBoard/volunteerFeedbackBoardList";
 	}
+	
+	// 내가 작성한 게시글 히스토리
+	@GetMapping(value = "volunteerFeedbackBoardHistory")
+	public String boardCreateHistory(VolunteerFeedbackBoardVO vfvo, Model model) {
+		
+		List<VolunteerFeedbackBoardVO> volunteerFeedbackBoardList = volunteerFeedbackBoardService.volunteerFeedbackBoardList(vfvo);
+		model.addAttribute("volunteerFeedbackBoardList", volunteerFeedbackBoardList);
+		
+		return "board/volunteerFeedbackBoardList";
+	}
+	
+	
 
 }

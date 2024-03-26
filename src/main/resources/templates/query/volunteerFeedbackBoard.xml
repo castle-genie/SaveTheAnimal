@@ -93,4 +93,12 @@
 		DELETE FROM volunteerFeedbackBoard 
 		WHERE	vfboard_id = #{vfboardId}
 	</delete>
+	
+	<!-- 내가 작성한 게시글 히스토리 -->
+	<select id="boardCreateHistory" parameterType="volunteerFeedbackBoard" resultMap="volunteerFeedbackBoardMap">
+		SELECT vfboard_id, vfboard_title, vfboard_date, vfboard_cnt, user_id
+		FROM volunteerFeedbackBoard
+		WHERE user_id = #{userId}
+		ORDER BY vfboard_id DESC
+	</select>
 </mapper>

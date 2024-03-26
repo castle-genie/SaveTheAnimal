@@ -88,21 +88,23 @@
 						<table class="alt">
 							<thead>
 								<tr class="text-center">
-									<td>제목</td>
-									<td>작성자</td>
-									<td>조회수</td>
-									<td>작성일</td>
+									<th class="col-md-1">글번호</th>
+									<th class="col-md-6">제목</th>
+									<th class="col-md-1">작성자</th>
+									<th class="col-md-1">조회수</th>
+									<th class="col-md-1">작성일</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${adoptionFeedbackBoardList}" var="list">
 									<tr>
+										<td class="text-center">${list.afboardId }</td>
 										<td><a
 											href="adoptionFeedbackBoardDetail?afboardId=${list.afboardId}&userId=${userLogin.userId}">
 												${list.afboardTitle} </a></td>
-										<td class="text-right">${list.userId }</td>
-										<td>${list.afboardCnt }</td>
-										<td><fmt:formatDate value="${list.afboardDate }" pattern="yyyy.MM.dd" /></td>
+										<td class="text-center">${list.userId }</td>
+										<td class="text-center">${list.afboardCnt }</td>
+										<td class="text-center"><fmt:formatDate value="${list.afboardDate }" pattern="yyyy.MM.dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>

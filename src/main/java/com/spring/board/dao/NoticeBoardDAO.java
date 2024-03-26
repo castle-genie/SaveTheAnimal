@@ -18,6 +18,9 @@ public interface NoticeBoardDAO {
 	// 조회수 증가 메서드
 	public boolean plusCnt(NoticeBoardVO nvo);
 	
+	//게시글 갯수 카운트(유저페이지)
+	public int noticeBoardListCnt(NoticeBoardVO nvo);
+	
 	
 	
 	
@@ -38,5 +41,8 @@ public interface NoticeBoardDAO {
 
 	// 게시글 삭제(관리자 페이지)
 	public int deleteNoticeBoard(NoticeBoardVO nvo);
+	
+	//게시글 갯수 카운트 (관리자 페이지)
+	public int adminNoticeBoardListCnt(NoticeBoardVO nvo);
 
 }

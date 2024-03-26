@@ -87,21 +87,23 @@
 						<table class="alt">
 							<thead>
 								<tr class="text-center">
-									<td>제목</td>
-									<td>작성자</td>
-									<td>조회수</td>
-									<td>작성일</td>
+									<th class="col-md-1">글번호</th>
+									<th class="col-md-7">제목</th>
+									<th class="col-md-1">작성자</th>
+									<th class="col-md-1">조회수</th>
+									<th class="col-md-1">작성일</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${freeBoardList}" var="list">
 									<tr>
+										<td class="text-center">${list.fboardId }</td>
 										<td><a
 											href="freeBoardDetail?fboardId=${list.fboardId}&userId=${userLogin.userId}">
 												${list.fboardTitle} </a></td>
-										<td>${list.userId }</td>
-										<td>${list.fboardCnt }</td>
-										<td><fmt:formatDate value="${list.fboardDate }" pattern="yyyy.MM.dd" /></td>
+										<td class="text-center">${list.userId }</td>
+										<td class="text-center">${list.fboardCnt }</td>
+										<td class="text-center"><fmt:formatDate value="${list.fboardDate }" pattern="yyyy.MM.dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
