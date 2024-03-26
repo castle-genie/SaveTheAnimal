@@ -27,7 +27,7 @@
             <div class="content">
                 <form id="write_form">
                 <input type="hidden" id="adoptionId" name="adoptionId" value="${ adoptionId }" />
-                
+                <input type="hidden" id="userId" name="userId" value="${ userLogin.userId }" />
                 <header class="align-center">
                     <p>신상 정보</p>
                     <label for="animalId"></label><br>
