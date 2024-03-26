@@ -33,4 +33,11 @@ public class CounselingDAOTest {
 		log.info("갯수 : " + counselingDAO.adminCounselingUpdate(counselingVO));
 	}
 	*/
+	
+	@Test
+	public void writeForm() {
+		CounselingVO counselingVO = new CounselingVO();
+		counselingVO.setUserId("member11");
+		log.info("행 정보" + counselingDAO.writeForm(counselingVO));
+	}
 }
