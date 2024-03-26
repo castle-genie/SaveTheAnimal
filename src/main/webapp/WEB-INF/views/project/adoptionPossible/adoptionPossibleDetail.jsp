@@ -78,7 +78,7 @@
 								<tr>
 									<td colspan="4">
 										<c:if test="${not empty detail.animalFile}">
-										    <img src="/uploadStorage/animal/${detail.animalFile}" class="rounded img-fluid" />
+										    <img src="/resources/images/storage/animal/${detail.animalFile}" class="rounded img-fluid" />
 										</c:if>
 										<c:if test="${empty detail.animalFile}">
 										    <img src="/resources/images/common/noanimal.jpg" class="rounded img-fluid" />
@@ -147,7 +147,11 @@
 								<tr>
 									<td>공고 상태</td>
 									<td class="text-start">${detail.adoptionStatus }</td>
-									<td><button class="btn btn-primary" id="couselingBtn">입양 신청하기</button></td>
+									<c:choose>
+										<c:when test="${not empty userLogin.userId}">
+											<td><button class="btn btn-primary" id="couselingBtn">입양 신청하기</button></td>
+										</c:when>
+									</c:choose>
 								</tr>
 							</table>
 						</td>

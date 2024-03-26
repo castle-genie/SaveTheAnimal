@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.animal.service.AnimalService;
+import com.spring.animal.vo.AnimalVO;
 import com.spring.volunteer.service.VolunteerService;
 import com.spring.volunteer.vo.VolunteerVO;
 
@@ -24,9 +26,11 @@ public class IndexController {
 	
 	@Autowired
 	private VolunteerService volSer;
+	@Autowired
+	private AnimalService aniSer;
 	
 	@GetMapping("/")
-	public String mainpage(Model model, VolunteerVO vvo) {	
+	public String mainpage(Model model, VolunteerVO vvo, AnimalVO avo) {	
 		if(vvo == null) {
 			return "project/mainpage";
 		}else {
@@ -35,7 +39,14 @@ public class IndexController {
 			
 			System.out.println(mainVol);
 		}
-		
+		if(avo == null) {
+			return "project/mainpage";
+		}else {
+			List<AnimalVO> mainAni = aniSer.mainAni(avo);
+			model.addAttribute("mainAni", mainAni);
+			
+			System.out.println(mainAni);
+		}
 		
 		
 		return "project/mainpage";
