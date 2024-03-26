@@ -26,5 +26,7 @@ public interface CounselingService {
     int userCounselingUpdate(CounselingVO counselingVO);
     
     CounselingVO writeForm(CounselingVO counselingVO);
+    
+    List<CounselingVO> adminCounselingList(CounselingVO counselingVO);
 }
 
