@@ -17,7 +17,7 @@ public interface CounselingDAO {
     public CounselingVO writeForm(CounselingVO counselingVO);
 
     /* admin */
-    //public List<CounselingVO> counselingList(CounselingVO counselingVO); // user 쪽의 리스트와 동일ㄴ
+    public List<CounselingVO> adminCounselingList(CounselingVO counselingVO); // user 쪽의 리스트와 동일ㄴ
     public int counselingInsert(CounselingVO counselingVO);
 
     public int counselingUpdate(CounselingVO counselingVO);

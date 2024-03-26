@@ -84,4 +84,11 @@ public class CounselingServiceImpl implements CounselingService {
 		writeForm = counselingDAO.writeForm(counselingVO);
 		return writeForm;
 	}
+
+	@Override
+	public List<CounselingVO> adminCounselingList(CounselingVO counselingVO) {
+		List<CounselingVO> adminCounselingList = null;
+		adminCounselingList = counselingDAO.adminCounselingList(counselingVO);
+		return adminCounselingList;
+	}
 }
