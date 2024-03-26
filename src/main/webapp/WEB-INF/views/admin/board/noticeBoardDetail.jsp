@@ -16,7 +16,7 @@
 							<h3>${noticeBoard.nboardTitle}</h3>
 						</header>
 						<div>
-							<pre>${noticeBoard.nboardContent}</pre>
+							<textarea style="resize:none;" rows="20" cols="100" readonly>${noticeBoard.nboardContent}</textarea>
 						</div>
 						<br>
 						<button type="button"

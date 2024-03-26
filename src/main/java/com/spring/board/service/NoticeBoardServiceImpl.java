@@ -37,6 +37,13 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 		return noticeBoardDAO.plusCnt(nvo);
 	}
 	
+	// 게시글 갯수 카운트
+	@Override
+	public int noticeBoardListCnt (NoticeBoardVO nvo) {
+
+		return noticeBoardDAO.noticeBoardListCnt(nvo);
+	}
+	
 	//////////////////////관리자 페이지
 	//공지게시판 글 목록 (관리자 페이지)
 	@Override
@@ -76,6 +83,13 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 		int deleteNoticeBoard = noticeBoardDAO.deleteNoticeBoard(nvo);
 		log.info("deleteFreeBoard 메서드 실행완료"+ deleteNoticeBoard);
 		return deleteNoticeBoard;
+	}
+	
+	// 게시글 갯수 카운트
+	@Override
+	public int adminNoticeBoardListCnt (NoticeBoardVO nvo) {
+
+		return noticeBoardDAO.adminNoticeBoardListCnt(nvo);
 	}
 
 }

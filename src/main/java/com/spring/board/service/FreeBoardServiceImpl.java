@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 import com.spring.board.dao.FreeBoardDAO;
 import com.spring.board.vo.FreeBoardVO;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 public class FreeBoardServiceImpl implements FreeBoardService{
 	
-	@Autowired
+	@Setter(onMethod_=@Autowired)
 	private FreeBoardDAO freeBoardDAO;
-	
 	
 	@Override
 	public List<FreeBoardVO> freeBoardList(FreeBoardVO freeBoardVO){
@@ -24,15 +24,6 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		
 		return freeBoardList;
 	}
-	
-	//자유게시판 글 조회하는 메서드
-	/*
-	@Override
-	public FreeBoardVO freeBoardDetail(int fboardId) {
-		return freeBoardDAO.freeBoardDetail(fboardId);
-	}
-	*/
-	
 	
 	@Override
 	public FreeBoardVO freeBoardDetail(FreeBoardVO freeBoardVO) {
@@ -59,7 +50,6 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	public int updateFreeBoard(FreeBoardVO freeBoardVO) {
 		int  updatefreeboard = freeBoardDAO.updateFreeBoard(freeBoardVO);
 		return updatefreeboard;
-		//return freeBoardDAO.updateFreeBoard(freeBoardVO);
 	}
 	
 	//게시글 삭제
@@ -69,10 +59,20 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		int deletefreeboard = freeBoardDAO.deleteFreeBoard(freeBoardVO);
 		log.info("deleteFreeBoard 메서드 실행완료"+ deletefreeboard);
 		return deletefreeboard;
-		//return freeBoardDAO.freeBoardDelete(fboardId);
+	}
+	//게시글 갯수 카운트
+	@Override
+	public int freeBoardListCnt(FreeBoardVO freeBoardVO) {
+		
+		 return freeBoardDAO.freeBoardListCnt(freeBoardVO); 
 	}
 	
+	//게시글 히스토리
+	@Override
+	public List<FreeBoardVO> boardCreateHistory (FreeBoardVO freeBoardVO){
+		List<FreeBoardVO> freeBoardList = freeBoardDAO.boardCreateHistory(freeBoardVO);
+		
+		return freeBoardList;
+	}
 	
-	
-
 }

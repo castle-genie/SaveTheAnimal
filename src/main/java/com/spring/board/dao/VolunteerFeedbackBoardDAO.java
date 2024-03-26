@@ -24,5 +24,10 @@ public interface VolunteerFeedbackBoardDAO {
 
 	// 게시글 삭제
 	public int deleteVolunteerFeedbackBoard(VolunteerFeedbackBoardVO vfvo);
-
+	
+	//게시글 갯수 카운트
+	public int volunteerFeedbackBoardListCnt(VolunteerFeedbackBoardVO vfvo);
+	
+	//게시글 히스토리
+	public List<VolunteerFeedbackBoardVO> boardCreateHistory (VolunteerFeedbackBoardVO vfvo);
 }
