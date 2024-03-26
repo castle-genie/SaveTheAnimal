@@ -146,7 +146,7 @@ public class CounselingController {
         int result = 0;
         String url = "";
 
-        result = counselingService.counselingUpdate(counselingVO);
+        result = counselingService.userCounselingUpdate(counselingVO);
         int num = counselingVO.getCounselingId();
         if(result == 1) {
             url = "/counseling/counselingDetail?counselingId="+num;

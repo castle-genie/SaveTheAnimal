@@ -28,12 +28,17 @@
                 <header class="align-center">
                     <p>신상 정보</p>
 
-                    <input type="text" id="name" name="name" placeholder="성명">
-                    <input type="text" id="age" name="age" placeholder="연령">
-                    <input type="text" id="address" name="address" placeholder="주소">
-                    <input type="text" id="phone" name="phone" placeholder="전화번호">
-                    <input type="text" id="occupation" name="occupation" placeholder="직업">
+                    <input type="text" id="userName" name="userName" placeholder="성명">
+                    <input type="text" id="counselingAge" name="counselingAge" placeholder="연령">
+                    <input type="text" id="counselingAddress" name="counselingAddress" placeholder="주소">
+                    <input type="text" id="userPhone" name="userPhone" placeholder="전화번호">
+                    <input type="text" id="counselingJob" name="counselingJob" placeholder="직업">
                 </header>
+                <hr>
+                <h3>상담 예약 날짜 </h3>
+                <label for="counselingSchedule"></label><br>
+                <input type="date" id="counselingSchedule" name="counselingSchedule" placeholder="예약날짜">
+
                 <hr>
                 <h3>입양질문</h3>
                 <ol>
