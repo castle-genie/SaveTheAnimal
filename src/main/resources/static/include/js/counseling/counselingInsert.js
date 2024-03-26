@@ -21,12 +21,12 @@ $(function() {
             if ($("#file").val() != "") {
                 if (!chkFile($("#file"))) return;
             }
-            $("#insertForm").attr({
+            $("#writeForm").attr({
                 method: "post",
                 enctype: "multipart/form-data",
                 action: "/counseling/counselingInsert"
             });
-            $("#insertForm").submit();
+            $("#writeForm").submit();
         }
     })
 })

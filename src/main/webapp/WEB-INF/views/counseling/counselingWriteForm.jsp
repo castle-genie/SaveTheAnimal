@@ -25,11 +25,11 @@
     <div class="inner">
         <div class="box">
             <div class="content">
-                <form id="write form">
+                <form id="writeForm">
                 <header class="align-center">
                     <p>신상 정보</p>
                     <label for="animalId"></label><br>
-					<input type="text" id="animalId" name="animalId" value="" readonly />
+					<input type="text" id="animalId" name="animalId" value="20" readonly />
 
                     <label for="userName"></label><br>
                     <input type="text" id="userName" name="userName" placeholder="성명">
