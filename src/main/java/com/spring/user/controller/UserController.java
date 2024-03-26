@@ -42,8 +42,12 @@ public class UserController {
 	public String userLoginProcess(UserVO login, Model model, RedirectAttributes ras) {
 		
 		UserVO userLogin = userService.userLoginProcess(login);
-		int userAct = userLogin.getUserAct();
+		int userAct = 0;
 		
+		if (userLogin != null) {
+			userAct = userLogin.getUserAct();
+		}		
+
 		if (userLogin != null && userAct == 1) {			// 활동 계정이면
 			model.addAttribute("userLogin", userLogin); 
 			return "redirect:/";// 성공하면 메인페이지 이동			
@@ -56,7 +60,7 @@ public class UserController {
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
 			return "redirect:/user/login";
-		}
+		} 
 	}
 	
 	@GetMapping("/logout")
