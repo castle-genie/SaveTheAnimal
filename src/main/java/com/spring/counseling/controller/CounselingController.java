@@ -3,8 +3,6 @@ package com.spring.counseling.controller;
 import com.spring.admin.login.vo.AdminLoginVO;
 import com.spring.counseling.service.CounselingService;
 import com.spring.counseling.vo.CounselingVO;
-import com.spring.user.vo.UserVO;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -142,10 +140,18 @@ public class CounselingController {
     	return "redirect:"+url;
     }
     
-    @ResponseBody
+
     @PostMapping("/userCounselingUpdate")
-    public void userCounselingUpdate(CounselingVO counselingVO) {
-    	counselingService.userCounselingUpdate(counselingVO);
+    public String userCounselingUpdate(CounselingVO counselingVO) throws Exception {
+        int result = 0;
+        String url = "";
+
+        result = counselingService.counselingUpdate(counselingVO);
+        int num = counselingVO.getCounselingId();
+        if(result == 1) {
+            url = "/counseling/counselingDetail?counselingId="+num;
+        }
+        return "redirect:"+url;
     }
     
 }
