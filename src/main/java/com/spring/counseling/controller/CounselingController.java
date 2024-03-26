@@ -52,7 +52,7 @@ public class CounselingController {
         try {
             int result = counselingService.counselingInsert(counselingVO);
             if (result == 1) {
-                return "redirect:/counseling/counselingList";
+                return "redirect:/ap/apList";
             }
             ras.addFlashAttribute("errorMsg", "입력에 문제가 있어 다시 진행해 주세요.");
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class CounselingController {
         if (adminLoginVO == null) {
             return "/admin/adminLogin";
         } else {
-            List<CounselingVO> counselingList = counselingService.counselingList(counselingVO);
+            List<CounselingVO> counselingList = counselingService.adminCounselingList(counselingVO);
             model.addAttribute("admincounselingList", counselingList);
             return "/admin/counseling/adminCounselingList"; // 여기 경로 수정 (/counseling/adminCounselingList)
         }
@@ -147,5 +147,5 @@ public class CounselingController {
     public void userCounselingUpdate(CounselingVO counselingVO) {
     	counselingService.userCounselingUpdate(counselingVO);
     }
-
+    
 }
