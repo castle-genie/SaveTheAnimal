@@ -64,7 +64,7 @@
 									<td>${animal.animalId}</td>
 									<td>
 										<c:if test="${not empty animal.animalFile }">
-											<img src="/uploadStorage/animal/${animal.animalFile}"
+											<img src="/resources/images/storage/animal/${animal.animalFile}"
 											class="rounded w-50 h-50"/>
 										</c:if>
 										<c:if test="${empty animal.animalFile }">

@@ -24,7 +24,7 @@
                             <option value="adoption_id">공고 ID</option>
                             <option value="adoption_title">공고 제목</option>
                             <option value="adoption_level">공고 레벨</option>
-                            <option value="adoption_temp">공고 상태</option>
+                            <option value="adoption_status">공고 상태</option>
                         </select>
                     </div>
                     <div class="col-auto">
