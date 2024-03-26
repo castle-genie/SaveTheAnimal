@@ -107,7 +107,7 @@
 	
 	<delete id="animalDelete" parameterType="animal">
 	    DELETE FROM animal WHERE animal_id = #{animalId}
-	    CASCADE
+	   
 	</delete>
 
 		
@@ -159,4 +159,15 @@
 			<![CDATA[animal_temp LIKE '%' || #{keyword} || '%']]>
 		</if>
 	</sql>
+	
+	<select id="mainAni" parameterType="animal" resultMap="animalMap">
+		select animal_id, animal_name, animal_file
+		from (
+			select animal_id, animal_name, animal_file
+			from animal
+			order by animal_id desc
+		)
+		where rownum &lt;=4
+	</select>
+	
 </mapper>

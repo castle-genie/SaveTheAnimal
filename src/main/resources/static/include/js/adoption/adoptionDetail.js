@@ -21,13 +21,10 @@ $(function(){
 	
 	//삭제 버튼 클릭시 처리 이벤트
 	$("#DeleteBtn").on("click", () => {
-    // 사용자에게 확인 메시지 보여주기
-   
-	 const confirmDelete = confirm("정말로 삭제하시겠습니까?");
-    // 확인이 true인 경우에만 삭제 진행
-    if (confirmDelete) {
-        $("#f_data").attr({
-            "method": "post",
+     //사용자에게 확인 메시지 보여주기
+ 
+       $("#f_data").attr({
+           "method": "post",
             "action": "/adoption/adoptionDelete"
         });
         $("#f_data").submit();
@@ -35,15 +32,15 @@ $(function(){
         $("#pwdChk").css("visibility", "visible");
         btnInit();
         buttonCheck = "deleteButton";
-    }
+    
 });
 
-	/*
+	
 	//삭제 버튼 클릭시 댓글 확인 후 처리 이벤트
-	$("#DeleteBtn").on("click", ()=> {
+	/*$("#DeleteBtn").on("click", ()=> {
 		$.ajax({
 			type : "post",
-			data : "adoptionId=" + $("#adoptionId").val(),
+			data : "animalId=" + $("#animalId").val(),
 			dataType : "text",
 			error : function() {
 				alert('시스템에 문제가 있어 잠시 후 다시 진행해 주세요');

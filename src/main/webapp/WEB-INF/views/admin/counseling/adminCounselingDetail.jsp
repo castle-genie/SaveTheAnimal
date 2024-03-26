@@ -10,15 +10,22 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">예약 고유 ID: ${adminCounselingDetail.counselingId}</h5>
-                        <p class="card-text">예약일정: <input type="date" id="counselingSchedule" value="${adminCounselingDetail.counselingSchedule}"></p>
-                        <p class="card-text">회원ID: ${adminCounselingDetail.userId}</p>
-                        <p class="card-text">입양공고ID: ${adminCounselingDetail.adoptionId}</p>
-                        <p class="card-text">동물ID: ${adminCounselingDetail.animalId}</p>
-                        <p class="card-text">예약신청일자: ${adminCounselingDetail.counselingDate}</p>
-                        <p class="card-text">적격판정: <input type="text" id="counselingJudgment" value="${adminCounselingDetail.counselingJudgment}"></p>
-                        <p class="card-text">상담내용: <textarea id="counselingDetail" rows="5" cols="30">${adminCounselingDetail.counselingDetail}</textarea></p>
-                        <p class="card-text">입양/임시보호구분: <input type="text" id="counselingAdopt" value="${adminCounselingDetail.counselingAdopt}"></p>
+                    	<form id="counselingForm">
+	                        <h5 class="card-title">예약 고유 ID: <input type="text" id="counselingId" name="counselingId" value="${adminCounselingDetail.counselingId}"readonly /></h5>
+	                        <p class="card-text">예약일정: <input type="date" id="counselingSchedule" value="${adminCounselingDetail.counselingSchedule}"readonly></p>
+	                        <p class="card-text">회원ID: <input type="text" id="userId" name="userId" value="${adminCounselingDetail.userId }" readonly></p>
+	                        <p class="card-text">입양공고ID: ${adminCounselingDetail.adoptionId}</p>
+	                        <p class="card-text">동물ID: ${adminCounselingDetail.animalId}</p>
+	                        <p class="card-text">예약신청일자: ${adminCounselingDetail.counselingDate}</p>
+	                        <p class="card-text">적격판정: 
+	                        	<select name="counselingJudgment">
+	                        		<option value="">${ adminCounselingDetail.counselingJudgment }</option>
+	                        		<option value="적격">적격</option>
+	                        		<option value="비적격">비적격</option>
+	                        	</select>
+	                        </p>
+	                        <p class="card-text">상담내용: <textarea id="counselingDetail" name="counselingDetail" rows="5" cols="30">${adminCounselingDetail.counselingDetail}</textarea></p>
+                        </form>
                     </div>
                 </div>
                 <button type="button" id="sanctionBtn" class="btn btn-success btn-sm">수정하기</button>

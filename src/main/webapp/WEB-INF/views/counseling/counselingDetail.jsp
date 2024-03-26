@@ -15,7 +15,7 @@
     <div class="inner">
         <header class="align-center">
             <p>Save The Animal</p>
-            <h2>입양 상담 디테일</h2>
+            <h2>입양 상담 신청서</h2>
         </header>
     </div>
 </section>
@@ -27,12 +27,14 @@
             <div class="content">
                 <header class="align-center">
                     <p>신상 정보</p>
-
-                    <input type="text" id="name" name="name" placeholder="성명">
+                    <form id="counseling_form">
+                    <input type="hidden" id="userId" name="userId" value="${ counselingDetail.userId }" />
+                    <input type="text" id="name" name="name" value="${ counselingDetail.userName }" placeholder="성명">
                     <input type="text" id="age" name="age" placeholder="연령">
                     <input type="text" id="address" name="address" placeholder="주소">
                     <input type="text" id="phone" name="phone" placeholder="전화번호">
                     <input type="text" id="occupation" name="occupation" placeholder="직업">
+                     </form>
                 </header>
                 <hr>
                 <h3>입양질문</h3>

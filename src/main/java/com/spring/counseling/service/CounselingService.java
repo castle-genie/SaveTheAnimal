@@ -20,5 +20,13 @@ public interface CounselingService {
     int counselingDeleteById(int counselingId);
 
     CounselingVO getCounselingDetail(int counselingId);
+    
+    
+    int adminCounselingUpdate(CounselingVO counselingVO);
+    int userCounselingUpdate(CounselingVO counselingVO);
+    
+    CounselingVO writeForm(CounselingVO counselingVO);
+    
+    List<CounselingVO> adminCounselingList(CounselingVO counselingVO);
 }
 

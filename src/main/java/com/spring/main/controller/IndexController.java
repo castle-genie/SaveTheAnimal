@@ -1,17 +1,15 @@
 package com.spring.main.controller;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.animal.service.AnimalService;
+import com.spring.animal.vo.AnimalVO;
 import com.spring.volunteer.service.VolunteerService;
 import com.spring.volunteer.vo.VolunteerVO;
 
@@ -19,25 +17,27 @@ import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/*")
 @Controller
-@Slf4j
 public class IndexController {
 	
 	@Autowired
 	private VolunteerService volSer;
+	@Autowired
+	private AnimalService aniSer;
 	
 	@GetMapping("/")
-	public String mainpage(Model model, VolunteerVO vvo) {	
+	public String mainpage(Model model, VolunteerVO vvo, AnimalVO avo) {	
 		if(vvo == null) {
 			return "project/mainpage";
 		}else {
 			List<VolunteerVO> mainVol = volSer.mainVol(vvo);
 			model.addAttribute("mainVol", mainVol);
-			
-			System.out.println(mainVol);
 		}
-		
-		
-		
+		if(avo == null) {
+			return "project/mainpage";
+		}else {
+			List<AnimalVO> mainAni = aniSer.mainAni(avo);
+			model.addAttribute("mainAni", mainAni);
+		}
 		return "project/mainpage";
 	}		
 	

@@ -2,25 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp" %>
 	<link rel="stylesheet" href="/resources/include/assets/css/main.css">
-	<script>
-		 function getRandomImages() {
-	         // AJAX를 사용하여 서버로부터 랜덤 이미지 경로들을 요청
-	         var xhr = new XMLHttpRequest();
-	         xhr.onreadystatechange = function() {
-	             if (xhr.readyState == 4 && xhr.status == 200) {
-	                 // 서버로부터 받은 이미지 경로들을 사용하여 이미지들을 표시
-	                 var imagePaths = JSON.parse(xhr.responseText);
-	                 for (var i = 0; i < imagePaths.length; i++) {
-	                     document.getElementById("image" + (i+1)).src = imagePaths[i];
-	                 }
-	             }
-	         };
-	         xhr.open("GET", "/randomImages", true);
-	         xhr.send();
-	     }
-	</script>
 	</head>
-	<body onload="getRandomImages()">
+	<body>
 		<header id="header" class="alt"><div class="logo"><a href="/">SaveTheAnimal <span>by team3</span></a></div>
 				<a href="#menu">Menu</a>
 		</header>
@@ -100,8 +83,15 @@
 							<c:forEach var="mainVol" items="${mainVol}" varStatus="status">
 								<div>
 									<div class="box">
-										<div class="image fit">
-											<img src="/resources/images/pic02.jpg" alt="" width="600" height="300">
+										<div class="image fit" style="width:100%; height:358.28px; aspect-ratio: 557.33/358.28">
+											<c:choose>
+												<c:when test="${not empty mainVol.volunteerFile}">
+													<img src="/resources/images/storage/volunteer/${mainVol.volunteerFile}" alt="no image" width="600" height="300" style="width:100; height: 100%">
+												</c:when>
+												<c:otherwise>
+													<img src="/resources/images/walk.jpg" title="no image" width="600" height="300" style="width:100; height: 100%">
+												</c:otherwise>
+											</c:choose>
 										</div>
 										<div class="content">
 											<header class="align-center">
@@ -167,29 +157,49 @@
 			<div class="inner">
 				<header class="align-center">
 					<p class="special">an abandoned animal list</p>
-					<h2>STA:SaveTheAniaml</h2>
+					<h2>STA : Save The Aniaml</h2>
 				</header>
 				<div class="gallery">
-					<div>
-						<div class="image fit">
-							<a href="#"><img id="image1" src="" alt="" width="600" height="300"></a>
-						</div>
-					</div>
-					<div>
-						<div class="image fit">
-							<a href="#"><img id="image2" src="" alt="" width="600" height="300"></a>
-						</div>
-					</div>
-					<div>
-						<div class="image fit">
-							<a href="#"><img id="image3" src="" alt="" width="600" height="300"></a>
-						</div>
-					</div>
-					<div>
-						<div class="image fit">
-							<a href="#"><img id="image4" src="" alt="" width="600" height="300"></a>
-						</div>
-					</div>
+					<c:choose>
+						<c:when test="${not empty mainAni}">
+							<c:forEach var="mainAni" items="${mainAni}" varStatus="status">
+								<div>
+									<div class="image fit" style="width:600px; height:371px;">
+										<c:choose>
+											<c:when test="${not empty mainAni.animalFile}">
+												<img src="/resources/images/storage/animal/${mainAni.animalFile}" alt="${mainAni.animalName}" alt="no image" width="600" height="300" style="width:100%; height:100%;">
+											</c:when>
+											<c:otherwise>
+										    	<img src="/resources/images/common/noanimal.jpg" title="no image" width="600" height="300" style="width:100%; height:100%;" />
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<div>
+								<div class="image fit">
+									<a href="#"><img id="/resources/images/pic01.jsp" src="" alt="" width="600" height="300" ></a>
+								</div>
+							</div>
+							<div>
+								<div class="image fit">
+									<a href="#"><img id="/resources/images/pic02.jsp" src="" alt="" width="600" height="300"></a>
+								</div>
+							</div>
+							<div>
+								<div class="image fit">
+									<a href="#"><img id="/resources/images/pic03.jsp" src="" alt="" width="600" height="300"></a>
+								</div>
+							</div>
+							<div>
+								<div class="image fit">
+									<a href="#"><img id="/resources/images/pic04.jsp" src="" alt="" width="600" height="300"></a>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</section>

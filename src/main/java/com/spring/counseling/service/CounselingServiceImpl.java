@@ -63,4 +63,32 @@ public class CounselingServiceImpl implements CounselingService {
     public int counselingDeleteById(int counselingId) {
         return counselingDAO.counselingDelete(counselingId);
     }
+
+	@Override
+	public int adminCounselingUpdate(CounselingVO counselingVO) {
+		int adminCounselingUpdate = 0;
+		adminCounselingUpdate = counselingDAO.adminCounselingUpdate(counselingVO);
+		return adminCounselingUpdate;
+	}
+
+	@Override
+	public int userCounselingUpdate(CounselingVO counselingVO) {
+		int userCounselingUpdate = 0;
+		userCounselingUpdate = counselingDAO.userCounselingUpdate(counselingVO);
+		return userCounselingUpdate;
+	}
+	
+	@Override
+	public CounselingVO writeForm(CounselingVO counselingVO) {
+		CounselingVO writeForm = null;
+		writeForm = counselingDAO.writeForm(counselingVO);
+		return writeForm;
+	}
+
+	@Override
+	public List<CounselingVO> adminCounselingList(CounselingVO counselingVO) {
+		List<CounselingVO> adminCounselingList = null;
+		adminCounselingList = counselingDAO.adminCounselingList(counselingVO);
+		return adminCounselingList;
+	}
 }

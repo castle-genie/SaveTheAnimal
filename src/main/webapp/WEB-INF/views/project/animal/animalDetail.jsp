@@ -64,7 +64,7 @@
 								<tr>
 									<td colspan="4">
 										<c:if test="${not empty detail.animalFile}">
-										    <img src="/uploadStorage/animal/${detail.animalFile}" class="rounded img-fluid" />
+										    <img src="/resources/images/storage/animal/${detail.animalFile}" class="rounded img-fluid" />
 										</c:if>
 										<c:if test="${empty detail.animalFile}">
 										    <img src="/resources/images/common/noanimal.jpg" class="rounded img-fluid" />

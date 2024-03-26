@@ -96,4 +96,5 @@ WHERE
 		from animal an  join adoption ad  on an.animal_id = ad.animal_id
 		where ad.animal_id = #{animalId}
 	</select> 
+	
 </mapper>
