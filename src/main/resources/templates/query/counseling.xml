@@ -79,11 +79,9 @@
     <!-- 상담 신청 수정 -->
     <update id="counselingUpdate" parameterType="counseling">
         UPDATE counseling
-        SET counseling_schedule = #{counseling_schedule}, user_id = #{user_id}, adoption_id = #{adoption_id},
-            animal_id = #{animal_id}, counseling_date = #{counseling_date}, counseling_judgment = #{counseling_judgment},
-            counseling_detail = #{counseling_detail}, counseling_age = #{counseling_age}, counseling_address = #{counseling_address},
-            counseling_job = #{counseling_job}, counseling_adopt = #{counseling_adopt}, , user_name = #{user_name}, user_phone = #{user_phone}
-        WHERE counseling_id = #{counseling_id}
+        SET counseling_schedule = #{counselingSchedule}, counseling_age = #{counselingAge}, counseling_address = #{counselingAddress},
+            counseling_job = #{counselingJob}, user_phone = #{userPhone}
+        WHERE counseling_id = #{counselingId}
     </update>
     
     <!-- admin 단 상담 신청 수정 -->

@@ -13,7 +13,6 @@
 		<result column="animal_temp" property="animalTemp"/>
 		<result column="animal_regist" property="animalRegist"/>
 		<result column="animal_name" property="animalName"/>
-		<result column="animal_passwd" property="animalPasswd"/>
 		<result column="admin_id" property="adminId"/>
 		<result column="readcnt" property="readcnt"/>
 		<result column="animal_file" property="animalFile"/>	
@@ -23,11 +22,11 @@
 		 <![CDATA[
 	    SELECT
 	      animal_id, animal_species, animal_name, TO_CHAR(animal_regist, 'YYYY-MM-DD') AS animal_regist, readcnt, animal_file,animal_gender,
-	      animal_status,animal_kg,animal_color,animal_temp, animal_age ,  animal_passwd
+	      animal_status,animal_kg,animal_color,animal_temp, animal_age 
 	    FROM (
 	      		SELECT /*+INDEX_DESC(animal pk_animal)*/
 	        	ROWNUM AS rnum,animal_id, animal_species, animal_name, animal_regist, readcnt, animal_file,animal_gender,
-	      animal_status,animal_kg,animal_color,animal_temp, animal_age , animal_passwd
+	      animal_status,animal_kg,animal_color,animal_temp, animal_age
 	      			FROM animal
 	      		WHERE]]>
 	   			<trim prefix="(" suffix=") AND" prefixOverrides="AND">
@@ -60,8 +59,8 @@
 		    SELECT animal_seq.nextval FROM dual
 		</selectKey>
 
-		INSERT INTO animal(animal_id, animal_name, animal_species,animal_gender, animal_kg, animal_age,  animal_status,animal_memo,animal_color,animal_temp,animal_passwd,animal_file,admin_id)
-		VALUES(#{animalId}, #{animalName}, #{animalSpecies},#{animalGender},#{animalKg},#{animalAge} , #{animalStatus},#{animalMemo},#{animalColor},#{animalTemp},#{animalPasswd},#{animalFile},#{adminId})
+		INSERT INTO animal(animal_id, animal_name, animal_species,animal_gender, animal_kg, animal_age,  animal_status,animal_memo,animal_color,animal_temp,animal_file,admin_id)
+		VALUES(#{animalId}, #{animalName}, #{animalSpecies},#{animalGender},#{animalKg},#{animalAge} , #{animalStatus},#{animalMemo},#{animalColor},#{animalTemp},#{animalFile},#{adminId})
 	</insert>
 	
 	
@@ -74,13 +73,6 @@
 		WHERE animal_id = #{animalId}
 	</select>
 	
-	<select id="pwdConfirm" parameterType="animal" resultType="int">
-		SELECT NVL((
-					SELECT 1 FROM animal
-					WHERE animal_id = #{animalId} AND animal_passwd = #{animalPasswd}
-					), 0) as state
-		FROM dual
-	</select>
 	
 	<update id="animalUpdate" parameterType="animal">
 	    UPDATE animal
@@ -94,9 +86,6 @@
 	        animal_memo = #{animalMemo},
 	        animal_temp = #{animalTemp},
 	        animal_regist = sysdate
-	        <if test="animalPasswd != ''">
-	            , animal_passwd = #{animalPasswd}
-	        </if>
 	        <if test="animalFile != ''">
 	        	, animal_file = #{animalFile}
 	        </if>

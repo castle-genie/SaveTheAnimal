@@ -12,14 +12,12 @@ $(function(){
 		});
 		$("#detailForm").submit();
 	});
-	
-	/*페이징 처리 이벤트*/
-	$(".page-item a").on("click", function(e){
-		e.preventDefault();
-		$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
-		goPage();
-	});
 
+	
+	$("#adoptionListBtn").click(function(){
+		location.href="/adoption/adoptionList";
+	});
+	
 	
 	$("#insertFormBtn").on("click", ()=>{
 		location.href = "/adoption/writeForm";
@@ -44,13 +42,18 @@ $(function(){
 	});
 	
 	
-	
-	
 	//검색 버튼 클릭시 처리 이벤트
 	$("#searchData").on("click", function(){
 		if($("#search").val()!="all"){
 			if(!chkData("#keyword","검색어를 "))return;
 		}
+		goPage();
+	});
+	
+	/*페이징 처리 이벤트*/
+	$(".page-item a").on("click", function(e){
+		e.preventDefault();
+		$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
 		goPage();
 	});
 });

@@ -62,13 +62,13 @@
 		          		</select>
 		          	</td>
 		        </tr>
-		        <tr>
+		        <!-- <tr>
 		          	<th>비밀번호</th>
 		          	<td class="text-start">
 		          	<input type="password" name="adoptionPasswd" id="adoptionPasswd"
 		          	class="form-control" placeholder="기존의 비밀번호가 아니라 수정할 비밀번호를 입력해 주세요"></td>
 		      	
-		        </tr>
+		        </tr> -->
 		        <tr>
 		          	<th>이미지 파일첨부</th>
 		          	<td class="text-start">
