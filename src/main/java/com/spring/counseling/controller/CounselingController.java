@@ -3,6 +3,8 @@ package com.spring.counseling.controller;
 import com.spring.admin.login.vo.AdminLoginVO;
 import com.spring.counseling.service.CounselingService;
 import com.spring.counseling.vo.CounselingVO;
+import com.spring.user.vo.UserVO;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +39,11 @@ public class CounselingController {
     }
 
     @GetMapping("/counselingWriteForm")
-    public String counselingWriteForm(@RequestParam("animalId") int animalId, Model model) {
+    public String counselingWriteForm(CounselingVO counselinVO, @RequestParam("animalId") int animalId, @RequestParam("adoptionId") int adoptionId, Model model) {
+    	CounselingVO counselingWriteForm = counselingService.writeForm(counselinVO);
+    	model.addAttribute("writeForm", counselingWriteForm);
     	model.addAttribute("animalId", animalId);
+    	model.addAttribute("adoptionId", adoptionId);
         return "/counseling/counselingWriteForm";
     }
 

@@ -25,11 +25,13 @@
     <div class="inner">
         <div class="box">
             <div class="content">
-                <form id="write form">
+                <form id="write_form">
+                <input type="hidden" id="adoptionId" name="adoptionId" value="${ adoptionId }" />
+                
                 <header class="align-center">
                     <p>신상 정보</p>
                     <label for="animalId"></label><br>
-					<input type="text" id="animalId" name="animalId" value="" readonly />
+					<input type="text" id="animalId" name="animalId" value="${ animalId }" readonly />
 
                     <label for="userName"></label><br>
                     <input type="text" id="userName" name="userName" placeholder="성명">
@@ -41,7 +43,7 @@
                     <input type="text" id="counselingAddress" name="counselingAddress" placeholder="주소">
 
                     <label for="userPhone"></label><br>
-                    <input type="text" id="userPhone" name="userPhone" placeholder="전화번호">
+                    <input type="text" id="userPhone" name="userPhone" value="${ userLogin.userPhone }" placeholder="전화번호">
 
                     <label for="counselingJob"></label><br>
                     <input type="text" id="counselingJob" name="counselingJob" placeholder="직업">
