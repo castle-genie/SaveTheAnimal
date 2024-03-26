@@ -150,29 +150,42 @@
 			<div class="inner">
 				<header class="align-center">
 					<p class="special">an abandoned animal list</p>
-					<h2>STA:SaveTheAniaml</h2>
+					<h2>STA : Save The Aniaml</h2>
 				</header>
 				<div class="gallery">
-					<div>
-						<div class="image fit">
-							<a href="#"><img src="/resources/images/pic01.jpg" alt="" width="600" height="300"></a>
-						</div>
-					</div>
-					<div>
-						<div class="image fit">
-							<a href="#"><img src="/resources/images/pic02.jpg" alt="" width="600" height="300"></a>
-						</div>
-					</div>
-					<div>
-						<div class="image fit">
-							<a href="#"><img src="/resources/images/pic03.jpg" alt="" width="600" height="300"></a>
-						</div>
-					</div>
-					<div>
-						<div class="image fit">
-							<a href="#"><img src="/resources/images/pic04.jpg" alt="" width="600" height="300"></a>
-						</div>
-					</div>
+					<c:choose>
+						<c:when test="${not empty mainAni}">
+							<c:forEach var="mainAni" items="${mainAni}" varStatus="status">
+								<div>
+									<div class="image fit">
+										<img src="/resources/images/storage/animal/${mainAni.animalFile}" alt="${mainAni.animalName}" width="600" height="300">
+									</div>
+								</div>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<div>
+								<div class="image fit">
+									<a href="#"><img id="/resources/images/pic01.jsp" src="" alt="" width="600" height="300"></a>
+								</div>
+							</div>
+							<div>
+								<div class="image fit">
+									<a href="#"><img id="/resources/images/pic02.jsp" src="" alt="" width="600" height="300"></a>
+								</div>
+							</div>
+							<div>
+								<div class="image fit">
+									<a href="#"><img id="/resources/images/pic03.jsp" src="" alt="" width="600" height="300"></a>
+								</div>
+							</div>
+							<div>
+								<div class="image fit">
+									<a href="#"><img id="/resources/images/pic04.jsp" src="" alt="" width="600" height="300"></a>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</section>
