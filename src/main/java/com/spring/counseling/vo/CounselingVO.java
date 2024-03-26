@@ -20,6 +20,8 @@ public class CounselingVO {
     private String counselingAddress; // 주소
     private String counselingJob; // 직업
     private int counselingAdopt; // 입양/임시보호 구분
+    private String userName;
+    private String userPhone;
     
     private UserVO user = new UserVO();
 }
