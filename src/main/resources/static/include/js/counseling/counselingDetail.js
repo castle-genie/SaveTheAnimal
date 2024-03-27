@@ -18,10 +18,10 @@ $(function() {
         else if (!chkData("#survey8", "입양 질문8번을")) return;
 
         else {
+            console.log();
             $("#detail_form").attr({
                 method: "post",
-                enctype: "multipart/form-data",
-                action: "/counseling/userCounselingUpdate"
+                action: "/counseling/counselingUpdate"
             });
             $("#detail_form").submit();
         }
