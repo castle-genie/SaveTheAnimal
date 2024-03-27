@@ -25,7 +25,7 @@
 			<div class="box">
 				<div class="content">
 					<header class="align-center">
-						<p>부제목</p>
+						<p>Save The Animal</p>
 						<h2>${volunteerFeedbackBoard.vfboardTitle}</h2>
 					</header>
 					<div>
