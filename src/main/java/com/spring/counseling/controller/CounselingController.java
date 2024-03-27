@@ -61,11 +61,12 @@ public class CounselingController {
     }
 
     @PostMapping("/counselingDelete")
-    public String counselingDelete(@RequestParam("counselingId") int counselingId) {
+    public String counselingDelete(CounselingVO cvo) {
+        String userId = cvo.getUserId();
         try {
-            int result = counselingService.counselingDelete(counselingId);
+            int result = counselingService.counselingDelete(cvo);
             if (result == 1) {
-                return "redirect:/counseling/counselingList";
+                return "redirect:/counseling/counselingList?userId="+userId;
             }
         } catch (Exception e) {
             log.error("Error occurred while deleting counseling: {}", e.getMessage());

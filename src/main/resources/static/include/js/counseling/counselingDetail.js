@@ -28,10 +28,8 @@ $(function() {
     })
 })
 $(function() {
-    $(".deleteButton").on("click", function() {
-        var counselingId = $(this).parents("tr").attr("data-id");
-        console.log(counselingId);
-        $("#counselingId").val(counselingId);
+    $("#deleteButton").on("click", function() {
+
         $("#detail_form").attr({
             method:"post",
             action:"/counseling/counselingDelete"

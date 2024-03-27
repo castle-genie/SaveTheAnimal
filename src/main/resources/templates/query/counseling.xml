@@ -79,7 +79,7 @@
     <!-- 상담 신청 수정 -->
     <update id="counselingUpdate" parameterType="counseling">
         UPDATE counseling
-        SET counseling_schedule = sysdate, counseling_age = #{counselingAge}, counseling_address = #{counselingAddress},
+        SET counseling_schedule = #{counselingSchedule}, counseling_age = #{counselingAge}, counseling_address = #{counselingAddress},
             counseling_job = #{counselingJob}, user_phone = #{userPhone}
         WHERE counseling_id = #{counselingId}
     </update>

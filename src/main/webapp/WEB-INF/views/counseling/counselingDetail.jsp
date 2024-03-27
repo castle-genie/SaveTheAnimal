@@ -28,21 +28,20 @@
                 <form id="detail_form">
                     <header class="align-center">
                         <p>신상 정보</p>
-                        <form id="counseling_form">
-                            <input type="hidden" id="counselingId" name="counselingId" value="${ counselingDetail.counselingId }" />
-                            <input type="hidden" id="userId" name="userId" value="${ counselingDetail.userId }" />
-                            <input type="text" id="userName" name="userName" value="${ counselingDetail.userName }" placeholder="성명" readonly>
-                            <input type="text" id="counselingAge" name="counselingAge" value="${ counselingDetail.counselingAge }"placeholder="연령">
-                            <input type="text" id="counselingAddress" name="counselingAddress" value="${ counselingDetail.counselingAddress }"placeholder="주소">
-                            <input type="text" id="userPhone" name="userPhone" value="${ counselingDetail.userPhone }"placeholder="전화번호">
-                            <input type="text" id="counselingJob" name="counselingJob" value="${ counselingDetail.counselingJob }"placeholder="직업">
-                        </form>
-                    </header>
+	                        <input type="hidden" id="counselingId" name="counselingId" value="${ counselingDetail.counselingId }" />
+	                        <input type="hidden" id="userId" name="userId" value="${ counselingDetail.userId }" />
+	                        <input type="text" id="userName" name="userName" value="${ counselingDetail.userName }" placeholder="성명" readonly>
+	                        <input type="text" id="counselingAge" name="counselingAge" value="${ counselingDetail.counselingAge }"placeholder="연령">
+	                        <input type="text" id="counselingAddress" name="counselingAddress" value="${ counselingDetail.counselingAddress }"placeholder="주소">
+	                        <input type="text" id="userPhone" name="userPhone" value="${ counselingDetail.userPhone }"placeholder="전화번호">
+	                        <input type="text" id="counselingJob" name="counselingJob" value="${ counselingDetail.counselingJob }"placeholder="직업">
+					</header>                    
 
                     <hr>
                     <h3>상담 예약 날짜 </h3>
                     <label for="counselingSchedule"></label><br>
-                    <input type="date" id="counselingSchedule" name="counselingSchedule" value="${ counselingDetail.counselingSchedule }" placeholder="예약날짜">
+                    <input type="text" value="${counselingDetail.counselingSchedule}"/>
+                    <input type="date" id="counselingSchedule" name="counselingSchedule" value="${counselingDetail.counselingSchedule}" placeholder="예약날짜">
 
                     <hr>
                     <h3>입양질문</h3>
