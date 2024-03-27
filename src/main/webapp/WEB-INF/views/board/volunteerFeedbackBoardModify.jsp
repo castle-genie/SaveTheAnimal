@@ -25,10 +25,10 @@
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<header class="align-center">
+					<!-- <header class="align-center">
 						<p>부제목</p>
 						<h2>글 수정하는 페이지</h2>
-					</header>
+					</header> -->
 					<form method="post" action="/volunteerFeedbackBoard/volunteerFeedbackBoardModify">
 						<div class="row uniform">
 							<div class="12u$">

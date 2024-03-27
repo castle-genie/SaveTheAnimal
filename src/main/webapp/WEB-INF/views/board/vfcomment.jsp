@@ -209,7 +209,7 @@
 			$("#replyForm button[type='button']").attr("data-rnum", vfcommentId);
 			$("#replyForm button[type='button']").html("수정");
 
-			let resetButton = $("<button type='button' class='btn btn-primary col-sm-1 resetBtn'>");
+			let resetButton = $("<button type='button' class='btn btn-primary col-sm-1 resetBtn button alt small'>");
 			resetButton.html("취소");
 			$("#replyForm .sendBtn").after(resetButton);
 		}

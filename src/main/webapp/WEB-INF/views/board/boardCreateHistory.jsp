@@ -56,7 +56,7 @@
 											</thead>
 											<tbody>
 												<c:choose>
-													<c:when test="${not empty userLogin.userId}">
+													<c:when test="${not empty fboard}">
 														<c:forEach items="${fboard}" var="flist">
 															<tr>
 																<td class="text-center">${flist.fboardId}</td>
@@ -94,7 +94,7 @@
 											</thead>
 											<tbody>
 												<c:choose>
-													<c:when test="${not empty userLogin.userId}">
+													<c:when test="${not empty vfboard}">
 														<c:forEach items="${vfboard}" var="vflist">
 															<tr>
 																<td class="text-center">${vflist.vfboardId}</td>
@@ -132,7 +132,7 @@
 											</thead>
 											<tbody>
 												<c:choose>
-													<c:when test="${not empty userLogin.userId}">
+													<c:when test="${not empty afboard}">
 														<c:forEach items="${afboard}" var="aflist">
 															<tr>
 																<td class="text-center">${aflist.afboardId}</td>
