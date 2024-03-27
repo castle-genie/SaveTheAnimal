@@ -21,7 +21,7 @@ $(function() {
             $("#detail_form").attr({
                 method: "post",
                 enctype: "multipart/form-data",
-                action: "/counseling/userCounselingUpdate"
+                action: "/counseling/counselingUpdate"
             });
             $("#detail_form").submit();
         }
