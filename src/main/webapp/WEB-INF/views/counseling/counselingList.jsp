@@ -25,8 +25,7 @@
         <div class="box">
             <div class="content">
                 <header class="align-center">
-                    <p>부제목</p>
-                    <h2>제목</h2>
+                    <h2>신청 목록</h2>
                 </header>
                 <p>내용</p>
                 <table border="1">
