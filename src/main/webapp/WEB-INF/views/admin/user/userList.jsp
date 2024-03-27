@@ -31,7 +31,6 @@
 	                        <option value="">선택하세요</option>
 	                        <option value="1">활동</option>
 	                        <option value="2">활동중지</option>
-	                        <option value="0">비활동(탈퇴)</option>
 	                    </select>
 	                </div>
 		            <div class="col-auto dateArea">
@@ -100,9 +99,6 @@
 											</c:when>
 											<c:when test="${user.userAct==2}">
 												활동중지
-											</c:when>
-											<c:when test="${user.userAct==0}">
-												비활동(탈퇴)
 											</c:when>
 										</c:choose>
 									</td>
