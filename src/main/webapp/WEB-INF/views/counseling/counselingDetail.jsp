@@ -40,7 +40,6 @@
                     <hr>
                     <h3>상담 예약 날짜 </h3>
                     <label for="counselingSchedule"></label><br>
-                    <input type="text" value="${counselingDetail.counselingSchedule}"/>
                     <input type="date" id="counselingSchedule" name="counselingSchedule" value="${counselingDetail.counselingSchedule}" placeholder="예약날짜">
 
                     <hr>
