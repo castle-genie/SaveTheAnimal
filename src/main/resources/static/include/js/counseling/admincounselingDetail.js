@@ -25,7 +25,27 @@ $(function(){
 		    counselingDetail: counselingDetail,
 		    userId : userId
 		};
-		
+
+		switch(counselingJudgment){
+			case '적격':
+				ajaxRequest("/counseling/userCounselingUpdate", data)
+					.then(() => {
+						$("#counselingForm").attr({
+							"method" : "post",
+							"action" : "/counseling/adminCounselingUpdate"
+						});
+						$("#counselingForm").submit();
+					})
+			case '비적격':
+				$("#counselingForm").attr({
+					"method" : "post",
+					"action" : "/counseling/adminCounselingUpdate"
+				});
+				$("#counselingForm").submit();
+		}
+
+
+/*
 		ajaxRequest("/counseling/userCounselingUpdate", data)
 		.then(() => {
 			$("#counselingForm").attr({
@@ -34,6 +54,7 @@ $(function(){
 			});
 			$("#counselingForm").submit();
 		})
+*/
         // AJAX를 통해 서버로 데이터 전송
         /*$.ajax({
             type: "POST",

@@ -15,7 +15,7 @@
     <div class="inner">
         <header class="align-center">
             <p>Save The Animal</p>
-            <h2>입양 상담 디테일</h2>
+            <h2>입양 상담 신청서 작성</h2>
         </header>
     </div>
 </section>
@@ -80,10 +80,11 @@
                     <label for="survey8"></label><br>
                     <li><strong><%= SurveyRequestVO.SurveyA8 %>:</strong> <input type="text" id="survey8" name="survey8"></li>
                 </ol>
+                </form>
                 <div style="float: right;">
                     <button type="button" id="insertBtn">작성</button>
                 </div>
-                </form>
+
             </div>
         </div>
     </div>

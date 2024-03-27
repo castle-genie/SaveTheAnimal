@@ -253,7 +253,7 @@
 				</li>
 				<li class="nav-item text-nowrap">
 					<button class="nav-link px-3 text-white" type="button"
-						data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"
+						data-bs-toggle="offcanvas" data-bs-target="#sidebar"
 						aria-controls="sidebarMenu" aria-expanded="false"
 						aria-label="Toggle navigation">
 						<svg class="bi">
@@ -299,7 +299,7 @@
 								<li class="nav-item"><a
 									class="nav-link d-flex align-items-center gap-2" href="/admin/noticeBoardList"> <svg
 											class="bi">
-											<use xlink:href="#file-earmark-text" /></svg> 공지게시판
+											<use xlink:href="#file-earmark-text" /></svg> 공지사항
 								</a></li>
 								<li class="nav-item"><a
 									class="nav-link d-flex align-items-center gap-2" href="/counseling/adminCounselingList"> <svg

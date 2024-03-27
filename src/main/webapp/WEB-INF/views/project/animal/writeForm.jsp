@@ -90,13 +90,13 @@
                     </select>
                 </div>
             </div>
-            <div class="mb-3 row">
+            <!-- <div class="mb-3 row">
                 <label for="animalPasswd" class="col-sm-2 col-form-label">비밀번호</label>
                 <div class="col-sm-10">
                     <input type="password" class="form-control" id="animalPasswd"
                         name="animalPasswd" placeholder="비밀번호를 입력하세요." maxlength="16">
                 </div>
-            </div>
+            </div> -->
              <div class="mb-3 row">
                 <label for="file" class="col-sm-2 col-form-label">첨부파일</label>
                 <div class="col-sm-10">
@@ -127,8 +127,7 @@
 	
 	
 </main>
-</div>
-</div>
+
 <script src="/resources/include/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/resources/include/assets/js/color-modes.js"></script>
 <script src="/resources/include/js/common.js"></script>
