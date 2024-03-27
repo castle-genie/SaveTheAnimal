@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.spring.admin.login.vo.AdminLoginVO;
 import com.spring.adoption.service.AdoptionService;
 import com.spring.adoption.vo.AdoptionVO;
 import com.spring.common.vo.PageDTO;
@@ -28,68 +30,82 @@ public class AdoptionController {
 		
 	
 	@GetMapping("/adoptionList")
-	public String adoptionList(@ModelAttribute AdoptionVO adoptionvo, Model model) {
+	public String adoptionList(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, @ModelAttribute AdoptionVO adoptionvo, Model model) {
 		log.info("adoptionList 호출 성공");
+		if (adminLoginVO == null) {return "/admin/adminLogin";} else {
+			List<AdoptionVO> adoptionList = adoptionService.adoptionList(adoptionvo);
+			model.addAttribute("adoptionList", adoptionList);
+			
+			int total = adoptionService.adoptionListCnt(adoptionvo);
+			model.addAttribute("pageMaker", new PageDTO(adoptionvo, total));
+			
+			return "project/adoption/adoptionList";
+		}
 		
-		List<AdoptionVO> adoptionList = adoptionService.adoptionList(adoptionvo);
-		model.addAttribute("adoptionList", adoptionList);
-		
-		int total = adoptionService.adoptionListCnt(adoptionvo);
-		model.addAttribute("pageMaker", new PageDTO(adoptionvo, total));
-		
-		return "project/adoption/adoptionList";
 	}
 	
 	@GetMapping("/adoptionDetail")
-	public String adoptionDetail(@ModelAttribute AdoptionVO adoptionvo, Model model) {
+	public String adoptionDetail(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, @ModelAttribute AdoptionVO adoptionvo, Model model) {
 		log.info("adoptionDetail 호출 성공");
+		 if (adminLoginVO == null) {return "/admin/adminLogin";} else {
+			 AdoptionVO detail = adoptionService.adoptionDetail(adoptionvo);
+				model.addAttribute("detail", detail);
+				
+				return "project/adoption/adoptionDetail"; 
+		 }
 		
-		AdoptionVO detail = adoptionService.adoptionDetail(adoptionvo);
-		model.addAttribute("detail", detail);
-		
-		return "project/adoption/adoptionDetail";
 	}
 	
 	@PostMapping("/adoptionInsert")
-	public String adoptionInsert(AdoptionVO adoptionvo)throws Exception{
+	public String adoptionInsert(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, AdoptionVO adoptionvo)throws Exception{
 		log.info("adoptionInsert 호출 성공 ");
-		adoptionService.adoptionInsert(adoptionvo);
-		return "redirect:/adoption/adoptionList";
+		
+		if (adminLoginVO == null) {return "/admin/adminLogin";} else {
+			adoptionService.adoptionInsert(adoptionvo);
+			return "redirect:/adoption/adoptionList";
+		}
+		
 	}
 	
 	@GetMapping(value="/writeForm")
-	public String adoptionWriteForm() {
+	public String adoptionWriteForm(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO) {
 		log.info("writeForm 호출 성공");
-		
-		return "project/adoption/writeForm"; //  /WEB-INF/views/client/board/writeForm.jsp
+		if (adminLoginVO == null) {return "/admin/adminLogin";} else {
+			return "project/adoption/writeForm"; 
+		}
+		//  /WEB-INF/views/client/board/writeForm.jsp
 	}
 	
 	@GetMapping(value="/updateForm")
-	public String updateForm(@ModelAttribute AdoptionVO adoptionvo, Model model) {
+	public String updateForm(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO,@ModelAttribute AdoptionVO adoptionvo, Model model) {
 		log.info("updateForm 호출 성공");
 		log.info("adoptionId = " + adoptionvo.getAdoptionId());
+		 if (adminLoginVO == null) {return "/admin/adminLogin";} else {
+			 AdoptionVO updateData = adoptionService.updateForm(adoptionvo);
+				
+				model.addAttribute("updateData", updateData);
+				return "project/adoption/updateForm";
+		 }
 		
-		AdoptionVO updateData = adoptionService.updateForm(adoptionvo);
-		
-		model.addAttribute("updateData", updateData);
-		return "project/adoption/updateForm";
 	}
 	
 	@PostMapping("/adoptionUpdate")
-	public String adoptionUpdate(@ModelAttribute AdoptionVO adoptionvo)throws Exception {
+	public String adoptionUpdate(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO,@ModelAttribute AdoptionVO adoptionvo)throws Exception {
 		log.info("adoptionUpdate 호출 성공");
+		 if (adminLoginVO == null) {return "/admin/adminLogin";} else {
+			 int result=0;
+				String url ="";
+				
+				result = adoptionService.adoptionUpdate(adoptionvo);
+				
+				if(result == 1) {
+					url ="/adoption/adoptionDetail?adoptionId="+adoptionvo.getAdoptionId();
+				}else {
+					url="/adoption/adoptionUpdateForm?adoptionId=" +adoptionvo.getAdoptionId();
+				}
+				return "redirect:" + url;
+		 }
 		
-		int result=0;
-		String url ="";
-		
-		result = adoptionService.adoptionUpdate(adoptionvo);
-		
-		if(result == 1) {
-			url ="/adoption/adoptionDetail?adoptionId="+adoptionvo.getAdoptionId();
-		}else {
-			url="/adoption/adoptionUpdateForm?adoptionId=" +adoptionvo.getAdoptionId();
-		}
-		return "redirect:" + url;
 	}
 	
 //	@PostMapping(value="/animalDelete")
@@ -109,25 +125,30 @@ public class AdoptionController {
 //		return "redirect:"+url;
 //	}
 	@PostMapping(value="/adoptionDelete")
-	public String adoptionDelete(@ModelAttribute AdoptionVO adoptionvo) throws Exception {
+	public String adoptionDelete(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, @ModelAttribute AdoptionVO adoptionvo) throws Exception {
 		log.info("adoptionDelete 호출 성공");
-		adoptionService.adoptionDelete(adoptionvo);
-		return "redirect:/adoption/adoptionList";
+		if (adminLoginVO == null) {return "/admin/adminLogin";} else {
+			adoptionService.adoptionDelete(adoptionvo);
+			return "redirect:/adoption/adoptionList";
+		}
+		
 	}
 	
 	@ResponseBody
 	@PostMapping(value="/pwdConfirm", produces = "text/plain; charset=UTF-8")
-	public String pwdConfirm(AdoptionVO adoptionvo) {
+	public String pwdConfirm(@SessionAttribute(name = "adminLogin", required = false) AdminLoginVO adminLoginVO, AdoptionVO adoptionvo) {
 		log.info("pwdConfirm 호출 성공");
-		
-		int result = adoptionService.pwdConfirm(adoptionvo);
-		String value="";
-		if(result==1) {
-			value="일치";
-		}else {
-			value="불일치";
+		if (adminLoginVO == null) {return "/admin/adminLogin";} else {
+			int result = adoptionService.pwdConfirm(adoptionvo);
+			String value="";
+			if(result==1) {
+				value="일치";
+			}else {
+				value="불일치";
+			}
+			log.info("result= " + result);
+			return value;
 		}
-		log.info("result= " + result);
-		return value;
+		
 	}	
 }
