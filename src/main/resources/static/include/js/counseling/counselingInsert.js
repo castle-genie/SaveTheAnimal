@@ -17,6 +17,8 @@ $(function() {
         else if (!chkData("#survey7", "입양 질문7번을")) return;
         else if (!chkData("#survey8", "입양 질문8번을")) return;
 
+
+
         else {
             $("#write_form").attr({
                 method: "post",
