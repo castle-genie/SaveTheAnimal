@@ -1,8 +1,9 @@
 $(function(){
 	$("#adoptionUpdateBtn").on("click", function(){
 		if(!chkData("#adoptionTitle","공고 제목을")) return;
-		else if (!chkData("#adoptionContent", "공고 내용을")) return;
 		else if (!chkData("#animalId", "동물 ID를")) return;
+		else if (!chkData("#adoptionContent", "공고 내용을")) return;
+		
 		else if (!chkData("#adoptionLevel", "공고 레벨을")) return;
 		else if (!chkData("#adoptionStatus", "공고 상태를")) return;
 		else {
