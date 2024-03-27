@@ -4,6 +4,8 @@ $(function(){
 		else if (!chkData("#animalSpecies","분류를")) return;
 		else if(!chkData("#animalGender", "성별을")) return;
 		else if(!chkData("#animalKg","무게를")) return;
+		else if(!chkData("#animalAge","나이를")) return;
+		else if(!chkData("#animalColor","색깔을")) return;
 		else if(!chkData("#animalStatus","중성화 유무를")) return;
 		else if(!chkData("#animalMemo","특이사항을")) return;
 		else if(!chkData("#animalTemp","임시보호 유무를")) return;
