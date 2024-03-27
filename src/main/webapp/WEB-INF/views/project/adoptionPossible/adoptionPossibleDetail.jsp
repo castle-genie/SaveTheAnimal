@@ -66,8 +66,8 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>					
-						<td class="col_3">동물 ID</td>
-						<td>${detail.animalId }(조회수 : ${detail.readcnt })</td>
+						<td class="col_3">동물 ID(${detail.animalId })</td>
+						<td>(조회수 : ${detail.readcnt })</td>
 						<td>작성일</td>
 						<td>${detail.animalRegist}</td>
 					</tr>

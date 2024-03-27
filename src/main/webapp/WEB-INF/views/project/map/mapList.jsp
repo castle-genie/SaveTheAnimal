@@ -13,7 +13,7 @@
             }
         </style>
 <body>
-		<div class="text-center"><h4 class="mb-2">찾아오시는 길</h4></div>	
+		<div class="text-center"><h4 class="mb-2">관련 보호소</h4></div>	
 		<div style="width: 50%; margin: 0 auto;">
 			<table class="table table-striped center">
 			    <thead>

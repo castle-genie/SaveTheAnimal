@@ -41,43 +41,43 @@
             <div class="mb-3 row">
                 <label for="animalGender" class="col-sm-2 col-form-label">성별</label>
                 <div class="col-sm-10">
-                    <textarea name="animalGender" id="animalGender"
-                        class="form-control" rows="1"></textarea>
+                    <input type="text" name="animalGender" id="animalGender"
+                        class="form-control" rows="1" >
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="animalKg" class="col-sm-2 col-form-label">무게</label>
                 <div class="col-sm-10">
-                    <textarea name="animalKg" id="animalKg"
-                        class="form-control" rows="1"></textarea>
+                    <input type="text" name="animalKg" id="animalKg"
+                        class="form-control" rows="1">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="animalAge" class="col-sm-2 col-form-label">나이</label>
                 <div class="col-sm-10">
-                    <textarea name="animalAge" id="animalAge"
-                        class="form-control" rows="1"></textarea>
+                    <input type="text" name="animalAge" id="animalAge"
+                        class="form-control" rows="1">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="animalColor" class="col-sm-2 col-form-label">색깔</label>
                 <div class="col-sm-10">
-                    <textarea name="animalColor" id="animalColor"
-                        class="form-control" rows="1"></textarea>
+                    <input type="text" name="animalColor" id="animalColor"
+                        class="form-control" rows="1">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="animalStatus" class="col-sm-2 col-form-label">중성화 유무</label>
                 <div class="col-sm-10">
-                    <textarea name="animalStatus" id="animalStatus"
-                        class="form-control" rows="1"></textarea>
+                    <input type="text" name="animalStatus" id="animalStatus"
+                        class="form-control" rows="1">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="animalMemo" class="col-sm-2 col-form-label">특이 사항</label>
                 <div class="col-sm-10">
                     <textarea name="animalMemo" id="animalMemo"
-                        class="form-control" rows="1"></textarea>
+                        class="form-control" rows="1" style="resize: none;"></textarea>
                 </div>
             </div>
             <div class="mb-3 row">

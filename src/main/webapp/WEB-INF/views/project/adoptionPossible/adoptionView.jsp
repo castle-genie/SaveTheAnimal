@@ -85,7 +85,7 @@
                                 <div class="card">
                                     <img src="<c:if test='${not empty animal.animalFile}'>/resources/images/storage/animal/${animal.animalFile}</c:if>
                                          <c:if test='${empty animal.animalFile}'>/resources/images/common/noanimal.jpg</c:if>"
-                                       class="card-img-top l"  alt="Animal Image">
+                                       class="card-img-top l"  alt="Animal Image" style="width: 200px; height: 200px; object-fit: cover;">
                                     <div class="card-body">
                                         <table>
                               				<tr>

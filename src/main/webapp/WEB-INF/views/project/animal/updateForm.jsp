@@ -44,36 +44,36 @@
 		        <tr>
 		          	<th>성별</th>
 		          	<td class="text-start">
-		            <textarea name="animalGender" id="animalGender"  class="form-control">${updateData.animalGender }</textarea>
+		            <textarea name="animalGender" id="animalGender"  class="form-control" style="resize: none;">${updateData.animalGender }</textarea>
 		          	</td>
 		        </tr>
 		        <tr>
 		          	<th>무게</th>
 		          	<td class="text-start">
-		            <textarea name="animalKg" id="animalKg"  class="form-control">${updateData.animalKg }</textarea>
+		            <textarea name="animalKg" id="animalKg"  class="form-control" style="resize: none;">${updateData.animalKg }</textarea>
 		          	</td>
 		        </tr>
 		        <tr>
 		          	<th>나이</th>
 		          	<td class="text-start">
-		            <textarea name="animalAge" id="animalAge"  class="form-control">${updateData.animalAge }</textarea>
+		            <textarea name="animalAge" id="animalAge"  class="form-control" style="resize: none;">${updateData.animalAge }</textarea>
 		          	</td>
 		        </tr>
 		        <tr>
 		          	<th>색깔</th>
 		          	<td class="text-start">
-		            <textarea name="animalColor" id="animalColor"  class="form-control">${updateData.animalColor }</textarea>
+		            <textarea name="animalColor" id="animalColor"  class="form-control" style="resize: none;">${updateData.animalColor }</textarea>
 		          	</td>
 		        </tr><tr>
 		          	<th>중성화 유무</th>
 		          	<td class="text-start">
-		            <textarea name="animalStatus" id="animalStatus"  class="form-control">${updateData.animalStatus }</textarea>
+		            <textarea name="animalStatus" id="animalStatus"  class="form-control" style="resize: none;">${updateData.animalStatus }</textarea>
 		          	</td>
 		        </tr>
 		        <tr>
 		          	<th>특이 사항</th>
 		          	<td class="text-start">
-		            <textarea name="animalMemo" id="animalMemo"  class="form-control">${updateData.animalMemo }</textarea>
+		            <textarea name="animalMemo" id="animalMemo"  class="form-control" style="resize: none;">${updateData.animalMemo }</textarea>
 		          	</td>
 		        </tr>
 		        <tr>

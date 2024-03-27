@@ -39,7 +39,7 @@
 		         <tr>
 		          	<th>공고 내용</th>
 		          	<td class="text-start">
-		            <textarea name="adoptionContent" id="adoptionContent"  class="form-control">${updateData.adoptionContent }</textarea>
+		            <textarea name="adoptionContent" id="adoptionContent"  class="form-control" style="resize: none;">${updateData.adoptionContent }</textarea>
 		          	</td>
 		        </tr>
 		        <tr>
