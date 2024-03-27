@@ -36,11 +36,11 @@
 							</div>
 							<div class="12u$">
 								<input type="text" name="vfboardTitle" id="vfboardTitle" placeholder="제목" 
-								value="${volunteerFeedbackBoard.vfboardTitle}">
+								value="${volunteerFeedbackBoard.vfboardTitle}" required>
 							</div>
 							<div class="12u$">
 								<textarea cols="100" wrap="hard" name="vfboardContent" id="vfboardContent" placeholder="내용을 입력해주세요"
-									rows="6">${volunteerFeedbackBoard.vfboardContent}</textarea>
+									rows="6" required>${volunteerFeedbackBoard.vfboardContent}</textarea>
 							</div>
 							<div class="12u$">
 								<input type="hidden" name="userId" id="userId" value="${userLogin.userId}" readonly>

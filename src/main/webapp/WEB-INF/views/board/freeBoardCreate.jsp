@@ -34,12 +34,12 @@
 							<div class="12u$">
 								<h3>제목</h3>
 								<input type="text" name="fboardTitle" id="fboardTitle"
-									placeholder="제목을 입력해주세요.">
+									placeholder="제목을 입력해주세요." required>
 							</div>
 							<div class="12u$">
 								<h3>내용</h3>
 								<textarea cols="100" wrap="hard" name="fboardContent"
-									id="fboardContent" placeholder="내용을 입력해주세요" rows="6"></textarea>
+									id="fboardContent" placeholder="내용을 입력해주세요" rows="6" required></textarea>
 							</div>
 							<div class="12u$">
 								<input type="hidden" name="userId" id="userId"
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
+		
 	</section>
 	<!-- Footer -->
 	<footer id="footer">
@@ -84,32 +84,5 @@
 	<script src="/resources/include/assets2/js/main.js"></script>
 </body>
 <script>
-<!--
-const fboardContent = document.querySelector('#fboardContent');
-fboardContent.innerHTML = '${freeBoard.fboardContent}';
--->
-<!--
-function goWrite(frm) {
-	var fboardTitle = frm.fboardTitle.value;
-	//var writer = frm.writer.value;
-	var fboardContent = frm.fboardContent.value;
-	
-	if (fboardTitle.trim() == ''){
-		alert("제목을 입력해주세요");
-		return false;
-	}
-	
-	if (writer.trim() == ''){
-		alert("작성자를 입력해주세요");
-		return false;
-	}
-	
-	if (fboardContent.trim() == ''){
-		alert("내용을 입력해주세요");
-		return false;
-	}
-	frm.submit();
-}
--->
 </script>
 </html>
