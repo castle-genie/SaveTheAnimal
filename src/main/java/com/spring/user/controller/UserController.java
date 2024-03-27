@@ -54,9 +54,6 @@ public class UserController {
 		} else if (userLogin != null && userAct == 2) {		// 활동 중지 계정이면							
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 활동 중지된 계정입니다.");
 			return "redirect:/user/login";
-		}	else if (userLogin != null && userAct == 0) {	// 비활동(탈퇴) 계정이면							
-			ras.addFlashAttribute("errorMsg", "로그인 실패 : 탈퇴한 계정입니다.");
-			return "redirect:/user/login";			
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패 : 아이디와 비밀번호를 확인해 주세요.");
 			return "redirect:/user/login";
@@ -165,7 +162,7 @@ public class UserController {
 		
 		if (isUpdate == 1 && result != null) {		
 			log.info("업데이트 성공");
-			model.addAttribute("isUpdate", isUpdate);
+			//model.addAttribute("isUpdate", isUpdate);
 			model.addAttribute("result", result);
 			return "user/resetPwd";
 		} else {
@@ -260,12 +257,7 @@ public class UserController {
 		String url = "";
 		
 		result = userService.userDelete(uvo); // 회원 레코드 삭제 쿼리
-		
-		/*if (result == 0) {
-			log.info("탈퇴 회원으로 상태 변경");
-			result = userService.userWithdrawal(uvo); // 레코드 삭제가 안될 경우 상태값 변경 쿼리 대체 			
-		}*/
-		
+				
 		if (result == 1) {
 			url="/user/logout"; // 로그아웃 처리
 		} else {
