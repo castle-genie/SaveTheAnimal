@@ -58,9 +58,8 @@
 		<selectKey keyProperty="animalId" resultType="int" order="BEFORE">
 		    SELECT animal_seq.nextval FROM dual
 		</selectKey>
-
 		INSERT INTO animal(animal_id, animal_name, animal_species,animal_gender, animal_kg, animal_age,  animal_status,animal_memo,animal_color,animal_temp,animal_file,admin_id)
-		VALUES(#{animalId}, #{animalName}, #{animalSpecies},#{animalGender},#{animalKg},#{animalAge} , #{animalStatus},#{animalMemo},#{animalColor},#{animalTemp},#{animalFile},#{adminId})
+		VALUES(#{animalId}, #{animalName}, #{animalSpecies},#{animalGender},#{animalKg},#{animalAge}, #{animalStatus},#{animalMemo},#{animalColor},#{animalTemp},#{animalFile},#{adminId})
 	</insert>
 	
 	
