@@ -2,6 +2,7 @@ $(function(){
 	$("#adoptionInsertBtn").on("click", function(){
 		if(!chkData("#adoptionTitle", "공고 제목을")) return;
 		else if (!chkData("#adoptionContent","공고 내용을")) return;
+		else if (!chkData("#animalId","동물 ID를")) return;
 		else {
 			if($("#file").val()!=""){
 				if(!chkFile($("#file"))) return;
