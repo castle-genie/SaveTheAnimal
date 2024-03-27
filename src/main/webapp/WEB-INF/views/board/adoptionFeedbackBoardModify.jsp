@@ -36,11 +36,11 @@
 							</div>
 							<div class="12u$">
 								<input type="text" name="afboardTitle" id="afboardTitle" placeholder="제목" 
-								value="${adoptionFeedbackBoard.afboardTitle}">
+								value="${adoptionFeedbackBoard.afboardTitle}" required>
 							</div>
 							<div class="12u$">
 								<textarea cols="100" wrap="hard" name="afboardContent" id="afboardContent" placeholder="내용을 입력해주세요"
-									rows="6">${adoptionFeedbackBoard.afboardContent}</textarea>
+									rows="6" required>${adoptionFeedbackBoard.afboardContent}</textarea>
 							</div>
 							<div class="12u$">
 								<input type="hidden" name="userId" id="userId" value="${userLogin.userId}" readonly>
