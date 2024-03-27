@@ -100,9 +100,9 @@
 										<td><a
 											href="noticeBoardDetail?nboardId=${list.nboardId}&adminId=<%= session.getAttribute("adminId") %>">
 												${list.nboardTitle} </a></td>
-										<td>${list.adminId }</td>
-										<td>${list.nboardCnt }</td>
-										<td><fmt:formatDate value="${list.nboardDate }"
+										<td class="text-center">${list.adminId }</td>
+										<td class="text-center">${list.nboardCnt }</td>
+										<td class="text-center"><fmt:formatDate value="${list.nboardDate }"
 												pattern="yyyy.MM.dd" /></td>
 									</tr>
 								</c:forEach>

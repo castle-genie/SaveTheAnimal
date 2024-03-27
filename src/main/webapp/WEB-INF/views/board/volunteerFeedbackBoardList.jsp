@@ -120,7 +120,8 @@
 						<c:when
 							test="${not empty userLogin and userLogin.userVolcnt==0}">
 							<ul class="actions">
-							<li><a class="button special" onClick="alert('봉사에 1회 이상 참여한 유저만 글을 작성할 수 있습니다')">글쓰기</a></li>
+							<li><a class="button special" onClick="alert('봉사에 1회 이상 참여한 유저만 글을 작성할 수 있습니다')"
+									>글쓰기</a></li>
 							</ul>
 						</c:when>
 						<c:when

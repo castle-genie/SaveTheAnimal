@@ -20,12 +20,12 @@
 							<div class="row uniform">
 								<div class="12u$">
 									<h3>제목</h3>
-									<input type="text" name="nboardTitle" id="nboardTitle"
+									<input type="text" size=98 name="nboardTitle" id="nboardTitle"
 										placeholder="제목을 입력해주세요." required>
 								</div>
 								<div class="12u$">
 									<h3>내용</h3>
-									<textarea cols="100" wrap="hard" name="nboardContent"
+									<textarea style="resize:none;" cols="100" wrap="hard" name="nboardContent"
 										id="nboardContent" placeholder="내용을 입력해주세요" rows="6" required></textarea>
 								</div>
 								<div class="12u$">

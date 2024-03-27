@@ -55,7 +55,8 @@ public class FreeBoardController {
 	// 게시글 조회
 	@GetMapping(value = "freeBoardDetail")
 	public String freeBoardDetail(Model model, FreeBoardVO freeBoardVO){
-		model.addAttribute("freeBoard", freeBoardService.freeBoardDetail(freeBoardVO));
+		model.addAttribute("freeBoard", 
+				freeBoardService.freeBoardDetail(freeBoardVO));
 		
 		freeBoardService.plusCnt(freeBoardVO);
 		
@@ -121,15 +122,18 @@ public class FreeBoardController {
 	 */
 	
 	@GetMapping(value = "getBoardCreateHistory")
-	public String getBoardCreateHistory (@ModelAttribute FreeBoardVO fvo, VolunteerFeedbackBoardVO vfvo, AdoptionFeedbackBoardVO afvo, Model model){
+	public String getBoardCreateHistory (@ModelAttribute FreeBoardVO fvo, 
+		VolunteerFeedbackBoardVO vfvo, AdoptionFeedbackBoardVO afvo, Model model){
 		
 		List<FreeBoardVO> freeBoardList = freeBoardService.boardCreateHistory(fvo);
 		model.addAttribute("fboard", freeBoardList);
 
-		List<VolunteerFeedbackBoardVO> volunteerFeedbackBoardList = volunteerFeedbackBoardService.boardCreateHistory(vfvo);
+		List<VolunteerFeedbackBoardVO> volunteerFeedbackBoardList = 
+				volunteerFeedbackBoardService.boardCreateHistory(vfvo);
 		model.addAttribute("vfboard", volunteerFeedbackBoardList);
 
-		List<AdoptionFeedbackBoardVO> adoptionFeedbackBoardList = adoptionFeedbackBoardService.boardCreateHistory(afvo);
+		List<AdoptionFeedbackBoardVO> adoptionFeedbackBoardList = 
+				adoptionFeedbackBoardService.boardCreateHistory(afvo);
 		model.addAttribute("afboard", adoptionFeedbackBoardList);
 		
 		return "board/boardCreateHistory";

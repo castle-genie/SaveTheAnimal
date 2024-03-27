@@ -68,6 +68,7 @@
 							</c:choose>
 						</c:if>
 					</ul>
+					<br />
 					<!-- 댓글 시작 -->
 					<%@ include file="/WEB-INF/views/board/fcomment.jsp"%>
 					<!-- 댓글 종료 -->
