@@ -26,6 +26,7 @@
 			<input type="hidden" class="fcommentId" name="fcommentId" value=""/>
 			<input type="hidden" name="userId" value="${userLogin.userId}"/>
 		</form>
+		<br />
 		
 		<!-- 댓글 목록 시작 -->
 		<div id="commentList">

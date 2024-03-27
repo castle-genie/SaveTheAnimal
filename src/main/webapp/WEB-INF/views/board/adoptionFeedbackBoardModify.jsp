@@ -39,7 +39,7 @@
 								value="${adoptionFeedbackBoard.afboardTitle}" required>
 							</div>
 							<div class="12u$">
-								<textarea cols="100" wrap="hard" name="afboardContent" id="afboardContent" placeholder="내용을 입력해주세요"
+								<textarea style="resize:none;" cols="100" wrap="hard" name="afboardContent" id="afboardContent" placeholder="내용을 입력해주세요"
 									rows="6" required>${adoptionFeedbackBoard.afboardContent}</textarea>
 							</div>
 							<div class="12u$">

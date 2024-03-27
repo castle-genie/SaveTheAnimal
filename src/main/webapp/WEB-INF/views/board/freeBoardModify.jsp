@@ -40,7 +40,7 @@
 									placeholder="제목" value="${freeBoard.fboardTitle}" required>
 							</div>
 							<div class="12u$">
-								<textarea cols="100" wrap="hard" name="fboardContent"
+								<textarea style="resize:none;" cols="100" wrap="hard" name="fboardContent"
 									id="fboardContent" placeholder="내용을 입력해주세요" rows="6" required>${freeBoard.fboardContent}</textarea>
 							</div>
 							<div class="12u$">
