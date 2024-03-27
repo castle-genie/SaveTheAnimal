@@ -13,7 +13,8 @@ import java.util.List;
 public class CounselingServiceImpl implements CounselingService {
     @Override
     public int counselingDelete(CounselingVO counselingVO) {
-        return 0;
+    	int result = counselingDAO.counselingDelete(counselingVO);
+    	return result;
     }
 
     @Autowired

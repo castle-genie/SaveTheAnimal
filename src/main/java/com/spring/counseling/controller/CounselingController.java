@@ -38,10 +38,10 @@ public class CounselingController {
 
     @GetMapping("/counselingWriteForm")
     public String counselingWriteForm(CounselingVO counselinVO, @RequestParam("animalId") int animalId, @RequestParam("adoptionId") int adoptionId, Model model) {
-    	CounselingVO counselingWriteForm = counselingService.writeForm(counselinVO);
-    	model.addAttribute("writeForm", counselingWriteForm);
-    	model.addAttribute("animalId", animalId);
-    	model.addAttribute("adoptionId", adoptionId);
+        CounselingVO counselingWriteForm = counselingService.writeForm(counselinVO);
+        model.addAttribute("writeForm", counselingWriteForm);
+        model.addAttribute("animalId", animalId);
+        model.addAttribute("adoptionId", adoptionId);
         return "/counseling/counselingWriteForm";
     }
 
@@ -61,11 +61,12 @@ public class CounselingController {
     }
 
     @PostMapping("/counselingDelete")
-    public String counselingDelete(@RequestParam("counselingId") int counselingId) {
+    public String counselingDelete(CounselingVO cvo) {
+        String userId = cvo.getUserId();
         try {
-            int result = counselingService.counselingDelete(counselingId);
+            int result = counselingService.counselingDelete(cvo);
             if (result == 1) {
-                return "redirect:/counseling/counselingList";
+                return "redirect:/counseling/counselingList?userId="+userId;
             }
         } catch (Exception e) {
             log.error("Error occurred while deleting counseling: {}", e.getMessage());
@@ -101,17 +102,11 @@ public class CounselingController {
         }
     }
 
-    @PostMapping("/admincounselingUpdate")
+    @PostMapping("/counselingUpdate")
     public String counselingUpdate(CounselingVO counselingVO) {
-        try {
-            int result = counselingService.counselingUpdate(counselingVO);
-            if (result == 1) {
-                return "redirect:/counseling/adminCounselingList";
-            }
-        } catch (Exception e) {
-            log.error("Error occurred while updating counseling: {}", e.getMessage());
-        }
-        return "redirect:/counseling/admincounselingUpdateForm?counselingId=" + counselingVO.getCounselingId();
+        String userId = counselingVO.getUserId();
+        int result = counselingService.counselingUpdate(counselingVO);
+        return "redirect:/counseling/counselingList?userId="+userId;
     }
 
     @PostMapping("/admincounselingDelete")
@@ -126,20 +121,20 @@ public class CounselingController {
         }
         return "redirect:/counseling/adminCounselingList";
     }
-    
+
     @PostMapping("/adminCounselingUpdate")
     public String adminCounselingUpdate(CounselingVO counselingVO) {
-    	int result = 0;
-    	String url = "";
-    	
-    	result = counselingService.adminCounselingUpdate(counselingVO);
-    	int num = counselingVO.getCounselingId();
-    	if(result == 1) {
-    		url = "/counseling/adminCounselingDetail?counselingId="+num;
-    	}
-    	return "redirect:"+url;
+        int result = 0;
+        String url = "";
+
+        result = counselingService.adminCounselingUpdate(counselingVO);
+        int num = counselingVO.getCounselingId();
+        if(result == 1) {
+            url = "/counseling/adminCounselingDetail?counselingId="+num;
+        }
+        return "redirect:"+url;
     }
-    
+
 
     @PostMapping("/userCounselingUpdate")
     public String userCounselingUpdate(CounselingVO counselingVO) throws Exception {
@@ -153,5 +148,5 @@ public class CounselingController {
         }
         return "redirect:"+url;
     }
-    
+
 }
